@@ -14,15 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Ship schooner = new Ship(ShipType.SCHOONER, 0.5, 10, 10, 100);
-
-//    Ship brigantine = new Ship();
-//    Ship barquentine = new Ship();
-//    Ship aircraft_carrier = new Ship();
-
-        Ship selectedShip = new Ship(ShipType.SCHOONER, 1, 1, 1, 1);
-//        Island starterIsland = new Island("First", store, 0, 0);
-
+        Ship selectedShip;
         String traderName = "";
         int gameDuration = 0;
         int islandTotal = 5;
@@ -32,15 +24,22 @@ public class Main {
         List<Island> islands = new ArrayList<Island>();
         List<Ship> ships = new ArrayList<Ship>();
 
-        ships.add(schooner);
+        ships.add(new Ship(ShipType.SCHOONER, 0.5, 10, 10, 100));
+        ships.add(new Ship(ShipType.BARQUENTINE, 0.5, 10, 10, 100));
+        ships.add(new Ship(ShipType.BRIGANTINE, 0.5, 10, 10, 100));
+        ships.add(new Ship(ShipType.AIRCRAFT_CARRIER, 0.01, 200, 100, 1000));
 
         Scanner scanner = new Scanner(System.in);
 
-        while (traderName.length() < 3 || traderName.length() > 15) {
+        while (true) {
             System.out.println("Enter Trader Name");
             traderName = scanner.nextLine();
             if (traderName.length() < 3 || traderName.length() > 15) {
                 System.out.println("Length of trader name must be 3-15 characters.");
+            } else if (!traderName.matches("^[a-zA-Z]*$")) {
+                System.out.println("You may only use alphabetical characters.");
+            } else {
+                break;
             }
         }
 
@@ -60,16 +59,17 @@ public class Main {
             System.out.println(ship.toString());
         }
 
-        while (shipSelected == false) {
+        shipSelector:
+        while (true) {
             String selectedShipType = scanner.nextLine();
-            for (Ship shipB : ships) {
-                if (shipB.getShipType().getName().equalsIgnoreCase(selectedShipType)) {
-                    selectedShip = shipB;
-                    shipSelected = true;
-                } else {
-                    System.out.println("Invalid ship name, choose again");
+            for (Ship ship : ships) {
+                if (ship.getShipType().getName().equalsIgnoreCase(selectedShipType)) {
+                    selectedShip = ship;
+                    break shipSelector;
                 }
             }
+            System.out.println("Invalid ship name, choose again.");
+
         }
 
         Game game = new Game(traderName, gameDuration, selectedShip);
