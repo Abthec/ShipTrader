@@ -45,4 +45,8 @@ public class Ship {
         return capacityRemaining;
     }
 
+    public String toString() {
+        return this.getShipType().getName() + " | " + this.getSailSpeed() + " | " + this.getMaxCargoCapacity() + " | "
+                + this.getMaxCrewSize() + " | " + this.getShipEndurance();
+    }
 }
