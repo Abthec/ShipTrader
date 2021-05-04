@@ -5,7 +5,7 @@ import java.util.Random;
 public class Store {
 
     StoreType storeType;
-    int inventorySize;
+    int stock;
     String name;
     private StoreNameHandler storeNames = new StoreNameHandler();
 
@@ -16,18 +16,18 @@ public class Store {
         this.storeType = StoreType.values()[random.nextInt(5)];
         switch (this.storeType) {
             case BLACKSMITH:
-                this.inventorySize = 30 + random.nextInt(21);
+                this.stock = 30 + random.nextInt(21);
             case SHIP_BUILDER:
-                this.inventorySize = 20 + random.nextInt(21);
+                this.stock = 20 + random.nextInt(21);
             case JEWELER:
-                this.inventorySize = 40 + random.nextInt(21);
+                this.stock = 40 + random.nextInt(21);
             case ARTIFICER:
-                this.inventorySize = 15 + random.nextInt(26);
+                this.stock = 15 + random.nextInt(26);
         }
     }
 
     public int getInventorySize() {
-        return inventorySize;
+        return stock;
     }
 
     public StoreType getStoreType() {

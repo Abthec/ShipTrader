@@ -18,7 +18,6 @@ public class Game {
     int gameDuration;
     int islandTotal;
     List<Island> islands = new ArrayList<Island>();
-    List<Store> stores = new ArrayList<Store>();
     IslandNameHandler islandNames = new IslandNameHandler();
     IslandCoordinateHandler islandCoordinates = new IslandCoordinateHandler(islandTotal);
     Store originStore;
@@ -27,17 +26,18 @@ public class Game {
 
     public Game(String traderName, int gameDuration, Ship ship, int islandTotal) {
 
-        while (stores.size() <= islandTotal) {
-            stores.add(new Store());
-    }
-
-        originStore = stores.get(random.nextInt(5));
-        stores.remove(originStore);
-        islands.add(new Island(originStore));
+        islands.add(new Island());
 
         while (islands.size() <= islandTotal) {
-            Store currentStore = stores.get(0);
-            islands.add(new Island(islandNames.getName(), currentStore, islandCoordinates.getCoordinate()));
+            islands.add(new Island(islandNames.getName(),islandCoordinates.getCoordinate()));
+        }
+
+        for (Island islandA : islands) {
+            for (Island islandB : islands) {
+                if (!islandA.equals(islandB)) {
+
+                }
+            }
         }
 
         int startingCash = 500;

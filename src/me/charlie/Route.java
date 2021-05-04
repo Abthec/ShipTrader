@@ -5,12 +5,22 @@ import java.util.ArrayList;
 
 public class Route {
 
-    Island currentIsland;
-    ArrayList islands;
+    Island islandA;
+    Island islandB;
+    double distance;
 
-    public Route(Island currentIsland, ArrayList islands) {
-        this.currentIsland = currentIsland;
-        this.islands = islands;
+    public Route(Island islandA, Island islandB) {
+        this.islandA = islandA;
+        this.islandB = islandB;
+        this.distance = islandA.getCoordinate().getDistance(islandB.getCoordinate());
+    }
+
+    public Island getIslandA() {
+        return islandA;
+    }
+
+    public Island getIslandB() {
+        return islandB;
     }
 
 

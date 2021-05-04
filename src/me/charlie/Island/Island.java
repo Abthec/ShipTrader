@@ -15,16 +15,14 @@ public class Island {
 
     private Random random = new Random();
 
-    public Island(Store store) {
-        this.store = store;
-        this.name = "The Origin";
-        this.coordinate = new Coordinate();
+    public Island() {
+        this("The Origin", new Coordinate());
     }
 
-    public Island(String name, Store store, Coordinate coordinate) {
+    public Island(String name, Coordinate coordinate) {
         this.coordinate = coordinate;
         this.name = name;
-        this. store = store;
+        this.store = new Store();
     }
 
     public String getName() {

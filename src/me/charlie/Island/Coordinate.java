@@ -19,6 +19,12 @@ public class Coordinate {
         this.yCoordinate = 0;
     }
 
+    public double getDistance(Coordinate location) {
+        int deltaX = this.getX() - location.getX();
+        int deltaY = this.getY() - location.getY();
+        return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+    }
+
     public int getX() {
         return xCoordinate;
     }
