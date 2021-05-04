@@ -17,9 +17,8 @@ public class Route {
     public Route(Island islandA, Island islandB) {
         this.islandA = islandA;
         this.islandB = islandB;
-        this.distance = islandA.getCoordinate().getDistance(islandB.getCoordinate());
         this.randomEvent = new RandomEvent();
-
+        this.distance = islandA.getCoordinate().getDistance(islandB.getCoordinate()) * randomEvent.getRandomEventRarity().getEventDistanceModifier();
     }
 
     public Island getIslandA() {
@@ -39,7 +38,7 @@ public class Route {
     }
 
     public String toString() {
-        return "Route from " + this.islandA.getName() + " to " + this.islandB.getName();
+        return "Route from " + this.islandA.getName() + " to " + this.islandB.getName() + ". This route is %.2f".formatted(this.getDistance()) +
+                " km long.";
     }
-
 }

@@ -21,10 +21,10 @@ public class Main {
 
         List<Ship> ships = new ArrayList<Ship>();
 
-        ships.add(new Ship(ShipType.SCHOONER, 0.5, 10, 10, 100));
-        ships.add(new Ship(ShipType.BARQUENTINE, 0.5, 10, 10, 100));
-        ships.add(new Ship(ShipType.BRIGANTINE, 0.5, 10, 10, 100));
-        ships.add(new Ship(ShipType.AIRCRAFT_CARRIER, 0.01, 200, 100, 1000));
+        ships.add(new Ship(ShipType.SCHOONER, 1.5, 10, 10, 100));
+        ships.add(new Ship(ShipType.BARQUENTINE, 1.25, 10, 10, 100));
+        ships.add(new Ship(ShipType.BRIGANTINE, 1.0, 10, 10, 100));
+        ships.add(new Ship(ShipType.AIRCRAFT_CARRIER, 0.75, 200, 100, 1000));
 
         Scanner scanner = new Scanner(System.in);
 
