@@ -6,11 +6,14 @@ public class Store {
 
     StoreType storeType;
     int inventorySize;
+    String name;
+    private StoreNameHandler storeNames = new StoreNameHandler();
 
     private Random random = new Random();
 
-    public Store(StoreType storeType) {
-        this.storeType = storeType;
+    public Store() {
+        this.name = storeNames.getName();
+        this.storeType = StoreType.values()[random.nextInt(5)];
         switch (this.storeType) {
             case BLACKSMITH:
                 this.inventorySize = 30 + random.nextInt(21);

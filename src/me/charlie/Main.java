@@ -18,10 +18,7 @@ public class Main {
         String traderName = "";
         int gameDuration = 0;
         int islandTotal = 5;
-        int islandCount = 0;
-        boolean shipSelected = false;
 
-        List<Island> islands = new ArrayList<Island>();
         List<Ship> ships = new ArrayList<Ship>();
 
         ships.add(new Ship(ShipType.SCHOONER, 0.5, 10, 10, 100));
@@ -69,9 +66,8 @@ public class Main {
                 }
             }
             System.out.println("Invalid ship name, choose again.");
-
         }
 
-        Game game = new Game(traderName, gameDuration, selectedShip);
+        Game game = new Game(traderName, gameDuration, selectedShip, islandTotal);
     }
 }
