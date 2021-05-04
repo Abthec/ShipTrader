@@ -1,8 +1,6 @@
 package me.charlie;
 
 import me.charlie.Island.Island;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Route {

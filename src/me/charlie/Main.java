@@ -1,6 +1,5 @@
 package me.charlie;
 
-import me.charlie.Island.Island;
 import me.charlie.Ship.Ship;
 import me.charlie.Ship.ShipType;
 
