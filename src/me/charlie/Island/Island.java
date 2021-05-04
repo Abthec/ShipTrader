@@ -11,7 +11,7 @@ public class Island {
     String name;
     Store store;
     Coordinate coordinate;
-    List<Island> islands = new ArrayList<Island>();
+    private List<Island> islands = new ArrayList<Island>();
 
     private Random random = new Random();
 

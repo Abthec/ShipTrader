@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class IslandCoordinateHandler {
 
-    List<Coordinate> islandCoordinates = new ArrayList<Coordinate>();
+    private List<Coordinate> islandCoordinates = new ArrayList<Coordinate>();
     Coordinate coordinate;
     private Random random = new Random();
     int islandTotal;

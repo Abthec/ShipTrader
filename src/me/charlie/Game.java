@@ -14,14 +14,12 @@ public class Game {
 
 
     Trader trader;
-    Ship ship;
     int gameDuration;
     int islandTotal;
-    List<Island> islands = new ArrayList<Island>();
-    List<Route> routes = new ArrayList<Route>();
-    IslandNameHandler islandNames = new IslandNameHandler();
-    IslandCoordinateHandler islandCoordinates = new IslandCoordinateHandler(islandTotal);
-    Store originStore;
+    private List<Island> islands = new ArrayList<Island>();
+    private List<Route> routes = new ArrayList<Route>();
+    private IslandNameHandler islandNames = new IslandNameHandler();
+    private IslandCoordinateHandler islandCoordinates = new IslandCoordinateHandler(islandTotal);
 
     private Random random = new Random();
 
@@ -46,6 +44,5 @@ public class Game {
         int startingCash = 500;
         this.gameDuration = gameDuration;
         trader = new Trader(traderName, startingCash, ship);
-
     }
 }

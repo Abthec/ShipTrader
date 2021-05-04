@@ -9,7 +9,7 @@ public class Item {
     int cost;
     String description;
 
-    Random random = new Random();
+    private Random random = new Random();
 
     public Item(ItemType itemType) {
         this.itemType = itemType;
