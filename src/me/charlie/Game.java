@@ -1,6 +1,8 @@
 package me.charlie;
 
 import me.charlie.Island.Island;
+import me.charlie.Island.IslandCoordinateHandler;
+import me.charlie.Island.IslandNameHandler;
 import me.charlie.Ship.Ship;
 import me.charlie.Store.Store;
 
@@ -17,6 +19,8 @@ public class Game {
     int islandTotal;
     List<Island> islands = new ArrayList<Island>();
     List<Store> stores = new ArrayList<Store>();
+    IslandNameHandler islandNames = new IslandNameHandler();
+    IslandCoordinateHandler islandCoordinates = new IslandCoordinateHandler(islandTotal);
     Store originStore;
 
     private Random random = new Random();
@@ -25,14 +29,15 @@ public class Game {
 
         while (stores.size() <= islandTotal) {
             stores.add(new Store());
-        }
+    }
 
         originStore = stores.get(random.nextInt(5));
         stores.remove(originStore);
         islands.add(new Island(originStore));
 
         while (islands.size() <= islandTotal) {
-
+            Store currentStore = stores.get(0);
+            islands.add(new Island(islandNames.getName(), currentStore, islandCoordinates.getCoordinate()));
         }
 
         int startingCash = 500;
