@@ -18,6 +18,7 @@ public class Game {
     int gameDuration;
     int islandTotal;
     List<Island> islands = new ArrayList<Island>();
+    List<Route> routes = new ArrayList<Route>();
     IslandNameHandler islandNames = new IslandNameHandler();
     IslandCoordinateHandler islandCoordinates = new IslandCoordinateHandler(islandTotal);
     Store originStore;
@@ -35,7 +36,9 @@ public class Game {
         for (Island islandA : islands) {
             for (Island islandB : islands) {
                 if (!islandA.equals(islandB)) {
-
+                    for (int i = 0; i < (1 + random.nextInt(3)); i++) {
+                        routes.add(new Route(islandA, islandB));
+                    }
                 }
             }
         }
