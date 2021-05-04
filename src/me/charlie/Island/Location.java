@@ -15,8 +15,8 @@ public class Location {
     }
 
     public Location() {
-        this.xCoordinate = 0;
-        this.yCoordinate = 0;
+        this.xCoordinate = 50;
+        this.yCoordinate = 50;
     }
 
     public double getDistance(Location location) {

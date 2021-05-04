@@ -19,13 +19,14 @@ public class Game {
     int islandTotal;
     private List<Island> islands = new ArrayList<Island>();
     private List<Route> routes = new ArrayList<Route>();
-    private IslandNameHandler islandNames = new IslandNameHandler();
-    private IslandCoordinateHandler islandCoordinates = new IslandCoordinateHandler(islandTotal);
+
 
     private Random random = new Random();
 
     public Game(String traderName, int gameDuration, Ship ship, int islandTotal) {
 
+        IslandNameHandler islandNames = new IslandNameHandler();
+        IslandCoordinateHandler islandCoordinates = new IslandCoordinateHandler(islandTotal);
         islands.add(new Island());
 
         while (islands.size() <= islandTotal) {
@@ -45,5 +46,8 @@ public class Game {
         int startingCash = 500;
         this.gameDuration = gameDuration;
         trader = new Trader(traderName, startingCash, ship);
+        for (Route route : routes) {
+            System.out.println(route);
+        }
     }
 }

@@ -13,16 +13,13 @@ public class Route {
     double distance;
     RandomEvent randomEvent;
     int travelTime;
-    boolean eventOccurs;
-
-    private Random random = new Random();
 
     public Route(Island islandA, Island islandB) {
         this.islandA = islandA;
         this.islandB = islandB;
         this.distance = islandA.getCoordinate().getDistance(islandB.getCoordinate());
         this.randomEvent = new RandomEvent();
-        this.eventOccurs = random.nextDouble() < randomEvent.getRandomEventRarity().getChanceOfEventOccurring();
+
     }
 
     public Island getIslandA() {
@@ -40,4 +37,9 @@ public class Route {
     public double getDistance() {
         return distance;
     }
+
+    public String toString() {
+        return "Route from " + this.islandA.getName() + " to " + this.islandB.getName();
+    }
+
 }

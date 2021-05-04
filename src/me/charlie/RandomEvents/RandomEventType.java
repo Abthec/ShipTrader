@@ -6,5 +6,4 @@ public enum RandomEventType {
     WEATHER,
     RESCUED_SAILORS;
 
-
 }

@@ -36,17 +36,21 @@ public class Main {
             } else if (!traderName.matches("^[a-zA-Z]*$")) {
                 System.out.println("You may only use alphabetical characters.");
             } else {
+                System.out.println("Welcome Captain " + traderName);
                 break;
             }
         }
 
-        while (gameDuration < 20 || gameDuration > 50) {
+        while (true) {
             System.out.println("Enter desired amount of days");
             gameDuration = Integer.parseInt(scanner.nextLine());
 
             if (gameDuration < 20 || gameDuration > 50) {
             	gameDuration = 0;
             	System.out.println("Game duration must be between 20 and 50 days");
+            } else {
+                System.out.println("Game will last " + gameDuration + " days.");
+                break;
             }
         }
 

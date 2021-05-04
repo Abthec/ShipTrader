@@ -14,7 +14,7 @@ public class IslandCoordinateHandler {
     public IslandCoordinateHandler(int islandTotal) {
         this.islandTotal = islandTotal;
         while (islandLocations.size() <= islandTotal - 1) {
-            Location newLocation = new Location(random.nextInt(11), random.nextInt(11));
+            Location newLocation = new Location(random.nextInt(101), random.nextInt(101));
             if (!islandLocations.contains(newLocation)) {
                 islandLocations.add(newLocation);
             }
@@ -26,8 +26,8 @@ public class IslandCoordinateHandler {
     }
 
     public Location getCoordinate() {
-        location = islandLocations.get(0);
-        islandLocations.remove(0);
+        location = this.islandLocations.get(0);
+        this.islandLocations.remove(0);
         return location;
     }
 }

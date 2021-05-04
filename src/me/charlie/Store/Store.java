@@ -13,7 +13,7 @@ public class Store {
 
     public Store() {
         this.name = storeNames.getName();
-        this.storeType = StoreType.values()[random.nextInt(5)];
+        this.storeType = StoreType.values()[random.nextInt(4)];
         switch (this.storeType) {
             case BLACKSMITH:
                 this.stock = 30 + random.nextInt(21);
