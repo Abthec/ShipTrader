@@ -18,7 +18,7 @@ public enum RandomEventRarity {
         return 1.0;
     }
 
-    public double getEventRarity() {
+    public double getChanceOfEventOccurring() {
         switch (this) {
             case RARE:
                 return 0.1;
