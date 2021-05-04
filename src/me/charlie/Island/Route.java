@@ -27,5 +27,11 @@ public class Route {
         return islandB;
     }
 
+    public RandomEvent getRandomEvent() {
+        return randomEvent;
+    }
 
+    public double getDistance() {
+        return distance;
+    }
 }

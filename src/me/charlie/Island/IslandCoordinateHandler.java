@@ -6,28 +6,28 @@ import java.util.Random;
 
 public class IslandCoordinateHandler {
 
-    private List<Coordinate> islandCoordinates = new ArrayList<Coordinate>();
-    Coordinate coordinate;
+    private List<Location> islandLocations = new ArrayList<Location>();
+    Location location;
     private Random random = new Random();
     int islandTotal;
 
     public IslandCoordinateHandler(int islandTotal) {
         this.islandTotal = islandTotal;
-        while (islandCoordinates.size() <= islandTotal - 1) {
-            Coordinate newCoordinate = new Coordinate(random.nextInt(11), random.nextInt(11));
-            if (!islandCoordinates.contains(newCoordinate)) {
-                islandCoordinates.add(newCoordinate);
+        while (islandLocations.size() <= islandTotal - 1) {
+            Location newLocation = new Location(random.nextInt(11), random.nextInt(11));
+            if (!islandLocations.contains(newLocation)) {
+                islandLocations.add(newLocation);
             }
         }
     }
 
-    public List<Coordinate> getIslandCoordinates() {
-        return islandCoordinates;
+    public List<Location> getIslandCoordinates() {
+        return islandLocations;
     }
 
-    public Coordinate getCoordinate() {
-        coordinate = islandCoordinates.get(0);
-        islandCoordinates.remove(0);
-        return coordinate;
+    public Location getCoordinate() {
+        location = islandLocations.get(0);
+        islandLocations.remove(0);
+        return location;
     }
 }

@@ -10,17 +10,17 @@ public class Island {
 
     String name;
     Store store;
-    Coordinate coordinate;
+    Location location;
     private List<Island> islands = new ArrayList<Island>();
 
     private Random random = new Random();
 
     public Island() {
-        this("The Origin", new Coordinate());
+        this("The Origin", new Location());
     }
 
-    public Island(String name, Coordinate coordinate) {
-        this.coordinate = coordinate;
+    public Island(String name, Location location) {
+        this.location = location;
         this.name = name;
         this.store = new Store();
     }
@@ -33,7 +33,7 @@ public class Island {
         return store;
     }
 
-    public Coordinate getCoordinate() {
-        return coordinate;
+    public Location getCoordinate() {
+        return location;
     }
 }
