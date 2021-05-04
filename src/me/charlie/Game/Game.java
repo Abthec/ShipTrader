@@ -1,10 +1,11 @@
-package me.charlie;
+package me.charlie.Game;
 
 import me.charlie.Island.Island;
 import me.charlie.Island.IslandCoordinateHandler;
 import me.charlie.Island.IslandNameHandler;
+import me.charlie.Island.Route;
 import me.charlie.Ship.Ship;
-import me.charlie.Store.Store;
+import me.charlie.Trader.Trader;
 
 import java.util.ArrayList;
 import java.util.List;

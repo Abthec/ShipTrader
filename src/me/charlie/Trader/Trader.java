@@ -1,4 +1,4 @@
-package me.charlie;
+package me.charlie.Trader;
 
 import me.charlie.Ship.Ship;
 

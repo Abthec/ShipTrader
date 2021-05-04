@@ -1,5 +1,6 @@
-package me.charlie;
+package me.charlie.Game;
 
+import me.charlie.Game.Game;
 import me.charlie.Ship.Ship;
 import me.charlie.Ship.ShipType;
 

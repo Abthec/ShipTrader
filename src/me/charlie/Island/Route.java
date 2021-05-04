@@ -1,4 +1,4 @@
-package me.charlie;
+package me.charlie.Island;
 
 import me.charlie.Island.Island;
 import java.util.ArrayList;
