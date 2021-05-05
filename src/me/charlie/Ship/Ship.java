@@ -1,5 +1,6 @@
 package me.charlie.Ship;
 
+import me.charlie.Island.Island;
 import me.charlie.Item.Item;
 
 public class Ship {
@@ -9,14 +10,24 @@ public class Ship {
     int maxCargoCapacity;
     int maxCrewSize;
     double shipEndurance;
+    Island currentIsland;
 
 
-    public Ship(ShipType shipType, double sailSpeed, int maxCargoCapacity, int maxCrewSize, double shipEndurance) {
+    public Ship(ShipType shipType, double sailSpeed, int maxCargoCapacity, int maxCrewSize, double shipEndurance, Island currentIsland) {
         this.maxCargoCapacity = maxCargoCapacity;
         this.sailSpeed = sailSpeed;
         this.maxCrewSize = maxCrewSize;
         this.shipEndurance = shipEndurance;
         this.shipType = shipType;
+        this.currentIsland = currentIsland;
+    }
+
+    public Island getCurrentIsland() {
+        return currentIsland;
+    }
+
+    public void setCurrentIsland(Island currentIsland) {
+        this.currentIsland = currentIsland;
     }
 
     public int getMaxCargoCapacity() {

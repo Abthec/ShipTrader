@@ -11,11 +11,11 @@ public class Item {
 
     private Random random = new Random();
 
-    public Item(ItemType itemType) {
-        this.itemType = itemType;
+    public Item() {
+        this.itemType = ItemType.values()[random.nextInt(4)];
         this.size = itemType.getSize();
         this.description = itemType.getDescription();
-        switch (this.itemType) {
+        switch (itemType) {
             case ARTIFACT:
                 this.cost = 750 + random.nextInt(50);
             case WEAPON:
@@ -41,5 +41,9 @@ public class Item {
 
     public ItemType getItemType() {
         return itemType;
+    }
+
+    public String toString() {
+        return this.getItemType().getName() + " | " + this.getCost();
     }
 }

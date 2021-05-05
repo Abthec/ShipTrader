@@ -36,4 +36,5 @@ public class Island {
     public Location getCoordinate() {
         return location;
     }
+
 }

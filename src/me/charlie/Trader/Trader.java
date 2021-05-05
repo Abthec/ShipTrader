@@ -25,4 +25,9 @@ public class Trader {
     public int getMoney() {
         return money;
     }
+
+    public int subtractMoney(int moneySpent) {
+        this.money = this.getMoney() - moneySpent;
+        return this.money;
+    }
 }
