@@ -21,23 +21,14 @@ public class Store {
     public Store() {
         this.name = storeNames.getName();
         this.storeType = StoreType.values()[random.nextInt(4)];
-        switch (this.storeType) {
-            case BLACKSMITH:
-                this.maxStock = 30 + random.nextInt(21);
-            case SHIP_BUILDER:
-                this.maxStock = 20 + random.nextInt(21);
-            case JEWELER:
-                this.maxStock = 40 + random.nextInt(21);
-            case ARTIFICER:
-                this.maxStock = 15 + random.nextInt(26);
-        }
+        this.maxStock = this.storeType.getMinStockBound() + random.nextInt(this.storeType.getMaxStockBound() - this.storeType.getMinStockBound() + 1);
         for (int i = 0; i < this.maxStock;  i++) {
-            stock.add(new Item());
+            stock.add(new Item(storeType));
         }
     }
 
     public double getStoreBuyModifier(Item item) {
-        storeBuyModifier = this.getStoreType().getBuyModifier(item);
+        storeBuyModifier = this.getStoreType().getBuyModifier(item.getItemType());
         return storeBuyModifier;
     }
 
@@ -58,6 +49,6 @@ public class Store {
     }
 
     public String toString() {
-        return this.getName() + " | " + this.getStoreType().getName() + " | " + this.getStock();
+        return this.getName() + " | " + this.getStoreType().getName();
     }
 }

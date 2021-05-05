@@ -1,13 +1,14 @@
 package me.charlie.Ship;
 
 import me.charlie.Island.Island;
-import me.charlie.Item.Item;
 
 public class Ship {
 
     ShipType shipType;
     double sailSpeed;
     int maxCargoCapacity;
+    int currentCargo;
+    int cargoSpaceRemaining;
     int maxCrewSize;
     double shipEndurance;
     double shipHealth;
@@ -22,6 +23,7 @@ public class Ship {
         this.shipHealth = shipEndurance;
         this.shipType = shipType;
         this.currentIsland = currentIsland;
+        this.currentCargo = 0;
     }
 
     public Island getCurrentIsland() {
@@ -34,6 +36,20 @@ public class Ship {
 
     public int getMaxCargoCapacity() {
         return maxCargoCapacity;
+    }
+
+    public int getCurrentCargo() {
+        return currentCargo;
+    }
+
+    public int setCurrentCargo(int cargoChange) {
+        this.currentCargo = getCurrentCargo() + cargoChange;
+        return cargoChange;
+    }
+
+    public int getCargoSpaceRemaining() {
+        cargoSpaceRemaining = getMaxCargoCapacity() - getCurrentCargo();
+        return cargoSpaceRemaining;
     }
 
     public int getMaxCrewSize() {
@@ -67,12 +83,6 @@ public class Ship {
 
     public ShipType getShipType() {
         return shipType;
-    }
-
-    public int getRemainingCargoCapacity() {
-        int capacityUsed = 0;
-        int capacityRemaining = getMaxCargoCapacity() - capacityUsed;
-        return capacityRemaining;
     }
 
     public String toString() {

@@ -1,6 +1,7 @@
 package me.charlie.Store;
 
 import me.charlie.Item.Item;
+import me.charlie.Item.ItemType;
 
 public enum StoreType {
 
@@ -9,10 +10,10 @@ public enum StoreType {
     SHIP_BUILDER,
     BLACKSMITH;
 
-    public double getBuyModifier(Item item) {
+    public double getBuyModifier(ItemType itemType) {
         switch (this) {
             case JEWELER:
-                switch (item.getItemType()) {
+                switch (itemType) {
                     case UPGRADE:
                         return 1.2;
                     case JEWEL:
@@ -22,7 +23,7 @@ public enum StoreType {
                         return 1.1;
                 }
             case ARTIFICER:
-                switch (item.getItemType()) {
+                switch (itemType) {
                     case UPGRADE:
                         return 1.6;
                     case JEWEL:
@@ -33,7 +34,7 @@ public enum StoreType {
                         return 0.7;
                 }
             case  BLACKSMITH:
-                switch (item.getItemType()) {
+                switch (itemType) {
                     case UPGRADE:
                         return 1.0;
                     case JEWEL:
@@ -44,7 +45,7 @@ public enum StoreType {
                         return 1.5;
                 }
             case SHIP_BUILDER:
-                switch (item.getItemType()) {
+                switch (itemType) {
                     case UPGRADE:
                         return 0.9;
                     case JEWEL:
@@ -59,10 +60,10 @@ public enum StoreType {
         }
     }
 
-    public double getSellModifier(Item item) {
+    public double getSellModifier(ItemType itemType) {
         switch (this) {
             case JEWELER:
-                switch (item.getItemType()) {
+                switch (itemType) {
                     case UPGRADE:
                         return 1.2;
                     case JEWEL:
@@ -73,7 +74,7 @@ public enum StoreType {
                         return 1.1;
                 }
             case ARTIFICER:
-                switch (item.getItemType()) {
+                switch (itemType) {
                     case UPGRADE:
                         return 1.2;
                     case JEWEL:
@@ -84,7 +85,7 @@ public enum StoreType {
                         return 1.1;
                 }
             case BLACKSMITH:
-                switch (item.getItemType()) {
+                switch (itemType) {
                     case UPGRADE:
                         return 1.2;
                     case JEWEL:
@@ -95,7 +96,7 @@ public enum StoreType {
                         return 1.1;
                 }
             case SHIP_BUILDER:
-                switch (item.getItemType()) {
+                switch (itemType) {
                     case UPGRADE:
                         return 1.2;
                     case JEWEL:
@@ -107,6 +108,36 @@ public enum StoreType {
                 }
             default:
                 return 1.0;
+        }
+    }
+
+    public int getMaxStockBound() {
+        switch (this) {
+            case BLACKSMITH:
+                return 40;
+            case SHIP_BUILDER:
+                return 35;
+            case JEWELER:
+                return 32;
+            case ARTIFICER:
+                return 34;
+            default:
+                return 0;
+        }
+    }
+
+    public int getMinStockBound() {
+        switch (this) {
+            case BLACKSMITH:
+                return 20;
+            case SHIP_BUILDER:
+                return  15;
+            case JEWELER:
+                return 12;
+            case ARTIFICER:
+                return 10;
+            default:
+                return 0;
         }
     }
 

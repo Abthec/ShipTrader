@@ -22,6 +22,36 @@ public enum ItemType {
         }
     }
 
+   public int getUpperCostBound(ItemType itemType) {
+       switch (itemType) {
+           case ARTIFACT:
+               return 800;
+           case WEAPON:
+               return 90;
+           case JEWEL:
+               return 350;
+           case UPGRADE:
+               return 200;
+           default:
+               return 0;
+       }
+   }
+
+   public int getLowerCostBound(ItemType itemType) {
+       switch (itemType) {
+           case ARTIFACT:
+               return 750;
+           case WEAPON:
+               return 75;
+           case JEWEL:
+               return 300;
+           case UPGRADE:
+               return 175;
+           default:
+               return 0;
+       }
+   }
+
     public String getDescription() {
         switch (this) {
             default:
