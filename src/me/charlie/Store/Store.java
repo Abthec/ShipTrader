@@ -10,6 +10,7 @@ public class Store {
 
     StoreType storeType;
     int maxStock;
+    double storeBuyModifier;
     String name;
     private StoreNameHandler storeNames = new StoreNameHandler();
 
@@ -33,6 +34,11 @@ public class Store {
         for (int i = 0; i < this.maxStock;  i++) {
             stock.add(new Item());
         }
+    }
+
+    public double getStoreBuyModifier(Item item) {
+        storeBuyModifier = this.getStoreType().getBuyModifier(item);
+        return storeBuyModifier;
     }
 
     public int getMaxStock() {

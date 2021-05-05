@@ -10,6 +10,7 @@ public class Ship {
     int maxCargoCapacity;
     int maxCrewSize;
     double shipEndurance;
+    double shipHealth;
     Island currentIsland;
 
 
@@ -18,6 +19,7 @@ public class Ship {
         this.sailSpeed = sailSpeed;
         this.maxCrewSize = maxCrewSize;
         this.shipEndurance = shipEndurance;
+        this.shipHealth = shipEndurance;
         this.shipType = shipType;
         this.currentIsland = currentIsland;
     }
@@ -44,6 +46,23 @@ public class Ship {
 
     public double getShipEndurance() {
         return shipEndurance;
+    }
+
+    public double getShipHealth() {
+        return shipHealth;
+    }
+
+    public double shipTakeDamage(double damageTaken) {
+        shipHealth = getShipHealth() - damageTaken;
+        return shipHealth;
+    }
+
+    public double repairShip(double amountRepaired) {
+        shipHealth = getShipHealth() + amountRepaired;
+        if (shipHealth > shipEndurance) {
+            shipHealth = shipEndurance;
+        }
+        return shipHealth;
     }
 
     public ShipType getShipType() {
