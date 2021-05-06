@@ -4,6 +4,7 @@ import me.charlie.Island.Island;
 import me.charlie.RandomEvents.RandomEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Route {
@@ -39,6 +40,6 @@ public class Route {
 
     public String toString() {
         return "Route from " + this.islandA.getName() + " to " + this.islandB.getName() + ". This route is %.2f".formatted(this.getDistance()) +
-                " km long.";
+                " km long.\n";
     }
 }

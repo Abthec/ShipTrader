@@ -21,6 +21,7 @@ public class Game {
     int islandTotal;
     int daysRemaining;
     int daysSailed;
+    List<Route> routes;
 
     public Game(String traderName, int gameDuration, Ship ship, int islandTotal) {
 
@@ -29,12 +30,20 @@ public class Game {
         this.gameDuration = gameDuration;
 
         List<Island> islands = createIslands(islandTotal);
-        List<Route> routes = createRoutes(islands);
+        this.routes = createRoutes(islands);
         ship.setCurrentIsland(islands.get(0));
         trader = new Trader(traderName, startingCash, ship);
 
         System.out.println("You are on " + ship.getCurrentIsland().getName() + " island.");
-        Activitiy chosenActivity = getChosenActivity(ship);
+        Island currentIsland = ship.getCurrentIsland();
+        while (true) {
+            if (!ship.getCurrentIsland().equals(currentIsland)) {
+                break;
+            }
+            Activitiy chosenActivity = getChosenActivity(ship);
+            executeActivity(chosenActivity, trader);
+        }
+
 
     }
 
@@ -68,7 +77,7 @@ public class Game {
             for (Island islandB : islands) {
                 if (!islandA.equals(islandB)) {
                     Random random = new Random();
-                    for (int i = 0; i < (1 + random.nextInt(2)); i++) {
+                    for (int i = 0; i < (random.nextInt(3)); i++) {
                         routes.add(new Route(islandA, islandB));
                     }
                 }
@@ -123,15 +132,34 @@ public class Game {
         return chosenActivity;
     }
 
-    public void shopping(Trader trader, Ship ship) {
+    public void executeActivity(Activitiy activitiy, Trader trader) {
+        switch (activitiy) {
+            case REPAIR:
+                break;
+            case SHOP:
+                shopping(trader);
+                break;
+            case SAIL:
+                break;
+            case HIRE:
+                break;
+        }
+    }
+
+    public void shopping(Trader trader) {
 
         Scanner scanner = new Scanner(System.in);
+        Ship ship = trader.getShip();
         Island currentIsland = ship.getCurrentIsland();
         int cash = trader.getMoney();
         Store store = currentIsland.getStore();
-        System.out.println("Welcome to " + store + ". How can I help you today?");
+        System.out.println("Welcome to " + store);
+
+        shopActions:
         while (true) {
-            System.out.println("[Buy], [Sell], [Leave] - insert answer below:");
+            System.out.println("""
+            How can I help you today?
+            [Buy], [Sell], [Leave] - insert answer below:""");
             String action = scanner.nextLine();
             if (action.equalsIgnoreCase("buy")) {
                 if (ship.getCargoSpaceRemaining() == 0) {
@@ -142,20 +170,37 @@ public class Game {
                     System.out.println("Here are the items available");
                     int itemID = 0;
                     for (Item item : store.getStock()) {
-                        System.out.println("ID: Item Type | Base Item Cost (May be changed at shopkeepers discretion)");
-                        System.out.println(itemID + ": " + item);
+                        System.out.println("ID: Item Type | Item Cost");
+                        System.out.println(itemID + ": " + item + item.getBuyCost());
                     }
                     System.out.println("Enter the ID of the item you'd like to purchase.");
                     int chosenItemID = Integer.parseInt(scanner.nextLine());
                     Item chosenItem = store.getStock().get(chosenItemID);
-                    int itemCost = (int)Math.round(chosenItem.getBaseCost() * store.getStoreType().getBuyModifier(chosenItem.getItemType()));
-                    System.out.println("After reviewing the item the shop has decided to sell it to you for " + itemCost + " schmeckles.");
-                    if (itemCost == cash) {
+                    if (chosenItem.getBuyCost() == cash) {
                         System.out.println("Warning! Buying this item will bankrupt you. Would you like to proceed?");
                         String proceedToPurchase = scanner.nextLine();
                         if (proceedToPurchase.equalsIgnoreCase("yes")) {
-                            trader.subtractMoney(itemCost);
+                            ship.getCurrentIsland().getStore().buyItem(chosenItem);
+                            trader.subtractMoney(chosenItem.getBuyCost());
                         }
+                    } else if (chosenItem.getBuyCost() < cash) {
+                        ship.getCurrentIsland().getStore().buyItem(chosenItem);
+                        trader.subtractMoney(chosenItem.getBuyCost());
+                    } else {
+                        System.out.println("This item cost " + chosenItem.getBuyCost() + " coins.\nWould you like to chose another? - [Yes] or [No]");
+                        String retryBuy = scanner.nextLine();
+
+                        while (true) {
+                            if (retryBuy.equalsIgnoreCase("Yes")) {
+                                continue shopActions;
+                            } else if (retryBuy.equalsIgnoreCase("No")){
+                                break shopActions;
+                            } else {
+                                System.out.println("Please enter [Yes] or [No].");
+                                retryBuy = scanner.nextLine();
+                            }
+                        }
+
                     }
                     break;
                 }
@@ -170,5 +215,28 @@ public class Game {
                 System.out.println("That was not a valid option please try again.");
             }
         }
+    }
+
+    public Island sailing(Trader trader, List<Route> routes) {
+        Ship ship = trader.getShip();;
+        Island currentIsland = ship.getCurrentIsland();
+        List<Route> usableRoutes = new ArrayList<>();
+
+        System.out.println("These are the routes you may take to get to other islands:");
+        for (Route route : this.routes) {
+            if (currentIsland.equals(route.getIslandA())) {
+                usableRoutes.add(route);
+                System.out.println(route);
+            }
+        }
+        return currentIsland;
+    }
+
+    public void repairShip() {
+
+    }
+
+    public void hireCrew() {
+
     }
 }

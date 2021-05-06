@@ -49,6 +49,6 @@ public class Item {
     }
 
     public String toString() {
-        return this.getItemType().getName() + " | " + this.getBaseCost();
+        return this.getItemType().getName() + " | ";
     }
 }

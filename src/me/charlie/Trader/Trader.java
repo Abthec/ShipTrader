@@ -28,6 +28,7 @@ public class Trader {
 
     public int subtractMoney(int moneySpent) {
         this.money = this.getMoney() - moneySpent;
+        System.out.println("You have " + getMoney() + " coins left.");
         return this.money;
     }
 }
