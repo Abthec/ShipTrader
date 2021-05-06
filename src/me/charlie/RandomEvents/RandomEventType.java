@@ -11,7 +11,7 @@ public enum RandomEventType {
             case PIRATES:
                 return "";
             default:
-                return "Whoops"
+                return "Whoops";
         }
     }
 
