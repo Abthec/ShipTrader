@@ -2,6 +2,7 @@ package me.charlie.Ship;
 
 import me.charlie.Island.Island;
 import me.charlie.Item.Item;
+import me.charlie.Store.Store;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,7 @@ public class Ship {
     double shipEndurance;
     double shipHealth;
     Island currentIsland;
-
-    List<Item> currentCargo;
+    private List<Item> currentCargo;
 
     public Ship(ShipType shipType, double sailSpeed, int maxCargoCapacity, int maxCrewSize, double shipEndurance, Island currentIsland) {
         this.maxCargoCapacity = maxCargoCapacity;
@@ -66,6 +66,17 @@ public class Ship {
         }
         this.cargoSpaceRemaining = getMaxCargoCapacity() - cargoSpaceTaken;
         return cargoSpaceRemaining;
+    }
+
+    public boolean isCargoEmpty() {
+        return (getCargoSpaceRemaining() == maxCargoCapacity);
+    }
+
+    public void viewCurrentCargo(Store store) {
+        for (Item item : currentCargo) {
+            int sellCost = item.getSellCost(store);
+            System.out.println(item.getItemType().getName() + " | " + sellCost);
+        }
     }
 
     public int getMaxCrewSize() {

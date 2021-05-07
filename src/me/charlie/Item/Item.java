@@ -1,5 +1,6 @@
 package me.charlie.Item;
 
+import me.charlie.Store.Store;
 import me.charlie.Store.StoreType;
 
 import java.util.Random;
@@ -21,7 +22,6 @@ public class Item {
         this.description = itemType.getDescription();
         this.baseCost = itemType.getLowerCostBound(itemType) + random.nextInt(itemType.getUpperCostBound(itemType) - itemType.getLowerCostBound(itemType) + 1);
         this.buyCost = (int)Math.round(baseCost * storeType.getBuyModifier(itemType));
-        this.sellCost = (int)Math.round(baseCost * storeType.getSellModifier(itemType));
     }
 
     public int getBaseCost() {
@@ -32,7 +32,8 @@ public class Item {
         return buyCost;
     }
 
-    public int getSellCost() {
+    public int getSellCost(Store store) {
+        sellCost = (int)Math.round(this.getBaseCost() * store.getStoreBuyModifier(this));
         return sellCost;
     }
 
