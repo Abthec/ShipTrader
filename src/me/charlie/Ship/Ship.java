@@ -1,19 +1,23 @@
 package me.charlie.Ship;
 
 import me.charlie.Island.Island;
+import me.charlie.Item.Item;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ship {
 
     ShipType shipType;
     double sailSpeed;
     int maxCargoCapacity;
-    int currentCargo;
     int cargoSpaceRemaining;
     int maxCrewSize;
     double shipEndurance;
     double shipHealth;
     Island currentIsland;
 
+    private List<Item> currentCargo = new ArrayList<Item>();
 
     public Ship(ShipType shipType, double sailSpeed, int maxCargoCapacity, int maxCrewSize, double shipEndurance, Island currentIsland) {
         this.maxCargoCapacity = maxCargoCapacity;
@@ -23,7 +27,6 @@ public class Ship {
         this.shipHealth = shipEndurance;
         this.shipType = shipType;
         this.currentIsland = currentIsland;
-        this.currentCargo = 0;
     }
 
     public Island getCurrentIsland() {
@@ -38,17 +41,25 @@ public class Ship {
         return maxCargoCapacity;
     }
 
-    public int getCurrentCargo() {
+    public List<Item> getCurrentCargo() {
         return currentCargo;
     }
 
-    public int setCurrentCargo(int cargoChange) {
-        this.currentCargo = getCurrentCargo() + cargoChange;
-        return cargoChange;
+    public void addItemToCargo(Item item) {
+        if (getCargoSpaceRemaining() + item.getSize() > getMaxCargoCapacity()) {
+            System.out.println("You don't have enough space for that item.");
+        } else {
+            currentCargo.add(item);
+            System.out.println("The item was deposited in the cargo hold.");
+        }
     }
 
     public int getCargoSpaceRemaining() {
-        cargoSpaceRemaining = getMaxCargoCapacity() - getCurrentCargo();
+        int cargoSpaceTaken = 0;
+        for (Item item : currentCargo) {
+            cargoSpaceTaken += item.getSize();
+        }
+        cargoSpaceRemaining = getMaxCargoCapacity() - cargoSpaceTaken;
         return cargoSpaceRemaining;
     }
 

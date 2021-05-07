@@ -92,7 +92,6 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         Activitiy chosenActivity;
 
-        System.out.println("You are currently on " + currentIsland.getName());
         System.out.println("""
                 Which of the following activities would you like to do?
                 1: Sail to another Island?
@@ -157,9 +156,7 @@ public class Game {
 
         shopActions:
         while (true) {
-            System.out.println("""
-            How can I help you today?
-            [Buy], [Sell], [Leave] - insert answer below:""");
+            System.out.println("[Buy], [Sell], [Leave] - insert answer below:");
             String action = scanner.nextLine();
             if (action.equalsIgnoreCase("buy")) {
                 if (ship.getCargoSpaceRemaining() == 0) {
@@ -172,24 +169,28 @@ public class Game {
                     for (Item item : store.getStock()) {
                         System.out.println("ID: Item Type | Item Cost");
                         System.out.println(itemID + ": " + item + item.getBuyCost());
+                        itemID++;
                     }
                     System.out.println("Enter the ID of the item you'd like to purchase.");
                     int chosenItemID = Integer.parseInt(scanner.nextLine());
                     Item chosenItem = store.getStock().get(chosenItemID);
                     if (chosenItem.getBuyCost() == cash) {
-                        System.out.println("Warning! Buying this item will bankrupt you. Would you like to proceed?");
+                        System.out.println("Warning! Buying this item will leave you with 0 coins. Would you like to proceed?");
                         String proceedToPurchase = scanner.nextLine();
                         if (proceedToPurchase.equalsIgnoreCase("yes")) {
                             ship.getCurrentIsland().getStore().buyItem(chosenItem);
                             trader.subtractMoney(chosenItem.getBuyCost());
+                            System.out.println("Is there anything else I can help you with?");
+                            continue shopActions;
                         }
                     } else if (chosenItem.getBuyCost() < cash) {
                         ship.getCurrentIsland().getStore().buyItem(chosenItem);
                         trader.subtractMoney(chosenItem.getBuyCost());
+                        System.out.println("Is there anything else I can help you with?");
+                        continue shopActions;
                     } else {
                         System.out.println("This item cost " + chosenItem.getBuyCost() + " coins.\nWould you like to chose another? - [Yes] or [No]");
                         String retryBuy = scanner.nextLine();
-
                         while (true) {
                             if (retryBuy.equalsIgnoreCase("Yes")) {
                                 continue shopActions;

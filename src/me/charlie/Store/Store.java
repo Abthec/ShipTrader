@@ -29,7 +29,7 @@ public class Store {
 
     public void buyItem(Item item) {
         stock.remove(item);
-        System.out.println(item.getItemType().getName() + "was purchased for " + item.getBuyCost() + " coins.");
+        System.out.println(item.getItemType().getName() + " was purchased for " + item.getBuyCost() + " coins.");
     }
 
     public double getStoreBuyModifier(Item item) {
