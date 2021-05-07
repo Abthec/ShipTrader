@@ -166,9 +166,10 @@ public class Game {
                 } else {
                     System.out.println("Here are the items available");
                     int itemID = 0;
+                    System.out.println("You currently have " + ship.getCargoSpaceRemaining() + " cargo space remaining.");
                     for (Item item : store.getStock()) {
-                        System.out.println("ID: Item Type | Item Cost");
-                        System.out.println(itemID + ": " + item + item.getBuyCost());
+                        System.out.println("ID: Item Type | Item Cost | Item Size");
+                        System.out.println(itemID + ": " + item + item.getBuyCost() + " | " + item.getSize());
                         itemID++;
                     }
                     System.out.println("Enter the ID of the item you'd like to purchase.");
@@ -178,14 +179,18 @@ public class Game {
                         System.out.println("Warning! Buying this item will leave you with 0 coins. Would you like to proceed?");
                         String proceedToPurchase = scanner.nextLine();
                         if (proceedToPurchase.equalsIgnoreCase("yes")) {
-                            ship.getCurrentIsland().getStore().buyItem(chosenItem);
-                            trader.subtractMoney(chosenItem.getBuyCost());
+                            if (ship.addItemToCargo(chosenItem)) {
+                                ship.getCurrentIsland().getStore().buyItem(chosenItem);
+                                trader.subtractMoney(chosenItem.getBuyCost());
+                            }
                             System.out.println("Is there anything else I can help you with?");
                             continue shopActions;
                         }
                     } else if (chosenItem.getBuyCost() < cash) {
-                        ship.getCurrentIsland().getStore().buyItem(chosenItem);
-                        trader.subtractMoney(chosenItem.getBuyCost());
+                        if (ship.addItemToCargo(chosenItem)) {
+                            ship.getCurrentIsland().getStore().buyItem(chosenItem);
+                            trader.subtractMoney(chosenItem.getBuyCost());
+                        }
                         System.out.println("Is there anything else I can help you with?");
                         continue shopActions;
                     } else {

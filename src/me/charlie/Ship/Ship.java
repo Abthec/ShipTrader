@@ -17,7 +17,7 @@ public class Ship {
     double shipHealth;
     Island currentIsland;
 
-    private List<Item> currentCargo = new ArrayList<Item>();
+    List<Item> currentCargo;
 
     public Ship(ShipType shipType, double sailSpeed, int maxCargoCapacity, int maxCrewSize, double shipEndurance, Island currentIsland) {
         this.maxCargoCapacity = maxCargoCapacity;
@@ -27,6 +27,8 @@ public class Ship {
         this.shipHealth = shipEndurance;
         this.shipType = shipType;
         this.currentIsland = currentIsland;
+        this.currentCargo = new ArrayList<>();
+        this.cargoSpaceRemaining = maxCargoCapacity;
     }
 
     public Island getCurrentIsland() {
@@ -45,21 +47,24 @@ public class Ship {
         return currentCargo;
     }
 
-    public void addItemToCargo(Item item) {
-        if (getCargoSpaceRemaining() + item.getSize() > getMaxCargoCapacity()) {
+    public boolean addItemToCargo(Item item) {
+        if (item.getSize() > getCargoSpaceRemaining()) {
             System.out.println("You don't have enough space for that item.");
+            return false;
         } else {
-            currentCargo.add(item);
-            System.out.println("The item was deposited in the cargo hold.");
+            this.currentCargo.add(item);
+            System.out.println("The item was deposited in the cargo hold." +
+                    "\nYou have " + getCargoSpaceRemaining() + " cargo space left.");
+            return true;
         }
     }
 
     public int getCargoSpaceRemaining() {
         int cargoSpaceTaken = 0;
-        for (Item item : currentCargo) {
+        for (Item item : this.currentCargo) {
             cargoSpaceTaken += item.getSize();
         }
-        cargoSpaceRemaining = getMaxCargoCapacity() - cargoSpaceTaken;
+        this.cargoSpaceRemaining = getMaxCargoCapacity() - cargoSpaceTaken;
         return cargoSpaceRemaining;
     }
 
