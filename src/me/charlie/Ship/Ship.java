@@ -14,6 +14,7 @@ public class Ship {
     int maxCargoCapacity;
     int cargoSpaceRemaining;
     int maxCrewSize;
+    int cargoFullness;
     double shipEndurance;
     double shipHealth;
     Island currentIsland;
@@ -68,8 +69,21 @@ public class Ship {
         return cargoSpaceRemaining;
     }
 
+    public int getCargoFullness() {
+        cargoFullness = getMaxCargoCapacity() - getCargoSpaceRemaining();
+        return cargoFullness;
+    }
+
     public boolean isCargoEmpty() {
         return (getCargoSpaceRemaining() == maxCargoCapacity);
+    }
+
+    public void viewCurrentCargo() {
+        System.out.println("Total items in cargo: " + getCargoFullness() +
+                "\nYou can fit " + getCargoSpaceRemaining() + " more items.");
+        for (Item item : currentCargo) {
+            System.out.println(item.getItemType().getName());
+        }
     }
 
     public void viewCurrentCargo(Store store) {
