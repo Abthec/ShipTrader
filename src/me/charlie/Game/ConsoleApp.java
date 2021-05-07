@@ -33,16 +33,24 @@ public class ConsoleApp {
         return game;
     }
 
-    public int getNumberCode() {
+    public int getNumberCode(int maxNumberCode) {
         while (true) {
             try {
                 int numberCode = Integer.parseInt(scanner.nextLine());
+                if (numberCode > maxNumberCode) {
+                    System.out.println("Please enter a number within the required range");
+                    continue;
+                }
                 return numberCode;
             } catch (Exception e) {
-
             }
             System.out.println("Please input a number");
         }
+    }
+
+    public void pressAnyKeyToContinue() {
+        System.out.println("Press any key to continue.");
+        scanner.nextLine();
     }
 
     public void chooseActivity(Trader trader) {
@@ -58,7 +66,7 @@ public class ConsoleApp {
                 4: Repair your ship?""");
         activityChooser:
         while (true) {
-            int activityCode = Integer.parseInt(scanner.nextLine());
+            int activityCode = getNumberCode(4);
             switch (activityCode) {
                 case 1:
                     if (ship.getShipHealth() < ship.getShipEndurance()) {
@@ -80,7 +88,7 @@ public class ConsoleApp {
                         break activityChooser;
                     }
                 default:
-                    System.out.println("Sorry that is not a valid code please try again.");
+                    continue;
             }
         }
     }
@@ -93,16 +101,15 @@ public class ConsoleApp {
         Store store = currentIsland.getStore();
         System.out.println("Welcome to " + store);
 
-        shopActions:
         while (true) {
             System.out.println("1: [Buy], 2: [Sell], 3: [Leave] - insert answer code below:");
-            int action = getNumberCode();
+            int action = getNumberCode(3);
             if (action == 1) {
                 purchaseItems(trader);
-                continue shopActions;
+                continue;
             } else if (action == 2) {
                 sellItems(trader);
-                break;
+                continue;
             } else if (action == 3) {
                 System.out.println("Goodbye. Thank you for shopping with us.");
                 break;
@@ -120,8 +127,8 @@ public class ConsoleApp {
 
         if (ship.getCargoSpaceRemaining() == 0) {
             System.out.println("""
-                            You cannot fit anymore items sorry.
-                            Would you like to do something else?""");
+                    You cannot fit anymore items sorry.
+                    Would you like to do something else?""");
         } else {
             buyWindow:
             while (true) {
@@ -129,7 +136,7 @@ public class ConsoleApp {
                 System.out.println(cash + "\nEnter the ID of the item you'd like to purchase.\nOr if you have changed your mind enter 0");
 
                 while (true) {
-                    chosenItemID = getNumberCode() - 1;
+                    chosenItemID = getNumberCode(store.getStock().size()) - 1;
                     if (chosenItemID == -1) {
                         break buyWindow;
                     } else if (chosenItemID >= store.getStock().size() || chosenItemID < -1) {
@@ -144,11 +151,12 @@ public class ConsoleApp {
                 if (chosenItem.getBuyCost() == cash) {
                     System.out.println("Warning! Buying this item will leave you with 0 coins. Would you like to proceed?" +
                             "\n1: [Yes] | 2: [No]");
-                    int proceedToPurchase = getNumberCode();
+                    int proceedToPurchase = getNumberCode(2);
                     if (proceedToPurchase == 1) {
                         if (ship.addItemToCargo(chosenItem)) {
                             ship.getCurrentIsland().getStore().buyItem(chosenItem);
                             trader.subtractMoney(chosenItem.getBuyCost());
+                            pressAnyKeyToContinue();
                         }
                         System.out.println("Is there anything else I can help you with?");
                         break;
@@ -157,13 +165,14 @@ public class ConsoleApp {
                     if (ship.addItemToCargo(chosenItem)) {
                         ship.getCurrentIsland().getStore().buyItem(chosenItem);
                         trader.subtractMoney(chosenItem.getBuyCost());
+                        pressAnyKeyToContinue();
                     }
                     System.out.println("Is there anything else I can help you with?");
                     break;
                 } else {
                     System.out.println("You cannot afford this item.\nWould you like to chose another?\n" +
                             "\n1: [Yes] | 2: [No]");
-                    int retryBuy = getNumberCode();
+                    int retryBuy = getNumberCode(2);
                     while (true) {
                         if (retryBuy == 1) {
                             continue;
@@ -171,7 +180,7 @@ public class ConsoleApp {
                             break;
                         } else {
                             System.out.println("Please enter - 1: [Yes] | 2: [No].");
-                            retryBuy = getNumberCode();
+                            retryBuy = getNumberCode(2);
                         }
                     }
                 }
@@ -181,10 +190,46 @@ public class ConsoleApp {
 
     public void sellItems(Trader trader) {
         Ship ship = trader.getShip();
+        Store store = ship.getCurrentIsland().getStore();
 
-        if (ship.isCargoEmpty()) {
-            System.out.println("You do not have any items to sell.");
-        } else {
+
+        while (true) {
+            if (ship.isCargoEmpty()) {
+                System.out.println("You do not have any items to sell.");
+                pressAnyKeyToContinue();
+                break;
+            } else {
+                System.out.println("""
+                        These are the items you have available to sell.
+                        ID: Item Type | Sell Price""");
+                ship.viewCurrentCargo(store);
+                System.out.println("Would you like to sell one of these items? - 1: [Yes] 2: [No]");
+                int chooseToSell = getNumberCode(2);
+                if (chooseToSell == 1) {
+                    System.out.println("Enter the ID of the item you would like to sell.");
+                    int chosenItemId = getNumberCode(ship.getCargoFullness());
+                    Item chosenItem = ship.getCurrentCargo().get(chosenItemId - 1);
+                    ship.removeItemFromCargo(chosenItem);
+                    trader.addMoney(chosenItem.getSellCost(store));
+                    if (ship.isCargoEmpty()) {
+                        System.out.println("You do not have any items to sell.");
+                        pressAnyKeyToContinue();
+                        break;
+                    } else {
+                        System.out.println("Would you like to sell another item? - 1: [Yes] or 2: [No].");
+                        int nextAction = getNumberCode(2);
+                        if (nextAction == 1) {
+                            continue;
+                        } else {
+                            break;
+                        }
+                    }
+                } else if (chooseToSell == 2) {
+                    System.out.println("Is there anything else I can help you with?");
+                    break;
+                }
+            }
+
 
         }
     }
@@ -237,27 +282,27 @@ public class ConsoleApp {
 
         List<Ship> ships = new ArrayList<Ship>();
 
-        ships.add(new Ship(ShipType.SCHOONER, 1.5, 3, 10, 100, null));
-        ships.add(new Ship(ShipType.BARQUENTINE, 1.25, 10, 10, 100, null));
-        ships.add(new Ship(ShipType.BRIGANTINE, 1.0, 10, 10, 100, null));
-        ships.add(new Ship(ShipType.AIRCRAFT_CARRIER, 0.75, 200, 100, 1000, null));
+        ships.add(new Ship(ShipType.SCHOONER, 1, 1.5, 3, 10, 100, null));
+        ships.add(new Ship(ShipType.BARQUENTINE, 2, 1.25, 10, 10, 100, null));
+        ships.add(new Ship(ShipType.BRIGANTINE, 3, 1.0, 10, 10, 100, null));
+        ships.add(new Ship(ShipType.AIRCRAFT_CARRIER, 4, 0.75, 200, 100, 1000, null));
 
         System.out.println("Choose your ship!");
-        System.out.println("Name | Speed | Max Cargo Capacity | Max Crew Size | Ship Health");
+        System.out.println("ID: Name | Speed | Max Cargo Capacity | Max Crew Size | Ship Health");
         for (Ship ship : ships) {
             System.out.println(ship.toString());
         }
 
+        System.out.println("Enter your chosen ship ID.");
         shipSelector:
         while (true) {
-            String selectedShipType = scanner.nextLine();
+            int shipId = getNumberCode(4);
             for (Ship ship : ships) {
-                if (ship.getShipType().getName().equalsIgnoreCase(selectedShipType)) {
+                if (ship.getShipId() == shipId) {
                     selectedShip = ship;
                     break shipSelector;
                 }
             }
-            System.out.println("Invalid ship name, choose again.");
         }
         return selectedShip;
     }

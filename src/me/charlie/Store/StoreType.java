@@ -80,7 +80,7 @@ public enum StoreType {
                     case JEWEL:
                         return 0.75;
                     case WEAPON:
-                        return 1.1;
+                        return 0.6;
                     case ARTIFACT:
                         return 1.1;
                 }

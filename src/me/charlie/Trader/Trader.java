@@ -31,4 +31,10 @@ public class Trader {
         System.out.println("You have " + getMoney() + " coins left.");
         return this.money;
     }
+
+    public int addMoney(int moneyEarned) {
+     this.money = getMoney() + moneyEarned;
+     System.out.println("You now have " + getMoney() + " coins in your stash!");
+     return money;
+    }
 }

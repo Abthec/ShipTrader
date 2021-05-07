@@ -11,6 +11,7 @@ public class Store {
     StoreType storeType;
     int maxStock;
     double storeBuyModifier;
+    double storeSellModifier;
     String name;
     private StoreNameHandler storeNames = new StoreNameHandler();
 
@@ -35,6 +36,11 @@ public class Store {
     public double getStoreBuyModifier(Item item) {
         storeBuyModifier = this.getStoreType().getBuyModifier(item.getItemType());
         return storeBuyModifier;
+    }
+
+    public double getStoreSellModifier(Item item) {
+        storeSellModifier = this.getStoreType().getSellModifier(item.getItemType());
+        return storeSellModifier;
     }
 
     public int getMaxStock() {

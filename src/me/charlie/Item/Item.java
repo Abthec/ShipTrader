@@ -33,7 +33,7 @@ public class Item {
     }
 
     public int getSellCost(Store store) {
-        sellCost = (int)Math.round(this.getBaseCost() * store.getStoreBuyModifier(this));
+        sellCost = (int)Math.round(this.getBaseCost() * store.getStoreSellModifier(this));
         return sellCost;
     }
 

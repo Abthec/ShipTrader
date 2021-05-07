@@ -15,12 +15,13 @@ public class Ship {
     int cargoSpaceRemaining;
     int maxCrewSize;
     int cargoFullness;
+    int shipId;
     double shipEndurance;
     double shipHealth;
     Island currentIsland;
     private List<Item> currentCargo;
 
-    public Ship(ShipType shipType, double sailSpeed, int maxCargoCapacity, int maxCrewSize, double shipEndurance, Island currentIsland) {
+    public Ship(ShipType shipType, int shipId, double sailSpeed, int maxCargoCapacity, int maxCrewSize, double shipEndurance, Island currentIsland) {
         this.maxCargoCapacity = maxCargoCapacity;
         this.sailSpeed = sailSpeed;
         this.maxCrewSize = maxCrewSize;
@@ -30,6 +31,7 @@ public class Ship {
         this.currentIsland = currentIsland;
         this.currentCargo = new ArrayList<>();
         this.cargoSpaceRemaining = maxCargoCapacity;
+        this.shipId = shipId;
     }
 
     public Island getCurrentIsland() {
@@ -60,6 +62,18 @@ public class Ship {
         }
     }
 
+    public boolean removeItemFromCargo(Item item) {
+        if (currentCargo.size() == 0) {
+            System.out.println("There are no items to remove.");
+            return false;
+        } else {
+            this.currentCargo.remove(item);
+            System.out.println("The item was removed from the cargo hold." +
+                    "\nYou now have " + getCargoSpaceRemaining() + " cargo space left.");
+            return true;
+        }
+    }
+
     public int getCargoSpaceRemaining() {
         int cargoSpaceTaken = 0;
         for (Item item : this.currentCargo) {
@@ -79,17 +93,20 @@ public class Ship {
     }
 
     public void viewCurrentCargo() {
+        int id = 1;
         System.out.println("Total items in cargo: " + getCargoFullness() +
                 "\nYou can fit " + getCargoSpaceRemaining() + " more items.");
         for (Item item : currentCargo) {
-            System.out.println(item.getItemType().getName());
+            System.out.println(id + ": " + item.getItemType().getName());
         }
     }
 
     public void viewCurrentCargo(Store store) {
+        int id = 1;
         for (Item item : currentCargo) {
             int sellCost = item.getSellCost(store);
-            System.out.println(item.getItemType().getName() + " | " + sellCost);
+            System.out.println(id + ": " + item.getItemType().getName() + " | " + sellCost);
+            id++;
         }
     }
 
@@ -126,8 +143,12 @@ public class Ship {
         return shipType;
     }
 
+    public int getShipId() {
+        return shipId;
+    }
+
     public String toString() {
-        return this.getShipType().getName() + " | " + this.getSailSpeed() + " | " + this.getMaxCargoCapacity() + " | "
+        return this.shipId + ": " + this.getShipType().getName() + " | " + this.getSailSpeed() + " | " + this.getMaxCargoCapacity() + " | "
                 + this.getMaxCrewSize() + " | " + this.getShipEndurance();
     }
 }
