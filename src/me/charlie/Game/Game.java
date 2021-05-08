@@ -19,6 +19,7 @@ public class Game {
     int islandTotal;
     int daysRemaining;
     int daysSailed;
+    int sailDuration;
     int startingCash;
     private List<Route> routes;
     private List<Island> islands;
@@ -47,6 +48,15 @@ public class Game {
         return daysRemaining;
     }
 
+    public int getSailDuration(Route route) {
+        if (ship.getCargoFullness()/ship.getMaxCrewSize() >= 0.5) {
+            sailDuration = (int)Math.round((route.getDistance() * 1000) / ((ship.getSailSpeed() - (1 - 1.5*ship.getCrewFullness()))) - 0.1);
+        } else {
+            sailDuration = (int)Math.round((route.getDistance() * 1000) / (ship.getSailSpeed() - (1 - 1.5*ship.getCrewFullness())));
+        }
+        return sailDuration;
+    }
+
     public Ship getShip() {
         return ship;
     }
@@ -62,7 +72,7 @@ public class Game {
         this.islands = new ArrayList<>();
         islands.add(new Island());
 
-        while (islands.size() <= islandTotal) {
+        while (islands.size() < islandTotal) {
             islands.add(new Island(islandNames.getName(), islandCoordinates.getCoordinate()));
         }
         return islands;
@@ -76,12 +86,13 @@ public class Game {
             for (Island islandB : islands) {
                 if (!islandA.equals(islandB)) {
                     Random random = new Random();
-                    for (int i = 0; i < (random.nextInt(3)); i++) {
+                    for (int i = 0; i < 1 + (random.nextInt(3)); i++) {
                         routes.add(new Route(islandA, islandB));
                     }
                 }
             }
         }
+
         return routes;
     }
 

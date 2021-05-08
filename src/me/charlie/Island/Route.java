@@ -40,6 +40,6 @@ public class Route {
 
     public String toString() {
         return "Route from " + this.islandA.getName() + " to " + this.islandB.getName() + ". This route is %.2f".formatted(this.getDistance()) +
-                " km long.\n";
+                " km long.";
     }
 }

@@ -11,9 +11,11 @@ public class Ship {
 
     ShipType shipType;
     double sailSpeed;
+    double crewFullness;
     int maxCargoCapacity;
     int cargoSpaceRemaining;
     int maxCrewSize;
+    int currentCrewSize;
     int cargoFullness;
     int shipId;
     double shipEndurance;
@@ -32,6 +34,7 @@ public class Ship {
         this.currentCargo = new ArrayList<>();
         this.cargoSpaceRemaining = maxCargoCapacity;
         this.shipId = shipId;
+        this.currentCrewSize = (int)Math.round(maxCrewSize * 0.5);
     }
 
     public Island getCurrentIsland() {
@@ -112,6 +115,15 @@ public class Ship {
 
     public int getMaxCrewSize() {
         return maxCrewSize;
+    }
+
+    public int getCurrentCrewSize() {
+        return currentCrewSize;
+    }
+
+    public double getCrewFullness() {
+        crewFullness = getCurrentCrewSize()/getMaxCrewSize();
+        return crewFullness;
     }
 
     public double getSailSpeed() {

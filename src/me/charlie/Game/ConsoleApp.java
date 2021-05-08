@@ -1,6 +1,7 @@
 package me.charlie.Game;
 
 import me.charlie.Island.Island;
+import me.charlie.Island.Route;
 import me.charlie.Item.Item;
 import me.charlie.Ship.Ship;
 import me.charlie.Ship.ShipType;
@@ -9,11 +10,13 @@ import me.charlie.Trader.Trader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class ConsoleApp {
 
     private Scanner scanner;
+    Route chosenRoute;
     String traderName;
     Ship selectedShip;
     int gameDuration;
@@ -53,7 +56,8 @@ public class ConsoleApp {
         scanner.nextLine();
     }
 
-    public void chooseActivity(Trader trader) {
+    public void chooseActivity(Game game) {
+        Trader trader = game.getTrader();
         Ship ship = trader.getShip();
         Island currentIsland = ship.getCurrentIsland();
         Scanner scanner = new Scanner(System.in);
@@ -71,10 +75,10 @@ public class ConsoleApp {
                 case 1:
                     if (ship.getShipHealth() < ship.getShipEndurance()) {
                         System.out.println("Cannot go sailing with a damaged ship.\nChoose again.");
-                        continue activityChooser;
                     } else {
-
+                        sail(game);
                     }
+                    break activityChooser;
                 case 2:
                     visitStore(trader);
                     break activityChooser;
@@ -192,7 +196,6 @@ public class ConsoleApp {
         Ship ship = trader.getShip();
         Store store = ship.getCurrentIsland().getStore();
 
-
         while (true) {
             if (ship.isCargoEmpty()) {
                 System.out.println("You do not have any items to sell.");
@@ -248,6 +251,51 @@ public class ConsoleApp {
         }
     }
 
+    public void sail(Game game) {
+        chooseRoute(game);
+        if (chosenRoute == null) {
+            return;
+        }
+        System.out.println(chosenRoute);
+    }
+
+    public void chooseRoute(Game game) {
+        Ship ship = game.getShip();
+        Route chosenRoute = null;
+        Island currentIsland = ship.getCurrentIsland();
+        int count = 1;
+
+        List<Route> routes = game.getRoutes();
+        List<Route> availableRoutes = new ArrayList<>();
+        System.out.println("Please select the route you would like to take." +
+                "\nRoute ID: Island From | Island To | Distance | Description");
+
+        for (Route route : routes) {
+            if (route.getIslandA().equals(currentIsland)) {
+                System.out.println(count + ": " + route);
+                availableRoutes.add(route);
+                count++;
+            }
+        }
+
+        while(true) {
+            System.out.println("Enter the route ID of your chosen route. Or enter [0] to exit.");
+            int chosenRouteId = getNumberCode(availableRoutes.size()) - 1;
+            if (chosenRouteId == -1) {
+                break;
+            } else {
+                Route route = availableRoutes.get(chosenRouteId);
+                if (game.getDaysRemaining() >= game.getSailDuration(route)) {
+                    this.chosenRoute = route;
+                    break;
+                } else {
+                    System.out.println("There is not enough time remaining to sail to that island." +
+                            "\nPlease choose another.");
+                }
+            }
+        }
+    }
+
     public String chooseTraderName() {
         while (true) {
             System.out.println("Enter Trader Name");
@@ -282,10 +330,10 @@ public class ConsoleApp {
 
         List<Ship> ships = new ArrayList<Ship>();
 
-        ships.add(new Ship(ShipType.SCHOONER, 1, 1.5, 3, 10, 100, null));
-        ships.add(new Ship(ShipType.BARQUENTINE, 2, 1.25, 10, 10, 100, null));
-        ships.add(new Ship(ShipType.BRIGANTINE, 3, 1.0, 10, 10, 100, null));
-        ships.add(new Ship(ShipType.AIRCRAFT_CARRIER, 4, 0.75, 200, 100, 1000, null));
+        ships.add(new Ship(ShipType.SCHOONER, 1, 1, 10, 15, 250, null));
+        ships.add(new Ship(ShipType.BARQUENTINE, 2, 1.25, 8, 12, 150, null));
+        ships.add(new Ship(ShipType.BRIGANTINE, 3, 0.85, 18, 24, 310, null));
+        ships.add(new Ship(ShipType.AIRCRAFT_CARRIER, 4, 0.6, 30, 50, 750, null));
 
         System.out.println("Choose your ship!");
         System.out.println("ID: Name | Speed | Max Cargo Capacity | Max Crew Size | Ship Health");
@@ -315,8 +363,9 @@ public class ConsoleApp {
 
         ConsoleApp consoleApp = new ConsoleApp();
         Game game = consoleApp.Start();
+        List<Route> routes = game.getRoutes();
         while (true) {
-            consoleApp.chooseActivity(game.getTrader());
+            consoleApp.chooseActivity(game);
         }
 
     }
