@@ -148,15 +148,23 @@ public class Ship {
         return shipHealth;
     }
 
-    public double shipTakeDamage(double damageTaken) {
-        shipHealth = getShipHealth() - damageTaken;
+    public double addShipHealth() {
+        shipHealth += shipEndurance/10;
+        if (shipHealth > shipEndurance) {
+            shipHealth = shipEndurance;
+        }
         return shipHealth;
     }
 
-    public double repairShip(double amountRepaired) {
-        shipHealth = getShipHealth() + amountRepaired;
-        if (shipHealth > shipEndurance) {
-            shipHealth = shipEndurance;
+    public double repairFull() {
+        shipHealth = shipEndurance;
+        return shipHealth;
+    }
+
+    public double removeShipHealth(double amountRemoved) {
+        shipHealth -= amountRemoved;
+        if (shipHealth < 0) {
+            shipHealth = 0;
         }
         return shipHealth;
     }

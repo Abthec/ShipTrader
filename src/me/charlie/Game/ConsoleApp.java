@@ -10,7 +10,6 @@ import me.charlie.Trader.Trader;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class ConsoleApp {
@@ -40,7 +39,7 @@ public class ConsoleApp {
         while (true) {
             try {
                 int numberCode = Integer.parseInt(scanner.nextLine());
-                if (numberCode > maxNumberCode) {
+                if (numberCode > maxNumberCode || numberCode < 0) {
                     System.out.println("Please enter a number within the required range");
                     continue;
                 }
@@ -89,8 +88,10 @@ public class ConsoleApp {
                 case 4:
                     if (ship.getShipHealth() == ship.getShipEndurance()) {
                         System.out.println("Ship is not in need of repairs.\nChoose again.");
+                        repairShip(game.getTrader());
                         continue activityChooser;
                     } else {
+                        repairShip(game.getTrader());
                         break activityChooser;
                     }
                 case 5:
@@ -102,8 +103,31 @@ public class ConsoleApp {
         }
     }
 
-    public void repairShip() {
+    public void repairShip(Trader trader) {
+        Ship ship = trader.getShip();
+        System.out.println("Current ship health is: " + ship.getShipHealth() + "/" + ship.getShipEndurance() +
+                ".\nThe cost to repair your ship is 100 coins." +
+                "\nRepairing your ship will increase your ship health by " + ship.getShipEndurance()/10 +
+                "\nTo repair to full health it will cost " + getFullRepairCost(ship) +
+                "\n0: [Leave] 1: [Repair Once] 2: [Full Repair]");
+        int action = getNumberCode(3);
+        if (action == 1) {
+            trader.subtractMoney(100);
+            ship.addShipHealth();
+            System.out.println("New ship health is " + ship.getShipHealth());
+        } else if (action == 2) {
+            trader.subtractMoney(getFullRepairCost(ship));
+            ship.repairFull();
+            System.out.println("New ship health is " + ship.getShipHealth());
+        }
+    }
 
+    public int getFullRepairCost(Ship ship) {
+        double eachRepair = ship.getShipEndurance()/10;
+        double healthMissing = ship.getShipEndurance() - ship.getShipHealth();
+        int numberOfRepairs = (int)Math.round(healthMissing/eachRepair);
+        int fullRepairCost = numberOfRepairs * 100;
+        return fullRepairCost;
     }
 
     public void hireCrew() {
@@ -199,8 +223,10 @@ public class ConsoleApp {
                     System.out.println("Is there anything else I can help you with?");
                     break;
                 } else {
-                    System.out.println("You cannot afford this item.\nWould you like to chose another?\n" +
-                            "\n1: [Yes] | 2: [No]");
+                    System.out.println("""
+                            You cannot afford this item.
+                            Would you like to chose another?" +
+                            "1: [Yes] | 2: [No]""");
                     int retryBuy = getNumberCode(2);
                     while (true) {
                         if (retryBuy == 1) {
