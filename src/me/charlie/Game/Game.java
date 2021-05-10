@@ -48,14 +48,7 @@ public class Game {
         return daysRemaining;
     }
 
-    public int getSailDuration(Route route) {
-        if (ship.getCargoFullness()/ship.getMaxCrewSize() >= 0.5) {
-            sailDuration = (int)Math.round((route.getDistance() * 1000) / ((ship.getSailSpeed() - (1 - 1.5*ship.getCrewFullness()))) - 0.1);
-        } else {
-            sailDuration = (int)Math.round((route.getDistance() * 1000) / (ship.getSailSpeed() - (1 - 1.5*ship.getCrewFullness())));
-        }
-        return sailDuration;
-    }
+
 
     public Ship getShip() {
         return ship;

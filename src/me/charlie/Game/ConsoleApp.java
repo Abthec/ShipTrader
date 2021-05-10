@@ -272,7 +272,7 @@ public class ConsoleApp {
 
         for (Route route : routes) {
             if (route.getIslandA().equals(currentIsland)) {
-                System.out.println(count + ": " + route);
+                System.out.println(count + ": " + route.toString(ship));
                 availableRoutes.add(route);
                 count++;
             }
@@ -285,7 +285,7 @@ public class ConsoleApp {
                 break;
             } else {
                 Route route = availableRoutes.get(chosenRouteId);
-                if (game.getDaysRemaining() >= game.getSailDuration(route)) {
+                if (game.getDaysRemaining() >= route.getSailDuration(ship)) {
                     this.chosenRoute = route;
                     break;
                 } else {
@@ -330,10 +330,10 @@ public class ConsoleApp {
 
         List<Ship> ships = new ArrayList<Ship>();
 
-        ships.add(new Ship(ShipType.SCHOONER, 1, 1, 10, 15, 250, null));
-        ships.add(new Ship(ShipType.BARQUENTINE, 2, 1.25, 8, 12, 150, null));
-        ships.add(new Ship(ShipType.BRIGANTINE, 3, 0.85, 18, 24, 310, null));
-        ships.add(new Ship(ShipType.AIRCRAFT_CARRIER, 4, 0.6, 30, 50, 750, null));
+        ships.add(new Ship(ShipType.SCHOONER, 1, 17.5, 10, 15, 250, null));
+        ships.add(new Ship(ShipType.BARQUENTINE, 2, 20, 8, 12, 150, null));
+        ships.add(new Ship(ShipType.BRIGANTINE, 3, 16, 18, 24, 310, null));
+        ships.add(new Ship(ShipType.AIRCRAFT_CARRIER, 4, 15, 30, 50, 750, null));
 
         System.out.println("Choose your ship!");
         System.out.println("ID: Name | Speed | Max Cargo Capacity | Max Crew Size | Ship Health");

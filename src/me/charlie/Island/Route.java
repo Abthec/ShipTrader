@@ -2,6 +2,7 @@ package me.charlie.Island;
 
 import me.charlie.Island.Island;
 import me.charlie.RandomEvents.RandomEvent;
+import me.charlie.Ship.Ship;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class Route {
     Island islandB;
     double distance;
     RandomEvent randomEvent;
-    int travelTime;
+    int sailDuration;
 
     public Route(Island islandA, Island islandB) {
         this.islandA = islandA;
@@ -38,8 +39,14 @@ public class Route {
         return distance;
     }
 
-    public String toString() {
+    public int getSailDuration(Ship ship) {
+        double shipSpeed = ship.getSailSpeed() + ship.getCrewFullness() - ship.getCargoFullness();
+        sailDuration = (int)Math.round(this.getDistance() / shipSpeed);
+        return sailDuration;
+    }
+
+    public String toString(Ship ship) {
         return "Route from " + this.islandA.getName() + " to " + this.islandB.getName() + ". This route is %.2f".formatted(this.getDistance()) +
-                " km long.";
+                " km long and will take you " + this.getSailDuration(ship) + " days to sail.";
     }
 }
