@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Ship {
 
+    String name;
     ShipType shipType;
     double sailSpeed;
     double crewFullness;
@@ -19,9 +20,11 @@ public class Ship {
     int cargoFullness;
     int shipId;
     double shipEndurance;
+    double currentShipEndurance;
     double shipHealth;
     Island currentIsland;
     private List<Item> currentCargo;
+    private ShipNameHandler shipNameHandler = new ShipNameHandler();
 
     public Ship(ShipType shipType, int shipId, double sailSpeed, int maxCargoCapacity, int maxCrewSize, double shipEndurance, Island currentIsland) {
         this.maxCargoCapacity = maxCargoCapacity;
@@ -35,6 +38,8 @@ public class Ship {
         this.cargoSpaceRemaining = maxCargoCapacity;
         this.shipId = shipId;
         this.currentCrewSize = (int)Math.round(maxCrewSize * 0.5);
+        this.name = shipNameHandler.getName();
+        this.currentShipEndurance = shipEndurance;
     }
 
     public Island getCurrentIsland() {
@@ -126,6 +131,11 @@ public class Ship {
         return crewFullness;
     }
 
+    public String hireCrewMember() {
+        this.currentCrewSize++;
+        return "You hired a crew member, things brings your crew size to: " + this.getCurrentCrewSize() + "/" + this.getMaxCrewSize();
+    }
+
     public double getSailSpeed() {
         return sailSpeed;
     }
@@ -157,6 +167,15 @@ public class Ship {
 
     public int getShipId() {
         return shipId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getProperties() {
+        return shipType.getName() + " | " + this.sailSpeed + " | " + this.getCargoFullness() + "/" + this.getMaxCargoCapacity() +
+                " | " + this.getCurrentCrewSize() + "/" + this.getMaxCrewSize() + " | " + this.getShipHealth() + "/" + this.getShipEndurance();
     }
 
     public String toString() {

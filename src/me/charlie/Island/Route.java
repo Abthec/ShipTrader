@@ -15,6 +15,7 @@ public class Route {
     double distance;
     RandomEvent randomEvent;
     int sailDuration;
+    int sailCost;
 
     public Route(Island islandA, Island islandB) {
         this.islandA = islandA;
@@ -45,8 +46,13 @@ public class Route {
         return sailDuration;
     }
 
+    public int getSailCost(Ship ship) {
+        sailCost = ship.getCurrentCrewSize() * 10;
+        return sailCost;
+    }
+
     public String toString(Ship ship) {
-        return "Route from " + this.islandA.getName() + " to " + this.islandB.getName() + ". This route is %.2f".formatted(this.getDistance()) +
+        return "Route to " + this.islandB.getName() + ". This route is %.2f".formatted(this.getDistance()) +
                 " km long and will take you " + this.getSailDuration(ship) + " days to sail.";
     }
 }

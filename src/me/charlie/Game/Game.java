@@ -48,8 +48,6 @@ public class Game {
         return daysRemaining;
     }
 
-
-
     public Ship getShip() {
         return ship;
     }

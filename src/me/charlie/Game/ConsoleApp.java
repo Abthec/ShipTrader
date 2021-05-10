@@ -67,10 +67,11 @@ public class ConsoleApp {
                 1: Sail to another Island?
                 2: Visit the store?
                 3: Look for more crew to hire?
-                4: Repair your ship?""");
+                4: Repair your ship?
+                5: View ship properties.""");
         activityChooser:
         while (true) {
-            int activityCode = getNumberCode(4);
+            int activityCode = getNumberCode(5);
             switch (activityCode) {
                 case 1:
                     if (ship.getShipHealth() < ship.getShipEndurance()) {
@@ -83,6 +84,7 @@ public class ConsoleApp {
                     visitStore(trader);
                     break activityChooser;
                 case 3:
+                    hireCrew();
                     break activityChooser;
                 case 4:
                     if (ship.getShipHealth() == ship.getShipEndurance()) {
@@ -91,10 +93,33 @@ public class ConsoleApp {
                     } else {
                         break activityChooser;
                     }
+                case 5:
+                    viewShipProperties(ship);
+                    break activityChooser;
                 default:
                     continue;
             }
         }
+    }
+
+    public void repairShip() {
+
+    }
+
+    public void hireCrew() {
+        System.out.println("Hiring a crew member will add 10 coins extra wages per day sailed." +
+                "\nWould you like to hire a new member - 1: [Yes] 2: [No]");
+        int response = getNumberCode(2);
+        if (response == 1) {
+            selectedShip.hireCrewMember();
+        }
+    }
+
+    public void viewShipProperties(Ship ship) {
+        System.out.println("Ship name: " + ship.getName());
+        System.out.println("Ship Type | Sail Speed | Current Cargo | Current Crew Size | Current Ship Health");
+        System.out.println(ship.getProperties());
+        pressAnyKeyToContinue();
     }
 
     public void visitStore(Trader trader) {
@@ -256,7 +281,11 @@ public class ConsoleApp {
         if (chosenRoute == null) {
             return;
         }
-        System.out.println(chosenRoute);
+        game.getShip().setCurrentIsland(chosenRoute.getIslandB());
+        System.out.println("You have arrived. " + chosenRoute.getIslandB());
+        game.getTrader().subtractMoney(chosenRoute.getSailCost(game.getShip()));
+        System.out.println("After paying your crew you now have: " + game.getTrader().getMoney() + " coins left.");
+        pressAnyKeyToContinue();
     }
 
     public void chooseRoute(Game game) {

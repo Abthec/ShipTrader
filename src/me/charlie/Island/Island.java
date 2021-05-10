@@ -37,4 +37,7 @@ public class Island {
         return location;
     }
 
+    public String toString() {
+        return "Welcome to " + this.getName() + ", on this island we have a " + this.getStore().getStoreType().getName() + ".\nPlease enjoy your stay.";
+    }
 }
