@@ -1,13 +1,9 @@
 package me.charlie.Island;
 
-import java.util.Random;
-
 public class Location {
 
     int xCoordinate;
     int yCoordinate;
-
-    private Random random = new Random();
 
     public Location(int xCoordinate, int yCoordinate) {
         this.xCoordinate = xCoordinate;
@@ -15,8 +11,7 @@ public class Location {
     }
 
     public Location() {
-        this.xCoordinate = 50;
-        this.yCoordinate = 50;
+        this(50, 50);
     }
 
     public double getDistance(Location location) {
