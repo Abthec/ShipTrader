@@ -8,6 +8,7 @@ import java.util.Random;
 public class Item {
 
     ItemType itemType;
+    UpgradeType upgradeType;
     int size;
     int baseCost;
     int buyCost;
@@ -22,6 +23,11 @@ public class Item {
         this.description = itemType.getDescription();
         this.baseCost = itemType.getLowerCostBound(itemType) + random.nextInt(itemType.getUpperCostBound(itemType) - itemType.getLowerCostBound(itemType) + 1);
         this.buyCost = (int)Math.round(baseCost * storeType.getBuyModifier(itemType));
+        if (itemType.equals(ItemType.UPGRADE)) {
+            this.upgradeType = UpgradeType.values()[random.nextInt(4)];
+        } else {
+            this.upgradeType = null;
+        }
     }
 
     public int getBaseCost() {
@@ -47,6 +53,10 @@ public class Item {
 
     public ItemType getItemType() {
         return itemType;
+    }
+
+    public UpgradeType getUpgradeType() {
+        return upgradeType;
     }
 
     public String toString() {
