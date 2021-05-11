@@ -188,7 +188,7 @@ public class ConsoleApp {
                         "\n If [Yes] enter the ID of the upgrade you would like to apply. If [No] enter 0.");
                 int upgrade = getNumberCode(upgradeId);
                 if (!(upgrade == 0)) {
-                    applyUpgrade(upgrades.get(upgradeId - 1).getUpgradeType(), ship);
+                    applyUpgrade(upgrades.get(upgrade - 1).getUpgradeType(), ship);
                 }
             }
 
@@ -421,7 +421,13 @@ public class ConsoleApp {
                     }
                 }
             case WEATHER:
-
+                double healthRemoved = 25 + random.nextInt(25);
+                ship.removeShipHealth(healthRemoved);
+                System.out.println("While sailing you encountered stormy weather." +
+                        "\nUnfortunately due to the bad weather your ship took some damage." +
+                        "\nYour ship took " + healthRemoved + " damage." +
+                        "\nYour ship has " + ship.getShipHealth() + "/" + ship.getShipEndurance() +
+                        "\nYou must repair it at the next island before you can sail again.");
                 break;
         }
     }
