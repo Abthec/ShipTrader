@@ -5,6 +5,7 @@ import me.charlie.Island.Route;
 import me.charlie.Item.Item;
 import me.charlie.Item.ItemType;
 import me.charlie.Item.UpgradeType;
+import me.charlie.RandomEvents.RandomEventType;
 import me.charlie.Ship.Ship;
 import me.charlie.Ship.ShipType;
 import me.charlie.Store.Store;
@@ -12,6 +13,7 @@ import me.charlie.Trader.Trader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class ConsoleApp {
@@ -85,7 +87,7 @@ public class ConsoleApp {
                     visitStore(trader);
                     break activityChooser;
                 case 3:
-                    hireCrew();
+                    hireCrew(ship);
                     break activityChooser;
                 case 4:
                     if (ship.getShipHealth() == ship.getShipEndurance()) {
@@ -108,7 +110,7 @@ public class ConsoleApp {
         Ship ship = trader.getShip();
         System.out.println("Current ship health is: " + ship.getShipHealth() + "/" + ship.getShipEndurance() +
                 ".\nThe cost to repair your ship is 100 coins." +
-                "\nRepairing your ship will increase your ship health by " + ship.getShipEndurance()/10 +
+                "\nRepairing your ship will increase your ship health by " + ship.getShipEndurance() / 10 +
                 "\nTo repair to full health it will cost " + getFullRepairCost(ship) +
                 "\n0: [Leave] 1: [Repair Once] 2: [Full Repair]");
         int action = getNumberCode(3);
@@ -124,28 +126,43 @@ public class ConsoleApp {
     }
 
     public int getFullRepairCost(Ship ship) {
-        double eachRepair = ship.getShipEndurance()/10;
+        double eachRepair = ship.getShipEndurance() / 10;
         double healthMissing = ship.getShipEndurance() - ship.getShipHealth();
-        int numberOfRepairs = (int)Math.round(healthMissing/eachRepair);
+        int numberOfRepairs = (int) Math.round(healthMissing / eachRepair);
         int fullRepairCost = numberOfRepairs * 100;
         return fullRepairCost;
     }
 
-    public void hireCrew() {
+    public void hireCrew(Ship ship) {
         System.out.println("Hiring a crew member will add 10 coins extra wages per day sailed." +
+                "\nCurrent crew wages are " + ship.getCurrentCrewSize() * 10 + "." +
                 "\nWould you like to hire a new member - 1: [Yes] 2: [No]");
         int response = getNumberCode(2);
         if (response == 1) {
-            selectedShip.hireCrewMember();
+            ship.hireCrewMember();
         }
     }
 
     public void viewShipProperties(Ship ship) {
-        List<Item> upgrades = new ArrayList<>();
 
         System.out.println("Ship name: " + ship.getName());
         System.out.println("Ship Type | Sail Speed | Current Cargo | Current Crew Size | Current Ship Health");
         System.out.println(ship.getProperties());
+
+        upgradeShip(ship);
+
+        System.out.println("Would you like to view your current cargo?" +
+                "\n1: [Yes] 2: [No]");
+        int action = getNumberCode(2);
+        if (action == 1) {
+            ship.viewCurrentCargo();
+        }
+
+        pressAnyKeyToContinue();
+    }
+
+    public void upgradeShip(Ship ship) {
+        List<Item> upgrades = new ArrayList<>();
 
         for (Item item : ship.getCurrentCargo()) {
             if (item.getItemType().equals(ItemType.UPGRADE)) {
@@ -171,12 +188,11 @@ public class ConsoleApp {
                         "\n If [Yes] enter the ID of the upgrade you would like to apply. If [No] enter 0.");
                 int upgrade = getNumberCode(upgradeId);
                 if (!(upgrade == 0)) {
-                    applyUpgrade(upgrades.get(upgradeId-1).getUpgradeType(), ship);
+                    applyUpgrade(upgrades.get(upgradeId - 1).getUpgradeType(), ship);
                 }
             }
 
         }
-        pressAnyKeyToContinue();
     }
 
     public void applyUpgrade(UpgradeType upgrade, Ship ship) {
@@ -358,11 +374,56 @@ public class ConsoleApp {
         if (chosenRoute == null) {
             return;
         }
+        if (chosenRoute.getRandomEvent().doesEventOccur()) {
+            applyRandomEvent(chosenRoute.getRandomEvent().getRandomEventType(), game.getShip());
+        }
         game.getShip().setCurrentIsland(chosenRoute.getIslandB());
         System.out.println("You have arrived. " + chosenRoute.getIslandB());
         game.getTrader().subtractMoney(chosenRoute.getSailCost(game.getShip()));
         System.out.println("After paying your crew you now have: " + game.getTrader().getMoney() + " coins left.");
         pressAnyKeyToContinue();
+    }
+
+    public void applyRandomEvent(RandomEventType randomEventType, Ship ship) {
+        Random random = new Random();
+
+        switch (randomEventType) {
+            case PIRATES:
+                System.out.println("You see pirates on the horizon");
+                break;
+            case RESCUED_SAILORS:
+                System.out.println("""
+                        You see sailors drowning in the water.
+                        If you save them they may join your crew or give you a reward!
+                        Will you save them?
+                        1: [Yes] 2: [No]""");
+                int saveSailors = getNumberCode(2);
+
+                if (saveSailors == 1) {
+                    int sailorsSaved = 1 + random.nextInt(2);
+                    System.out.println("You saved " + sailorsSaved + " sailors." +
+                            "\nThey have given you 100 coins each as a reward.");
+                    if (ship.getCurrentCrewSize() < ship.getMaxCrewSize()) {
+                        System.out.println("The rescued sailors have offered to join your crew will you accept" +
+                                "\n1: [Yes] 2: [No]");
+                        int yesOrNo = getNumberCode(2);
+                        if (yesOrNo == 1) {
+                            for (int i=0; i < sailorsSaved; i++) {
+                                if (ship.getCurrentCrewSize() < ship.getMaxCrewSize()) {
+                                    ship.hireCrewMember();
+                                    System.out.println("A member was added to your crew.");
+                                } else {
+                                    System.out.println("Your crew is full you cannot get any more members.");
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            case WEATHER:
+
+                break;
+        }
     }
 
     public void chooseRoute(Game game) {
@@ -384,7 +445,7 @@ public class ConsoleApp {
             }
         }
 
-        while(true) {
+        while (true) {
             System.out.println("Enter the route ID of your chosen route. Or enter [0] to exit.");
             int chosenRouteId = getNumberCode(availableRoutes.size()) - 1;
             if (chosenRouteId == -1) {
@@ -461,8 +522,9 @@ public class ConsoleApp {
         return selectedShip;
     }
 
-    public void gameover() {
+    public void gameover(Trader trader) {
         System.out.println("Gameover!");
+        System.out.println("You finished with " + trader.getMoney());
     }
 
     public static void main(String[] args) {
@@ -470,9 +532,9 @@ public class ConsoleApp {
         ConsoleApp consoleApp = new ConsoleApp();
         Game game = consoleApp.Start();
         List<Route> routes = game.getRoutes();
-        while (true) {
+        while (game.canSailToAnotherIsland() || game.getShip().getCurrentCargo().size() > 0) {
             consoleApp.chooseActivity(game);
         }
-
+        consoleApp.gameover(game.getTrader());
     }
 }

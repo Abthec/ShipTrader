@@ -131,9 +131,8 @@ public class Ship {
         return crewFullness;
     }
 
-    public String hireCrewMember() {
+    public void hireCrewMember() {
         this.currentCrewSize++;
-        return "You hired a crew member, things brings your crew size to: " + this.getCurrentCrewSize() + "/" + this.getMaxCrewSize();
     }
 
     public double getSailSpeed() {

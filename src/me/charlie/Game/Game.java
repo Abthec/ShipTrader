@@ -48,6 +48,16 @@ public class Game {
         return daysRemaining;
     }
 
+    public boolean canSailToAnotherIsland() {
+        Island island = ship.getCurrentIsland();
+        for (Route route : getRoutes()) {
+            if (route.getIslandA().equals(island) && route.getSailDuration(ship) <= getDaysRemaining()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Ship getShip() {
         return ship;
     }

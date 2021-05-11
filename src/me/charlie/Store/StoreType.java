@@ -1,6 +1,5 @@
 package me.charlie.Store;
 
-import me.charlie.Item.Item;
 import me.charlie.Item.ItemType;
 
 public enum StoreType {
