@@ -177,6 +177,19 @@ public class Ship {
         return shipId;
     }
 
+    public void upgradeSailSpeed() {
+        sailSpeed += 2.5;
+    }
+
+    public void upgradeShipEndurance() {
+        shipEndurance += 50;
+        shipHealth += 50;
+    }
+
+    public void upgradeCargoCapacity() {
+        maxCargoCapacity += 2;
+    }
+
     public String getName() {
         return name;
     }

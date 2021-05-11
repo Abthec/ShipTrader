@@ -3,6 +3,8 @@ package me.charlie.Game;
 import me.charlie.Island.Island;
 import me.charlie.Island.Route;
 import me.charlie.Item.Item;
+import me.charlie.Item.ItemType;
+import me.charlie.Item.UpgradeType;
 import me.charlie.Ship.Ship;
 import me.charlie.Ship.ShipType;
 import me.charlie.Store.Store;
@@ -88,7 +90,6 @@ public class ConsoleApp {
                 case 4:
                     if (ship.getShipHealth() == ship.getShipEndurance()) {
                         System.out.println("Ship is not in need of repairs.\nChoose again.");
-                        repairShip(game.getTrader());
                         continue activityChooser;
                     } else {
                         repairShip(game.getTrader());
@@ -140,10 +141,60 @@ public class ConsoleApp {
     }
 
     public void viewShipProperties(Ship ship) {
+        List<Item> upgrades = new ArrayList<>();
+
         System.out.println("Ship name: " + ship.getName());
         System.out.println("Ship Type | Sail Speed | Current Cargo | Current Crew Size | Current Ship Health");
         System.out.println(ship.getProperties());
+
+        for (Item item : ship.getCurrentCargo()) {
+            if (item.getItemType().equals(ItemType.UPGRADE)) {
+                upgrades.add(item);
+            }
+        }
+
+        if (upgrades.size() == 0) {
+            System.out.println("You do not currently have any upgrades for your ship. You can purchase upgrades from the shop.");
+        } else {
+            System.out.println("You currently have " + upgrades.size() + " upgrades available." +
+                    "\nWould you like to view them? 1: [Yes] 2: [No]");
+            int view = getNumberCode(2);
+            if (view == 1) {
+                int upgradeId = 1;
+                System.out.println("Available upgrades are:" +
+                        "\nID: | Upgrade Type");
+                for (Item item : upgrades) {
+                    System.out.println(upgradeId + item.getUpgradeType().getName());
+                    upgradeId++;
+                }
+                System.out.println("Would you like to apply an upgrade to your ship?" +
+                        "\n If [Yes] enter the ID of the upgrade you would like to apply. If [No] enter 0.");
+                int upgrade = getNumberCode(upgradeId);
+                if (!(upgrade == 0)) {
+                    applyUpgrade(upgrades.get(upgradeId-1).getUpgradeType(), ship);
+                }
+            }
+
+        }
         pressAnyKeyToContinue();
+    }
+
+    public void applyUpgrade(UpgradeType upgrade, Ship ship) {
+        switch (upgrade) {
+            case MAST:
+                ship.upgradeSailSpeed();
+                break;
+            case CANNON:
+                System.out.println("A cannon was added.");
+            case BULKHEAD:
+                System.out.println("The ships endurance went up.");
+                ship.upgradeShipEndurance();
+                break;
+            case CARGO_HOLD:
+                System.out.println("The ships max cargo capacity went up.");
+                ship.upgradeCargoCapacity();
+                break;
+        }
     }
 
     public void visitStore(Trader trader) {
