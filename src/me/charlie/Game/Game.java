@@ -35,6 +35,7 @@ public class Game {
         this.routes = createRoutes(islands);
         this.trader = new Trader(traderName, startingCash, ship);
         this.ship = ship;
+        this.daysRemaining = gameDuration;
 
         ship.setCurrentIsland(islands.get(0));
     }
@@ -43,8 +44,11 @@ public class Game {
         return gameDuration;
     }
 
+    public void setDaysRemaining(int daysSailed) {
+        daysRemaining = daysRemaining - daysSailed;
+    }
+
     public int getDaysRemaining() {
-        daysRemaining = getGameDuration() - daysSailed;
         return daysRemaining;
     }
 
