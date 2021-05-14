@@ -128,7 +128,7 @@ public class ConsoleApp {
     public int getFullRepairCost(Ship ship) {
         double eachRepair = ship.getShipEndurance() / 10;
         double healthMissing = ship.getShipEndurance() - ship.getShipHealth();
-        int numberOfRepairs = (int) Math.round(healthMissing / eachRepair);
+        int numberOfRepairs = (int) Math.ceil(healthMissing / eachRepair);
         int fullRepairCost = numberOfRepairs * 100;
         return fullRepairCost;
     }
@@ -379,8 +379,10 @@ public class ConsoleApp {
         }
         game.getShip().setCurrentIsland(chosenRoute.getIslandB());
         System.out.println("You have arrived. " + chosenRoute.getIslandB());
+        game.setDaysRemaining(chosenRoute.getSailDuration(game.getShip()));
         game.getTrader().subtractMoney(chosenRoute.getSailCost(game.getShip()));
         System.out.println("After paying your crew you now have: " + game.getTrader().getMoney() + " coins left.");
+        System.out.println("There is " + game.getDaysRemaining() + " days left.");
         pressAnyKeyToContinue();
     }
 
@@ -420,6 +422,7 @@ public class ConsoleApp {
                         }
                     }
                 }
+                break;
             case WEATHER:
                 double healthRemoved = 25 + random.nextInt(25);
                 ship.removeShipHealth(healthRemoved);
@@ -434,7 +437,6 @@ public class ConsoleApp {
 
     public void chooseRoute(Game game) {
         Ship ship = game.getShip();
-        Route chosenRoute = null;
         Island currentIsland = ship.getCurrentIsland();
         int count = 1;
 

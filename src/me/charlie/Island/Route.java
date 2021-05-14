@@ -43,6 +43,9 @@ public class Route {
     public int getSailDuration(Ship ship) {
         double shipSpeed = ship.getSailSpeed() + ship.getCrewFullness() - ship.getCargoFullness();
         sailDuration = (int)Math.round(this.getDistance() / shipSpeed);
+        if (sailDuration == 0) {
+            sailDuration = 1;
+        }
         return sailDuration;
     }
 
