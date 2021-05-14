@@ -1,4 +1,4 @@
-package me.charlie.gui;
+package me.charlie.Gui;
 
 import java.awt.EventQueue;
 
