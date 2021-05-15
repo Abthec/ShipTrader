@@ -1,43 +1,44 @@
 package me.charlie.Gui;
 
-import java.awt.EventQueue;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
+public class SetupScreen extends JFrame{
+    private JTextField textFieldEnterName;
+    private JLabel lblWelcome;
+    private JLabel lblEnterName;
+    private JPanel mainPanel;
+    private JLabel lblNameConditions;
+    private JSlider sliderGameDuration;
+    private JLabel lblGameDuration;
+    private JLabel lblGameDurationConditions;
+    private JButton readyButton;
+    String traderName;
+    int gameDuration;
 
-public class SetupScreen {
+    public SetupScreen(String title) {
+        super(title);
 
-	private JFrame frame;
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setContentPane(mainPanel);
+        this.pack();
+        readyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // grab the text from the enter name text field
+                // grab the value from the slider
+                // run checks to make sure they meet our conditions
+                // if conditions are met open ship selector
+                traderName = textFieldEnterName.getText();
+                gameDuration = sliderGameDuration.getValue();
+                System.out.println(traderName + gameDuration);
+            }
+        });
+    }
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SetupScreen window = new SetupScreen();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public SetupScreen() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-
+    public static void main(String[] args) {
+        JFrame jFrame = new SetupScreen("Ship Trader - Setup");
+        jFrame.setVisible(true);
+    }
 }

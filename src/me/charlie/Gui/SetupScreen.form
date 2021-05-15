@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="me.charlie.Gui.SetupScreen">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="3976d" class="javax.swing.JLabel" binding="lblWelcome">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Gill Sans MT" size="24" style="1"/>
+          <text value="Welcome To Ship Trader!"/>
+        </properties>
+      </component>
+      <component id="b4200" class="javax.swing.JLabel" binding="lblEnterName">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Gill Sans MT" size="16" style="1"/>
+          <text value="Enter trader name:"/>
+        </properties>
+      </component>
+      <component id="4aaac" class="javax.swing.JTextField" binding="textFieldEnterName">
+        <constraints>
+          <grid row="1" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Gill Sans MT" size="14"/>
+        </properties>
+      </component>
+      <component id="aadf6" class="javax.swing.JLabel" binding="lblNameConditions">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Gill Sans MT" size="14"/>
+          <text value="(3-15 Alphabetic charaters)"/>
+        </properties>
+      </component>
+      <component id="39b8a" class="javax.swing.JLabel" binding="lblGameDuration">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Gill Sans MT" size="16" style="1"/>
+          <text value="Select game duration:"/>
+        </properties>
+      </component>
+      <component id="f966d" class="javax.swing.JLabel" binding="lblGameDurationConditions">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Gill Sans MT" size="14"/>
+          <text value="(20-50 Days)"/>
+        </properties>
+      </component>
+      <component id="c8a36" class="javax.swing.JSlider" binding="sliderGameDuration">
+        <constraints>
+          <grid row="3" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <enabled value="true"/>
+          <font name="Gill Sans MT" size="14"/>
+          <majorTickSpacing value="5"/>
+          <maximum value="50"/>
+          <minimum value="20"/>
+          <minorTickSpacing value="1"/>
+          <paintLabels value="true"/>
+          <paintTicks value="true"/>
+          <paintTrack value="true"/>
+          <snapToTicks value="true"/>
+          <toolTipText value=""/>
+          <valueIsAdjusting value="true"/>
+        </properties>
+      </component>
+      <component id="c1a75" class="javax.swing.JButton" binding="readyButton" default-binding="true">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Gill Sans MT" size="16" style="1"/>
+          <text value="Ready!"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
