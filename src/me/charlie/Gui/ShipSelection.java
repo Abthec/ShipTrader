@@ -4,7 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-public class ShipProperties {
+public class ShipSelection {
 
 	private JFrame frame;
 
@@ -15,7 +15,7 @@ public class ShipProperties {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ShipProperties window = new ShipProperties();
+					ShipSelection window = new ShipSelection();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -27,7 +27,7 @@ public class ShipProperties {
 	/**
 	 * Create the application.
 	 */
-	public ShipProperties() {
+	public ShipSelection() {
 		initialize();
 	}
 
