@@ -7,6 +7,7 @@ import me.charlie.Item.ItemType;
 import me.charlie.Item.UpgradeType;
 import me.charlie.RandomEvents.RandomEventType;
 import me.charlie.Ship.Ship;
+import me.charlie.Ship.ShipNameHandler;
 import me.charlie.Ship.ShipType;
 import me.charlie.Store.Store;
 import me.charlie.Trader.Trader;
@@ -504,11 +505,12 @@ public class ConsoleApp {
     public Ship chooseShip() {
 
         List<Ship> ships = new ArrayList<Ship>();
+        ShipNameHandler shipNameHandler = new ShipNameHandler();
 
-        ships.add(new Ship(ShipType.SCHOONER, 1, 17.5, 10, 15, 250, null));
-        ships.add(new Ship(ShipType.BARQUENTINE, 2, 20, 8, 12, 150, null));
-        ships.add(new Ship(ShipType.BRIGANTINE, 3, 16, 18, 24, 310, null));
-        ships.add(new Ship(ShipType.AIRCRAFT_CARRIER, 4, 15, 30, 50, 750, null));
+        ships.add(new Ship(ShipType.SCHOONER, 1, 17.5, 10, 15, 250, null, shipNameHandler.getName()));
+        ships.add(new Ship(ShipType.BARQUENTINE, 2, 20, 8, 12, 150, null, shipNameHandler.getName()));
+        ships.add(new Ship(ShipType.BRIGANTINE, 3, 16, 18, 24, 310, null, shipNameHandler.getName()));
+        ships.add(new Ship(ShipType.AIRCRAFT_CARRIER, 4, 15, 30, 50, 750, null, shipNameHandler.getName()));
 
         System.out.println("Choose your ship!");
         System.out.println("ID: Name | Speed | Max Cargo Capacity | Max Crew Size | Ship Health");

@@ -24,9 +24,8 @@ public class Ship {
     double shipHealth;
     Island currentIsland;
     private List<Item> currentCargo;
-    private ShipNameHandler shipNameHandler = new ShipNameHandler();
 
-    public Ship(ShipType shipType, int shipId, double sailSpeed, int maxCargoCapacity, int maxCrewSize, double shipEndurance, Island currentIsland) {
+    public Ship(ShipType shipType, int shipId, double sailSpeed, int maxCargoCapacity, int maxCrewSize, double shipEndurance, Island currentIsland, String shipName) {
         this.maxCargoCapacity = maxCargoCapacity;
         this.sailSpeed = sailSpeed;
         this.maxCrewSize = maxCrewSize;
@@ -38,8 +37,8 @@ public class Ship {
         this.cargoSpaceRemaining = maxCargoCapacity;
         this.shipId = shipId;
         this.currentCrewSize = (int)Math.round(maxCrewSize * 0.5);
-        this.name = shipNameHandler.getName();
         this.currentShipEndurance = shipEndurance;
+        this.name = shipName;
     }
 
     public Island getCurrentIsland() {

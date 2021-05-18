@@ -8,6 +8,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import me.charlie.Gui.GameManager;
+import me.charlie.Ship.*;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
@@ -25,6 +26,8 @@ import java.awt.GridLayout;
 import java.awt.Font;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Window.Type;
 import net.miginfocom.swing.MigLayout;
@@ -33,8 +36,16 @@ public class ShipSelectionScreen {
 
 	private JFrame frameShipSelectoionScreen;
 	private GameManager gameManager;
+	List<Ship> ships;
+	
 	
 	public ShipSelectionScreen(GameManager gameManager) {
+		ShipNameHandler shipNameHandler = new ShipNameHandler();
+		this.ships = new ArrayList<Ship>();
+		ships.add(new Ship(ShipType.SCHOONER, 1, 17.5, 10, 15, 250, null, shipNameHandler.getName()));
+        ships.add(new Ship(ShipType.BARQUENTINE, 2, 20, 8, 12, 150, null, shipNameHandler.getName()));
+        ships.add(new Ship(ShipType.BRIGANTINE, 3, 16, 18, 24, 310, null, shipNameHandler.getName()));
+        ships.add(new Ship(ShipType.AIRCRAFT_CARRIER, 4, 15, 30, 50, 750, null, shipNameHandler.getName()));
 		this.gameManager = gameManager;
 		initialize();
 		frameShipSelectoionScreen.setVisible(true);
