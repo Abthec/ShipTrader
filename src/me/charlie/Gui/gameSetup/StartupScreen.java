@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import me.charlie.Game.Game;
 import me.charlie.Gui.GameManager;
 
 import javax.swing.JPanel;
@@ -31,6 +32,7 @@ public class StartupScreen {
 	private JFrame frmIslandTraderSetup;
 	private JTextField textFieldTraderName;
 	private GameManager gameManager;
+	private Game game;
 	
 	String traderName;
 	int gameDuration;
@@ -51,6 +53,14 @@ public class StartupScreen {
 	
 	public JFrame getSetupJFrame() {
 		return frmIslandTraderSetup;
+	}
+	
+	public String getTraderName() {
+		return traderName;
+	}
+	
+	public int getGameDuration() {
+		return gameDuration;
 	}
 	/**
 	 * Launch the application.
@@ -192,7 +202,6 @@ public class StartupScreen {
 	            } else {
 	            	finishedWindow();
 	            }
-				System.out.println(traderName + gameDuration);
 			}
 		});
 		btnReady.setFont(new Font("Tahoma", Font.BOLD, 16));

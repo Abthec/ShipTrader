@@ -77,7 +77,7 @@ public class InvalidTraderNamePopup {
 		frameInvalidTraderNamePopup.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Please Try Again.");
-		lblNewLabel_1.setBounds(87, 47, 103, 17);
+		lblNewLabel_1.setBounds(87, 47, 113, 17);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		frameInvalidTraderNamePopup.getContentPane().add(lblNewLabel_1);
 		
@@ -87,7 +87,7 @@ public class InvalidTraderNamePopup {
 				finishedWindow();
 			}
 		});
-		btnNewButton.setBounds(95, 99, 95, 33);
+		btnNewButton.setBounds(87, 101, 95, 33);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 20));
 		frameInvalidTraderNamePopup.getContentPane().add(btnNewButton);
 	}
