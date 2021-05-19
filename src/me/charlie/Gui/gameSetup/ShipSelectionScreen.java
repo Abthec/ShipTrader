@@ -32,11 +32,13 @@ import java.awt.event.ActionEvent;
 import java.awt.Window.Type;
 import net.miginfocom.swing.MigLayout;
 
+@SuppressWarnings("unused")
 public class ShipSelectionScreen {
 
 	private JFrame frameShipSelectoionScreen;
 	private GameManager gameManager;
 	List<Ship> ships;
+	Ship chosenShip;
 	
 	
 	public ShipSelectionScreen(GameManager gameManager) {
@@ -51,6 +53,29 @@ public class ShipSelectionScreen {
 		frameShipSelectoionScreen.setVisible(true);
 	}
 
+	public void closeWindow() {
+		frameShipSelectoionScreen.dispose();
+	}
+	
+	public void goBack() {
+		gameManager.shipSelectorGoBack(this);
+	}
+	
+	public void finishedWindow() {
+		gameManager.closeShipSelectorScreen(this);
+	}
+	
+	public void viewShipProperties() {
+		gameManager.minimizeShipSelectionScreen(this);
+	}
+	
+	public Ship getChosenShip() {
+		return chosenShip;
+	}
+	
+	public JFrame getJFrame() {
+		return frameShipSelectoionScreen;
+	}
 	
 	/**
 	 * Launch the application.
@@ -111,6 +136,11 @@ public class ShipSelectionScreen {
 		panel.add(lblSelectShip, gbc_lblSelectShip);
 		
 		JButton btnBack = new JButton("BACK");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				goBack();
+			}
+		});
 		btnBack.setFont(new Font("Tahoma", Font.BOLD, 14));
 		frameShipSelectoionScreen.getContentPane().add(btnBack, BorderLayout.SOUTH);
 		
@@ -121,20 +151,40 @@ public class ShipSelectionScreen {
 		btnShip1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnShip1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				chosenShip = ships.get(0);
+				viewShipProperties();
 			}
 		});
 		panel_1.setLayout(new MigLayout("", "[133px][133px][133px][133px]", "[232px]"));
 		panel_1.add(btnShip1, "cell 0 0,grow");
 		
 		JButton btnShip2 = new JButton("BRIGANTINE");
+		btnShip2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chosenShip = ships.get(2);
+				viewShipProperties();
+			}
+		});
 		btnShip2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel_1.add(btnShip2, "cell 1 0,grow");
 		
 		JButton btnShip3 = new JButton("BARQUENTINE");
+		btnShip3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chosenShip = ships.get(1);
+				viewShipProperties();
+			}
+		});
 		btnShip3.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel_1.add(btnShip3, "cell 2 0,grow");
 		
 		JButton btnShip4 = new JButton("AIRCRAFT\r\n CARRIER");
+		btnShip4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chosenShip = ships.get(3);
+				viewShipProperties();
+			}
+		});
 		btnShip4.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel_1.add(btnShip4, "cell 3 0,grow");
 	}

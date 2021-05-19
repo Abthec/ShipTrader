@@ -19,6 +19,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("unused")
 public class InvalidTraderNamePopup {
 
 	private JFrame frameInvalidTraderNamePopup;

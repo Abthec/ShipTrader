@@ -1,16 +1,13 @@
 package me.charlie.Gui.gameSetup;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
 import me.charlie.Game.Game;
 import me.charlie.Gui.GameManager;
-
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -27,13 +24,13 @@ import java.awt.Window.Type;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("unused")
 public class StartupScreen {
 
 	private JFrame frmIslandTraderSetup;
 	private JTextField textFieldTraderName;
 	private GameManager gameManager;
-	private Game game;
-	
+
 	String traderName;
 	int gameDuration;
 
@@ -62,6 +59,7 @@ public class StartupScreen {
 	public int getGameDuration() {
 		return gameDuration;
 	}
+	
 	/**
 	 * Launch the application.
 	 */
@@ -90,8 +88,6 @@ public class StartupScreen {
 	 */
 	private void initialize() {
 		frmIslandTraderSetup = new JFrame();
-		frmIslandTraderSetup.setType(Type.UTILITY);
-		frmIslandTraderSetup.setResizable(false);
 		frmIslandTraderSetup.setTitle("Island Trader Setup");
 		frmIslandTraderSetup.setBounds(100, 100, 580, 361);
 		frmIslandTraderSetup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

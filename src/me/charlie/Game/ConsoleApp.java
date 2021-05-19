@@ -491,7 +491,7 @@ public class ConsoleApp {
     public int chooseGameDuration() {
         while (true) {
             System.out.println("Enter desired amount of days");
-            gameDuration = Integer.parseInt(scanner.nextLine());
+            gameDuration = getNumberCode(50);
             if (gameDuration < 20 || gameDuration > 50) {
                 System.out.println("Game duration must be between 20 and 50 days");
             } else {
