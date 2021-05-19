@@ -1,4 +1,4 @@
-package me.charlie.Gui.gameSetup;
+package me.charlie.Gui.Popups;
 
 import java.awt.EventQueue;
 

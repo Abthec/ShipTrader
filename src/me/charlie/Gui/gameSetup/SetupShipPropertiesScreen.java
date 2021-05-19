@@ -4,10 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
-
+import me.charlie.Game.Game;
 import me.charlie.Gui.GameManager;
 import me.charlie.Ship.Ship;
-
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import java.awt.GridLayout;
@@ -21,14 +20,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("unused")
-public class ShipPropertiesScreen {
+public class SetupShipPropertiesScreen {
 
 	private JFrame frameShipProperties;
 	private GameManager gameManager;
 	private ShipSelectionScreen shipSelectionWindow;
 	private Ship ship;
+	private Game game;
 	
-	public ShipPropertiesScreen(GameManager gameManager, ShipSelectionScreen shipSelectionWindow) {
+	public SetupShipPropertiesScreen(GameManager gameManager, ShipSelectionScreen shipSelectionWindow) {
 		this.gameManager = gameManager;
 		this.ship = shipSelectionWindow.getChosenShip();
 		this.shipSelectionWindow = shipSelectionWindow;
@@ -59,7 +59,7 @@ public class ShipPropertiesScreen {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ShipPropertiesScreen window = new ShipPropertiesScreen();
+					SetupShipPropertiesScreen window = new SetupShipPropertiesScreen();
 					window.frameShipProperties.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -71,7 +71,7 @@ public class ShipPropertiesScreen {
 	/**
 	 * Create the application.
 	 */
-	public ShipPropertiesScreen() {
+	public SetupShipPropertiesScreen() {
 		initialize();
 	}
 

@@ -1,4 +1,4 @@
-package me.charlie.Gui.gameSetup;
+package me.charlie.Gui.Main;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -8,9 +8,13 @@ import javax.swing.JLabel;
 
 import me.charlie.Game.Game;
 import me.charlie.Gui.GameManager;
+import me.charlie.Gui.Popups.UnableToRepairPopup;
+import me.charlie.Ship.Ship;
 
 import java.awt.Font;
 import java.awt.Window.Type;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("unused")
 public class ActivitySelectorScreen {
@@ -18,16 +22,35 @@ public class ActivitySelectorScreen {
 	private JFrame frameActivitySelector;
 	private GameManager gameManager;
 	Game game;
+	Ship ship;
 	
 	public ActivitySelectorScreen(GameManager gameManager, Game game) {
 		this.gameManager = gameManager;
 		this.game = game;
+		this.ship = game.getShip();
 		initialize();
 		frameActivitySelector.setVisible(true);
 	}
 	
 	public void closeWindow() {
 		frameActivitySelector.dispose();
+	}
+	
+	public void finishedWindow() {
+		
+	}
+	
+	public void openShipProperties() {
+		
+	}
+	
+	public void launchUnableToRepairPopup() {
+		frameActivitySelector.setVisible(false);
+		UnableToRepairPopup unableToRepairPopup = new UnableToRepairPopup(this);
+	}
+	
+	public JFrame getJFrame() {
+		return frameActivitySelector;
 	}
 	
 	/**
@@ -86,10 +109,23 @@ public class ActivitySelectorScreen {
 		frameActivitySelector.getContentPane().add(btnHireCrew);
 		
 		JButton btnRepairShip = new JButton("    Repair your ship    ");
+		btnRepairShip.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (ship.getShipHealth() == ship.getShipEndurance()) {
+					launchUnableToRepairPopup();
+				}
+			}
+		});
 		btnRepairShip.setFont(new Font("Tahoma", Font.BOLD, 14));
 		frameActivitySelector.getContentPane().add(btnRepairShip);
 		
 		JButton btnViewProperties = new JButton("    View your ship's properties    ");
+		btnViewProperties.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				openShipProperties();
+				finishedWindow();
+			}
+		});
 		btnViewProperties.setFont(new Font("Tahoma", Font.BOLD, 14));
 		frameActivitySelector.getContentPane().add(btnViewProperties);
 		

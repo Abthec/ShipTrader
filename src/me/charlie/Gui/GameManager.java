@@ -3,9 +3,9 @@ package me.charlie.Gui;
 import java.util.Scanner;
 
 import me.charlie.Game.Game;
-import me.charlie.Gui.gameSetup.ActivitySelectorScreen;
-import me.charlie.Gui.gameSetup.InvalidTraderNamePopup;
-import me.charlie.Gui.gameSetup.ShipPropertiesScreen;
+import me.charlie.Gui.Main.ActivitySelectorScreen;
+import me.charlie.Gui.Popups.InvalidTraderNamePopup;
+import me.charlie.Gui.gameSetup.SetupShipPropertiesScreen;
 import me.charlie.Gui.gameSetup.ShipSelectionScreen;
 import me.charlie.Gui.gameSetup.StartupScreen;
 import me.charlie.Ship.Ship;
@@ -76,16 +76,16 @@ public class GameManager {
 	}
 	
 	public void launchShipPropertiesScreen(ShipSelectionScreen shipSelectionWindow) {
-		ShipPropertiesScreen shipPropertiesWindow = new ShipPropertiesScreen(this, shipSelectionWindow);
+		SetupShipPropertiesScreen shipPropertiesWindow = new SetupShipPropertiesScreen(this, shipSelectionWindow);
 	}
 	
-	public void shipPropertiesGoBack(ShipPropertiesScreen shipPropertiesWindow, ShipSelectionScreen shipSelectionWindow) {
+	public void shipPropertiesGoBack(SetupShipPropertiesScreen shipPropertiesWindow, ShipSelectionScreen shipSelectionWindow) {
 		shipPropertiesWindow.closeWindow();
 		unMinimizeShipSelectionScreen(shipSelectionWindow);
 	}
 	
 	// this method running marks the end of the game creation
-	public void closeShipPropertiesScreen(ShipPropertiesScreen shipPropertiesWindow) {
+	public void closeShipPropertiesScreen(SetupShipPropertiesScreen shipPropertiesWindow) {
 		this.chosenShip = shipPropertiesWindow.getShip();
 		this.game = new Game(traderName, gameDuration, chosenShip, 5);
 		shipPropertiesWindow.closeWindow();
@@ -95,6 +95,11 @@ public class GameManager {
 	public void launchActivitySelectorScreen() {
 		ActivitySelectorScreen activitySelectorWindow = new ActivitySelectorScreen(this, game);
 	}
+	
+	public void closeActivitySelectorScreen(ActivitySelectorScreen activitySelectorWindow) {
+		activitySelectorWindow.closeWindow();
+	}
+	
 	
 	public static void main(String[] args) {
 		GameManager gameManager = new GameManager();
