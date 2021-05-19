@@ -3,6 +3,7 @@ package me.charlie.Gui;
 import java.util.Scanner;
 
 import me.charlie.Game.Game;
+import me.charlie.Gui.gameSetup.ActivitySelectorScreen;
 import me.charlie.Gui.gameSetup.InvalidTraderNamePopup;
 import me.charlie.Gui.gameSetup.ShipPropertiesScreen;
 import me.charlie.Gui.gameSetup.ShipSelectionScreen;
@@ -86,9 +87,13 @@ public class GameManager {
 	// this method running marks the end of the game creation
 	public void closeShipPropertiesScreen(ShipPropertiesScreen shipPropertiesWindow) {
 		this.chosenShip = shipPropertiesWindow.getShip();
-		game = new Game(traderName, gameDuration, chosenShip, 5);
-		System.out.println(traderName + gameDuration + chosenShip.getName());
+		this.game = new Game(traderName, gameDuration, chosenShip, 5);
 		shipPropertiesWindow.closeWindow();
+		launchActivitySelectorScreen();
+	}
+	
+	public void launchActivitySelectorScreen() {
+		ActivitySelectorScreen activitySelectorWindow = new ActivitySelectorScreen(this, game);
 	}
 	
 	public static void main(String[] args) {
