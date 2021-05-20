@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import me.charlie.Game.Game;
 import me.charlie.Gui.GameManager;
 import me.charlie.Gui.Popups.UnableToRepairPopup;
+import me.charlie.Gui.Popups.UnableToUpgradePopup;
+import me.charlie.Item.Item;
+import me.charlie.Item.ItemType;
 import me.charlie.Ship.Ship;
 
 import java.awt.Font;
@@ -37,16 +40,37 @@ public class ActivitySelectorScreen {
 	}
 	
 	public void finishedWindow() {
-		
+		gameManager.closeActivitySelectorScreen(this);
 	}
 	
 	public void openShipProperties() {
 		
 	}
 	
+	public void openRouteSelector() {
+		
+	}
+	
+	public void openCrewHire() {
+		
+	}
+	
+	public void openShipRepairer() {
+		
+	}
+	
+	public void openShipUpgrader() {
+		
+	}
+	
 	public void launchUnableToRepairPopup() {
 		frameActivitySelector.setVisible(false);
 		UnableToRepairPopup unableToRepairPopup = new UnableToRepairPopup(this);
+	}
+	
+	public void launchUnableToUpgradePopup() {
+		frameActivitySelector.setVisible(false);
+		UnableToUpgradePopup unableToUpgradePopup = new UnableToUpgradePopup(this);
 	}
 	
 	public JFrame getJFrame() {
@@ -130,6 +154,21 @@ public class ActivitySelectorScreen {
 		frameActivitySelector.getContentPane().add(btnViewProperties);
 		
 		JButton btnUpgradeShip = new JButton("    Upgrade your ship    ");
+		btnUpgradeShip.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean canUpgrade = false;
+				for (Item item : game.getShip().getCurrentCargo()) {
+					if (item.getItemType().equals(ItemType.UPGRADE)) {
+						canUpgrade = true;
+					}
+				}
+				if (canUpgrade) {
+					
+				} else {
+					launchUnableToUpgradePopup();
+				}
+			}
+		});
 		btnUpgradeShip.setFont(new Font("Tahoma", Font.BOLD, 14));
 		frameActivitySelector.getContentPane().add(btnUpgradeShip);
 		

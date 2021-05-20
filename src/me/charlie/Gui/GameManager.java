@@ -5,6 +5,7 @@ import java.util.Scanner;
 import me.charlie.Game.Game;
 import me.charlie.Gui.Main.ActivitySelectorScreen;
 import me.charlie.Gui.Popups.InvalidTraderNamePopup;
+import me.charlie.Gui.Popups.UnableToUpgradePopup;
 import me.charlie.Gui.gameSetup.SetupShipPropertiesScreen;
 import me.charlie.Gui.gameSetup.ShipSelectionScreen;
 import me.charlie.Gui.gameSetup.StartupScreen;
@@ -100,12 +101,15 @@ public class GameManager {
 		activitySelectorWindow.closeWindow();
 	}
 	
+
+	
+	public void closeUnableToUpgradePopup(UnableToUpgradePopup unableToUpgradePopup) {
+		unableToUpgradePopup.closeWindow();
+	}
+	
 	
 	public static void main(String[] args) {
 		GameManager gameManager = new GameManager();
 		gameManager.launchStartupScreen();
 	}
-
-
-
 }
