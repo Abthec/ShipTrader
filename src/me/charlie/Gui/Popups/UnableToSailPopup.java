@@ -77,6 +77,7 @@ public class UnableToSailPopup {
 		frameUnableToSailPopup.getContentPane().add(lblYouMustRepair);
 		
 		JButton btnBack = new JButton("BACK");
+		btnBack.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				finishedWindow();

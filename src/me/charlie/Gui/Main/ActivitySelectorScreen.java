@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import me.charlie.Game.Game;
 import me.charlie.Gui.GameManager;
 import me.charlie.Gui.Popups.UnableToRepairPopup;
+import me.charlie.Gui.Popups.UnableToSailPopup;
 import me.charlie.Gui.Popups.UnableToUpgradePopup;
 import me.charlie.Item.Item;
 import me.charlie.Item.ItemType;
@@ -73,6 +74,11 @@ public class ActivitySelectorScreen {
 		UnableToUpgradePopup unableToUpgradePopup = new UnableToUpgradePopup(this);
 	}
 	
+	public void launchUnableToSailPopup() {
+		frameActivitySelector.setVisible(false);
+		UnableToSailPopup unableToSailPopup = new UnableToSailPopup(this);
+	}
+	
 	public JFrame getJFrame() {
 		return frameActivitySelector;
 	}
@@ -121,6 +127,13 @@ public class ActivitySelectorScreen {
 		frameActivitySelector.getContentPane().add(lblWindowInstruction);
 		
 		JButton btnSail = new JButton("    Sail to another island    ");
+		btnSail.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (game.getShip().getShipHealth() < game.getShip().getShipEndurance()) {
+					launchUnableToSailPopup();
+				}
+			}
+		});
 		btnSail.setFont(new Font("Tahoma", Font.BOLD, 14));
 		frameActivitySelector.getContentPane().add(btnSail);
 		
@@ -135,7 +148,7 @@ public class ActivitySelectorScreen {
 		JButton btnRepairShip = new JButton("    Repair your ship    ");
 		btnRepairShip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (ship.getShipHealth() == ship.getShipEndurance()) {
+				if (ship.getShipHealth() >= ship.getShipEndurance()) {
 					launchUnableToRepairPopup();
 				}
 			}
