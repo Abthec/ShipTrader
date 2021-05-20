@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 
 import me.charlie.Game.Game;
 import me.charlie.Gui.GameManager;
+import me.charlie.Gui.Popups.UnableToHireCrewPopup;
 import me.charlie.Gui.Popups.UnableToRepairPopup;
 import me.charlie.Gui.Popups.UnableToSailPopup;
 import me.charlie.Gui.Popups.UnableToUpgradePopup;
@@ -44,23 +45,23 @@ public class ActivitySelectorScreen {
 		gameManager.closeActivitySelectorScreen(this);
 	}
 	
-	public void openShipProperties() {
+	public void launchShipPropertiesScreen() {
 		
 	}
 	
-	public void openRouteSelector() {
+	public void launchRouteSelectionScreen() {
+		gameManager.launchRouteSelectionScreen();
+	}
+	
+	public void launchCrewHireScreen() {
 		
 	}
 	
-	public void openCrewHire() {
+	public void launchShipRepairScreen() {
 		
 	}
 	
-	public void openShipRepairer() {
-		
-	}
-	
-	public void openShipUpgrader() {
+	public void launchShipUpgradeScreen() {
 		
 	}
 	
@@ -77,6 +78,11 @@ public class ActivitySelectorScreen {
 	public void launchUnableToSailPopup() {
 		frameActivitySelector.setVisible(false);
 		UnableToSailPopup unableToSailPopup = new UnableToSailPopup(this);
+	}
+	
+	public void launchUnableToHireCrewPopup() {
+		frameActivitySelector.setVisible(false);
+		UnableToHireCrewPopup unableToHireCrewPopup = new UnableToHireCrewPopup(this);
 	}
 	
 	public JFrame getJFrame() {
@@ -131,6 +137,8 @@ public class ActivitySelectorScreen {
 			public void actionPerformed(ActionEvent e) {
 				if (game.getShip().getShipHealth() < game.getShip().getShipEndurance()) {
 					launchUnableToSailPopup();
+				} else {
+					launchRouteSelectionScreen();
 				}
 			}
 		});
@@ -142,6 +150,13 @@ public class ActivitySelectorScreen {
 		frameActivitySelector.getContentPane().add(btnVisitStore);
 		
 		JButton btnHireCrew = new JButton("    Hire more crew members    ");
+		btnHireCrew.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (game.getShip().getCrewFullness() == 1) {
+					launchUnableToHireCrewPopup();
+				}
+			}
+		});
 		btnHireCrew.setFont(new Font("Tahoma", Font.BOLD, 14));
 		frameActivitySelector.getContentPane().add(btnHireCrew);
 		
@@ -159,7 +174,7 @@ public class ActivitySelectorScreen {
 		JButton btnViewProperties = new JButton("    View your ship's properties    ");
 		btnViewProperties.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				openShipProperties();
+				launchShipPropertiesScreen();
 				finishedWindow();
 			}
 		});
