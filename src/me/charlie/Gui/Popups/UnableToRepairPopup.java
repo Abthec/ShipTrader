@@ -62,9 +62,10 @@ public class UnableToRepairPopup {
 	 */
 	private void initialize() {
 		frameUnableToRepair = new JFrame();
+		frameUnableToRepair.setUndecorated(true);
 		frameUnableToRepair.setResizable(false);
 		frameUnableToRepair.setType(Type.POPUP);
-		frameUnableToRepair.setBounds(100, 100, 450, 190);
+		frameUnableToRepair.setBounds(100, 100, 439, 166);
 		frameUnableToRepair.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frameUnableToRepair.getContentPane().setLayout(null);
 		
