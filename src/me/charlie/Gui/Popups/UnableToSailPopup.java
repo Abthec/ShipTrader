@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 import me.charlie.Gui.Main.ActivitySelectorScreen;
+import me.charlie.Gui.Main.RouteSelectionScreen;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -16,19 +18,34 @@ public class UnableToSailPopup {
 
 	private JFrame frameUnableToSailPopup;
 	private ActivitySelectorScreen activitySelectorWindow;
+	private RouteSelectionScreen routeSelectionWindow;
+	String reason;
 	
-	public UnableToSailPopup(ActivitySelectorScreen activitySelectorWindow) {
+	public UnableToSailPopup(ActivitySelectorScreen activitySelectorWindow, String reason) {
 		this.activitySelectorWindow = activitySelectorWindow;
+		this.reason = reason;
+		initialize();
+		frameUnableToSailPopup.setVisible(true);
+	}
+	
+	public UnableToSailPopup(RouteSelectionScreen routeSelectionWindow, String reason) {
+		this.routeSelectionWindow = routeSelectionWindow;
+		this.reason = reason;
 		initialize();
 		frameUnableToSailPopup.setVisible(true);
 	}
 	
 	public void closeWindow() {
+		if (activitySelectorWindow.equals(null)) {
+			routeSelectionWindow.getJFrame().setVisible(true);
+		} else if (routeSelectionWindow.equals(null)) {
+			activitySelectorWindow.getJFrame().setVisible(true);
+		}
 		frameUnableToSailPopup.dispose();
 	}
 
 	public void finishedWindow() {
-		activitySelectorWindow.getJFrame().setVisible(true);
+		
 		closeWindow();
 	}
 	/**
@@ -70,11 +87,12 @@ public class UnableToSailPopup {
 		lblUnableToSail.setBounds(0, 11, 434, 50);
 		frameUnableToSailPopup.getContentPane().add(lblUnableToSail);
 		
-		JLabel lblYouMustRepair = new JLabel("You must repair your ship before setting out.");
-		lblYouMustRepair.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblYouMustRepair.setHorizontalAlignment(SwingConstants.CENTER);
-		lblYouMustRepair.setBounds(0, 72, 434, 50);
-		frameUnableToSailPopup.getContentPane().add(lblYouMustRepair);
+		JLabel lblUnableToSailReason = new JLabel("Reason");
+		lblUnableToSailReason.setText(reason);
+		lblUnableToSailReason.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblUnableToSailReason.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUnableToSailReason.setBounds(0, 72, 434, 50);
+		frameUnableToSailPopup.getContentPane().add(lblUnableToSailReason);
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.setFont(new Font("Tahoma", Font.BOLD, 16));

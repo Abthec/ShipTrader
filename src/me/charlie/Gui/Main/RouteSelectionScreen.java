@@ -7,6 +7,7 @@ import javax.swing.JList;
 
 import me.charlie.Game.Game;
 import me.charlie.Gui.GameManager;
+import me.charlie.Gui.Popups.UnableToSailPopup;
 import me.charlie.Island.Route;
 
 import java.awt.BorderLayout;
@@ -16,6 +17,20 @@ import javax.swing.JLabel;
 import java.awt.Insets;
 import java.util.List;
 import java.awt.Font;
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JSpinner;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
+import java.awt.GridLayout;
+import javax.swing.JTextField;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class RouteSelectionScreen {
 
@@ -23,6 +38,7 @@ public class RouteSelectionScreen {
 	private Game game;
 	private GameManager gameManager;
 	private List<Route> routes;
+	Route chosenRoute;
 	
 	public RouteSelectionScreen(GameManager gameManager, Game game) {
 		this.game = game;
@@ -39,7 +55,15 @@ public class RouteSelectionScreen {
 	public void finishedWindow() {
 		closeWindow();
 	}
+	
+	public void launchUnableToSailPopup() {
+		UnableToSailPopup unableToSailPopup = new UnableToSailPopup(this, "Not enough days remaining");
+	}
 
+	public JFrame getJFrame() {
+		return frameRouteSelectionScreen;
+	}
+	
 	/**
 	 * Launch the application.
 	 */
@@ -68,14 +92,24 @@ public class RouteSelectionScreen {
 	 */
 	private void initialize() {
 		frameRouteSelectionScreen = new JFrame();
-		frameRouteSelectionScreen.setBounds(100, 100, 870, 471);
+		frameRouteSelectionScreen.setBounds(100, 100, 800, 620);
 		frameRouteSelectionScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frameRouteSelectionScreen.getContentPane().setLayout(gridBagLayout);
+		
+		DefaultListModel listModel = new DefaultListModel();
+
+		for (int i=0 ; i < routes.size() ; i++) {
+			Route route = routes.get(i);
+			String routeString = "  Route from " + route.getIslandA().getName() + " to " + route.getIslandB().getName() + 
+					" | " + "Route duration: " + route.getSailDuration(game.getShip()) + " | " +
+					"Random Event Chance: " + (route.getRandomEvent().getRandomEventRarity().getChanceOfEventOccurring()*100) + " %";
+			listModel.add(i, routeString);
+		}
 		
 		JLabel lblNewLabel = new JLabel("Select A Route!");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -85,16 +119,33 @@ public class RouteSelectionScreen {
 		gbc_lblNewLabel.gridy = 1;
 		frameRouteSelectionScreen.getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 		
-		JList list = new JList();
-		for (Route route : routes) {
-			list.add(new JLabel(route.getIslandA().toString()));
-		}
-		GridBagConstraints gbc_list = new GridBagConstraints();
-		gbc_list.insets = new Insets(0, 0, 0, 5);
-		gbc_list.fill = GridBagConstraints.BOTH;
-		gbc_list.gridx = 1;
-		gbc_list.gridy = 4;
-		frameRouteSelectionScreen.getContentPane().add(list, gbc_list);
+		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 1;
+		gbc_scrollPane.gridy = 3;
+		frameRouteSelectionScreen.getContentPane().add(scrollPane, gbc_scrollPane);
+		
+		JList listRoutes = new JList();
+		listRoutes.setModel(listModel);
+		scrollPane.setViewportView(listRoutes);
+		
+		JButton btnConfirmRouteSelection = new JButton("SET SAIL!");
+		btnConfirmRouteSelection.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int chosenRouteIndex = listRoutes.getSelectedIndex();
+				chosenRoute = routes.get(chosenRouteIndex);
+				if (chosenRoute.getSailDuration(game.getShip()) > game.getDaysRemaining()) {
+					launchUnableToSailPopup();
+				}
+			}
+		});
+		GridBagConstraints gbc_btnConfirmRouteSelection = new GridBagConstraints();
+		gbc_btnConfirmRouteSelection.insets = new Insets(0, 0, 5, 5);
+		gbc_btnConfirmRouteSelection.gridx = 1;
+		gbc_btnConfirmRouteSelection.gridy = 5;
+		frameRouteSelectionScreen.getContentPane().add(btnConfirmRouteSelection, gbc_btnConfirmRouteSelection);
 	}
 
 }

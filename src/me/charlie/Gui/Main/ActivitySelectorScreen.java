@@ -51,6 +51,7 @@ public class ActivitySelectorScreen {
 	
 	public void launchRouteSelectionScreen() {
 		gameManager.launchRouteSelectionScreen();
+		finishedWindow();
 	}
 	
 	public void launchCrewHireScreen() {
@@ -77,7 +78,7 @@ public class ActivitySelectorScreen {
 	
 	public void launchUnableToSailPopup() {
 		frameActivitySelector.setVisible(false);
-		UnableToSailPopup unableToSailPopup = new UnableToSailPopup(this);
+		UnableToSailPopup unableToSailPopup = new UnableToSailPopup(this, "Repair your ship before setting out.");
 	}
 	
 	public void launchUnableToHireCrewPopup() {
