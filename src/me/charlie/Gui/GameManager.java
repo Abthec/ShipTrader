@@ -5,6 +5,7 @@ import java.util.Scanner;
 import me.charlie.Game.Game;
 import me.charlie.Gui.Main.ActivitySelectorScreen;
 import me.charlie.Gui.Main.CrewHireScreen;
+import me.charlie.Gui.Main.ShipRepairScreen;
 import me.charlie.Gui.Main.StoreOperations.StoreOptionsScreen;
 import me.charlie.Gui.Main.Travel.ArrivalScreen;
 import me.charlie.Gui.Main.Travel.DrowningSailorsEventScreen;
@@ -102,7 +103,13 @@ public class GameManager {
 	}
 	
 	public void launchActivitySelectorScreen() {
-		ActivitySelectorScreen activitySelectorWindow = new ActivitySelectorScreen(this, game);
+		if (game.getDaysRemaining()==0 && !hasItemsToSell()) {
+			System.out.println("Gameover!");
+		} else if (game.getDaysRemaining()>0 && !canAffordToPayCrewOneDaysWages() && !hasItemsToSell()) {
+			System.out.println("Gameover!");
+		} else {
+			ActivitySelectorScreen activitySelectorWindow = new ActivitySelectorScreen(this, game);
+		}
 	}
 	
 	public void closeActivitySelectorScreen(ActivitySelectorScreen activitySelectorWindow) {
@@ -170,6 +177,23 @@ public class GameManager {
 	public void closeCrewHireScreen(CrewHireScreen crewHireWindow) {
 		crewHireWindow.closeWindow();
 		launchActivitySelectorScreen();
+	}
+	
+	public void launchShipRepairScreen() {
+		ShipRepairScreen shipRepairWindow = new ShipRepairScreen(this, game);
+	}
+	
+	public void closeShipRepairScreen(ShipRepairScreen shipRepairWindow) {
+		shipRepairWindow.closeWindow();
+		launchActivitySelectorScreen();
+	}
+	
+	public boolean canAffordToPayCrewOneDaysWages() {
+		return game.getTrader().getMoney() > game.getShip().getCurrentCrewSize()*10;
+	}
+	
+	public boolean hasItemsToSell() {
+		return game.getShip().getCurrentCargo().size() > 0;
 	}
 	
 	public static void main(String[] args) {

@@ -84,14 +84,14 @@ public class UnableToSailPopup {
 		JLabel lblUnableToSail = new JLabel("Unable To Sail.");
 		lblUnableToSail.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblUnableToSail.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUnableToSail.setBounds(0, 11, 434, 50);
+		lblUnableToSail.setBounds(10, 11, 424, 50);
 		frameUnableToSailPopup.getContentPane().add(lblUnableToSail);
 		
 		JLabel lblUnableToSailReason = new JLabel("Reason");
 		lblUnableToSailReason.setText(reason);
 		lblUnableToSailReason.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblUnableToSailReason.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUnableToSailReason.setBounds(0, 72, 434, 50);
+		lblUnableToSailReason.setBounds(10, 72, 424, 50);
 		frameUnableToSailPopup.getContentPane().add(lblUnableToSailReason);
 		
 		JButton btnBack = new JButton("BACK");
