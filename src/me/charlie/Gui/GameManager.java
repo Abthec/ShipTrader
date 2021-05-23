@@ -113,7 +113,6 @@ public class GameManager {
 	
 	public void closeRouteSelectionScreen(RouteSelectionScreen routeSelectionWindow, Route chosenRoute) {
 		routeSelectionWindow.closeWindow();
-		launchArrivalScreen(chosenRoute);
 	}
 	
 	public void launchStormyWeatherEventScreen(Route chosenRoute) {
@@ -148,7 +147,8 @@ public class GameManager {
 	}
 	
 	public void closeArrivalScreen(ArrivalScreen arrivalWindow) {
-		
+		arrivalWindow.closeWindow();
+		launchActivitySelectorScreen();
 	}
 	
 	public static void main(String[] args) {

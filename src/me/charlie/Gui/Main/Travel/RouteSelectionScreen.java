@@ -53,7 +53,23 @@ public class RouteSelectionScreen {
 	}
 	
 	public void finishedWindow(Route chosenRoute) {
-		gameManager.closeRouteSelectionScreen(this, chosenRoute);
+		if (chosenRoute.getRandomEvent().doesEventOccur()) {
+			switch(chosenRoute.getRandomEvent().getRandomEventType()) {
+				case STORMY_WEATHER:
+					gameManager.launchStormyWeatherEventScreen(chosenRoute);
+					closeWindow();
+					break;
+				case PIRATES:
+					gameManager.launchPiratesEventScreen(chosenRoute);
+					closeWindow();
+					break;
+				case DROWNING_SAILORS:
+					gameManager.launchDrowningSailorsEventScreen(chosenRoute);
+					closeWindow();
+			}
+		} else {
+			gameManager.closeRouteSelectionScreen(this, chosenRoute);
+		}
 	}
 	
 	public void launchUnableToSailPopup() {

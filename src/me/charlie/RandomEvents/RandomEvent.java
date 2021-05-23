@@ -12,7 +12,6 @@ public class RandomEvent {
     public RandomEvent() {
         this.randomEventRarity = RandomEventRarity.values()[random.nextInt(3)];
         this.randomEventType = RandomEventType.values()[random.nextInt(3)];
-        this.eventOccurs = random.nextDouble() < this.getRandomEventRarity().getChanceOfEventOccurring();
     }
 
     public RandomEventRarity getRandomEventRarity() {
@@ -24,6 +23,7 @@ public class RandomEvent {
     }
 
     public boolean doesEventOccur() {
+    	this.eventOccurs = random.nextDouble() < this.getRandomEventRarity().getChanceOfEventOccurring();
         return eventOccurs;
     }
 
