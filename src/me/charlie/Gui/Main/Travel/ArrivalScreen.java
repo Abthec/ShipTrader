@@ -41,8 +41,6 @@ public class ArrivalScreen {
 	
 	public void closeWindow() {
 		frameArrivalScreen.dispose();
-		initialize();
-		frameArrivalScreen.setVisible(true);
 	}
 	
 	public void finishedWindow() {

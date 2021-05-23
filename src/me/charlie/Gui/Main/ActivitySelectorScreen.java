@@ -165,6 +165,7 @@ public class ActivitySelectorScreen {
 		btnRepairShip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (ship.getShipHealth() >= ship.getShipEndurance()) {
+					btnRepairShip.setEnabled(false);
 					launchUnableToRepairPopup();
 				}
 			}

@@ -32,6 +32,9 @@ public class DrowningSailorsEventScreen {
 	private int sailorsSaved;
 	private JLabel lblOutcome;
 	private JLabel lblUpdatedWalletAndCrewStatus;
+	private JButton btnContinue;
+	private JButton btnSave;
+	private JButton btnLeave;
 	
 	public DrowningSailorsEventScreen(GameManager gameManager, Game game, Route route) {
 		this.gameManager = gameManager;
@@ -69,16 +72,23 @@ public class DrowningSailorsEventScreen {
 	
 	public void setOutcomeText(int crewAquired, int moneyAquired) {
 		lblOutcome.setText("The sailors gave you " + moneyAquired 
-				+ " coins as a reward.\n" + crewAquired + " sailors also joined your crew.");
+				+ " coins as a reward. " + crewAquired + " sailors also joined your crew.");
 	}
 	
 	public void setUpdatedStatsText() {
 		lblUpdatedWalletAndCrewStatus.setText("Current wallet is " + trader.getMoney() 
-				+ " coins.\n" + "Current crew size is " + game.getShip().getCurrentCrewSize() + ".");
+				+ " coins. " + "Current crew size is " + game.getShip().getCurrentCrewSize() + ".");
 	}
 	
 	public void leaveToDrown() {
 		lblOutcome.setText("You left the sailors!");
+	}
+	
+	public void setContinueBtn() {
+		btnLeave.setEnabled(false);
+		btnSave.setEnabled(false);
+		btnContinue.setText("CONTINUE");
+		btnContinue.setVisible(true);
 	}
 	
 	public JFrame getJFrame() {
@@ -113,13 +123,13 @@ public class DrowningSailorsEventScreen {
 	 */
 	private void initialize() {
 		frameDrowningSailorsEventScreen = new JFrame();
-		frameDrowningSailorsEventScreen.setBounds(100, 100, 667, 296);
+		frameDrowningSailorsEventScreen.setBounds(100, 100, 667, 328);
 		frameDrowningSailorsEventScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 32, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frameDrowningSailorsEventScreen.getContentPane().setLayout(gridBagLayout);
 		
 		JLabel lblNewLabel = new JLabel("While sailing you encountered " + this.sailorsSaved + " drowning sailors!\r\n");
@@ -161,31 +171,33 @@ public class DrowningSailorsEventScreen {
 		frameDrowningSailorsEventScreen.getContentPane().add(panel, gbc_panel);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnNewButton = new JButton("SAVE");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnSave = new JButton("SAVE");
+		this.btnSave = btnSave;
+		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int moneyAquired = giveReward();
 				int crewAquired = sailorsJoinCrew();
 				setOutcomeText(crewAquired, moneyAquired);
 				setUpdatedStatsText();
-				finishedWindow();
+				setContinueBtn();
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		panel.add(btnNewButton);
+		btnSave.setFont(new Font("Tahoma", Font.BOLD, 14));
+		panel.add(btnSave);
 		
 		JLabel lblSpacer3 = new JLabel("                                       ");
 		panel.add(lblSpacer3);
 		
-		JButton btnNewButton_1 = new JButton("LEAVE");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnLeave = new JButton("LEAVE");
+		this.btnLeave = btnLeave;
+		btnLeave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				leaveToDrown();
-				finishedWindow();
+				setContinueBtn();
 			}
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		panel.add(btnNewButton_1);
+		btnLeave.setFont(new Font("Tahoma", Font.BOLD, 14));
+		panel.add(btnLeave);
 		
 		JLabel lblOutcome_1 = new JLabel("  ");
 		lblOutcome_1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -204,6 +216,28 @@ public class DrowningSailorsEventScreen {
 		gbc_lblUpdatedWalletAndCrewStatus.gridx = 1;
 		gbc_lblUpdatedWalletAndCrewStatus.gridy = 8;
 		frameDrowningSailorsEventScreen.getContentPane().add(lblUpdatedWalletAndCrewStatus, gbc_lblUpdatedWalletAndCrewStatus);
+		
+		JLabel lblSpacer4 = new JLabel("                                       ");
+		GridBagConstraints gbc_lblSpacer4 = new GridBagConstraints();
+		gbc_lblSpacer4.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSpacer4.gridx = 1;
+		gbc_lblSpacer4.gridy = 9;
+		frameDrowningSailorsEventScreen.getContentPane().add(lblSpacer4, gbc_lblSpacer4);
+		
+		JButton btnContinue = new JButton(" ");
+		btnContinue.setVisible(false);
+		btnContinue.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnContinue.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				finishedWindow();
+			}
+		});
+		this.btnContinue = btnContinue;
+		GridBagConstraints gbc_btnContinue = new GridBagConstraints();
+		gbc_btnContinue.insets = new Insets(0, 0, 0, 5);
+		gbc_btnContinue.gridx = 1;
+		gbc_btnContinue.gridy = 10;
+		frameDrowningSailorsEventScreen.getContentPane().add(btnContinue, gbc_btnContinue);
 	}
 
 }
