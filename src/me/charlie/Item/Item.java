@@ -1,5 +1,6 @@
 package me.charlie.Item;
 
+import me.charlie.Island.Island;
 import me.charlie.Store.Store;
 import me.charlie.Store.StoreType;
 
@@ -13,6 +14,10 @@ public class Item {
     int baseCost;
     int buyCost;
     int sellCost;
+    Island placeOfPurchase;
+    Island placeOfSale;
+    int purchasedPrice;
+    int soldPrice;
     String description;
 
     private Random random = new Random();
@@ -23,11 +28,47 @@ public class Item {
         this.description = itemType.getDescription();
         this.baseCost = itemType.getLowerCostBound(itemType) + random.nextInt(itemType.getUpperCostBound(itemType) - itemType.getLowerCostBound(itemType) + 1);
         this.buyCost = (int)Math.round(baseCost * storeType.getBuyModifier(itemType));
+        this.placeOfPurchase=null;
+        this.placeOfSale=null;
+        this.purchasedPrice=0;
+        this.soldPrice=0;
         if (itemType.equals(ItemType.UPGRADE)) {
             this.upgradeType = UpgradeType.values()[random.nextInt(4)];
         } else {
             this.upgradeType = null;
         }
+    }
+    
+    public void setPlaceOfSale(Island island) {
+    	placeOfSale = island;
+    }
+    
+    public Island getPlaceOfSale() {
+    	return placeOfSale;
+    }
+    
+    public void setSoldPrice(int price) {
+    	soldPrice = price;
+    }
+    
+    public int getSoldPrice() {
+    	return soldPrice;
+    }
+    
+    public void setPlaceOfPurchase(Island island) {
+    	this.placeOfPurchase = island;
+    }
+    
+    public Island getPlaceOfPurchase() {
+    	return placeOfPurchase;
+    }
+    
+    public void setPurchasedPrice(int purchasedPrice) {
+    	this.purchasedPrice = purchasedPrice;
+    }
+    
+    public int getPurchasedPrice() {
+    	return purchasedPrice;
     }
 
     public int getBaseCost() {

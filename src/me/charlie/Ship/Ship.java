@@ -24,6 +24,7 @@ public class Ship {
     double shipHealth;
     Island currentIsland;
     private List<Item> currentCargo;
+    private List<Item> receipts;
 
     public Ship(ShipType shipType, int shipId, double sailSpeed, int maxCargoCapacity, int maxCrewSize, double shipEndurance, Island currentIsland, String shipName) {
         this.maxCargoCapacity = maxCargoCapacity;
@@ -34,6 +35,7 @@ public class Ship {
         this.shipType = shipType;
         this.currentIsland = currentIsland;
         this.currentCargo = new ArrayList<>();
+        this.receipts = new ArrayList<>();
         this.cargoSpaceRemaining = maxCargoCapacity;
         this.shipId = shipId;
         this.currentCrewSize = (int)Math.round(maxCrewSize * 0.5);
@@ -56,6 +58,14 @@ public class Ship {
     public List<Item> getCurrentCargo() {
         return currentCargo;
     }
+    
+    public void addReceipt(Item item) {
+    	receipts.add(item);
+    }
+    
+    public List<Item> getReceipts() {
+    	return receipts;
+    }
 
     public boolean addItemToCargo(Item item) {
         if (item.getSize() > getCargoSpaceRemaining()) {
@@ -77,6 +87,7 @@ public class Ship {
             this.currentCargo.remove(item);
             System.out.println("The item was removed from the cargo hold." +
                     "\nYou now have " + getCargoSpaceRemaining() + " cargo space left.");
+            addReceipt(item);
             return true;
         }
     }

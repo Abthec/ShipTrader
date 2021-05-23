@@ -46,11 +46,13 @@ public class ActivitySelectorScreen {
 	}
 	
 	public void launchShipPropertiesScreen() {
-		
+		gameManager.launchShipPropertiesScreen();
+		finishedWindow();
 	}
 	
 	public void launchStoreOptionsScreen() {
-		
+		gameManager.launchStoreOptionsScreen();
+		finishedWindow();
 	}
 	
 	public void launchRouteSelectionScreen() {
@@ -59,11 +61,13 @@ public class ActivitySelectorScreen {
 	}
 	
 	public void launchCrewHireScreen() {
-		
+		gameManager.launchCrewHireScreen();
+		finishedWindow();
 	}
 	
 	public void launchShipRepairScreen() {
-		
+		gameManager.launchShipRepairScreen();
+		finishedWindow();
 	}
 	
 	public void launchShipUpgradeScreen() {
@@ -72,7 +76,7 @@ public class ActivitySelectorScreen {
 	
 	public void launchUnableToRepairPopup() {
 		frameActivitySelector.setVisible(false);
-		UnableToRepairPopup unableToRepairPopup = new UnableToRepairPopup(this);
+		UnableToRepairPopup unableToRepairPopup = new UnableToRepairPopup(this, "Ship health is full.");
 	}
 	
 	public void launchUnableToUpgradePopup() {
@@ -164,6 +168,8 @@ public class ActivitySelectorScreen {
 			public void actionPerformed(ActionEvent e) {
 				if (game.getShip().getCrewFullness() == 1) {
 					launchUnableToHireCrewPopup();
+				} else {
+					launchCrewHireScreen();
 				}
 			}
 		});
@@ -176,6 +182,8 @@ public class ActivitySelectorScreen {
 				if (ship.getShipHealth() >= ship.getShipEndurance()) {
 					btnRepairShip.setEnabled(false);
 					launchUnableToRepairPopup();
+				} else {
+					launchShipRepairScreen();
 				}
 			}
 		});
