@@ -2,6 +2,7 @@ package me.charlie.Gui;
 
 import java.util.Scanner;
 
+import DiceGame.DiceGameManager;
 import me.charlie.Game.Game;
 import me.charlie.Gui.Main.ActivitySelectorScreen;
 import me.charlie.Gui.Main.CrewHireScreen;
@@ -30,6 +31,7 @@ public class GameManager {
 	String traderName;
 	Ship chosenShip;
 	Game game;
+	private DiceGameManager diceGameManager;
 	
 	public GameManager() {}
 	
@@ -148,10 +150,13 @@ public class GameManager {
 	public void launchPiratesEventScreen(Route chosenRoute) {
 		PiratesEventScreen piratesEventWindow = new PiratesEventScreen(this, game, chosenRoute);
 	}
-	
+	public void launchDiceGame(Route chosenRoute) {
+		DiceGameManager diceGame = new DiceGameManager(this, game, chosenRoute, 20);
+		this.diceGameManager = diceGame;
+	}
 	public void closePiratesEventScreen(PiratesEventScreen piratesEventWindow, Route chosenRoute) {
 		piratesEventWindow.closeWindow();
-		launchArrivalScreen(chosenRoute);
+		launchDiceGame(chosenRoute);
 	}
 	
 	public void launchArrivalScreen(Route chosenRoute) {

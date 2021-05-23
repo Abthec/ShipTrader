@@ -17,15 +17,12 @@ import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextPane;
 
-import DiceGame.DiceGameManager;
-
 public class PiratesEventScreen {
 
 	private JFrame framePirateEventScreen;
 	private GameManager gameManager;
 	private Game game;
 	private Route route;
-	private DiceGameManager diceGameManager;
 	private Trader trader;
 	
 	public PiratesEventScreen(GameManager gameManager, Game game, Route route) {
@@ -48,21 +45,13 @@ public class PiratesEventScreen {
 	public JFrame getJFrame() {
 		return framePirateEventScreen;
 	}
-	public void launchDiceGame() {
-		DiceGameManager diceGame = new DiceGameManager(20);
-		this.diceGameManager = diceGame;
-		diceGameManager.launchDiceGameRulesWindow();
-		int penalty = diceGame.getPenalty();
-		trader.subtractMoney(penalty);
-		finishedWindow();
-	}
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+			public void run(){
 				try {
 					PiratesEventScreen window = new PiratesEventScreen();
 					window.framePirateEventScreen.setVisible(true);
@@ -91,8 +80,7 @@ public class PiratesEventScreen {
 		JButton btnContinue = new JButton("CONTINUE");
 		btnContinue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				framePirateEventScreen.setVisible(false);
-				launchDiceGame();
+				finishedWindow();
 			}
 		});
 		framePirateEventScreen.getContentPane().setLayout(new MigLayout("", "[85px,grow]", "[grow][23px]"));

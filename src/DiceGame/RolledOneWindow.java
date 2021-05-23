@@ -35,6 +35,7 @@ public class RolledOneWindow {
 	 */
 	public RolledOneWindow(DiceGameManager diceGameManager) {
 		this.diceGameManager = diceGameManager;
+		initialize();
 		rolledOneFrame.setVisible(true);
 	}
 	public RolledOneWindow() {

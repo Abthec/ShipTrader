@@ -2,6 +2,11 @@ package DiceGame;
 
 import java.util.Arrays;
 
+import me.charlie.Game.Game;
+import me.charlie.Gui.GameManager;
+import me.charlie.Island.Route;
+import me.charlie.Trader.Trader;
+
 ;
 
 public class DiceGameManager {
@@ -12,20 +17,32 @@ public class DiceGameManager {
 	int pirateTurnScore;
 	int[] dice;
 	
+	private GameManager gameManager;
+	private Game game;
+	private Route route;
+	private Trader trader;
+	
 	private DiceGameRulesWindow diceGamesRulesWindow;
 	private DiceGameRollWindow diceGameRollWindow;
 	private DiceGameLossWindow diceGameLossWindow;
 	private DiceGameVictoryWindow diceGameVictoryWindow;
 	private SnakeEyesWindow snakeEyesWindow;
 	private RolledOneWindow rolledOneWindow;
-	private int penalty;
+	private int penalty
+	;
 	
-	public DiceGameManager(int handiCap) {
-		playScore = handiCap;
+	public DiceGameManager(GameManager gameManager, Game game, Route route,int handiCap) {
+		this.game = game;
+		this.gameManager = gameManager;
+		this.route = route;
+		this.trader = game.getTrader();
+		
+		this.playScore = handiCap;
 		this.handicap = handiCap;
-		pirateScore = 0;
-		playerTurnScore = 0;
-		pirateTurnScore = 0;
+		this.pirateScore = 0;
+		this.playerTurnScore = 0;
+		this.pirateTurnScore = 0;
+		launchDiceGameRulesWindow();
 	}
 	public int getHandicap() {
 		return handicap;
@@ -81,7 +98,7 @@ public class DiceGameManager {
 			if (playScore >= 100) {
 				launchDiceGameVictoryWindow();
 			} else {
-			launchDiceGameRollWindow();}
+			playerRoll();}
 			break;
 		}
 	}
@@ -91,11 +108,11 @@ public class DiceGameManager {
 		case 1:
 			this.pirateScore = 0;
 			this.pirateTurnScore = 0;
-			launchDiceGameRollWindow();
+			playerRoll();
 			break;
 		case 2:
 			this.pirateTurnScore = 0;
-			launchDiceGameRollWindow();
+			playerRoll();
 			break;
 		case 3:
 			this.pirateTurnScore = this.pirateTurnScore + dice[0] + dice[1];
@@ -106,7 +123,7 @@ public class DiceGameManager {
 			pirateTurn();
 			} else if (this.pirateScore >= 100) {
 				launchDiceGameLossWindow();
-			} else { launchDiceGameRollWindow();
+			} else { playerRoll();
 			}
 			break;
 		}
@@ -132,7 +149,7 @@ public class DiceGameManager {
 	}
 	public void reRoll() {
 		diceGameRollWindow.closeWindow();
-		launchDiceGameRollWindow();
+		playerRoll();
 	}
 	public void passTurn() {
 		diceGameRollWindow.closeWindow();
@@ -145,6 +162,8 @@ public class DiceGameManager {
 	public void closeLossWindow(DiceGameLossWindow diceGameLossWindow) {
 		makePenalty();
 		diceGameLossWindow.closeWindow();
+		gameManager.launchArrivalScreen(route);
+
 	}
 	public void launchSnakeEyesWindow() {
 		SnakeEyesWindow snakeEyesWindow = new SnakeEyesWindow(this);
@@ -169,5 +188,6 @@ public class DiceGameManager {
 	}
 	public void closeVictoryWindow() {
 		diceGameVictoryWindow.closeWindow();
+		gameManager.launchArrivalScreen(route);
 	}
 }
