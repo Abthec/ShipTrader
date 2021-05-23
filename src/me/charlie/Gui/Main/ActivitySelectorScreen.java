@@ -50,7 +50,8 @@ public class ActivitySelectorScreen {
 	}
 	
 	public void launchStoreOptionsScreen() {
-		
+		gameManager.launchStoreOptionsScreen();
+		finishedWindow();
 	}
 	
 	public void launchRouteSelectionScreen() {

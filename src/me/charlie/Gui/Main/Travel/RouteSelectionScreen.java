@@ -75,6 +75,11 @@ public class RouteSelectionScreen {
 	public void launchUnableToSailPopup() {
 		UnableToSailPopup unableToSailPopup = new UnableToSailPopup(this, "Not enough days remaining");
 	}
+	
+	public void goBack() {
+		gameManager.launchActivitySelectorScreen();
+		closeWindow();
+	}
 
 	public JFrame getJFrame() {
 		return frameRouteSelectionScreen;
@@ -148,6 +153,7 @@ public class RouteSelectionScreen {
 		scrollPane.setViewportView(listRoutes);
 		
 		JButton btnConfirmRouteSelection = new JButton("SET SAIL!");
+		btnConfirmRouteSelection.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnConfirmRouteSelection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int chosenRouteIndex = listRoutes.getSelectedIndex();
@@ -164,6 +170,19 @@ public class RouteSelectionScreen {
 		gbc_btnConfirmRouteSelection.gridx = 1;
 		gbc_btnConfirmRouteSelection.gridy = 5;
 		frameRouteSelectionScreen.getContentPane().add(btnConfirmRouteSelection, gbc_btnConfirmRouteSelection);
+		
+		JButton btnBack = new JButton("BACK");
+		btnBack.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				goBack();
+			}
+		});
+		GridBagConstraints gbc_btnBack = new GridBagConstraints();
+		gbc_btnBack.insets = new Insets(0, 0, 0, 5);
+		gbc_btnBack.gridx = 1;
+		gbc_btnBack.gridy = 6;
+		frameRouteSelectionScreen.getContentPane().add(btnBack, gbc_btnBack);
 	}
 
 }
