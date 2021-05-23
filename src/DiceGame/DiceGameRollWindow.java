@@ -15,8 +15,6 @@ import java.awt.event.ActionEvent;
 public class DiceGameRollWindow {
 
 	private JFrame rollFrame;
-	private JFrame snakeEyesFrame;
-	private JFrame oneOneFrame;
 	private DiceGameManager diceGameManager;
 
 	/**
@@ -49,7 +47,7 @@ public class DiceGameRollWindow {
 	public void closeWindow() {
 		rollFrame.dispose();
 	}
-	private String getSummary() {
+	private String makeSummary() {
 		int[] dice = diceGameManager.getDice();
 		int playerScore = diceGameManager.getPlayerScore();
 		int playerTurn = diceGameManager.getPlayerTurnScore();
@@ -76,7 +74,7 @@ public class DiceGameRollWindow {
 		JTextPane summaryPane = new JTextPane();
 		rollFrame.getContentPane().add(summaryPane, "cell 1 0,grow");
 		summaryPane.setEditable(false);
-		summaryPane.setText(getSummary());
+		summaryPane.setText(makeSummary());
 		
 		JLabel lblNewLabel = new JLabel("Roll again?");
 		rollFrame.getContentPane().add(lblNewLabel, "cell 1 1,alignx center,aligny center");

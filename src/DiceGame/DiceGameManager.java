@@ -13,8 +13,12 @@ public class DiceGameManager {
 	int[] dice;
 	
 	private DiceGameRulesWindow diceGamesRulesWindow;
-	private DiceGameSummaryWindow diceGameSummaryWindow;
 	private DiceGameRollWindow diceGameRollWindow;
+	private DiceGameLossWindow diceGameLossWindow;
+	private DiceGameVictoryWindow diceGameVictoryWindow;
+	private SnakeEyesWindow snakeEyesWindow;
+	private RolledOneWindow rolledOneWindow;
+	private int penalty;
 	
 	public DiceGameManager(int handiCap) {
 		playScore = handiCap;
@@ -48,7 +52,7 @@ public class DiceGameManager {
 	public int[] getDice() {
 		return dice;
 	}
-	private int determineCase() {
+	private int determineRoll() {
 		switch (Arrays.toString(this.dice)) {
 			case "[1, 1]":
 				return 1;
@@ -59,24 +63,76 @@ public class DiceGameManager {
 				return 3;
 		}
 	}
+	public void playerRoll() {
+		Roll();
+		switch (determineRoll()) {
+		case 1:
+			playScore = handicap;
+			playerTurnScore = 0;
+			launchSnakeEyesWindow();
+			break;
+		case 2:
+			playerTurnScore = 0;
+			launchRolledOneWindow();
+			break;
+		case 3:
+			playerTurnScore = playerTurnScore + dice[0] + dice[1];
+			playScore = playScore +dice[0] +dice[1];
+			if (playScore >= 100) {
+				launchDiceGameVictoryWindow();
+			} else {
+			launchDiceGameRollWindow();}
+			break;
+		}
+	}
+	public void pirateTurn() {
+		Roll();
+		switch(determineRoll()) {
+		case 1:
+			this.pirateScore = 0;
+			this.pirateTurnScore = 0;
+			launchDiceGameRollWindow();
+			break;
+		case 2:
+			this.pirateTurnScore = 0;
+			launchDiceGameRollWindow();
+			break;
+		case 3:
+			this.pirateTurnScore = this.pirateTurnScore + dice[0] + dice[1];
+			this.pirateScore = this.pirateScore + dice[0] + dice[1];
+			double coinflip = Math.random();
+			if ((this.pirateScore <= 100) || (coinflip < 0.5)) {/** ensures the pirate doesn't accidentally go over 50 points and
+			decides randomly to roll again or not */
+			pirateTurn();
+			} else if (this.pirateScore >= 100) {
+				launchDiceGameLossWindow();
+			} else { launchDiceGameRollWindow();
+			}
+			break;
+		}
+	}
+	public void makePenalty() {
+		int penalty = (int)(Math.random()*(750 - 250) + 250);
+		this.penalty = penalty;
+	}
+	public int getPenalty() {
+		return penalty;
+	}
+	private void launchDiceGameVictoryWindow() {
+		penalty = 0;
+		DiceGameVictoryWindow victoryWindow = new DiceGameVictoryWindow(this);
+		this.diceGameVictoryWindow = victoryWindow;
+	}
+	public void closeVictoryWindow() {
+		diceGameVictoryWindow.closeWindow();
+	}
 	public void launchDiceGameRulesWindow() {
 		DiceGameRulesWindow rulesWindow = new DiceGameRulesWindow(this);
 		this.diceGamesRulesWindow = rulesWindow;
 	}	
 	public void closeRulesWindow(DiceGameRulesWindow diceGameRulesWindow) {
 		diceGameRulesWindow.closeWindow();
-		Roll();
-		switch (determineCase()) {
-		case 1:
-			launchSnakeEyesWindow();
-			break;
-		case 2:
-			launchRolledOneWindow();
-			break;
-		case 3:
-			launchDiceGameRollWindow();
-			break;
-		}
+		playerRoll();
 	}
 	public void launchDiceGameRollWindow() {
 		DiceGameRollWindow rollWindow = new DiceGameRollWindow(this);
@@ -90,42 +146,28 @@ public class DiceGameManager {
 		diceGameRollWindow.closeWindow();
 		pirateTurn();
 	}
-	public void pirateTurn() {
-		Roll();
-		switch(determineCase()) {
-		case 1:
-			this.pirateScore = 0;
-			this.pirateTurnScore = 0;
-			break;
-		case 2:
-			this.pirateTurnScore = 0;
-			break;
-		case 3:
-			this.pirateTurnScore = this.pirateTurnScore + dice[0] + dice[1];
-			pirateScore = pirateScore + dice[0] + dice[1];
-			double coinflip = Math.random();
-			if ((pirateScore >= 50) || (coinflip <0.5)) {/** ensures the pirate doesn't accidentally go over 50 points and
-			decides randomly to roll again or not */
-			pirateTurn();
-			}
-			break;
-		
-		}
+	public void launchDiceGameLossWindow() {
+		DiceGameLossWindow lossWindow = new DiceGameLossWindow(this);
+		this.diceGameLossWindow = lossWindow;
 	}
-	public void checkScore() {
-		
-	}
-	public void launchDiceGameSummaryWindow() {
-		DiceGameSummaryWindow summaryScreen = new DiceGameSummaryWindow(this);
-		this.diceGameSummaryWindow = summaryScreen;
-	}
-	public void closeSummaryWindow(DiceGameSummaryWindow diceGameSummaryWindow) {
-		diceGameSummaryWindow.closeWindow();
+	public void closeLossWindow() {
+		makePenalty();
+		diceGameLossWindow.closeWindow();
 	}
 	public void launchSnakeEyesWindow() {
-		
+		SnakeEyesWindow snakeEyesWindow = new SnakeEyesWindow(this);
+		this.snakeEyesWindow = snakeEyesWindow;
 	}
-	private void launchRolledOneWindow() {
-		
+	public void closeSnakeEyesWindow() {
+		snakeEyesWindow.closeWindow();
+		pirateTurn();
+	}
+	public void launchRolledOneWindow() {
+		RolledOneWindow rolledOneWindow = new RolledOneWindow(this);
+		this.rolledOneWindow = rolledOneWindow;
+	}
+	public void closeRolledOneWindow() {
+		rolledOneWindow.closeWindow();
+		pirateTurn();
 	}
 }
