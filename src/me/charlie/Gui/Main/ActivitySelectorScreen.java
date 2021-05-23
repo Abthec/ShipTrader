@@ -46,7 +46,8 @@ public class ActivitySelectorScreen {
 	}
 	
 	public void launchShipPropertiesScreen() {
-		
+		gameManager.launchShipPropertiesScreen();
+		finishedWindow();
 	}
 	
 	public void launchStoreOptionsScreen() {

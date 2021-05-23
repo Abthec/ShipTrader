@@ -158,8 +158,11 @@ public class StoreSellScreen {
 			public void actionPerformed(ActionEvent e) {
 				int itemIndex = listItems.getSelectedIndex();
 				Item item = game.getShip().getCurrentCargo().remove(itemIndex);
+				game.getShip().getReceipts().add(item);
 				int sellCost = item.getSellCost(store);
 				game.getTrader().addMoney(sellCost);
+				item.setSoldPrice(sellCost);
+				item.setPlaceOfSale(game.getShip().getCurrentIsland());
 				refresh();
 			}
 		});

@@ -15,7 +15,9 @@ public class Item {
     int buyCost;
     int sellCost;
     Island placeOfPurchase;
+    Island placeOfSale;
     int purchasedPrice;
+    int soldPrice;
     String description;
 
     private Random random = new Random();
@@ -27,7 +29,9 @@ public class Item {
         this.baseCost = itemType.getLowerCostBound(itemType) + random.nextInt(itemType.getUpperCostBound(itemType) - itemType.getLowerCostBound(itemType) + 1);
         this.buyCost = (int)Math.round(baseCost * storeType.getBuyModifier(itemType));
         this.placeOfPurchase=null;
+        this.placeOfSale=null;
         this.purchasedPrice=0;
+        this.soldPrice=0;
         if (itemType.equals(ItemType.UPGRADE)) {
             this.upgradeType = UpgradeType.values()[random.nextInt(4)];
         } else {
@@ -35,12 +39,36 @@ public class Item {
         }
     }
     
+    public void setPlaceOfSale(Island island) {
+    	placeOfSale = island;
+    }
+    
+    public Island getPlaceOfSale() {
+    	return placeOfSale;
+    }
+    
+    public void setSoldPrice(int price) {
+    	soldPrice = price;
+    }
+    
+    public int getSoldPrice() {
+    	return soldPrice;
+    }
+    
     public void setPlaceOfPurchase(Island island) {
     	this.placeOfPurchase = island;
     }
     
+    public Island getPlaceOfPurchase() {
+    	return placeOfPurchase;
+    }
+    
     public void setPurchasedPrice(int purchasedPrice) {
     	this.purchasedPrice = purchasedPrice;
+    }
+    
+    public int getPurchasedPrice() {
+    	return purchasedPrice;
     }
 
     public int getBaseCost() {

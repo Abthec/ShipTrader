@@ -167,6 +167,8 @@ public class StoreBuyScreen {
 				if (itemCost <= game.getTrader().getMoney() && game.getShip().addItemToCargo(chosenItem)) {
 					game.getTrader().subtractMoney(itemCost);
 					store.getStock().remove(chosenItem);
+					chosenItem.setPurchasedPrice(itemCost);
+					chosenItem.setPlaceOfPurchase(game.getShip().getCurrentIsland());
 					refresh();
 				} else {
 					if (itemCost <= game.getTrader().getMoney()) {

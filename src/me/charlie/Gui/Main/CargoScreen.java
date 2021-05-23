@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import me.charlie.Game.Game;
 import me.charlie.Item.Item;
+import me.charlie.Ship.Ship;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -17,6 +18,7 @@ import java.awt.Insets;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
@@ -26,10 +28,17 @@ public class CargoScreen {
 	private JFrame frameCargoScreen;
 	private ShipPropertiesScreen shipPropertiesWindow;
 	private Game game;
-	private int listIndex = 0;
+	private Ship ship;
+	private List<Item> currentCargo;
+	private List<Item> receipts;
+	private int currentItemsListIndex = 0;
+	private int soldItemsListIndex = 0;
 	
 	public CargoScreen(ShipPropertiesScreen shipPropertiesWindow, Game game) {
 		this.game = game;
+		this.ship = game.getShip();
+		this.currentCargo = ship.getCurrentCargo();
+		this.receipts = ship.getReceipts();
 		this.shipPropertiesWindow = shipPropertiesWindow;
 		initialize();
 		frameCargoScreen.setVisible(true);
@@ -72,7 +81,7 @@ public class CargoScreen {
 	 */
 	private void initialize() {
 		frameCargoScreen = new JFrame();
-		frameCargoScreen.setBounds(100, 100, 769, 513);
+		frameCargoScreen.setBounds(100, 100, 963, 513);
 		frameCargoScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0};
@@ -89,15 +98,7 @@ public class CargoScreen {
 		gbc_lblCurrentCargo.gridx = 0;
 		gbc_lblCurrentCargo.gridy = 0;
 		frameCargoScreen.getContentPane().add(lblCurrentCargo, gbc_lblCurrentCargo);
-		
-		DefaultListModel listModel = new DefaultListModel();
-		
-		for (Item item : game.getShip().getCurrentCargo()) {
-			String itemString = "";
-			listModel.add(listIndex, itemString);
-			listIndex++;
-		}
-		
+
 		JLabel lblCurrentItems = new JLabel("Currently Store Items");
 		lblCurrentItems.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_lblCurrentItems = new GridBagConstraints();
@@ -114,7 +115,7 @@ public class CargoScreen {
 		gbc_lblPreviousItems.gridy = 1;
 		frameCargoScreen.getContentPane().add(lblPreviousItems, gbc_lblPreviousItems);
 		
-		JLabel lblNewLabel = new JLabel("         Item Type | Place Of Purchase | Purchase Price         ");
+		JLabel lblNewLabel = new JLabel("                    Item Type | Place Of Purchase | Purchase Price                     ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -129,7 +130,7 @@ public class CargoScreen {
 			}
 		});
 		
-		JLabel lblNewLabel_1 = new JLabel("Item Type | Place Of Purchase | Purchase Price | Sold Price");
+		JLabel lblNewLabel_1 = new JLabel("Item Type | Place Of Purchase | Place Of Sale | Purchase Price | Sold Price");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
@@ -145,7 +146,15 @@ public class CargoScreen {
 		gbc_scrollPane.gridy = 3;
 		frameCargoScreen.getContentPane().add(scrollPane, gbc_scrollPane);
 		
+		DefaultListModel currentItemsModel = new DefaultListModel();
+		
+		for (Item item : currentCargo) {
+			String itemString = item.getItemType().getName() + " | " + item.getPlaceOfPurchase().getName() + " | " + item.getPurchasedPrice();
+			currentItemsModel.add(currentItemsListIndex, itemString);
+		}
+		
 		JList listCurrentItems = new JList();
+		listCurrentItems.setModel(currentItemsModel);
 		scrollPane.setViewportView(listCurrentItems);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -156,7 +165,16 @@ public class CargoScreen {
 		gbc_scrollPane_1.gridy = 3;
 		frameCargoScreen.getContentPane().add(scrollPane_1, gbc_scrollPane_1);
 		
+		DefaultListModel soldItemsModel = new DefaultListModel();
+		
+		for (Item item : receipts) {
+			String itemString = item.getItemType().getName() + " | " + item.getPlaceOfPurchase().getName() + " | " + item.getPlaceOfSale().getName() 
+					+ " | " + item.getPurchasedPrice() + " | " + item.getSoldPrice();
+			soldItemsModel.add(soldItemsListIndex, itemString);
+		}
+		
 		JList listSoldItems = new JList();
+		listSoldItems.setModel(soldItemsModel);
 		scrollPane_1.setViewportView(listSoldItems);
 		btnBack.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_btnBack = new GridBagConstraints();

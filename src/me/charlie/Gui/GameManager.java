@@ -7,6 +7,7 @@ import me.charlie.Gui.Main.ActivitySelectorScreen;
 import me.charlie.Gui.Main.CrewHireScreen;
 import me.charlie.Gui.Main.ShipPropertiesScreen;
 import me.charlie.Gui.Main.ShipRepairScreen;
+import me.charlie.Gui.Main.ShipUpgradeScreen;
 import me.charlie.Gui.Main.StoreOperations.StoreOptionsScreen;
 import me.charlie.Gui.Main.Travel.ArrivalScreen;
 import me.charlie.Gui.Main.Travel.DrowningSailorsEventScreen;
@@ -195,6 +196,16 @@ public class GameManager {
 	
 	public void closeShipPropertiesScreen(ShipPropertiesScreen shipPropertiesWindow) {
 		shipPropertiesWindow.closeWindow();
+		launchActivitySelectorScreen();
+	}
+	
+	public void launchShipUpgrdeScreen() {
+		ShipUpgradeScreen shipUpgradeWindow = new ShipUpgradeScreen(this, game);
+	}
+	
+	public void closeShipUpgradeScreen(ShipUpgradeScreen shipUpgradeWindow) {
+		shipUpgradeWindow.closeWindow();
+		launchActivitySelectorScreen();
 	}
 	
 	public boolean canAffordToPayCrewOneDaysWages() {
