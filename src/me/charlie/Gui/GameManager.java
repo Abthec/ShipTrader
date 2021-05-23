@@ -5,6 +5,7 @@ import java.util.Scanner;
 import me.charlie.Game.Game;
 import me.charlie.Gui.Main.ActivitySelectorScreen;
 import me.charlie.Gui.Main.CrewHireScreen;
+import me.charlie.Gui.Main.ShipPropertiesScreen;
 import me.charlie.Gui.Main.ShipRepairScreen;
 import me.charlie.Gui.Main.StoreOperations.StoreOptionsScreen;
 import me.charlie.Gui.Main.Travel.ArrivalScreen;
@@ -186,6 +187,14 @@ public class GameManager {
 	public void closeShipRepairScreen(ShipRepairScreen shipRepairWindow) {
 		shipRepairWindow.closeWindow();
 		launchActivitySelectorScreen();
+	}
+	
+	public void launchShipPropertiesScreen() {
+		ShipPropertiesScreen shipPropertiesWindow = new ShipPropertiesScreen(this, game);
+	}
+	
+	public void closeShipPropertiesScreen(ShipPropertiesScreen shipPropertiesWindow) {
+		shipPropertiesWindow.closeWindow();
 	}
 	
 	public boolean canAffordToPayCrewOneDaysWages() {

@@ -1,5 +1,6 @@
 package me.charlie.Item;
 
+import me.charlie.Island.Island;
 import me.charlie.Store.Store;
 import me.charlie.Store.StoreType;
 
@@ -13,6 +14,8 @@ public class Item {
     int baseCost;
     int buyCost;
     int sellCost;
+    Island placeOfPurchase;
+    int purchasedPrice;
     String description;
 
     private Random random = new Random();
@@ -23,11 +26,21 @@ public class Item {
         this.description = itemType.getDescription();
         this.baseCost = itemType.getLowerCostBound(itemType) + random.nextInt(itemType.getUpperCostBound(itemType) - itemType.getLowerCostBound(itemType) + 1);
         this.buyCost = (int)Math.round(baseCost * storeType.getBuyModifier(itemType));
+        this.placeOfPurchase=null;
+        this.purchasedPrice=0;
         if (itemType.equals(ItemType.UPGRADE)) {
             this.upgradeType = UpgradeType.values()[random.nextInt(4)];
         } else {
             this.upgradeType = null;
         }
+    }
+    
+    public void setPlaceOfPurchase(Island island) {
+    	this.placeOfPurchase = island;
+    }
+    
+    public void setPurchasedPrice(int purchasedPrice) {
+    	this.purchasedPrice = purchasedPrice;
     }
 
     public int getBaseCost() {
