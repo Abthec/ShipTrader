@@ -35,6 +35,7 @@ public class ArrivalScreen {
 		this.currentIsland = route.getIslandB();
 		this.store = currentIsland.getStore();
 		game.getShip().setCurrentIsland(currentIsland);
+		game.setDaysRemaining(route.getSailDuration(game.getShip()));
 		initialize();
 		frameArrivalScreen.setVisible(true);
 	}

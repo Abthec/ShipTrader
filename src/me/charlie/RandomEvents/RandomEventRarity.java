@@ -9,11 +9,11 @@ public enum RandomEventRarity {
     public double getEventDistanceModifier() {
         switch (this) {
             case RARE:
-                return 0.5;
+                return 1.0;
             case UNCOMMON:
                 return 0.75;
             case COMMON:
-                return 1.0;
+                return 0.5;
         }
         return 1.0;
     }

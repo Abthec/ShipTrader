@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import me.charlie.Game.Game;
 import me.charlie.Gui.Main.ActivitySelectorScreen;
+import me.charlie.Gui.Main.StoreOperations.StoreOptionsScreen;
 import me.charlie.Gui.Main.Travel.ArrivalScreen;
 import me.charlie.Gui.Main.Travel.DrowningSailorsEventScreen;
 import me.charlie.Gui.Main.Travel.PiratesEventScreen;
@@ -113,6 +114,7 @@ public class GameManager {
 	
 	public void closeRouteSelectionScreen(RouteSelectionScreen routeSelectionWindow, Route chosenRoute) {
 		routeSelectionWindow.closeWindow();
+		launchArrivalScreen(chosenRoute);
 	}
 	
 	public void launchStormyWeatherEventScreen(Route chosenRoute) {
@@ -148,6 +150,15 @@ public class GameManager {
 	
 	public void closeArrivalScreen(ArrivalScreen arrivalWindow) {
 		arrivalWindow.closeWindow();
+		launchActivitySelectorScreen();
+	}
+	
+	public void launchStoreOptionsScreen() {
+		StoreOptionsScreen storeOptionsWindow = new StoreOptionsScreen(this, game);
+	}
+	
+	public void closeStoreOptionsScreen(StoreOptionsScreen storeOptionsWindow) {
+		storeOptionsWindow.closeWindow();
 		launchActivitySelectorScreen();
 	}
 	
