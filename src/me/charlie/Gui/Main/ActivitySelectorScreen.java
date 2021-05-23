@@ -49,6 +49,10 @@ public class ActivitySelectorScreen {
 		
 	}
 	
+	public void launchStoreOptionsScreen() {
+		
+	}
+	
 	public void launchRouteSelectionScreen() {
 		gameManager.launchRouteSelectionScreen();
 		finishedWindow();
@@ -121,7 +125,7 @@ public class ActivitySelectorScreen {
 		frameActivitySelector.setTitle("Island Trader");
 		frameActivitySelector.setResizable(false);
 		frameActivitySelector.setType(Type.UTILITY);
-		frameActivitySelector.setBounds(100, 100, 302, 292);
+		frameActivitySelector.setBounds(100, 100, 302, 336);
 		frameActivitySelector.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frameActivitySelector.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -147,6 +151,11 @@ public class ActivitySelectorScreen {
 		frameActivitySelector.getContentPane().add(btnSail);
 		
 		JButton btnVisitStore = new JButton("    Visit the store    ");
+		btnVisitStore.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				launchStoreOptionsScreen();
+			}
+		});
 		btnVisitStore.setFont(new Font("Tahoma", Font.BOLD, 14));
 		frameActivitySelector.getContentPane().add(btnVisitStore);
 		
@@ -165,6 +174,7 @@ public class ActivitySelectorScreen {
 		btnRepairShip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (ship.getShipHealth() >= ship.getShipEndurance()) {
+					btnRepairShip.setEnabled(false);
 					launchUnableToRepairPopup();
 				}
 			}
@@ -201,10 +211,15 @@ public class ActivitySelectorScreen {
 		btnUpgradeShip.setFont(new Font("Tahoma", Font.BOLD, 14));
 		frameActivitySelector.getContentPane().add(btnUpgradeShip);
 		
-		JLabel lblPlayerCash = new JLabel("Current Wallet:");
-		lblPlayerCash.setText("Current Wallet : " + game.getTrader().getMoney());
+		JLabel lblPlayerCash = new JLabel("       Current Wallet : 0       ");
+		lblPlayerCash.setText("       Current Wallet : " + game.getTrader().getMoney() + "       ");
 		lblPlayerCash.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		frameActivitySelector.getContentPane().add(lblPlayerCash);
+		
+		JLabel lblDaysRemaining = new JLabel("    Days Remaining:     ");
+		lblDaysRemaining.setText("    Days Remaining: " + game.getDaysRemaining() + "    ");
+		lblDaysRemaining.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		frameActivitySelector.getContentPane().add(lblDaysRemaining);
 	}
 
 }

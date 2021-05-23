@@ -12,7 +12,6 @@ public class RandomEvent {
     public RandomEvent() {
         this.randomEventRarity = RandomEventRarity.values()[random.nextInt(3)];
         this.randomEventType = RandomEventType.values()[random.nextInt(3)];
-        this.eventOccurs = random.nextDouble() < this.getRandomEventRarity().getChanceOfEventOccurring();
     }
 
     public RandomEventRarity getRandomEventRarity() {
@@ -24,6 +23,7 @@ public class RandomEvent {
     }
 
     public boolean doesEventOccur() {
+    	this.eventOccurs = random.nextDouble() < this.getRandomEventRarity().getChanceOfEventOccurring();
         return eventOccurs;
     }
 
@@ -31,18 +31,18 @@ public class RandomEvent {
         switch (this.getRandomEventType()) {
             case PIRATES:
                 System.out.println("You are attacked by pirates!");
-            case WEATHER:
+            case STORMY_WEATHER:
                 System.out.println("You encounter bad weather!");
-            case RESCUED_SAILORS:
+            case DROWNING_SAILORS:
                 System.out.println("You encounter sailors in the water!");
         }
     }
 
     public String toString() {
         switch (this.getRandomEventType()) {
-            case WEATHER:
+            case STORMY_WEATHER:
                 return "You may encounter bad weather on this route.";
-            case RESCUED_SAILORS:
+            case DROWNING_SAILORS:
                 return "You may encounter sailors in the water on this route.";
             case PIRATES:
                 return "You may encounter pirates on this route.";

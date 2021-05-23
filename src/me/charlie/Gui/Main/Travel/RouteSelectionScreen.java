@@ -1,4 +1,4 @@
-package me.charlie.Gui.Main;
+package me.charlie.Gui.Main.Travel;
 
 import java.awt.EventQueue;
 
@@ -38,7 +38,7 @@ public class RouteSelectionScreen {
 	private Game game;
 	private GameManager gameManager;
 	private List<Route> routes;
-	Route chosenRoute;
+	private Route chosenRoute;
 	
 	public RouteSelectionScreen(GameManager gameManager, Game game) {
 		this.game = game;
@@ -52,8 +52,24 @@ public class RouteSelectionScreen {
 		frameRouteSelectionScreen.dispose();
 	}
 	
-	public void finishedWindow() {
-		closeWindow();
+	public void finishedWindow(Route chosenRoute) {
+		if (chosenRoute.getRandomEvent().doesEventOccur()) {
+			switch(chosenRoute.getRandomEvent().getRandomEventType()) {
+				case STORMY_WEATHER:
+					gameManager.launchStormyWeatherEventScreen(chosenRoute);
+					closeWindow();
+					break;
+				case PIRATES:
+					gameManager.launchPiratesEventScreen(chosenRoute);
+					closeWindow();
+					break;
+				case DROWNING_SAILORS:
+					gameManager.launchDrowningSailorsEventScreen(chosenRoute);
+					closeWindow();
+			}
+		} else {
+			gameManager.closeRouteSelectionScreen(this, chosenRoute);
+		}
 	}
 	
 	public void launchUnableToSailPopup() {
@@ -138,6 +154,8 @@ public class RouteSelectionScreen {
 				chosenRoute = routes.get(chosenRouteIndex);
 				if (chosenRoute.getSailDuration(game.getShip()) > game.getDaysRemaining()) {
 					launchUnableToSailPopup();
+				} else {
+					finishedWindow(chosenRoute);
 				}
 			}
 		});

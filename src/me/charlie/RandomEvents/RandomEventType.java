@@ -3,8 +3,8 @@ package me.charlie.RandomEvents;
 public enum RandomEventType {
 
     PIRATES,
-    WEATHER,
-    RESCUED_SAILORS;
+    STORMY_WEATHER,
+    DROWNING_SAILORS;
 
     public String getRETDescription(RandomEventType randomEventType) {
         switch (randomEventType) {

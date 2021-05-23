@@ -394,7 +394,7 @@ public class ConsoleApp {
             case PIRATES:
                 System.out.println("You see pirates on the horizon");
                 break;
-            case RESCUED_SAILORS:
+            case DROWNING_SAILORS:
                 System.out.println("""
                         You see sailors drowning in the water.
                         If you save them they may join your crew or give you a reward!
@@ -424,7 +424,7 @@ public class ConsoleApp {
                     }
                 }
                 break;
-            case WEATHER:
+            case STORMY_WEATHER:
                 double healthRemoved = 25 + random.nextInt(25);
                 ship.removeShipHealth(healthRemoved);
                 System.out.println("While sailing you encountered stormy weather." +
