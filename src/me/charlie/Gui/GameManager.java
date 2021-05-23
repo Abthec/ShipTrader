@@ -6,6 +6,7 @@ import me.charlie.Game.Game;
 import me.charlie.Gui.Main.ActivitySelectorScreen;
 import me.charlie.Gui.Main.Travel.ArrivalScreen;
 import me.charlie.Gui.Main.Travel.DrowningSailorsEventScreen;
+import me.charlie.Gui.Main.Travel.PiratesEventScreen;
 import me.charlie.Gui.Main.Travel.RouteSelectionScreen;
 import me.charlie.Gui.Main.Travel.StormyWeatherEventScreen;
 import me.charlie.Gui.Popups.InvalidTraderNamePopup;
@@ -130,6 +131,15 @@ public class GameManager {
 	
 	public void closeDrowningSailorsEventScreen(DrowningSailorsEventScreen drowningSailorsEventScreen, Route chosenRoute) {
 		drowningSailorsEventScreen.closeWindow();
+		launchArrivalScreen(chosenRoute);
+	}
+	
+	public void launchPiratesEventScreen(Route chosenRoute) {
+		PiratesEventScreen piratesEventWindow = new PiratesEventScreen(this, game, chosenRoute);
+	}
+	
+	public void closePiratesEventScreen(PiratesEventScreen piratesEventWindow, Route chosenRoute) {
+		piratesEventWindow.closeWindow();
 		launchArrivalScreen(chosenRoute);
 	}
 	

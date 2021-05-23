@@ -38,7 +38,7 @@ public class RouteSelectionScreen {
 	private Game game;
 	private GameManager gameManager;
 	private List<Route> routes;
-	Route chosenRoute;
+	private Route chosenRoute;
 	
 	public RouteSelectionScreen(GameManager gameManager, Game game) {
 		this.game = game;
