@@ -45,10 +45,11 @@ public class StoreOptionsScreen {
 	}
 	
 	public void launchStoreSellScreen() {
-		
+		StoreSellScreen storeSellWindow = new StoreSellScreen(gameManager, game, this);
+		closeWindow();
 	}
 	
-	public void launchUnableToSellpopup() {
+	public void launchUnableToSellPopup() {
 		frameStoreOptionsScreen.setVisible(false);
 		UnableToSellPopup unableToSellPopup = new UnableToSellPopup(this);
 	}
@@ -180,7 +181,7 @@ public class StoreOptionsScreen {
 		btnSell.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (ship.getCargoFullness() == 0) {
-					
+					launchUnableToSellPopup();
 				} else {
 					launchStoreSellScreen();
 				}
