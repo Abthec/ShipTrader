@@ -45,7 +45,7 @@ public class DiceGameRulesWindow {
 		rulesFrame.dispose();
 	}
 	public void finishedWindow() {
-		 diceGameManager.closeRulesWindow(this);
+		diceGameManager.closeRulesWindow(this);
 	}
 	/**
 	 * Initialize the contents of the frame.

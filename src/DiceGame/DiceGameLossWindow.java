@@ -45,6 +45,9 @@ public class DiceGameLossWindow {
 	public void closeWindow() {
 		lossFrame.dispose();
 	}
+	public void finishedWindow() {
+		diceGameManager.closeLossWindow(this);
+	}
 	private String makeSummary() {
 		diceGameManager.makePenalty();
 		String summary = String.format("You lost the pirates are taking %o gold, if you cant afford this you lose!", diceGameManager.getPenalty());
@@ -67,7 +70,7 @@ public class DiceGameLossWindow {
 		JButton btnNewButton = new JButton("Continue");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				diceGameManager.closeLossWindow();
+				finishedWindow();
 			}
 		});
 		lossFrame.getContentPane().add(btnNewButton, "cell 0 1,alignx center");

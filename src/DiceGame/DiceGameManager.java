@@ -22,7 +22,7 @@ public class DiceGameManager {
 	
 	public DiceGameManager(int handiCap) {
 		playScore = handiCap;
-		handicap = handiCap;
+		this.handicap = handiCap;
 		pirateScore = 0;
 		playerTurnScore = 0;
 		pirateTurnScore = 0;
@@ -46,7 +46,7 @@ public class DiceGameManager {
 		int [] Rolled = new int[2];
 		Rolled[0] = (int)(Math.random()*6 +1);
 		Rolled[1] = (int)(Math.random()*6 +1);
-		dice = Rolled;
+		this.dice = Rolled;
 		
 	}
 	public int[] getDice() {
@@ -118,20 +118,12 @@ public class DiceGameManager {
 	public int getPenalty() {
 		return penalty;
 	}
-	private void launchDiceGameVictoryWindow() {
-		penalty = 0;
-		DiceGameVictoryWindow victoryWindow = new DiceGameVictoryWindow(this);
-		this.diceGameVictoryWindow = victoryWindow;
-	}
-	public void closeVictoryWindow() {
-		diceGameVictoryWindow.closeWindow();
-	}
 	public void launchDiceGameRulesWindow() {
 		DiceGameRulesWindow rulesWindow = new DiceGameRulesWindow(this);
 		this.diceGamesRulesWindow = rulesWindow;
 	}	
 	public void closeRulesWindow(DiceGameRulesWindow diceGameRulesWindow) {
-		diceGameRulesWindow.closeWindow();
+		diceGamesRulesWindow.closeWindow();
 		playerRoll();
 	}
 	public void launchDiceGameRollWindow() {
@@ -150,7 +142,7 @@ public class DiceGameManager {
 		DiceGameLossWindow lossWindow = new DiceGameLossWindow(this);
 		this.diceGameLossWindow = lossWindow;
 	}
-	public void closeLossWindow() {
+	public void closeLossWindow(DiceGameLossWindow diceGameLossWindow) {
 		makePenalty();
 		diceGameLossWindow.closeWindow();
 	}
@@ -169,5 +161,13 @@ public class DiceGameManager {
 	public void closeRolledOneWindow() {
 		rolledOneWindow.closeWindow();
 		pirateTurn();
+	}
+	private void launchDiceGameVictoryWindow() {
+		penalty = 0;
+		DiceGameVictoryWindow victoryWindow = new DiceGameVictoryWindow(this);
+		this.diceGameVictoryWindow = victoryWindow;
+	}
+	public void closeVictoryWindow() {
+		diceGameVictoryWindow.closeWindow();
 	}
 }

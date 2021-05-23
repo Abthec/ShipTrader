@@ -7,11 +7,17 @@ import javax.swing.JFrame;
 import me.charlie.Game.Game;
 import me.charlie.Gui.GameManager;
 import me.charlie.Island.Route;
+import me.charlie.Trader.Trader;
+
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JTextPane;
+
+import DiceGame.DiceGameManager;
 
 public class PiratesEventScreen {
 
@@ -19,11 +25,14 @@ public class PiratesEventScreen {
 	private GameManager gameManager;
 	private Game game;
 	private Route route;
+	private DiceGameManager diceGameManager;
+	private Trader trader;
 	
 	public PiratesEventScreen(GameManager gameManager, Game game, Route route) {
 		this.game = game;
 		this.gameManager = gameManager;
 		this.route = route;
+		this.trader = game.getTrader();
 		initialize();
 		framePirateEventScreen.setVisible(true);
 	}
@@ -38,6 +47,14 @@ public class PiratesEventScreen {
 	
 	public JFrame getJFrame() {
 		return framePirateEventScreen;
+	}
+	public void launchDiceGame() {
+		DiceGameManager diceGame = new DiceGameManager(20);
+		this.diceGameManager = diceGame;
+		diceGameManager.launchDiceGameRulesWindow();
+		int penalty = diceGame.getPenalty();
+		trader.subtractMoney(penalty);
+		finishedWindow();
 	}
 
 	/**
@@ -70,23 +87,21 @@ public class PiratesEventScreen {
 		framePirateEventScreen = new JFrame();
 		framePirateEventScreen.setBounds(100, 100, 560, 450);
 		framePirateEventScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		framePirateEventScreen.getContentPane().setLayout(gridBagLayout);
 		
 		JButton btnContinue = new JButton("CONTINUE");
 		btnContinue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				finishedWindow();
+				framePirateEventScreen.setVisible(false);
+				launchDiceGame();
 			}
 		});
-		GridBagConstraints gbc_btnContinue = new GridBagConstraints();
-		gbc_btnContinue.gridx = 1;
-		gbc_btnContinue.gridy = 12;
-		framePirateEventScreen.getContentPane().add(btnContinue, gbc_btnContinue);
+		framePirateEventScreen.getContentPane().setLayout(new MigLayout("", "[85px,grow]", "[grow][23px]"));
+		
+		JTextPane introduction = new JTextPane();
+		framePirateEventScreen.getContentPane().add(introduction, "cell 0 0,alignx center,aligny center");
+		framePirateEventScreen.getContentPane().add(btnContinue, "cell 0 1,alignx center,aligny center");
+		introduction.setEditable(false);
+		introduction.setText("Youve been boarded by pirates, youll have to beat them in a dice game to protect your inventory!");
 	}
 
 }
