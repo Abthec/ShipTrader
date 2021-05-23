@@ -22,7 +22,7 @@ public class DiceGameSummaryWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DiceGameSummaryWindow window = new DiceGameSummaryWindow(null);
+					DiceGameSummaryWindow window = new DiceGameSummaryWindow();
 					window.summaryFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,7 +30,9 @@ public class DiceGameSummaryWindow {
 			}
 		});
 	}
-
+	public DiceGameSummaryWindow() {
+		initialize();
+	}
 	/**
 	 * Create the application.
 	 * @param diceGameManager 
@@ -46,16 +48,15 @@ public class DiceGameSummaryWindow {
 	public void finishedWindow() {
 		 diceGameManager.closeSummaryWindow(this);
 	}
-	
 	public String getSummary() {
 		int playerScore = diceGameManager.getPlayerScore();
 		int playerTurn = diceGameManager.getPlayerTurnScore();
 		int pirateScore = diceGameManager.getPirateScore();
-		String summary = String.format("Your current score total is %o and your turn score is %o."
-				+ " The pirates have a score %o" , playerScore, playerTurn, pirateScore );
+		int[] dice = diceGameManager.getDice();
+		String summary = String.format("Your last roll was %o, %o. Your current score total is %o and your turn score is %o."
+				+ " The pirates have a score %o" , dice[0], dice[1], playerScore, playerTurn, pirateScore );
 		return summary;
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */

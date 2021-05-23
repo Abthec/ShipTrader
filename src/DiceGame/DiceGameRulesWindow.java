@@ -21,7 +21,7 @@ public class DiceGameRulesWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DiceGameRulesWindow window = new DiceGameRulesWindow(null);
+					DiceGameRulesWindow window = new DiceGameRulesWindow();
 					window.rulesFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -29,7 +29,9 @@ public class DiceGameRulesWindow {
 			}
 		});
 	}
-
+	DiceGameRulesWindow(){
+		initialize();
+	}
 	/**
 	 * Create the application.
 	 * @param diceGameManager 
@@ -54,7 +56,7 @@ public class DiceGameRulesWindow {
 		rulesFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		rulesFrame.getContentPane().setLayout(new MigLayout("", "[grow]", "[grow][]"));
 		
-		JButton readybttn = new JButton("Ready");
+		JButton readybttn = new JButton("Roll");
 		readybttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				finishedWindow();
