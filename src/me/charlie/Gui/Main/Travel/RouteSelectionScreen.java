@@ -128,7 +128,8 @@ public class RouteSelectionScreen {
 			Route route = routes.get(i);
 			String routeString = "  Route from " + route.getIslandA().getName() + " to " + route.getIslandB().getName() + 
 					" | " + "Route duration: " + route.getSailDuration(game.getShip()) + " | " +
-					"Random Event Chance: " + (route.getRandomEvent().getRandomEventRarity().getChanceOfEventOccurring()*100) + " %";
+					"Random Event Chance: " + (route.getRandomEvent().getRandomEventRarity().getChanceOfEventOccurring()*100) + " %" + " | " 
+					+ "Crew Wages: " + game.getShip().getCurrentCrewSize()*10*route.getSailDuration(game.getShip());
 			listModel.add(i, routeString);
 		}
 		

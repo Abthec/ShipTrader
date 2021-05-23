@@ -60,7 +60,8 @@ public class ActivitySelectorScreen {
 	}
 	
 	public void launchCrewHireScreen() {
-		
+		gameManager.launchCrewHireScreen();
+		finishedWindow();
 	}
 	
 	public void launchShipRepairScreen() {
@@ -165,6 +166,8 @@ public class ActivitySelectorScreen {
 			public void actionPerformed(ActionEvent e) {
 				if (game.getShip().getCrewFullness() == 1) {
 					launchUnableToHireCrewPopup();
+				} else {
+					launchCrewHireScreen();
 				}
 			}
 		});

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import me.charlie.Game.Game;
 import me.charlie.Gui.Main.ActivitySelectorScreen;
+import me.charlie.Gui.Main.CrewHireScreen;
 import me.charlie.Gui.Main.StoreOperations.StoreOptionsScreen;
 import me.charlie.Gui.Main.Travel.ArrivalScreen;
 import me.charlie.Gui.Main.Travel.DrowningSailorsEventScreen;
@@ -159,6 +160,15 @@ public class GameManager {
 	
 	public void closeStoreOptionsScreen(StoreOptionsScreen storeOptionsWindow) {
 		storeOptionsWindow.closeWindow();
+		launchActivitySelectorScreen();
+	}
+	
+	public void launchCrewHireScreen() {
+		CrewHireScreen crewHireWindow = new CrewHireScreen(this, game);
+	}
+	
+	public void closeCrewHireScreen(CrewHireScreen crewHireWindow) {
+		crewHireWindow.closeWindow();
 		launchActivitySelectorScreen();
 	}
 	
