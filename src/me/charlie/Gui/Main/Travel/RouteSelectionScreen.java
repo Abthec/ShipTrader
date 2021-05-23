@@ -1,4 +1,4 @@
-package me.charlie.Gui.Main;
+package me.charlie.Gui.Main.Travel;
 
 import java.awt.EventQueue;
 
@@ -52,8 +52,8 @@ public class RouteSelectionScreen {
 		frameRouteSelectionScreen.dispose();
 	}
 	
-	public void finishedWindow() {
-		closeWindow();
+	public void finishedWindow(Route chosenRoute) {
+		gameManager.closeRouteSelectionScreen(this, chosenRoute);
 	}
 	
 	public void launchUnableToSailPopup() {
@@ -138,6 +138,8 @@ public class RouteSelectionScreen {
 				chosenRoute = routes.get(chosenRouteIndex);
 				if (chosenRoute.getSailDuration(game.getShip()) > game.getDaysRemaining()) {
 					launchUnableToSailPopup();
+				} else {
+					finishedWindow(chosenRoute);
 				}
 			}
 		});

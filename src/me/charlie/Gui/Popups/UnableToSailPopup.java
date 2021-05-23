@@ -5,7 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 import me.charlie.Gui.Main.ActivitySelectorScreen;
-import me.charlie.Gui.Main.RouteSelectionScreen;
+import me.charlie.Gui.Main.Travel.RouteSelectionScreen;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;

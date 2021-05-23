@@ -4,12 +4,15 @@ import java.util.Scanner;
 
 import me.charlie.Game.Game;
 import me.charlie.Gui.Main.ActivitySelectorScreen;
-import me.charlie.Gui.Main.RouteSelectionScreen;
+import me.charlie.Gui.Main.Travel.ArrivalScreen;
+import me.charlie.Gui.Main.Travel.RouteSelectionScreen;
+import me.charlie.Gui.Main.Travel.StormyWeatherEventScreen;
 import me.charlie.Gui.Popups.InvalidTraderNamePopup;
 import me.charlie.Gui.Popups.UnableToUpgradePopup;
 import me.charlie.Gui.gameSetup.SetupShipPropertiesScreen;
 import me.charlie.Gui.gameSetup.ShipSelectionScreen;
 import me.charlie.Gui.gameSetup.StartupScreen;
+import me.charlie.Island.Route;
 import me.charlie.Ship.Ship;
 
 @SuppressWarnings({ "unused"})
@@ -104,6 +107,28 @@ public class GameManager {
 	
 	public void launchRouteSelectionScreen() {
 		RouteSelectionScreen routeSelectionWindow = new RouteSelectionScreen(this, game);
+	}
+	
+	public void closeRouteSelectionScreen(RouteSelectionScreen routeSelectionWindow, Route chosenRoute) {
+		routeSelectionWindow.closeWindow();
+		launchArrivalScreen(chosenRoute);
+	}
+	
+	public void launchStormyWeatherEventScreen(Route chosenRoute) {
+		StormyWeatherEventScreen stormyWeatherEventWindow = new StormyWeatherEventScreen(this, chosenRoute, game);
+	}
+	
+	public void closeStormyWeatherEventScreen(StormyWeatherEventScreen stormyWeatherEventWindow, Route chosenRoute) {
+		stormyWeatherEventWindow.closeWindow();
+		launchArrivalScreen(chosenRoute);
+	}
+	
+	public void launchArrivalScreen(Route chosenRoute) {
+		ArrivalScreen arrivalWindow = new ArrivalScreen(this, chosenRoute, game);
+	}
+	
+	public void closeArrivalScreen(ArrivalScreen arrivalWindow) {
+		
 	}
 	
 	public static void main(String[] args) {
