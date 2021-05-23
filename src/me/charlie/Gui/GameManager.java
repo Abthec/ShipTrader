@@ -5,6 +5,7 @@ import java.util.Scanner;
 import me.charlie.Game.Game;
 import me.charlie.Gui.Main.ActivitySelectorScreen;
 import me.charlie.Gui.Main.Travel.ArrivalScreen;
+import me.charlie.Gui.Main.Travel.DrowningSailorsEventScreen;
 import me.charlie.Gui.Main.Travel.RouteSelectionScreen;
 import me.charlie.Gui.Main.Travel.StormyWeatherEventScreen;
 import me.charlie.Gui.Popups.InvalidTraderNamePopup;
@@ -120,6 +121,15 @@ public class GameManager {
 	
 	public void closeStormyWeatherEventScreen(StormyWeatherEventScreen stormyWeatherEventWindow, Route chosenRoute) {
 		stormyWeatherEventWindow.closeWindow();
+		launchArrivalScreen(chosenRoute);
+	}
+	
+	public void launchDrowningSailorsEventScreen(Route routeChosen) {
+		DrowningSailorsEventScreen drowningSailorsEventScreen = new DrowningSailorsEventScreen(this, game, routeChosen);
+	}
+	
+	public void closeDrowningSailorsEventScreen(DrowningSailorsEventScreen drowningSailorsEventScreen, Route chosenRoute) {
+		drowningSailorsEventScreen.closeWindow();
 		launchArrivalScreen(chosenRoute);
 	}
 	

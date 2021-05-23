@@ -18,6 +18,8 @@ import javax.swing.JButton;
 import java.awt.Insets;
 import java.util.Random;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class StormyWeatherEventScreen {
 
@@ -44,7 +46,7 @@ public class StormyWeatherEventScreen {
 	}
 	
 	public void finishedWindow() {
-		
+		gameManager.closeStormyWeatherEventScreen(this, route);
 	}
 	
 	public JFrame getJFrame() {
@@ -161,6 +163,11 @@ public class StormyWeatherEventScreen {
 		frameStormyWeatherEventScreen.getContentPane().add(lblSpacer3, gbc_lblSpacer3);
 		
 		JButton btnContinue = new JButton("CONTINUE");
+		btnContinue.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				finishedWindow();
+			}
+		});
 		GridBagConstraints gbc_btnContinue = new GridBagConstraints();
 		gbc_btnContinue.insets = new Insets(0, 0, 5, 0);
 		gbc_btnContinue.gridx = 1;
