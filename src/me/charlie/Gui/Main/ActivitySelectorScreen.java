@@ -71,7 +71,7 @@ public class ActivitySelectorScreen {
 	}
 	
 	public void launchShipUpgradeScreen() {
-		gameManager.launchShipUpgrdeScreen();
+		gameManager.launchShipUpgrdeScreen("");
 		finishedWindow();
 	}
 	

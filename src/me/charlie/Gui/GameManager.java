@@ -204,8 +204,8 @@ public class GameManager {
 		launchActivitySelectorScreen();
 	}
 	
-	public void launchShipUpgrdeScreen() {
-		ShipUpgradeScreen shipUpgradeWindow = new ShipUpgradeScreen(this, game);
+	public void launchShipUpgrdeScreen(String outcome) {
+		ShipUpgradeScreen shipUpgradeWindow = new ShipUpgradeScreen(this, game, outcome);
 	}
 	
 	public void closeShipUpgradeScreen(ShipUpgradeScreen shipUpgradeWindow) {

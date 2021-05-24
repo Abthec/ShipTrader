@@ -37,8 +37,10 @@ public class ShipUpgradeScreen {
 	private int listIndex=0;
 	private JLabel lblOutcome;
 	private JButton btnConfirm;
+	private String outcome;
 	
-	public ShipUpgradeScreen(GameManager gameManager, Game game) {
+	public ShipUpgradeScreen(GameManager gameManager, Game game, String outcome) {
+		this.outcome = outcome;
 		this.game = game;
 		this.gameManager = gameManager;
 		this.upgrades = getUpgrades();
@@ -54,7 +56,7 @@ public class ShipUpgradeScreen {
 		gameManager.closeShipUpgradeScreen(this);
 	}
 	
-	public void setOutcome(String outcome) {
+	public void setOutcome() {
 		lblOutcome.setText(outcome);
 	}
 	
@@ -62,9 +64,9 @@ public class ShipUpgradeScreen {
 		btnConfirm.setEnabled(false);
 	}
 	
-	public void refresh() {
+	public void refresh(String outcomeString) {
 		closeWindow();
-		gameManager.launchShipUpgrdeScreen();
+		gameManager.launchShipUpgrdeScreen(outcomeString);
 	}
 	
 	public JFrame getJFrame() {
@@ -196,25 +198,30 @@ public class ShipUpgradeScreen {
 		}
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String outComestring = "";
 				int upgradeIndex = listUpgrades.getSelectedIndex();
 				Item upgrade = getUpgrades().get(upgradeIndex);
 				if (game.getShip().canUpgrade(upgrade.getUpgradeType())) {
 					switch(upgrade.getUpgradeType()) {
 						case BULKHEAD:
 							game.getShip().upgradeShipEndurance();
+							outComestring = ("A bulkhead upgrade was added.");
 							break;
 						case MAST:
 							game.getShip().upgradeSailSpeed();
+							outComestring = ("A mast upgrade was added.");
 							break;
 						case CANNON:
 							game.getShip().addCannon();
+							outComestring = ("A cannon was added.");
 							break;
 						case CARGO_HOLD:
 							game.getShip().upgradeCargoCapacity();
+							outComestring = ("A cargo hold upgrade was added.");
 					}
 					game.getShip().getCurrentCargo().remove(upgrade);
 					game.getShip().addReceipt(upgrade);
-					refresh();
+					refresh(outComestring);
 				} else {
 					launchUnableToUpgradePopup("Upgrade slot already at maximum.");
 				}
@@ -280,6 +287,8 @@ public class ShipUpgradeScreen {
 		panel.add(lblCargoHold);
 		
 		JLabel lblOutcome = new JLabel("");
+		this.lblOutcome = lblOutcome;
+		lblOutcome.setText(outcome);
 		lblOutcome.setFont(new Font("Tahoma", Font.BOLD, 16));
 		GridBagConstraints gbc_lblOutcome = new GridBagConstraints();
 		gbc_lblOutcome.gridx = 0;
