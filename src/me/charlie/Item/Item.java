@@ -14,10 +14,11 @@ public class Item {
     int baseCost;
     int buyCost;
     int sellCost;
-    Island placeOfPurchase;
-    Island placeOfSale;
     int purchasedPrice;
     int soldPrice;
+    boolean usedAsUpgrade;
+    Island placeOfPurchase;
+    Island placeOfSale;
     String description;
 
     private Random random = new Random();
@@ -32,11 +33,20 @@ public class Item {
         this.placeOfSale=null;
         this.purchasedPrice=0;
         this.soldPrice=0;
+        this.usedAsUpgrade = false;
         if (itemType.equals(ItemType.UPGRADE)) {
             this.upgradeType = UpgradeType.values()[random.nextInt(4)];
         } else {
             this.upgradeType = null;
         }
+    }
+    
+    public void setUsedAsUpgrade() {
+    	this.usedAsUpgrade = true;
+    }
+    
+    public boolean usedAsUpgrade() {
+    	return usedAsUpgrade;
     }
     
     public void setPlaceOfSale(Island island) {

@@ -6,6 +6,21 @@ public enum UpgradeType {
     BULKHEAD,
     CARGO_HOLD;
 
+	public String getDescription(UpgradeType upgradeType) {
+		switch(upgradeType) {
+			case CANNON:
+				return "Adds one cannon to your ship. Cannons help when fighting pirates!";
+			case MAST:
+				return "Increases sailing speed by 10%!";
+			case BULKHEAD:
+				return "Increases ship endurance by 10%!";
+			case CARGO_HOLD:
+				return "Increases cargo space by 2!";
+			default:
+				return "If you're seeing this something is wrong. Well done!";
+		}
+	}
+	
     public String getName() {
         return toString().substring(0, 1).toUpperCase() + toString().substring(1).toLowerCase().replace("_", " ");
     }

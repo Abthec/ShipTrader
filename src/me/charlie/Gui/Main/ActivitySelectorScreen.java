@@ -71,7 +71,8 @@ public class ActivitySelectorScreen {
 	}
 	
 	public void launchShipUpgradeScreen() {
-		
+		gameManager.launchShipUpgrdeScreen();
+		finishedWindow();
 	}
 	
 	public void launchUnableToRepairPopup() {
@@ -79,9 +80,9 @@ public class ActivitySelectorScreen {
 		UnableToRepairPopup unableToRepairPopup = new UnableToRepairPopup(this, "Ship health is full.");
 	}
 	
-	public void launchUnableToUpgradePopup() {
+	public void launchUnableToUpgradePopup(String reason) {
 		frameActivitySelector.setVisible(false);
-		UnableToUpgradePopup unableToUpgradePopup = new UnableToUpgradePopup(this);
+		UnableToUpgradePopup unableToUpgradePopup = new UnableToUpgradePopup(this, reason);
 	}
 	
 	public void launchUnableToSailPopup() {
@@ -210,9 +211,9 @@ public class ActivitySelectorScreen {
 					}
 				}
 				if (canUpgrade) {
-					
+					launchShipUpgradeScreen();
 				} else {
-					launchUnableToUpgradePopup();
+					launchUnableToUpgradePopup("You must first purchase upgrades from the store.");
 				}
 			}
 		});
