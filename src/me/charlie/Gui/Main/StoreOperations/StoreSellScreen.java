@@ -23,6 +23,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ListSelectionModel;
 
 public class StoreSellScreen {
 
@@ -96,7 +97,7 @@ public class StoreSellScreen {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		frameStoreSellScreen.getContentPane().setLayout(gridBagLayout);
 		
-		JLabel lblStoreDetails = new JLabel("<dynamic> | <dynamic>");
+		JLabel lblStoreDetails = new JLabel(store.getName() + " | " + store.getStoreType().getName());
 		lblStoreDetails.setFont(new Font("Tahoma", Font.BOLD, 16));
 		GridBagConstraints gbc_lblStoreDetails = new GridBagConstraints();
 		gbc_lblStoreDetails.insets = new Insets(0, 0, 5, 0);
@@ -137,6 +138,7 @@ public class StoreSellScreen {
 		}
 		
 		JList listItems = new JList();
+		listItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listItems.setFont(new Font("Tahoma", Font.ITALIC, 14));
 		listItems.setModel(listModel);
 		scrollPane.setViewportView(listItems);
