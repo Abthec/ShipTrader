@@ -23,6 +23,7 @@ import java.awt.FlowLayout;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ListSelectionModel;
 
 public class StoreBuyScreen {
 
@@ -145,6 +146,7 @@ public class StoreBuyScreen {
 		}
 		
 		JList listItems = new JList();
+		listItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listItems.setFont(new Font("Tahoma", Font.ITALIC, 14));
 		listItems.setModel(defaultListModel);
 		scrollPane.setViewportView(listItems);

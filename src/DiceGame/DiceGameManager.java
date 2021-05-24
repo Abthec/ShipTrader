@@ -121,6 +121,11 @@ public class DiceGameManager {
 	}
 	public void closeLossWindow(DiceGameLossWindow diceGameLossWindow) {
 		makePenalty();
+		if (game.getTrader().getMoney() < this.penalty) {
+			//Game Over
+		} else {
+			game.getTrader().subtractMoney(this.penalty);
+		}
 		diceGameLossWindow.closeWindow();
 		gameManager.launchArrivalScreen(route);
 

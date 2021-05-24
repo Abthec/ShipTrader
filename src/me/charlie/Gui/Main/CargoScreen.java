@@ -168,9 +168,15 @@ public class CargoScreen {
 		DefaultListModel soldItemsModel = new DefaultListModel();
 		
 		for (Item item : receipts) {
-			String itemString = item.getItemType().getName() + " | " + item.getPlaceOfPurchase().getName() + " | " + item.getPlaceOfSale().getName() 
+			if (item.usedAsUpgrade()) {
+				String itemString = item.getItemType().getName() + " | " + item.getPlaceOfPurchase() + " | " + item.getPurchasedPrice() + " | " + "Applied to ship as upgrade";
+				soldItemsModel.add(soldItemsListIndex, itemString);
+			} else {
+				String itemString = item.getItemType().getName() + " | " + item.getPlaceOfPurchase().getName() + " | " + item.getPlaceOfSale().getName() 
 					+ " | " + item.getPurchasedPrice() + " | " + item.getSoldPrice();
-			soldItemsModel.add(soldItemsListIndex, itemString);
+				soldItemsModel.add(soldItemsListIndex, itemString);
+			}
+			
 		}
 		
 		JList listSoldItems = new JList();

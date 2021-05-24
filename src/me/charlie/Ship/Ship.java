@@ -2,6 +2,7 @@ package me.charlie.Ship;
 
 import me.charlie.Island.Island;
 import me.charlie.Item.Item;
+import me.charlie.Item.UpgradeType;
 import me.charlie.Store.Store;
 
 import java.util.ArrayList;
@@ -19,6 +20,10 @@ public class Ship {
     int currentCrewSize;
     int cargoFullness;
     int shipId;
+    int numberOfCannons;
+    int numberOfMastUpgrades;
+    int numberOfCargoHoldUpgrades;
+    int numberOfBulkheadUpgrades;
     double shipEndurance;
     double currentShipEndurance;
     double shipHealth;
@@ -188,17 +193,55 @@ public class Ship {
 
     public void upgradeSailSpeed() {
         sailSpeed += 2.5;
+        numberOfMastUpgrades++;
     }
 
     public void upgradeShipEndurance() {
         shipEndurance += 50;
         shipHealth += 50;
+        numberOfBulkheadUpgrades++;
     }
 
     public void upgradeCargoCapacity() {
         maxCargoCapacity += 2;
+        numberOfCargoHoldUpgrades++;
+    }
+    
+    public void addCannon() {
+    	numberOfCannons++;
+    }
+    
+    public int getNumberOfCannons() {
+    	return numberOfCannons;
+    }
+    
+    public int getNumberOfMastUpgrades() {
+    	return numberOfMastUpgrades;
+    }
+    
+    public int getNumberOfCargoHoldUpgrades() {
+    	return numberOfCargoHoldUpgrades;
+    }
+    
+    public int getNumberOfBulkheadUpgrades() {
+    	return numberOfBulkheadUpgrades;
     }
 
+    public boolean canUpgrade(UpgradeType upgradeType) {
+    	switch(upgradeType) {
+    		case CANNON:
+    			return numberOfCannons < 5;
+    		case MAST:
+    			return numberOfMastUpgrades < 5;
+    		case CARGO_HOLD:
+    			return true;
+    		case BULKHEAD:
+    			return true;
+    		default:
+    			return false;
+    	}
+    }
+    
     public String getName() {
         return name;
     }

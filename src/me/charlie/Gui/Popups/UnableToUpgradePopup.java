@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 
 import me.charlie.Gui.GameManager;
 import me.charlie.Gui.Main.ActivitySelectorScreen;
+import me.charlie.Gui.Main.ShipUpgradeScreen;
+
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
@@ -18,11 +20,34 @@ public class UnableToUpgradePopup {
 
 	private JFrame frameUnableToUpgradePopup;
 	private ActivitySelectorScreen activitySelectionWindow;
+	private ShipUpgradeScreen shipUpgradeWindow;
+	private int returnCode;
+	private String reason;
 	
-	public UnableToUpgradePopup(ActivitySelectorScreen activitySelectionWindow) {
+	public UnableToUpgradePopup(ActivitySelectorScreen activitySelectionWindow, String reason) {
+		this.returnCode = 0;
+		this.reason = reason;
 		this.activitySelectionWindow = activitySelectionWindow;
 		initialize();
 		frameUnableToUpgradePopup.setVisible(true);
+	}
+	
+	public UnableToUpgradePopup(ShipUpgradeScreen shipUpgradeWindow, String reason) {
+		this.returnCode = 1;
+		this.reason = reason;
+		this.shipUpgradeWindow = shipUpgradeWindow;
+		initialize();
+		frameUnableToUpgradePopup.setVisible(true);
+	}
+	
+	public void launchActivitySelectionWindow() {
+		activitySelectionWindow.getJFrame().setVisible(true);
+		finishedWindow();
+	}
+	
+	public void launchShipUpgradeScreen() {
+		shipUpgradeWindow.getJFrame().setVisible(true);
+		finishedWindow();
 	}
 
 	public void closeWindow() {
@@ -30,7 +55,6 @@ public class UnableToUpgradePopup {
 	}
 	
 	public void finishedWindow() {
-		activitySelectionWindow.getJFrame().setVisible(true);
 		closeWindow();
 	}
 	/**
@@ -72,16 +96,20 @@ public class UnableToUpgradePopup {
 		lblNoUpgradesAvailable.setBounds(0, 0, 454, 32);
 		frameUnableToUpgradePopup.getContentPane().add(lblNoUpgradesAvailable);
 		
-		JLabel lblHowToGetUpgrades = new JLabel("To upgrade your ship first purchase an upgrade from the store.");
-		lblHowToGetUpgrades.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblHowToGetUpgrades.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHowToGetUpgrades.setBounds(0, 43, 454, 40);
-		frameUnableToUpgradePopup.getContentPane().add(lblHowToGetUpgrades);
+		JLabel lblReason = new JLabel(reason);
+		lblReason.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblReason.setHorizontalAlignment(SwingConstants.CENTER);
+		lblReason.setBounds(0, 43, 454, 40);
+		frameUnableToUpgradePopup.getContentPane().add(lblReason);
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				finishedWindow();
+				if (returnCode==0) {
+					launchActivitySelectionWindow();
+				} else if (returnCode==1) {
+					launchShipUpgradeScreen();
+				}
 			}
 		});
 		btnBack.setFont(new Font("Tahoma", Font.BOLD, 16));
