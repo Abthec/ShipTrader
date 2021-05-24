@@ -86,24 +86,24 @@ public enum StoreType {
             case BLACKSMITH:
                 switch (itemType) {
                     case UPGRADE:
-                        return 1.2;
+                        return 1.7;
                     case JEWEL:
                         return 0.75;
                     case WEAPON:
-                        return 1.1;
+                        return 0.1;
                     case ARTIFACT:
-                        return 1.1;
+                        return 1.3;
                 }
             case SHIP_BUILDER:
                 switch (itemType) {
                     case UPGRADE:
-                        return 1.2;
+                        return 0.9;
                     case JEWEL:
-                        return 0.75;
+                        return 1.3;
                     case WEAPON:
-                        return 1.1;
+                        return 1.7;
                     case ARTIFACT:
-                        return 1.1;
+                        return 1.2;
                 }
             default:
                 return 1.0;
