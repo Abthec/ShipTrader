@@ -64,7 +64,6 @@ public class DiceGameManager {
 		Rolled[0] = (int)(Math.random()*6 +1);
 		Rolled[1] = (int)(Math.random()*6 +1);
 		this.dice = Rolled;
-		
 	}
 	public int[] getDice() {
 		return dice;
@@ -82,6 +81,7 @@ public class DiceGameManager {
 	}
 	public void playerRoll() {
 		Roll();
+		int[] Dice = getDice();
 		switch (determineRoll()) {
 		case 1:
 			playScore = handicap;
@@ -93,8 +93,8 @@ public class DiceGameManager {
 			launchRolledOneWindow();
 			break;
 		case 3:
-			playerTurnScore = playerTurnScore + dice[0] + dice[1];
-			playScore = playScore +dice[0] +dice[1];
+			playerTurnScore = playerTurnScore + Dice[0] + Dice[1];
+			playScore = playScore +Dice[0] +Dice[1];
 			if (playScore >= 100) {
 				launchDiceGameVictoryWindow();
 			} else {
