@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.SpringLayout;
+
+import me.charlie.Game.DiceGame;
+
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -16,6 +19,7 @@ public class DiceGameRollWindow {
 
 	private JFrame rollFrame;
 	private DiceGameManager diceGameManager;
+	private DiceGame diceGame;
 
 	/**
 	 * Launch the application.
@@ -48,7 +52,7 @@ public class DiceGameRollWindow {
 		rollFrame.dispose();
 	}
 	private String makeSummary() {
-		int[] dice = diceGameManager.getDice();
+		int[] dice = diceGame.getDice();
 		int playerScore = diceGameManager.getPlayerScore();
 		int playerTurn = diceGameManager.getPlayerTurnScore();
 		int pirateScore = diceGameManager.getPirateScore();

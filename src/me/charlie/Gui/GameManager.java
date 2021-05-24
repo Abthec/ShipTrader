@@ -1,5 +1,7 @@
 package me.charlie.Gui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import DiceGame.DiceGameManager;
@@ -21,6 +23,8 @@ import me.charlie.Gui.gameSetup.SetupShipPropertiesScreen;
 import me.charlie.Gui.gameSetup.ShipSelectionScreen;
 import me.charlie.Gui.gameSetup.StartupScreen;
 import me.charlie.Island.Route;
+import me.charlie.Item.Item;
+import me.charlie.Item.ItemType;
 import me.charlie.Ship.Ship;
 
 @SuppressWarnings({ "unused"})
@@ -151,7 +155,15 @@ public class GameManager {
 		PiratesEventScreen piratesEventWindow = new PiratesEventScreen(this, game, chosenRoute);
 	}
 	public void launchDiceGame(Route chosenRoute) {
-		DiceGameManager diceGame = new DiceGameManager(this, game, chosenRoute, 20);
+		List<Item> upgrades = new ArrayList();
+		List<Item> cargo = game.getShip().getCurrentCargo();
+		for (Item item : cargo) {
+			if (item.getItemType().equals(ItemType.UPGRADE)) {
+				upgrades.add(item);
+			}
+		}
+		int handicap = 6*upgrades.size();
+		DiceGameManager diceGame = new DiceGameManager(this, game, chosenRoute, handicap);
 		this.diceGameManager = diceGame;
 	}
 	public void closePiratesEventScreen(PiratesEventScreen piratesEventWindow, Route chosenRoute) {

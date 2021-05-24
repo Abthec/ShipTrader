@@ -2,6 +2,7 @@ package DiceGame;
 
 import java.util.Arrays;
 
+import me.charlie.Game.DiceGame;
 import me.charlie.Game.Game;
 import me.charlie.Gui.GameManager;
 import me.charlie.Island.Route;
@@ -11,16 +12,16 @@ import me.charlie.Trader.Trader;
 
 public class DiceGameManager {
 	int playScore;
+	int playerTurnScore;
 	int handicap;
 	int pirateScore;
-	int playerTurnScore;
-	int pirateTurnScore;
 	int[] dice;
 	
 	private GameManager gameManager;
 	private Game game;
 	private Route route;
 	private Trader trader;
+	private DiceGame diceGame;
 	
 	private DiceGameRulesWindow diceGamesRulesWindow;
 	private DiceGameRollWindow diceGameRollWindow;
@@ -28,6 +29,7 @@ public class DiceGameManager {
 	private DiceGameVictoryWindow diceGameVictoryWindow;
 	private SnakeEyesWindow snakeEyesWindow;
 	private RolledOneWindow rolledOneWindow;
+	private PirateSummaryWindow pirateSummaryWindow;
 	private int penalty
 	;
 	
@@ -40,10 +42,8 @@ public class DiceGameManager {
 		this.playScore = handiCap;
 		this.handicap = handiCap;
 		this.pirateScore = 0;
-		this.playerTurnScore = 0;
-		this.pirateTurnScore = 0;
 		launchDiceGameRulesWindow();
-	}
+	} 
 	public int getHandicap() {
 		return handicap;
 	 }
@@ -51,82 +51,34 @@ public class DiceGameManager {
 	public int getPlayerScore() {
 		return playScore;
 	}
-	
 	public int getPlayerTurnScore() {
 		return playerTurnScore;
 	}
-	
-	public int getPirateScore() {
+	public int getPirateScore(){
 		return pirateScore;
 	}
-	public void Roll() {
-		int [] Rolled = new int[2];
-		Rolled[0] = (int)(Math.random()*6 +1);
-		Rolled[1] = (int)(Math.random()*6 +1);
-		this.dice = Rolled;
-	}
-	public int[] getDice() {
-		return dice;
-	}
-	private int determineRoll() {
-		switch (Arrays.toString(this.dice)) {
-			case "[1, 1]":
-				return 1;
-			case "[1, 2]": case "[1, 3]": case "[1, 4]": case "[1, 5]": case "[1, 6]": 
-			case "[2, 1]": case "[3, 1]": case "[4, 1]": case "[5, 1]": case "[6, 1]":
-				return 2;
-			default:
-				return 3;
-		}
-	}
-	public void playerRoll() {
-		Roll();
-		int[] Dice = getDice();
-		switch (determineRoll()) {
-		case 1:
-			playScore = handicap;
-			playerTurnScore = 0;
-			launchSnakeEyesWindow();
-			break;
-		case 2:
-			playerTurnScore = 0;
-			launchRolledOneWindow();
-			break;
-		case 3:
-			playerTurnScore = playerTurnScore + Dice[0] + Dice[1];
-			playScore = playScore +Dice[0] +Dice[1];
-			if (playScore >= 100) {
+	private void playerTurn() {
+		int playerTotal = this.playScore;
+		int handicap = this.handicap;
+		switch (diceGame.PlayerTurn(playerTotal, handicap)) {
+			case "Snake Eyes":
+				launchSnakeEyesWindow();
+				break;
+			case "Rolled One": 
+				launchRolledOneWindow();
+			case "Vicotry":
 				launchDiceGameVictoryWindow();
-			} else {
-			playerRoll();}
-			break;
+			case "Good Roll":
+				int turnScore = this.playerTurnScore;
+				int[] dice = diceGame.getDice();
+				this.playerTurnScore = turnScore + dice[0] +dice[1];
+				launchDiceGameRollWindow();
 		}
 	}
-	public void pirateTurn() {
-		Roll();
-		switch(determineRoll()) {
-		case 1:
-			this.pirateScore = 0;
-			this.pirateTurnScore = 0;
-			playerRoll();
-			break;
-		case 2:
-			this.pirateTurnScore = 0;
-			playerRoll();
-			break;
-		case 3:
-			this.pirateTurnScore = this.pirateTurnScore + dice[0] + dice[1];
-			this.pirateScore = this.pirateScore + dice[0] + dice[1];
-			double coinflip = Math.random();
-			if ((this.pirateScore <= 100) || (coinflip < 0.5)) {/** ensures the pirate doesn't accidentally go over 50 points and
-			decides randomly to roll again or not */
-			pirateTurn();
-			} else if (this.pirateScore >= 100) {
-				launchDiceGameLossWindow();
-			} else { playerRoll();
-			}
-			break;
-		}
+	private void pirateTurn() {
+		int pirateTotal = this.pirateScore;
+		int newScore = diceGame.PirateTurn(pirateTotal);
+		this.pirateScore = newScore;
 	}
 	public void makePenalty() {
 		int penalty = (int)(Math.random()*(750 - 250) + 250);
@@ -141,7 +93,7 @@ public class DiceGameManager {
 	}	
 	public void closeRulesWindow(DiceGameRulesWindow diceGameRulesWindow) {
 		diceGamesRulesWindow.closeWindow();
-		playerRoll();
+		playerTurn();
 	}
 	public void launchDiceGameRollWindow() {
 		DiceGameRollWindow rollWindow = new DiceGameRollWindow(this);
@@ -149,11 +101,19 @@ public class DiceGameManager {
 	}
 	public void reRoll() {
 		diceGameRollWindow.closeWindow();
-		playerRoll();
+		playerTurn();
 	}
 	public void passTurn() {
 		diceGameRollWindow.closeWindow();
-		pirateTurn();
+		launchPirateSummaryWindow();
+	}
+	public void launchPirateSummaryWindow() {
+		PirateSummaryWindow pirateSummaryWindow = new PirateSummaryWindow(this);
+		this.pirateSummaryWindow = pirateSummaryWindow;
+	}
+	public void closePirateSummaryWindow() {
+		pirateSummaryWindow.closeWindow();
+		playerTurn();
 	}
 	public void launchDiceGameLossWindow() {
 		DiceGameLossWindow lossWindow = new DiceGameLossWindow(this);
@@ -171,7 +131,8 @@ public class DiceGameManager {
 	}
 	public void closeSnakeEyesWindow() {
 		snakeEyesWindow.closeWindow();
-		pirateTurn();
+		int pirateTotal = this.pirateScore;
+		diceGame.PirateTurn(pirateTotal);
 	}
 	public void launchRolledOneWindow() {
 		RolledOneWindow rolledOneWindow = new RolledOneWindow(this);
@@ -179,7 +140,8 @@ public class DiceGameManager {
 	}
 	public void closeRolledOneWindow() {
 		rolledOneWindow.closeWindow();
-		pirateTurn();
+		int pirateTotal = this.pirateScore;
+		diceGame.PirateTurn(pirateTotal);
 	}
 	private void launchDiceGameVictoryWindow() {
 		penalty = 0;
