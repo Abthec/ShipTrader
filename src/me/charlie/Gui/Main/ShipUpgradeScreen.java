@@ -175,12 +175,12 @@ public class ShipUpgradeScreen {
 		JList listUpgrades = new JList();
 		scrollPane.setViewportView(listUpgrades);
 		listUpgrades.setModel(listModel);
-		JLabel lblNewLabel_5_5 = new JLabel("                   ");
-		GridBagConstraints gbc_lblNewLabel_5_5 = new GridBagConstraints();
-		gbc_lblNewLabel_5_5.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel_5_5.gridx = 0;
-		gbc_lblNewLabel_5_5.gridy = 5;
-		frameShipUpgradeScreen.getContentPane().add(lblNewLabel_5_5, gbc_lblNewLabel_5_5);
+		JLabel spacer8 = new JLabel("                   ");
+		GridBagConstraints gbc_spacer8 = new GridBagConstraints();
+		gbc_spacer8.insets = new Insets(0, 0, 5, 0);
+		gbc_spacer8.gridx = 0;
+		gbc_spacer8.gridy = 5;
+		frameShipUpgradeScreen.getContentPane().add(spacer8, gbc_spacer8);
 		
 		JPanel panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
@@ -242,12 +242,12 @@ public class ShipUpgradeScreen {
 		btnBack.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel_1.add(btnBack);
 		
-		JLabel lblNewLabel_5_4 = new JLabel("                   ");
-		GridBagConstraints gbc_lblNewLabel_5_4 = new GridBagConstraints();
-		gbc_lblNewLabel_5_4.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel_5_4.gridx = 0;
-		gbc_lblNewLabel_5_4.gridy = 7;
-		frameShipUpgradeScreen.getContentPane().add(lblNewLabel_5_4, gbc_lblNewLabel_5_4);
+		JLabel spacer9 = new JLabel("                   ");
+		GridBagConstraints gbc_spacer9 = new GridBagConstraints();
+		gbc_spacer9.insets = new Insets(0, 0, 5, 0);
+		gbc_spacer9.gridx = 0;
+		gbc_spacer9.gridy = 7;
+		frameShipUpgradeScreen.getContentPane().add(spacer9, gbc_spacer9);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
