@@ -50,7 +50,7 @@ public class Game {
 
     /**
      * 
-     * @return returns the duration chosen during game setup.
+     * @return the duration chosen during game setup.
      */
     public int getGameDuration() {
         return gameDuration;
@@ -68,7 +68,7 @@ public class Game {
 
     /**
      * 
-     * @return returns the amount of days, as an int, remaining before the game should end.
+     * @return  the amount of days, as an int, remaining before the game should end.
      */
     public int getDaysRemaining() {
         return daysRemaining;
@@ -78,7 +78,7 @@ public class Game {
      * Checks to see if it is possible to sail to another island.
      * Used to check whether or not the game should be ended.
      * 
-     * @return returns a boolean true if you can sail and false if you cannot.
+     * @return  a boolean true if you can sail and false if you cannot.
      */
     public boolean canSailToAnotherIsland() {
         Island island = ship.getCurrentIsland();
@@ -92,7 +92,7 @@ public class Game {
 
     /**
      * 
-     * @return returns the Ship object.
+     * @return  the Ship object.
      */
     public Ship getShip() {
         return ship;
@@ -100,7 +100,7 @@ public class Game {
 
     /**
      * 
-     * @return returns the Trader object.
+     * @return  the Trader object.
      */
     public Trader getTrader() {
         return trader;
@@ -111,7 +111,7 @@ public class Game {
      * Also creates an instance of IslandNameHandler which is used to designate names to the islands.
      * 
      * @param islandTotal the total number of islands to be generated.
-     * @return returns a list of Island objects.
+     * @return  a list of Island objects.
      */
     public List<Island> createIslands(int islandTotal) {
 
@@ -130,7 +130,7 @@ public class Game {
      * Creates a list of Route objects which connect the islands.
      * 
      * @param islands a list of Island objects to be linked by Routes/.
-     * @return returns a list to Route objects.
+     * @return  a list to Route objects.
      */
     public List<Route> createRoutes(List<Island> islands) {
 
@@ -152,7 +152,7 @@ public class Game {
 
     /**
      * 
-     * @return returns a list of the Island objects used in the current instance of the game.
+     * @return  a list of the Island objects used in the current instance of the game.
      */
     public List<Island> getIslands() {
         return islands;
@@ -160,7 +160,7 @@ public class Game {
 
     /**
      * 
-     * @return returns a list of all the Route objects generated for the current instance of the game.
+     * @return  a list of all the Route objects generated for the current instance of the game.
      */
     public List<Route> getRoutes() {
         return routes;
