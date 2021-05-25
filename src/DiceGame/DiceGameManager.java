@@ -80,7 +80,10 @@ public class DiceGameManager {
 		int pirateTotal = this.pirateScore;
 		int newScore = diceGame.PirateTurn(pirateTotal);
 		this.pirateScore = newScore;
-		launchPirateSummaryWindow();
+		if (this.pirateScore >= 100) {
+			launchDiceGameLossWindow();
+		} else { launchPirateSummaryWindow();
+		}
 	}
 	public void makePenalty() {
 		int penalty = (int)(Math.random()*(500) + 250);
@@ -98,7 +101,7 @@ public class DiceGameManager {
 		playerTurn();
 	}
 	public void launchDiceGameRollWindow() {
-		DiceGameRollWindow rollWindow = new DiceGameRollWindow(this);
+		DiceGameRollWindow rollWindow = new DiceGameRollWindow(this, diceGame);
 		this.diceGameRollWindow = rollWindow;
 	}
 	public void reRoll() {

@@ -42,9 +42,11 @@ public class DiceGameRollWindow {
 	/**
 	 * Create the application.
 	 * @param diceGameManager 
+	 * @param diceGame 
 	 */
-	public DiceGameRollWindow(DiceGameManager diceGameManager) {
+	public DiceGameRollWindow(DiceGameManager diceGameManager, DiceGame diceGame) {
 		this.diceGameManager = diceGameManager;
+		this.diceGame = diceGame;
 		initialize();
 		rollFrame.setVisible(true);
 	}
