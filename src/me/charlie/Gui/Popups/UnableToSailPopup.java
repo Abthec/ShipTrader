@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import me.charlie.Game.Game;
+import me.charlie.Gui.GameManager;
 import me.charlie.Gui.Main.ActivitySelectorScreen;
 import me.charlie.Gui.Main.Travel.RouteSelectionScreen;
 
@@ -19,34 +21,51 @@ public class UnableToSailPopup {
 	private JFrame frameUnableToSailPopup;
 	private ActivitySelectorScreen activitySelectorWindow;
 	private RouteSelectionScreen routeSelectionWindow;
-	String reason;
+	private String reason;
+	private GameManager gameManager;
+	private Game game;
+	private boolean launchedByActivitySelector;
 	
-	public UnableToSailPopup(ActivitySelectorScreen activitySelectorWindow, String reason) {
+	public UnableToSailPopup(ActivitySelectorScreen activitySelectorWindow, GameManager gameManager, Game game, String reason) {
+		this.gameManager = gameManager;
+		this.game = game;
 		this.activitySelectorWindow = activitySelectorWindow;
 		this.reason = reason;
+		this.launchedByActivitySelector = true;
 		initialize();
 		frameUnableToSailPopup.setVisible(true);
 	}
 	
-	public UnableToSailPopup(RouteSelectionScreen routeSelectionWindow, String reason) {
+	public UnableToSailPopup(RouteSelectionScreen routeSelectionWindow, GameManager gameManager, Game game, String reason) {
+		this.gameManager = gameManager;
+		this.game = game;
+		this.launchedByActivitySelector = false;
 		this.routeSelectionWindow = routeSelectionWindow;
 		this.reason = reason;
 		initialize();
 		frameUnableToSailPopup.setVisible(true);
 	}
 	
+	public void launchActivitySelectorScreen() {
+		ActivitySelectorScreen activitySelectorWindow = new ActivitySelectorScreen(gameManager, game);
+		closeWindow();
+	}
+	
+	public void launchRouteSelectionWindow() {
+		RouteSelectionScreen routeSelectionWindow = new RouteSelectionScreen(gameManager, game);
+		closeWindow();
+	}
+	
 	public void closeWindow() {
-		if (activitySelectorWindow.equals(null)) {
-			routeSelectionWindow.getJFrame().setVisible(true);
-		} else if (routeSelectionWindow.equals(null)) {
-			activitySelectorWindow.getJFrame().setVisible(true);
-		}
 		frameUnableToSailPopup.dispose();
 	}
 
 	public void finishedWindow() {
-		
-		closeWindow();
+		if (launchedByActivitySelector) {
+			launchActivitySelectorScreen();
+		} else {
+			launchRouteSelectionWindow();
+		}
 	}
 	/**
 	 * Launch the application.
