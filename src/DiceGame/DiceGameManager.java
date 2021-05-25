@@ -61,8 +61,7 @@ public class DiceGameManager {
 	public void playerTurn() {
 		int playerTotal = this.playScore;
 		int handicap = this.handicap;
-		int turnScore = this.playerTurnScore;
-		switch (diceGame.PlayerTurn(playerTotal, handicap, turnScore)) {
+		switch (diceGame.PlayerTurn(playerTotal, handicap, this.playerTurnScore)) {
 			case "Snake Eyes":
 				this.playerTurnScore = 0;
 				this.playScore = this.handicap;
@@ -74,7 +73,7 @@ public class DiceGameManager {
 				break;
 			case "Good Roll":
 				int[] dice = diceGame.getDice();
-				this.playerTurnScore = this.playerTurnScore + dice[0] +dice[1];
+				this.playerTurnScore += dice[0] +dice[1];
 				playerTotal = playerTotal + dice[0] + dice[1];
 				if (playerTotal >= 100) {
 					launchDiceGameVictoryWindow();
@@ -108,7 +107,7 @@ public class DiceGameManager {
 		playerTurn();
 	}
 	public void launchDiceGameRollWindow() {
-		DiceGameRollWindow rollWindow = new DiceGameRollWindow(this, diceGame, this.playScore);
+		DiceGameRollWindow rollWindow = new DiceGameRollWindow(this, diceGame, this.playScore, this.playerTurnScore);
 		this.diceGameRollWindow = rollWindow;
 	}
 	public void reRoll() {
@@ -137,7 +136,7 @@ public class DiceGameManager {
 	public void closeLossWindow(DiceGameLossWindow diceGameLossWindow) {
 		makePenalty();
 		if (game.getTrader().getMoney() < this.penalty) {
-			//Game Over
+			gameManager.launchGameoverScreen("You didnt have enough to pay off the pirates!", true);
 		} else {
 			game.getTrader().subtractMoney(this.penalty);
 		}
