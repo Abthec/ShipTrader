@@ -327,7 +327,9 @@ public class ConsoleApp {
                     System.out.println("Enter the ID of the item you would like to sell.");
                     int chosenItemId = getNumberCode(ship.getCargoFullness());
                     Item chosenItem = ship.getCurrentCargo().get(chosenItemId - 1);
-                    ship.removeItemFromCargo(chosenItem);
+                    ship.getCurrentCargo().remove(chosenItemId);
+                    System.out.println("The item was removed from the cargo hold." +
+                            "\nYou now have " + ship.getCargoSpaceRemaining() + " cargo space left.");
                     trader.addMoney(chosenItem.getSellCost(store));
                     if (ship.isCargoEmpty()) {
                         System.out.println("You do not have any items to sell.");

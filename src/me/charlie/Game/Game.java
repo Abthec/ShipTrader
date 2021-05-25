@@ -60,7 +60,7 @@ public class Game {
      * Sets the amount of days remaining in the game.
      * Used to determine if there is enough days remaining to sail chosen routes/continue the game.
      * 
-     * @param daysSailed the amount of days, as an int,` taken to sail the chosen route.
+     * @param daysSailed the amount of days, as an int, taken to sail the chosen route.
      */
     public void setDaysRemaining(int daysSailed) {
         daysRemaining = daysRemaining - daysSailed;
