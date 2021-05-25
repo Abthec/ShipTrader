@@ -28,6 +28,7 @@ public class UnableToSailPopup {
 	
 	public UnableToSailPopup(ActivitySelectorScreen activitySelectorWindow, GameManager gameManager, Game game, String reason) {
 		this.gameManager = gameManager;
+		this.game = game;
 		this.activitySelectorWindow = activitySelectorWindow;
 		this.reason = reason;
 		this.launchedByActivitySelector = true;
@@ -37,6 +38,7 @@ public class UnableToSailPopup {
 	
 	public UnableToSailPopup(RouteSelectionScreen routeSelectionWindow, GameManager gameManager, Game game, String reason) {
 		this.gameManager = gameManager;
+		this.game = game;
 		this.launchedByActivitySelector = false;
 		this.routeSelectionWindow = routeSelectionWindow;
 		this.reason = reason;
