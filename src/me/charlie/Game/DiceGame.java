@@ -21,9 +21,9 @@ public class DiceGame {
 	public int[] getDice() {
 		return dice;
 	}
+	/** rolls the dice and returns a string bassed on the outcome
+	*/
 	public String PlayerTurn(int PlayerScore, int HC, int turnScore) {
-		/** Checks if the player wants to roll again, rolls and adds the sum to the turn total
-		 */
 		int TurnValue = turnScore;
 		int total = PlayerScore;
 		int handicap = HC;

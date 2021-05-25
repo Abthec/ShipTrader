@@ -19,7 +19,6 @@ public class DiceGameManager {
 	private GameManager gameManager;
 	private Game game;
 	private Route route;
-	private Trader trader;
 	private DiceGame diceGame;
 	
 	private DiceGameRulesWindow diceGamesRulesWindow;
@@ -36,7 +35,6 @@ public class DiceGameManager {
 		this.game = game;
 		this.gameManager = gameManager;
 		this.route = route;
-		this.trader = game.getTrader();
 		this.diceGame = diceGame;
 		
 		this.playerTurnScore = 0;
@@ -58,6 +56,9 @@ public class DiceGameManager {
 	public int getPirateScore(){
 		return pirateScore;
 	}
+	/** Calls to the DiceGame.then alters the players turn and total values based on the string returned.
+	it then calls the next function
+	*/
 	public void playerTurn() {
 		int playerTotal = this.playScore;
 		int handicap = this.handicap;
@@ -86,6 +87,9 @@ public class DiceGameManager {
 				break;
 		}
 	}
+	/** calls to the DiceGame.PirateTurn to create a new pirate score based on the one input into the function
+	 * then passes back to the players turn unless the pirate has reached the score threshold 
+	 */
 	private void pirateTurn() {
 		int pirateTotal = this.pirateScore;
 		int newScore = diceGame.PirateTurn(pirateTotal);
@@ -95,6 +99,9 @@ public class DiceGameManager {
 		} else { launchPirateSummaryWindow();
 		}
 	}
+	/** generates a random number between 750 and 250
+	 * this is used as the gold taken if the player loses the dice game
+	 */
 	public void makePenalty() {
 		int penalty = (int)(Math.random()*(500) + 250);
 		this.penalty = penalty;
@@ -118,6 +125,9 @@ public class DiceGameManager {
 		diceGameRollWindow.closeWindow();
 		playerTurn();
 	}
+	/** this is the only time the players total score increases as you must lock in your turn score by ending your turn
+	 * 
+	 */
 	public void passTurn() {
 		int playerTotal = this.playScore;
 		this.playScore = playerTotal + this.playerTurnScore;
@@ -137,6 +147,8 @@ public class DiceGameManager {
 		DiceGameLossWindow lossWindow = new DiceGameLossWindow(this);
 		this.diceGameLossWindow = lossWindow;
 	}
+	/** applies the penalty, if the penalty is too great, the player loses the game
+	 */
 	public void closeLossWindow(DiceGameLossWindow diceGameLossWindow) {
 		makePenalty();
 		if (game.getTrader().getMoney() < penalty) {
