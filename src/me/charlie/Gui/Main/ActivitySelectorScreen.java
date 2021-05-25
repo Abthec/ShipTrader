@@ -70,8 +70,8 @@ public class ActivitySelectorScreen {
 		finishedWindow();
 	}
 	
-	public void launchShipUpgradeScreen() {
-		gameManager.launchShipUpgrdeScreen("");
+	public void launchShipUpgradeScreen(String outcome) {
+		gameManager.launchShipUpgrdeScreen(outcome);
 		finishedWindow();
 	}
 	
@@ -211,7 +211,7 @@ public class ActivitySelectorScreen {
 					}
 				}
 				if (canUpgrade) {
-					launchShipUpgradeScreen();
+					launchShipUpgradeScreen("");
 				} else {
 					launchUnableToUpgradePopup("You must first purchase upgrades from the store.");
 				}

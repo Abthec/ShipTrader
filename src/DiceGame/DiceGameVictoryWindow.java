@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextPane;
+
+import me.charlie.Game.DiceGame;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -13,6 +16,7 @@ public class DiceGameVictoryWindow {
 
 	private JFrame victoryFrame;
 	private DiceGameManager diceGameManager;
+	private DiceGame diceGame;
 
 	/**
 	 * Launch the application.
@@ -45,7 +49,7 @@ public class DiceGameVictoryWindow {
 		victoryFrame.dispose();
 	}
 	private String makeSummary() {
-		int[] dice = diceGameManager.getDice();
+		int[] dice = diceGame.getDice();
 		int score = diceGameManager.getPlayerScore();
 		String summary = String.format("Congratulations your last roll of %o, %o gave you a total score of %o."
 				+ " The pirates are retreating" ,dice[0], dice[1], score );

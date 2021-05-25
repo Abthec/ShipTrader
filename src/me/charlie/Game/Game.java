@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class Game {
 
-    int gameDuration;
+	int gameDuration;
     int islandTotal;
     int daysRemaining;
     int daysSailed;
@@ -25,7 +25,8 @@ public class Game {
     private List<Island> islands;
     private Trader trader;
     private Ship ship;
-
+    private DiceGame diceGame;
+    
     public Game(String traderName, int gameDuration, Ship ship, int islandTotal) {
 
         this.startingCash = 1500;
