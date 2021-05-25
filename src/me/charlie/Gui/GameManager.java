@@ -37,27 +37,42 @@ import me.charlie.Ship.Ship;
 public class GameManager {
 		
 	private StartupScreen startupScreen;
-	int gameDuration;
-	String traderName;
-	Ship chosenShip;
-	Game game;
+	private int gameDuration;
+	private String traderName;
+	private Ship chosenShip;
+	private Game game;
 	private DiceGameManager diceGameManager;
 	
-	public GameManager() {}
-	
+	/**
+	 * Launches the StartupScreen
+	 */
 	public void launchStartupScreen() {
 		StartupScreen startupWindow = new StartupScreen(this);
 		this.startupScreen = startupWindow;
 	}
 	
+	/**
+	 * Closes the StartupScreen without removing the information stored on it.
+	 * @param startupWindow the instance of StartupScreen.
+	 */
 	public void minimizeStartupScreen(StartupScreen startupWindow) {
 		startupWindow.getSetupJFrame().setVisible(false);
 	}
 	
+	/**
+	 * Reopens the StartupScreen.
+	 * @param startupWindow the instance of StatupScreen.
+	 */
 	public void unMinimizeStartupScreen(StartupScreen startupWindow) {
 		startupWindow.getSetupJFrame().setVisible(true);
 	}
 	
+	/**
+	 * Closes the StartupScreen and calls a function to launch the next screen.
+	 * Assigns values to gameDuration and traderNamer.
+	 * 
+	 * @param startupWindow the instance of StartupScreen.
+	 */
 	public void closeStartupScreen(StartupScreen startupWindow) {
 		this.gameDuration = startupWindow.getGameDuration();
 		this.traderName = startupWindow.getTraderName();
@@ -65,50 +80,97 @@ public class GameManager {
 		launchShipSelectionScreen();
 	}
 	
+	/**
+	 * launches an InvalidTraderNamePopup to say that the name entered does not meet specifications.
+	 * Minimizes the StartupScreen.
+	 */
 	public void launchInvalidTraderNamePopup() {
 		minimizeStartupScreen(startupScreen);
 		InvalidTraderNamePopup invalidTraderNamePopupWindow = new InvalidTraderNamePopup(this);
 	}
 	
+	/**
+	 * Closes the InvalidTraderNamePopup, brings back the StartupScreen
+	 * 
+	 * @param invalidTraderNamePopupWindow the instance of InvalidTraderNamePopup.
+	 */
 	public void closeInvalidTraderNamePopup(InvalidTraderNamePopup invalidTraderNamePopupWindow) {
 		invalidTraderNamePopupWindow.closeWindow();
 		unMinimizeStartupScreen(startupScreen);
 	}
 	
+	/**
+	 * Launches the ShipSelectionScreen to get the players choice of Ship.
+	 */
 	public void launchShipSelectionScreen() {
 		ShipSelectionScreen shipSelector = new ShipSelectionScreen(this);
 	}
 	
+	/**
+	 * Takes you from the ShipSelectionScreen back to the StartupScreen
+	 * 
+	 * @param shipSelectionWindow the instance of ShipSelectionScreen
+	 */
 	public void shipSelectorGoBack(ShipSelectionScreen shipSelectionWindow) {
 		shipSelectionWindow.closeWindow();
 		launchStartupScreen();
 	}
 	
+	/**
+	 * Closes the ShipSelectionScreen without terminating it.
+	 * 
+	 * @param shipSelectionWindow the instance of ShipSelectionScreen.
+	 */
 	public void minimizeShipSelectionScreen(ShipSelectionScreen shipSelectionWindow) {
 		Ship ship = shipSelectionWindow.getChosenShip(); 
 		shipSelectionWindow.getJFrame().setVisible(false);
 		launchShipPropertiesScreen(shipSelectionWindow);
 	}
 	
+	/**
+	 * Reopens an existing instance of ShipSelectionScreen.
+	 * 
+	 * @param shipSelectionWindow the instance of ShipSelectionScreen.
+	 */
 	public void unMinimizeShipSelectionScreen(ShipSelectionScreen shipSelectionWindow) {
 		shipSelectionWindow.getJFrame().setVisible(true);
 	}
 	
+	/**
+	 * Terminates the current instance of ShipSelectionScreen.
+	 * 
+	 * @param shipSelectionWindow the instance of ShipSelectionScreen.
+	 */
 	public void closeShipSelectorScreen(ShipSelectionScreen shipSelectionWindow) {
 		Ship ship = shipSelectionWindow.getChosenShip();
 		shipSelectionWindow.closeWindow();
 	}
 	
+	/**
+	 * Creates an instance of ShipPropertiesScreen.
+	 * 
+	 * @param shipSelectionWindow the current instance of ShipSelectionScreen.
+	 */
 	public void launchShipPropertiesScreen(ShipSelectionScreen shipSelectionWindow) {
 		SetupShipPropertiesScreen shipPropertiesWindow = new SetupShipPropertiesScreen(this, shipSelectionWindow);
 	}
 	
+	/**
+	 * Takes the player back to the ShipSelectionScreen without terminating the current instance of ShipPropertiesScreen.
+	 * 
+	 * @param shipPropertiesWindow the instance of ShipPropertiesScreen.
+	 * @param shipSelectionWindowthe instance of ShipSelectionScreen.
+	 */
 	public void shipPropertiesGoBack(SetupShipPropertiesScreen shipPropertiesWindow, ShipSelectionScreen shipSelectionWindow) {
 		shipPropertiesWindow.closeWindow();
 		unMinimizeShipSelectionScreen(shipSelectionWindow);
 	}
 	
-	// this method running marks the end of the game creation
+	/**
+	 * Terminates the current instance of ShipPropertiesScreen.
+	 * 
+	 * @param shipPropertiesWindow
+	 */
 	public void closeShipPropertiesScreen(SetupShipPropertiesScreen shipPropertiesWindow) {
 		this.chosenShip = shipPropertiesWindow.getShip();
 		this.game = new Game(traderName, gameDuration, chosenShip, 5);
@@ -116,6 +178,11 @@ public class GameManager {
 		launchActivitySelectorScreen();
 	}
 	
+	/**
+	 * Checks whether or not the game should end.
+	 * If not, launches ActivitySelectorScreen.
+	 * If yes, launches GameoverScreen.
+	 */
 	public void launchActivitySelectorScreen() {
 		if (!canSailSomewhere() && !hasItemsToSell()) {
 			launchGameoverScreen("Not enough days to sail anywhere and no items to sell.", false);
@@ -126,28 +193,58 @@ public class GameManager {
 		}
 	}
 	
+	/**
+	 * Closes the current instance of ActivitySelectorScreen.
+	 * 
+	 * @param activitySelectorWindow the current instance of ActivitySelectorScreen.
+	 */
 	public void closeActivitySelectorScreen(ActivitySelectorScreen activitySelectorWindow) {
 		activitySelectorWindow.closeWindow();
 	}
 	
+	/**
+	 * Creates an instance of RouteSelectionScreen.
+	 */
 	public void launchRouteSelectionScreen() {
 		RouteSelectionScreen routeSelectionWindow = new RouteSelectionScreen(this, game);
 	}
 	
+	/**
+	 * Closes the current instance of RouteSelecitonScreen.
+	 * 
+	 * @param routeSelectionWindow the current instance of RouteSelectionScreen.
+	 * @param chosenRoute the route the player has selected to travel.
+	 */
 	public void closeRouteSelectionScreen(RouteSelectionScreen routeSelectionWindow, Route chosenRoute) {
 		routeSelectionWindow.closeWindow();
 		launchArrivalScreen(chosenRoute);
 	}
 	
+	/**
+	 * Creates an instance of StormyWeatherEventScreen
+	 * 
+	 * @param chosenRoute the Route chosen by the player to travel.
+	 */
 	public void launchStormyWeatherEventScreen(Route chosenRoute) {
 		StormyWeatherEventScreen stormyWeatherEventWindow = new StormyWeatherEventScreen(this, chosenRoute, game);
 	}
 	
+	/**
+	 * Closes the current instance of StormyWeatherEventScreen.
+	 * 
+	 * @param stormyWeatherEventWindow the current instance of StormyWeatherEventScreen.
+	 * @param chosenRoute the Route chosen by the player to travel.
+	 */
 	public void closeStormyWeatherEventScreen(StormyWeatherEventScreen stormyWeatherEventWindow, Route chosenRoute) {
 		stormyWeatherEventWindow.closeWindow();
 		launchArrivalScreen(chosenRoute);
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param routeChosen
+	 */
 	public void launchDrowningSailorsEventScreen(Route routeChosen) {
 		DrowningSailorsEventScreen drowningSailorsEventScreen = new DrowningSailorsEventScreen(this, game, routeChosen);
 	}
@@ -250,8 +347,9 @@ public class GameManager {
 			return false;
 		} else {
 			for (Item upgrade : game.getShip().getCurrentCargo()) {
-				if (upgrade.getUpgradeType().equals(UpgradeType.MAST)) {
-					return true;
+				if (upgrade.getItemType().equals(ItemType.UPGRADE)) {
+					if (upgrade.getUpgradeType().equals(UpgradeType.MAST))
+						return true;
 				}
 			}
 			for (Route route : game.getRoutes()) {
