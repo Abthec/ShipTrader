@@ -154,7 +154,7 @@ public class DiceGameManager {
 	}
 	private void launchDiceGameVictoryWindow() {
 		penalty = 0;
-		DiceGameVictoryWindow victoryWindow = new DiceGameVictoryWindow(this);
+		DiceGameVictoryWindow victoryWindow = new DiceGameVictoryWindow(this, diceGame);
 		this.diceGameVictoryWindow = victoryWindow;
 	}
 	public void closeVictoryWindow() {
