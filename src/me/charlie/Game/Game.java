@@ -90,14 +90,29 @@ public class Game {
         return false;
     }
 
+    /**
+     * 
+     * @return returns the Ship object.
+     */
     public Ship getShip() {
         return ship;
     }
 
+    /**
+     * 
+     * @return returns the Trader object.
+     */
     public Trader getTrader() {
         return trader;
     }
 
+    /**
+     * Creates a list of Island objects.
+     * Also creates an instance of IslandNameHandler which is used to designate names to the islands.
+     * 
+     * @param islandTotal the total number of islands to be generated.
+     * @return returns a list of Island objects.
+     */
     public List<Island> createIslands(int islandTotal) {
 
         IslandNameHandler islandNames = new IslandNameHandler();
@@ -111,6 +126,12 @@ public class Game {
         return islands;
     }
 
+    /**
+     * Creates a list of Route objects which connect the islands.
+     * 
+     * @param islands a list of Island objects to be linked by Routes/.
+     * @return returns a list to Route objects.
+     */
     public List<Route> createRoutes(List<Island> islands) {
 
         List<Route> routes = new ArrayList<>();
@@ -129,27 +150,19 @@ public class Game {
         return routes;
     }
 
+    /**
+     * 
+     * @return returns a list of the Island objects used in the current instance of the game.
+     */
     public List<Island> getIslands() {
         return islands;
     }
 
+    /**
+     * 
+     * @return returns a list of all the Route objects generated for the current instance of the game.
+     */
     public List<Route> getRoutes() {
         return routes;
-    }
-
-    public Island sailing(Trader trader, List<Route> routes) {
-        Ship ship = trader.getShip();
-        ;
-        Island currentIsland = ship.getCurrentIsland();
-        List<Route> usableRoutes = new ArrayList<>();
-
-        System.out.println("These are the routes you may take to get to other islands:");
-        for (Route route : routes) {
-            if (currentIsland.equals(route.getIslandA())) {
-                usableRoutes.add(route);
-                System.out.println(route);
-            }
-        }
-        return currentIsland;
     }
 }
