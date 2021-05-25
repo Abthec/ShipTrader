@@ -33,11 +33,12 @@ public class DiceGameManager {
 	private int penalty
 	;
 	
-	public DiceGameManager(GameManager gameManager, Game game, Route route,int handiCap) {
+	public DiceGameManager(GameManager gameManager, Game game, Route route,int handiCap, DiceGame diceGame) {
 		this.game = game;
 		this.gameManager = gameManager;
 		this.route = route;
 		this.trader = game.getTrader();
+		this.diceGame = diceGame;
 		
 		this.playScore = handiCap;
 		this.handicap = handiCap;

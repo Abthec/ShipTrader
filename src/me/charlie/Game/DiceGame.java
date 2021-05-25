@@ -7,7 +7,7 @@ public class DiceGame {
 	int handicap;
 	int[] dice;
 
-	public DiceGame(int Handicap, int upgrades) {
+	public DiceGame(int Handicap) {
 		playerScore = Handicap;
 		pirateScore = 0;
 		handicap = Handicap;

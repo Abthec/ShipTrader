@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import DiceGame.DiceGameManager;
+import me.charlie.Game.DiceGame;
 import me.charlie.Game.Game;
 import me.charlie.Gui.Main.ActivitySelectorScreen;
 import me.charlie.Gui.Main.CrewHireScreen;
@@ -163,8 +164,9 @@ public class GameManager {
 			}
 		}
 		int handicap = 6*upgrades.size();
-		DiceGameManager diceGame = new DiceGameManager(this, game, chosenRoute, handicap);
-		this.diceGameManager = diceGame;
+		DiceGame diceGame = new DiceGame(handicap);
+		DiceGameManager diceGameManager = new DiceGameManager(this, game, chosenRoute, handicap, diceGame);
+		this.diceGameManager = diceGameManager;
 	}
 	public void closePiratesEventScreen(PiratesEventScreen piratesEventWindow, Route chosenRoute) {
 		piratesEventWindow.closeWindow();
