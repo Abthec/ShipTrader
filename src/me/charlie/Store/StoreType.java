@@ -9,6 +9,12 @@ public enum StoreType {
     SHIP_BUILDER,
     BLACKSMITH;
 
+	/**
+	 * gets the purchasing coefficient depending on StoreType and ItemType.
+	 * 
+	 * @param itemType the type of an item in the store.
+	 * @return the purchasing coefficient of a given ItemType.
+	 */
     public double getBuyModifier(ItemType itemType) {
         switch (this) {
             case JEWELER:
@@ -59,6 +65,12 @@ public enum StoreType {
         }
     }
 
+    /**
+     * get the selling coefficient of a given ItemType depending on the Store at which it is being sold.
+     * 
+     * @param itemType the type of an item in the players inventory within the Store sell window.
+     * @return the selling coefficient of a a given ItemType at a given StoreType.
+     */
     public double getSellModifier(ItemType itemType) {
         switch (this) {
             case JEWELER:
@@ -110,6 +122,11 @@ public enum StoreType {
         }
     }
 
+    /**
+     * get the maximum amount of items a given StoreType can have within their stock.
+     * 
+     * @return the maximum size of a Store's stock list given their StoreType.
+     */
     public int getMaxStockBound() {
         switch (this) {
             case BLACKSMITH:
@@ -125,6 +142,11 @@ public enum StoreType {
         }
     }
 
+    /**
+     * get the minimum amount of items a given StoreType can have within their stock.
+     * 
+     * @return the minimum size of a Store's stock list given their StoreType.
+     */
     public int getMinStockBound() {
         switch (this) {
             case BLACKSMITH:
@@ -140,6 +162,10 @@ public enum StoreType {
         }
     }
 
+    /**
+     * 
+     * @return a StoreType converted to a string.
+     */
     public String getName() {
         return toString().substring(0, 1).toUpperCase() + toString().substring(1).toLowerCase().replace("_", " ");
     }

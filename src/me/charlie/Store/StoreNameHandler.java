@@ -10,6 +10,9 @@ public class StoreNameHandler {
 
     private List<String> names = new ArrayList<String>();
 
+    /**
+     * create an instance of StoreNameHandler and add a set of hard coded names to a list.
+     */
     public StoreNameHandler() {
         this.names.add("Tesco Express");
         this.names.add("7-Eleven");
@@ -24,6 +27,11 @@ public class StoreNameHandler {
         this.names.add("Four Square");
     }
 
+    /**
+     * get a random name from a list of hard coded names and remove it from the list.
+     * 
+     * @return a randomly selected name.
+     */
     public String getName() {
         String name = this.names.get(this.random.nextInt(this.names.size() - 1));
         this.names.remove(name);
