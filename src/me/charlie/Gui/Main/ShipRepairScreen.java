@@ -26,6 +26,12 @@ public class ShipRepairScreen {
 	private GameManager gameManager;
 	private Game game;
 	
+	/**
+	 * Constructs an instance of ShipRepairScreen, initializing the GUI component.
+	 * 
+	 * @param gameManager an instance of GameManager which is used to control the game
+	 * @param game an instance of the Game where all the game data is saved
+	 */
 	public ShipRepairScreen(GameManager gameManager, Game game) {
 		this.gameManager = gameManager;
 		this.game = game;
@@ -33,14 +39,26 @@ public class ShipRepairScreen {
 		frameShipRepairScreen.setVisible(true);
 	}
 	
+	/**
+	 * Closes the window by terminating the instance of the frame.
+	 */
 	public void closeWindow() {
 		frameShipRepairScreen.dispose();
 	}
 	
+	/**
+	 * Calls the closeShipRepair() function from GameManager.
+	 * This calls closeWindow() and launches ActivitySelectorScreen.
+	 */
 	public void finishedWindow() {
 		gameManager.closeShipRepairScreen(this);
 	}
 	
+	/**
+	 * Launches a popup denying the repair attempt.
+	 * 
+	 * @param reason the reason the repair was unable to proceed.
+	 */
 	public void launchUnableToRepairPopup(String reason) {
 		UnableToRepairPopup unableToRepairPopup = new UnableToRepairPopup(this, reason);
 	}
@@ -152,11 +170,15 @@ public class ShipRepairScreen {
 		
 		JButton btnRepair = new JButton("REPAIR");
 		btnRepair.addActionListener(new ActionListener() {
+			/**
+			 * Attemtps a repair
+			 */
 			public void actionPerformed(ActionEvent e) {
 				if (game.getTrader().getMoney() < getFullRepairCost()) {
 					launchUnableToRepairPopup("You cannot afford the cost to repair.");
 				} else {
 					game.getTrader().subtractMoney(getFullRepairCost());
+					game.getShip().repairFull();
 					btnRepair.setEnabled(false);
 					lblCurrentShipHealth.setText("Current ship health: " + game.getShip().getShipHealth() + "/" + game.getShip().getShipEndurance() + ".");
 					lblRepairCost.setText("Cost to repair: " + getFullRepairCost() + " coins.");
@@ -171,6 +193,9 @@ public class ShipRepairScreen {
 		
 		JButton btnLeave = new JButton("LEAVE");
 		btnLeave.addActionListener(new ActionListener() {
+			/**
+			 * Calls finishedWindow() to go back to ActivitySelector.
+			 */
 			public void actionPerformed(ActionEvent e) {
 				finishedWindow();
 			}
