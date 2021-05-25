@@ -120,16 +120,17 @@ public class DiceGameManager {
 			double coinflip = Math.random();
 			if ((this.pirateScore <= 100) || (coinflip < 0.5)) {/** ensures the pirate doesn't accidentally go over 50 points and
 			decides randomly to roll again or not */
-			pirateTurn();
+				pirateTurn();
 			} else if (this.pirateScore >= 100) {
 				launchDiceGameLossWindow();
-			} else { playerRoll();
+			} else { 
+				playerRoll();
 			}
 			break;
 		}
 	}
 	public void makePenalty() {
-		int penalty = (int)(Math.random()*(750 - 250) + 250);
+		int penalty = (int)(Math.random()*(500) + 250);
 		this.penalty = penalty;
 	}
 	public int getPenalty() {
