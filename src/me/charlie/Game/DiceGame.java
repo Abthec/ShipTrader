@@ -21,10 +21,10 @@ public class DiceGame {
 	public int[] getDice() {
 		return dice;
 	}
-	public String PlayerTurn(int PlayerScore, int HC) {
+	public String PlayerTurn(int PlayerScore, int HC, int turnScore) {
 		/** Checks if the player wants to roll again, rolls and adds the sum to the turn total
 		 */
-		int TurnValue = 0;
+		int TurnValue = turnScore;
 		int total = PlayerScore;
 		int handicap = HC;
 		
@@ -37,7 +37,7 @@ public class DiceGame {
 			if ((Dice[0] ==1) &&(Dice[1] ==1)) {
 			/** Player rolled two ones, turn fails total score is reset to zero 
 			*/
-				System.out.println("You rolled Snake Eyes, your score is now Zero!");
+				System.out.println("You rolled Snake Eyes, your score is now " + handicap +"!");
 				TurnValue = 0;
 				total = handicap; //returns the player total to the handicap value
 				return "Snake Eyes";
@@ -45,23 +45,18 @@ public class DiceGame {
 			/** Player rolled at least one one and the turn is over
 			 */
 				System.out.println("You rolled a " + Dice[0] + " and " + Dice[1] );
-				System.out.println("You rolled a one, your turn is over. You got " + TurnValue + " points this turn.");
+				System.out.println("You rolled a one, your turn is over. You get zero points points this turn.");
 				TurnValue = 0;
 				return "Rolled One";
 			} else {
 			/** Roll is added to turn score
 			*/
 				TurnValue = TurnValue + Dice[0] + Dice[1];
-				total = total + Dice[0] + Dice[1];
 				System.out.println("You rolled a " + Dice[0] + " and " + Dice[1] );
 				System.out.println("Your score this turn so far is: " + TurnValue);
 				System.out.println("Your total is: " + total);
-				if (total >= 100) { // makes sure the player doesn't get another turn once they reach 50 
-					return "Vicotry";
-				}	else {
-					return "Good Roll";
-				}
-		}
+				return "Good Roll";
+			}
 	}
 	public int PirateTurn(int PirateScore) {
 		int total = PirateScore;

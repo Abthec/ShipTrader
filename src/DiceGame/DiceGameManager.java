@@ -15,7 +15,6 @@ public class DiceGameManager {
 	int playerTurnScore;
 	int handicap;
 	int pirateScore;
-	int[] dice;
 	
 	private GameManager gameManager;
 	private Game game;
@@ -40,6 +39,7 @@ public class DiceGameManager {
 		this.trader = game.getTrader();
 		this.diceGame = diceGame;
 		
+		this.playerTurnScore = 0;
 		this.playScore = handiCap;
 		this.handicap = handiCap;
 		this.pirateScore = 0;
@@ -61,27 +61,33 @@ public class DiceGameManager {
 	private void playerTurn() {
 		int playerTotal = this.playScore;
 		int handicap = this.handicap;
-		switch (diceGame.PlayerTurn(playerTotal, handicap)) {
+		int turnScore = this.playerTurnScore;
+		switch (diceGame.PlayerTurn(playerTotal, handicap, turnScore)) {
 			case "Snake Eyes":
+				this.playerTurnScore = 0;
+				this.playScore = this.handicap;
 				launchSnakeEyesWindow();
 				break;
 			case "Rolled One": 
+				this.playerTurnScore = 0;
 				launchRolledOneWindow();
-			case "Vicotry":
-				launchDiceGameVictoryWindow();
+				break;
 			case "Good Roll":
-				int turnScore = this.playerTurnScore;
 				int[] dice = diceGame.getDice();
-				this.playerTurnScore = turnScore + dice[0] +dice[1];
-				this.playScore = playerTotal + dice[0] +dice[1];
+				this.playerTurnScore = this.playerTurnScore + dice[0] +dice[1];
+				playerTotal = playerTotal + dice[0] + dice[1];
+				if (playerTotal >= 100) {
+					launchDiceGameVictoryWindow();
+				} else {
 				launchDiceGameRollWindow();
+				}
 		}
 	}
 	private void pirateTurn() {
 		int pirateTotal = this.pirateScore;
 		int newScore = diceGame.PirateTurn(pirateTotal);
 		this.pirateScore = newScore;
-		if (this.pirateScore >= 100) {
+		if (newScore >= 100) {
 			launchDiceGameLossWindow();
 		} else { launchPirateSummaryWindow();
 		}
@@ -111,6 +117,10 @@ public class DiceGameManager {
 	}
 	public void passTurn() {
 		diceGameRollWindow.closeWindow();
+		int[] dice = diceGame.getDice();
+		int playerTotal = this.playScore;
+		this.playScore = playerTotal + dice[0] +dice[1];
+		this.playerTurnScore = 0;
 		pirateTurn();
 	}
 	public void launchPirateSummaryWindow() {
@@ -146,6 +156,7 @@ public class DiceGameManager {
 		diceGame.PirateTurn(pirateTotal);
 	}
 	public void launchRolledOneWindow() {
+		
 		RolledOneWindow rolledOneWindow = new RolledOneWindow(this);
 		this.rolledOneWindow = rolledOneWindow;
 	}
