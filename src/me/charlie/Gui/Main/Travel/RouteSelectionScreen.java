@@ -77,7 +77,7 @@ public class RouteSelectionScreen {
 	}
 	
 	public void launchUnableToSailPopup(String reason) {
-		UnableToSailPopup unableToSailPopup = new UnableToSailPopup(this, reason);
+		UnableToSailPopup unableToSailPopup = new UnableToSailPopup(this, gameManager, game, reason);
 	}
 	
 	public void goBack() {
