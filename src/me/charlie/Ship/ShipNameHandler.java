@@ -9,6 +9,9 @@ public class ShipNameHandler {
     private List<String> shipNames = new ArrayList<>();
     private Random random = new Random();
 
+    /**
+     * Creates an instance of ShipNameHandle and adds all the possible names to a list.
+     */
     public ShipNameHandler() {
         this.shipNames.add("Costa Concordia");
         this.shipNames.add("Britannic II");
@@ -23,6 +26,11 @@ public class ShipNameHandler {
         this.shipNames.add("Diamond Princess");
     }
 
+    /**
+     * selects a random name from the list of names and then removes it from the list.
+     * 
+     * @return a name randomly selected from a list of hardcoded names.
+     */
     public String getName() {
         String name = this.shipNames.get(this.random.nextInt(this.shipNames.size() - 1));
         this.shipNames.remove(name);

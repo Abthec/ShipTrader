@@ -26,8 +26,8 @@ public class ActivitySelectorScreen {
 
 	private JFrame frameActivitySelector;
 	private GameManager gameManager;
-	Game game;
-	Ship ship;
+	private Game game;
+	private Ship ship;
 	
 	public ActivitySelectorScreen(GameManager gameManager, Game game) {
 		this.gameManager = gameManager;
@@ -70,8 +70,8 @@ public class ActivitySelectorScreen {
 		finishedWindow();
 	}
 	
-	public void launchShipUpgradeScreen() {
-		gameManager.launchShipUpgrdeScreen("");
+	public void launchShipUpgradeScreen(String outcome) {
+		gameManager.launchShipUpgrdeScreen(outcome);
 		finishedWindow();
 	}
 	
@@ -87,7 +87,7 @@ public class ActivitySelectorScreen {
 	
 	public void launchUnableToSailPopup() {
 		frameActivitySelector.setVisible(false);
-		UnableToSailPopup unableToSailPopup = new UnableToSailPopup(this, "Repair your ship before setting out.");
+		UnableToSailPopup unableToSailPopup = new UnableToSailPopup(this, gameManager, game, "Repair your ship before setting out.");
 	}
 	
 	public void launchUnableToHireCrewPopup() {
@@ -211,7 +211,7 @@ public class ActivitySelectorScreen {
 					}
 				}
 				if (canUpgrade) {
-					launchShipUpgradeScreen();
+					launchShipUpgradeScreen("");
 				} else {
 					launchUnableToUpgradePopup("You must first purchase upgrades from the store.");
 				}

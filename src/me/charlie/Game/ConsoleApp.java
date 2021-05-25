@@ -66,13 +66,12 @@ public class ConsoleApp {
         Island currentIsland = ship.getCurrentIsland();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("""
-                Which of the following activities would you like to do?
-                1: Sail to another Island?
-                2: Visit the store?
-                3: Look for more crew to hire?
-                4: Repair your ship?
-                5: View ship properties.""");
+        System.out.println("Which of the following activities would you like to do?"+
+                "/n1: Sail to another Island?"+
+                "/n2: Visit the store?"+
+                "/n3: Look for more crew to hire?"+
+                "/n4: Repair your ship?"+
+                "/n5: View ship properties.");
         activityChooser:
         while (true) {
             int activityCode = getNumberCode(5);
@@ -247,9 +246,8 @@ public class ConsoleApp {
         int chosenItemID;
 
         if (ship.getCargoSpaceRemaining() == 0) {
-            System.out.println("""
-                    You cannot fit anymore items sorry.
-                    Would you like to do something else?""");
+            System.out.println("You cannot fit anymore items sorry."+
+                    "/nWould you like to do something else?");
         } else {
             buyWindow:
             while (true) {
@@ -291,10 +289,9 @@ public class ConsoleApp {
                     System.out.println("Is there anything else I can help you with?");
                     break;
                 } else {
-                    System.out.println("""
-                            You cannot afford this item.
-                            Would you like to chose another?" +
-                            "1: [Yes] | 2: [No]""");
+                    System.out.println("You cannot afford this item."+
+                            "/nWould you like to chose another?" +
+                            "/n1: [Yes] | 2: [No]");
                     int retryBuy = getNumberCode(2);
                     while (true) {
                         if (retryBuy == 1) {
@@ -321,9 +318,8 @@ public class ConsoleApp {
                 pressAnyKeyToContinue();
                 break;
             } else {
-                System.out.println("""
-                        These are the items you have available to sell.
-                        ID: Item Type | Sell Price""");
+                System.out.println("These are the items you have available to sell."+
+                        "/nID: Item Type | Sell Price");
                 ship.viewCurrentCargo(store);
                 System.out.println("Would you like to sell one of these items? - 1: [Yes] 2: [No]");
                 int chooseToSell = getNumberCode(2);
@@ -331,7 +327,9 @@ public class ConsoleApp {
                     System.out.println("Enter the ID of the item you would like to sell.");
                     int chosenItemId = getNumberCode(ship.getCargoFullness());
                     Item chosenItem = ship.getCurrentCargo().get(chosenItemId - 1);
-                    ship.removeItemFromCargo(chosenItem);
+                    ship.getCurrentCargo().remove(chosenItemId);
+                    System.out.println("The item was removed from the cargo hold." +
+                            "\nYou now have " + ship.getCargoSpaceRemaining() + " cargo space left.");
                     trader.addMoney(chosenItem.getSellCost(store));
                     if (ship.isCargoEmpty()) {
                         System.out.println("You do not have any items to sell.");
@@ -395,11 +393,10 @@ public class ConsoleApp {
                 System.out.println("You see pirates on the horizon");
                 break;
             case DROWNING_SAILORS:
-                System.out.println("""
-                        You see sailors drowning in the water.
-                        If you save them they may join your crew or give you a reward!
-                        Will you save them?
-                        1: [Yes] 2: [No]""");
+                System.out.println("You see sailors drowning in the water."+
+                        "/nIf you save them they may join your crew or give you a reward!"+
+                        "/nWill you save them?"+
+                        "/n1: [Yes] 2: [No]");
                 int saveSailors = getNumberCode(2);
 
                 if (saveSailors == 1) {

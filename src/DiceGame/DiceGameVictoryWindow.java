@@ -37,8 +37,9 @@ public class DiceGameVictoryWindow {
 	/**
 	 * Create the application.
 	 */
-	public DiceGameVictoryWindow(DiceGameManager diceGameManager) {
+	public DiceGameVictoryWindow(DiceGameManager diceGameManager, DiceGame diceGame) {
 		this.diceGameManager = diceGameManager;
+		this.diceGame = diceGame;
 		initialize();
 		victoryFrame.setVisible(true);
 	}

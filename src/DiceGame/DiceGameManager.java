@@ -33,11 +33,12 @@ public class DiceGameManager {
 	private int penalty
 	;
 	
-	public DiceGameManager(GameManager gameManager, Game game, Route route,int handiCap) {
+	public DiceGameManager(GameManager gameManager, Game game, Route route,int handiCap, DiceGame diceGame) {
 		this.game = game;
 		this.gameManager = gameManager;
 		this.route = route;
 		this.trader = game.getTrader();
+		this.diceGame = diceGame;
 		
 		this.playScore = handiCap;
 		this.handicap = handiCap;
@@ -72,6 +73,7 @@ public class DiceGameManager {
 				int turnScore = this.playerTurnScore;
 				int[] dice = diceGame.getDice();
 				this.playerTurnScore = turnScore + dice[0] +dice[1];
+				this.playScore = playerTotal + dice[0] +dice[1];
 				launchDiceGameRollWindow();
 		}
 	}
@@ -79,9 +81,13 @@ public class DiceGameManager {
 		int pirateTotal = this.pirateScore;
 		int newScore = diceGame.PirateTurn(pirateTotal);
 		this.pirateScore = newScore;
+		if (this.pirateScore >= 100) {
+			launchDiceGameLossWindow();
+		} else { launchPirateSummaryWindow();
+		}
 	}
 	public void makePenalty() {
-		int penalty = (int)(Math.random()*(750 - 250) + 250);
+		int penalty = (int)(Math.random()*(500) + 250);
 		this.penalty = penalty;
 	}
 	public int getPenalty() {
@@ -96,7 +102,7 @@ public class DiceGameManager {
 		playerTurn();
 	}
 	public void launchDiceGameRollWindow() {
-		DiceGameRollWindow rollWindow = new DiceGameRollWindow(this);
+		DiceGameRollWindow rollWindow = new DiceGameRollWindow(this, diceGame);
 		this.diceGameRollWindow = rollWindow;
 	}
 	public void reRoll() {
@@ -105,7 +111,7 @@ public class DiceGameManager {
 	}
 	public void passTurn() {
 		diceGameRollWindow.closeWindow();
-		launchPirateSummaryWindow();
+		pirateTurn();
 	}
 	public void launchPirateSummaryWindow() {
 		PirateSummaryWindow pirateSummaryWindow = new PirateSummaryWindow(this);
@@ -145,12 +151,11 @@ public class DiceGameManager {
 	}
 	public void closeRolledOneWindow() {
 		rolledOneWindow.closeWindow();
-		int pirateTotal = this.pirateScore;
-		diceGame.PirateTurn(pirateTotal);
+		pirateTurn();
 	}
 	private void launchDiceGameVictoryWindow() {
 		penalty = 0;
-		DiceGameVictoryWindow victoryWindow = new DiceGameVictoryWindow(this);
+		DiceGameVictoryWindow victoryWindow = new DiceGameVictoryWindow(this, diceGame);
 		this.diceGameVictoryWindow = victoryWindow;
 	}
 	public void closeVictoryWindow() {

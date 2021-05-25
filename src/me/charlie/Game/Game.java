@@ -27,9 +27,16 @@ public class Game {
     private Ship ship;
     private DiceGame diceGame;
     
+    /**
+     * Creates an instance of the game, this is where all the data about the game is stored.
+     * 
+     * @param traderName the name the player chooses for their character.
+     * @param gameDuration the the duration the player chooses to play the game.
+     * @param ship the ship the player chooses to use.
+     * @param islandTotal the amount of islands that will be generated. (5 is in specifications).
+     */
     public Game(String traderName, int gameDuration, Ship ship, int islandTotal) {
-
-        this.startingCash = 1500;
+        this.startingCash = 10000;
         this.islandTotal = islandTotal;
         this.gameDuration = gameDuration;
         this.islands = createIslands(islandTotal);
@@ -41,18 +48,38 @@ public class Game {
         ship.setCurrentIsland(islands.get(0));
     }
 
+    /**
+     * 
+     * @return the duration chosen during game setup.
+     */
     public int getGameDuration() {
         return gameDuration;
     }
 
+    /**
+     * Sets the amount of days remaining in the game.
+     * Used to determine if there is enough days remaining to sail chosen routes/continue the game.
+     * 
+     * @param daysSailed the amount of days, as an int, taken to sail the chosen route.
+     */
     public void setDaysRemaining(int daysSailed) {
         daysRemaining = daysRemaining - daysSailed;
     }
 
+    /**
+     * 
+     * @return  the amount of days, as an int, remaining before the game should end.
+     */
     public int getDaysRemaining() {
         return daysRemaining;
     }
 
+    /**
+     * Checks to see if it is possible to sail to another island.
+     * Used to check whether or not the game should be ended.
+     * 
+     * @return  a boolean true if you can sail and false if you cannot.
+     */
     public boolean canSailToAnotherIsland() {
         Island island = ship.getCurrentIsland();
         for (Route route : getRoutes()) {
@@ -63,14 +90,29 @@ public class Game {
         return false;
     }
 
+    /**
+     * 
+     * @return  the Ship object.
+     */
     public Ship getShip() {
         return ship;
     }
 
+    /**
+     * 
+     * @return  the Trader object.
+     */
     public Trader getTrader() {
         return trader;
     }
 
+    /**
+     * Creates a list of Island objects.
+     * Also creates an instance of IslandNameHandler which is used to designate names to the islands.
+     * 
+     * @param islandTotal the total number of islands to be generated.
+     * @return  a list of Island objects.
+     */
     public List<Island> createIslands(int islandTotal) {
 
         IslandNameHandler islandNames = new IslandNameHandler();
@@ -84,6 +126,12 @@ public class Game {
         return islands;
     }
 
+    /**
+     * Creates a list of Route objects which connect the islands.
+     * 
+     * @param islands a list of Island objects to be linked by Routes/.
+     * @return  a list to Route objects.
+     */
     public List<Route> createRoutes(List<Island> islands) {
 
         List<Route> routes = new ArrayList<>();
@@ -102,27 +150,19 @@ public class Game {
         return routes;
     }
 
+    /**
+     * 
+     * @return  a list of the Island objects used in the current instance of the game.
+     */
     public List<Island> getIslands() {
         return islands;
     }
 
+    /**
+     * 
+     * @return  a list of all the Route objects generated for the current instance of the game.
+     */
     public List<Route> getRoutes() {
         return routes;
-    }
-
-    public Island sailing(Trader trader, List<Route> routes) {
-        Ship ship = trader.getShip();
-        ;
-        Island currentIsland = ship.getCurrentIsland();
-        List<Route> usableRoutes = new ArrayList<>();
-
-        System.out.println("These are the routes you may take to get to other islands:");
-        for (Route route : routes) {
-            if (currentIsland.equals(route.getIslandA())) {
-                usableRoutes.add(route);
-                System.out.println(route);
-            }
-        }
-        return currentIsland;
     }
 }
