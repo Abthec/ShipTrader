@@ -8,6 +8,7 @@ import DiceGame.DiceGameManager;
 import me.charlie.Game.Game;
 import me.charlie.Gui.Main.ActivitySelectorScreen;
 import me.charlie.Gui.Main.CrewHireScreen;
+import me.charlie.Gui.Main.GameoverScreen;
 import me.charlie.Gui.Main.ShipPropertiesScreen;
 import me.charlie.Gui.Main.ShipRepairScreen;
 import me.charlie.Gui.Main.ShipUpgradeScreen;
@@ -24,7 +25,11 @@ import me.charlie.Gui.gameSetup.ShipSelectionScreen;
 import me.charlie.Gui.gameSetup.StartupScreen;
 import me.charlie.Island.Route;
 import me.charlie.Item.Item;
+<<<<<<< HEAD
 import me.charlie.Item.ItemType;
+=======
+import me.charlie.Item.UpgradeType;
+>>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
 import me.charlie.Ship.Ship;
 
 @SuppressWarnings({ "unused"})
@@ -111,10 +116,10 @@ public class GameManager {
 	}
 	
 	public void launchActivitySelectorScreen() {
-		if (game.getDaysRemaining()==0 && !hasItemsToSell()) {
-			System.out.println("Gameover!");
+		if (!canSailSomewhere() && !hasItemsToSell()) {
+			launchGameoverScreen("Not enough days to sail anywhere and no items to sell.", false);
 		} else if (game.getDaysRemaining()>0 && !canAffordToPayCrewOneDaysWages() && !hasItemsToSell()) {
-			System.out.println("Gameover!");
+			launchGameoverScreen("Cannot afford to sail and had no items to sell.", false);
 		} else {
 			ActivitySelectorScreen activitySelectorWindow = new ActivitySelectorScreen(this, game);
 		}
@@ -216,13 +221,17 @@ public class GameManager {
 		launchActivitySelectorScreen();
 	}
 	
-	public void launchShipUpgrdeScreen() {
-		ShipUpgradeScreen shipUpgradeWindow = new ShipUpgradeScreen(this, game);
+	public void launchShipUpgrdeScreen(String outcome) {
+		ShipUpgradeScreen shipUpgradeWindow = new ShipUpgradeScreen(this, game, outcome);
 	}
 	
 	public void closeShipUpgradeScreen(ShipUpgradeScreen shipUpgradeWindow) {
 		shipUpgradeWindow.closeWindow();
 		launchActivitySelectorScreen();
+	}
+	
+	public void launchGameoverScreen(String reason, boolean lossToPirates) {
+		GameoverScreen gameoverWindow = new GameoverScreen(game, this, reason, lossToPirates);
 	}
 	
 	public boolean canAffordToPayCrewOneDaysWages() {
@@ -231,6 +240,27 @@ public class GameManager {
 	
 	public boolean hasItemsToSell() {
 		return game.getShip().getCurrentCargo().size() > 0;
+	}
+	
+	public boolean canSailSomewhere() {
+		boolean canSail = false;
+		if (game.getDaysRemaining()==0) {
+			return false;
+		} else {
+			for (Item upgrade : game.getShip().getCurrentCargo()) {
+				if (upgrade.getUpgradeType().equals(UpgradeType.MAST)) {
+					return true;
+				}
+			}
+			for (Route route : game.getRoutes()) {
+				if (route.getIslandA().equals(game.getShip().getCurrentIsland())) {
+					if (route.getSailDuration(game.getShip()) <= game.getDaysRemaining()) {
+						canSail = true;
+					}
+				}
+			}
+		}
+		return canSail;
 	}
 	
 	public static void main(String[] args) {
