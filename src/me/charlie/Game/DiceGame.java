@@ -76,7 +76,7 @@ public class DiceGame {
 			}else if ((Dice[0] ==1) || (Dice[1] ==1)) {
 				/** Pirate rolled at least one one and the turn is over
 				 */
-				turnValue = turnValue + Dice[0] + Dice[1];
+				turnValue = 0;
 				total += turnValue;
 				F = true;
 			} else {
