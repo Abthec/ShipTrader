@@ -73,6 +73,7 @@ public class DiceGameManager {
 				int turnScore = this.playerTurnScore;
 				int[] dice = diceGame.getDice();
 				this.playerTurnScore = turnScore + dice[0] +dice[1];
+				this.playScore = playerTotal + dice[0] +dice[1];
 				launchDiceGameRollWindow();
 		}
 	}
