@@ -46,7 +46,7 @@ public class PirateSummaryWindow {
 		summaryFrame.dispose();
 	}
 	private String makeSummary() {
-		String result = String.format("The pirates have had their turn and now have %o points" , diceGameManager.getPirateScore());
+		String result = String.format("The pirates have had their turn and now have %d points" , diceGameManager.getPirateScore());
 		return result;
 	}
 	/**
@@ -66,7 +66,7 @@ public class PirateSummaryWindow {
 		JLabel lblNewLabel = new JLabel("Ready to take your turn?");
 		summaryFrame.getContentPane().add(lblNewLabel, "cell 0 1,alignx center,aligny center");
 		
-		JButton btnNewButton = new JButton("Continue");
+		JButton btnNewButton = new JButton("Roll");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				diceGameManager.closePirateSummaryWindow();

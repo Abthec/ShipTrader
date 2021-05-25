@@ -52,8 +52,8 @@ public class DiceGameVictoryWindow {
 	private String makeSummary() {
 		int[] dice = diceGame.getDice();
 		int score = diceGameManager.getPlayerScore();
-		String summary = String.format("Congratulations your last roll of %o, %o gave you a total score of %o."
-				+ " The pirates are retreating" ,dice[0], dice[1], score );
+		String summary = String.format("Congratulations your last roll of %d, %d gave you a total score of %d."
+				+ "\nThe pirates are retreating" ,dice[0], dice[1], score );
 		return summary;
 	}
 	/**

@@ -55,7 +55,11 @@ public class DiceGame {
 				System.out.println("You rolled a " + Dice[0] + " and " + Dice[1] );
 				System.out.println("Your score this turn so far is: " + TurnValue);
 				System.out.println("Your total is: " + total);
+				if (TurnValue + total > 100) {
+					return "Victory";
+				}else {
 				return "Good Roll";
+				}
 			}
 	}
 	public int PirateTurn(int PirateScore) {
@@ -78,7 +82,7 @@ public class DiceGame {
 				turnValue = turnValue + Dice[0] + Dice[1];
 				total += turnValue;
 				double coinflip = Math.random();
-				if ((total >= 50) || (coinflip <0.5)) {/** ensures the pirate doesn't accidentally go over 50 points and
+				if ((total >= 100) || (coinflip <0.5)) {/** ensures the pirate doesn't accidentally go over 50 points and
 				decides randomly to roll again or not */
 					F = true;
 				}

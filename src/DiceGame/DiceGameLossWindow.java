@@ -50,7 +50,7 @@ public class DiceGameLossWindow {
 	}
 	private String makeSummary() {
 		diceGameManager.makePenalty();
-		String summary = String.format("You lost the pirates are taking %o gold, if you cant afford this you lose!", diceGameManager.getPenalty());
+		String summary = String.format("You lost the pirates are taking %d gold, if you cant afford this you lose!", diceGameManager.getPenalty());
 		return summary;
 	}
 	/**

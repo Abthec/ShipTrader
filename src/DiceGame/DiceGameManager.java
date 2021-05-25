@@ -80,6 +80,10 @@ public class DiceGameManager {
 				} else {
 				launchDiceGameRollWindow();
 				}
+				break;
+			case "Victory":
+				launchDiceGameVictoryWindow();
+				break;
 		}
 	}
 	private void pirateTurn() {
@@ -107,7 +111,7 @@ public class DiceGameManager {
 		playerTurn();
 	}
 	public void launchDiceGameRollWindow() {
-		DiceGameRollWindow rollWindow = new DiceGameRollWindow(this, diceGame, this.playScore, this.playerTurnScore);
+		DiceGameRollWindow rollWindow = new DiceGameRollWindow(this, diceGame);
 		this.diceGameRollWindow = rollWindow;
 	}
 	public void reRoll() {
@@ -135,10 +139,10 @@ public class DiceGameManager {
 	}
 	public void closeLossWindow(DiceGameLossWindow diceGameLossWindow) {
 		makePenalty();
-		if (game.getTrader().getMoney() < this.penalty) {
+		if (game.getTrader().getMoney() < penalty) {
 			gameManager.launchGameoverScreen("You didnt have enough to pay off the pirates!", true);
 		} else {
-			game.getTrader().subtractMoney(this.penalty);
+			game.getTrader().subtractMoney(penalty);
 		}
 		diceGameLossWindow.closeWindow();
 		gameManager.launchArrivalScreen(route);

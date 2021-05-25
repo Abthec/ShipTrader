@@ -46,9 +46,9 @@ public class RolledOneWindow {
 	}
 	private String makeSummary() {
 		int score = diceGameManager.getPlayerScore();
-		String summary = String.format("You rolled a one, your last roll doesnt count and your turn is over."+
+		String summary = String.format("You rolled a one, your last turn doesnt count and your turn is over."+
 				"\nYour score for this turn is zero"+
-				"\nYour total score is %o."+
+				"\nYour total score is %d"+
 				"\nThe Pirates will now have their turn.", score);
 		return summary;
 	}

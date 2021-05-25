@@ -43,11 +43,9 @@ public class DiceGameRollWindow {
 	 * @param diceGameManager 
 	 * @param diceGame 
 	 */
-	DiceGameRollWindow(DiceGameManager diceGameManager, DiceGame diceGame, int playerScore, int playerTurn) {
+	DiceGameRollWindow(DiceGameManager diceGameManager, DiceGame diceGame) {
 		this.diceGameManager = diceGameManager;
 		this.diceGame = diceGame;
-		this.playerScore = playerScore;
-		this.playerTurn = playerTurn;
 		initialize();
 		rollFrame.setVisible(true);
 	}
@@ -60,9 +58,11 @@ public class DiceGameRollWindow {
 	private String makeSummary() {
 		int[] dice = diceGame.getDice();
 		int pirateScore = diceGameManager.getPirateScore();
-		String summary = String.format("Your last role was %o, %o."+
-		"\nYour current score total is %o and your turn score is %o."+
-		"\nThe pirates have a score of %o" ,dice[0], dice[1], playerScore, playerTurn, pirateScore );
+		int playerScore = diceGameManager.getPlayerScore();
+		int turnScore = diceGameManager.getPlayerTurnScore();
+		String summary = String.format("Your last role was %d, %d." +
+		"\nYour current score total is %d and your turn score is %d." +
+		"\nThe pirates have a score of %d" ,dice[0], dice[1], playerScore, turnScore, pirateScore );
 		return summary;
 	}
 	public void reRoll() {
