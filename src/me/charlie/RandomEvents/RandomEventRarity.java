@@ -6,6 +6,10 @@ public enum RandomEventRarity {
     UNCOMMON,
     RARE;
 
+	/**
+	 * 
+	 * @return the coefficient of distance depending on the rarity of the event.
+	 */
     public double getEventDistanceModifier() {
         switch (this) {
             case RARE:
@@ -18,6 +22,10 @@ public enum RandomEventRarity {
         return 1.0;
     }
 
+    /**
+     * 
+     * @return the chance of an event occurring for each RandomEventRarity.
+     */
     public double getChanceOfEventOccurring() {
         switch (this) {
             case RARE:
