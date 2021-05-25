@@ -58,7 +58,7 @@ public class DiceGameManager {
 	public int getPirateScore(){
 		return pirateScore;
 	}
-	private void playerTurn() {
+	public void playerTurn() {
 		int playerTotal = this.playScore;
 		int handicap = this.handicap;
 		int turnScore = this.playerTurnScore;
@@ -108,7 +108,7 @@ public class DiceGameManager {
 		playerTurn();
 	}
 	public void launchDiceGameRollWindow() {
-		DiceGameRollWindow rollWindow = new DiceGameRollWindow(this, diceGame);
+		DiceGameRollWindow rollWindow = new DiceGameRollWindow(this, diceGame, this.playScore);
 		this.diceGameRollWindow = rollWindow;
 	}
 	public void reRoll() {
@@ -116,11 +116,10 @@ public class DiceGameManager {
 		playerTurn();
 	}
 	public void passTurn() {
-		diceGameRollWindow.closeWindow();
-		int[] dice = diceGame.getDice();
 		int playerTotal = this.playScore;
-		this.playScore = playerTotal + dice[0] +dice[1];
+		this.playScore = playerTotal + this.playerTurnScore;
 		this.playerTurnScore = 0;
+		diceGameRollWindow.closeWindow();
 		pirateTurn();
 	}
 	public void launchPirateSummaryWindow() {
@@ -152,8 +151,7 @@ public class DiceGameManager {
 	}
 	public void closeSnakeEyesWindow() {
 		snakeEyesWindow.closeWindow();
-		int pirateTotal = this.pirateScore;
-		diceGame.PirateTurn(pirateTotal);
+		pirateTurn();
 	}
 	public void launchRolledOneWindow() {
 		
