@@ -26,11 +26,11 @@ import me.charlie.Gui.gameSetup.ShipSelectionScreen;
 import me.charlie.Gui.gameSetup.StartupScreen;
 import me.charlie.Island.Route;
 import me.charlie.Item.Item;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import me.charlie.Item.ItemType;
-=======
+//=======
 import me.charlie.Item.UpgradeType;
->>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
+//>>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
 import me.charlie.Ship.Ship;
 
 @SuppressWarnings({ "unused"})
