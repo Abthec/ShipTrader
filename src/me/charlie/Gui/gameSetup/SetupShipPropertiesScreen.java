@@ -28,6 +28,12 @@ public class SetupShipPropertiesScreen {
 	private Ship ship;
 	private Game game;
 	
+	/**
+	 * Opens a window with the potential properties of the chosen Ship.
+	 * 
+	 * @param gameManager controls the launching and closing of the window.
+	 * @param shipSelectionWindow the window that this window was launched from.
+	 */
 	public SetupShipPropertiesScreen(GameManager gameManager, ShipSelectionScreen shipSelectionWindow) {
 		this.gameManager = gameManager;
 		this.ship = shipSelectionWindow.getChosenShip();
@@ -36,18 +42,31 @@ public class SetupShipPropertiesScreen {
 		frameShipProperties.setVisible(true);
 	}
 	
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frameShipProperties.dispose();
 	}
 	
+	/**
+	 * Calls GameManager to close the window.
+	 */
 	public void finishedWindow() {
 		gameManager.closeShipPropertiesScreen(this);
 	}
 	
+	/**
+	 * Takes the player back to the ShipSelectionScreen.
+	 */
 	public void goBack() {
 		gameManager.shipPropertiesGoBack(this, shipSelectionWindow);
 	}
 	
+	/**
+	 * 
+	 * @return the chosen Ship.
+	 */
 	public Ship getShip() {
 		return ship;
 	}

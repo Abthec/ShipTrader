@@ -40,7 +40,12 @@ public class ShipSelectionScreen {
 	List<Ship> ships;
 	Ship chosenShip;
 	
-	
+	/**
+	 * Opens a screen for the player to choose a ship.
+	 * Creates the Ships for the player to choose from.
+	 * 
+	 * @param gameManager controls the launching and closing of the window.
+	 */
 	public ShipSelectionScreen(GameManager gameManager) {
 		ShipNameHandler shipNameHandler = new ShipNameHandler();
 		this.ships = new ArrayList<Ship>();
@@ -53,26 +58,46 @@ public class ShipSelectionScreen {
 		frameShipSelectoionScreen.setVisible(true);
 	}
 
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frameShipSelectoionScreen.dispose();
 	}
 	
+	/**
+	 * Takes the player back to the StartupScreen.
+	 */
 	public void goBack() {
 		gameManager.shipSelectorGoBack(this);
 	}
 	
+	/**
+	 * Calls GameManager to close the window.
+	 */
 	public void finishedWindow() {
 		gameManager.closeShipSelectorScreen(this);
 	}
 	
+	/**
+	 * Opens the ShipPropertiesScreen through GameManager.
+	 */
 	public void viewShipProperties() {
 		gameManager.minimizeShipSelectionScreen(this);
 	}
 	
+	/**
+	 * 
+	 * @return the ship chosen by the player.
+	 */
 	public Ship getChosenShip() {
 		return chosenShip;
 	}
 	
+	/**
+	 * 
+	 * @return the frame of the current window.
+	 */
 	public JFrame getJFrame() {
 		return frameShipSelectoionScreen;
 	}

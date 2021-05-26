@@ -30,32 +30,54 @@ public class StartupScreen {
 	private JFrame frmIslandTraderSetup;
 	private JTextField textFieldTraderName;
 	private GameManager gameManager;
+	private String traderName;
+	private int gameDuration;
 
-	String traderName;
-	int gameDuration;
-
+	/**
+	 * Creates the first screen for the Game, to get a trader name and game duration.
+	 * 
+	 * @param gameManager controls the launching and closing of the window.
+	 */
 	public StartupScreen(GameManager gameManager) {
 		this.gameManager = gameManager;
 		initialize();
 		frmIslandTraderSetup.setVisible(true);
 	}
 	
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frmIslandTraderSetup.dispose();
 	}
 	
+	/**
+	 * Calls gameManager to close the window.
+	 */
 	public void finishedWindow() {
 		gameManager.closeStartupScreen(this);
 	}
 	
+	/**
+	 * 
+	 * @return the frame of the current window.
+	 */
 	public JFrame getSetupJFrame() {
 		return frmIslandTraderSetup;
 	}
 	
+	/**
+	 * 
+	 * @return the name entered by the player.
+	 */
 	public String getTraderName() {
 		return traderName;
 	}
 	
+	/**
+	 * 
+	 * @return the duration selected by the player.
+	 */
 	public int getGameDuration() {
 		return gameDuration;
 	}
