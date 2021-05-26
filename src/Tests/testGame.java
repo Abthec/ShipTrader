@@ -20,6 +20,7 @@ class DiceGameTest {
 	private Ship ship;
 	private Game game;
 	private DiceGameManager diceGameManager;
+	private DiceGame diceGame;
 	
 
 	@Test
@@ -43,18 +44,49 @@ class DiceGameTest {
 		}
 	}
 	@Test
-	void testDiceGame() {
+	/** creates a ship, GameManager, DiceGaneManager and DiceGame in order to test the DiceGameManager.Playerturnfunction.
+	 * you can test the handicap aspect by adjusting the amount of times the .addCannon is used as the amount of handicaps determines the players handicap
+	 */
+	void testPlayerTurn() {
 		islandTotal = 5;
 		Ship Temana = new Ship(ShipType.AIRCRAFT_CARRIER, 4, 15, 30, 50, 750, null, null);
 		Game testGame = new Game("Tester", 30, Temana, islandTotal);
+		this.game = testGame;
 		GameManager gameManager = new GameManager();
 		List<Route> routesList = testGame.getRoutes();
 		Temana.addCannon();
-		int handicap = game.getShip().getNumberOfCannons();
+		Temana.addCannon();
+		Temana.addCannon();
+		int handicap = (game.getShip().getNumberOfCannons())*6;
 		System.out.println(handicap);
 		Route route = routesList.get(1);
 		DiceGame diceGame = new DiceGame(handicap);
-		DiceGameManager diceGameManager = new DiceGameManager(gameManager, game, route, handicap);
+		this.diceGame = diceGame;
+		DiceGameManager diceGameManager = new DiceGameManager(gameManager, game, route, handicap, diceGame);
 		diceGame.PlayerTurn(0, handicap, 0);
+		diceGameManager.playerTurn();
+		diceGameManager.passTurn();
+		System.out.println("new score is: " + diceGameManager.getPlayerScore());
 	}
+	@Test
+	/** Most of this function is performed automatically, this is test the rolls are being added properly
+	 * 
+	 */
+	void testPirateTurn() {
+		islandTotal = 5;
+		Ship Temana = new Ship(ShipType.AIRCRAFT_CARRIER, 4, 15, 30, 50, 750, null, null);
+		Game testGame = new Game("Tester", 30, Temana, islandTotal);
+		this.game = testGame;
+		GameManager gameManager = new GameManager();
+		List<Route> routesList = testGame.getRoutes();
+		Route route = routesList.get(1);
+		int handicap = (game.getShip().getNumberOfCannons())*6;
+		DiceGame diceGame = new DiceGame(handicap);
+		this.diceGame = diceGame;
+		DiceGameManager diceGameManager = new DiceGameManager(gameManager, game, route, handicap, diceGame);
+		System.out.println(String.format("The pirates score is: %d", diceGameManager.getPirateScore()));
+		diceGameManager.pirateTurn();
+		int dice[] = diceGame.getDice();
+		System.out.println(String.format("Pirates roll is: %d , %d", dice[0], dice[1]));
+		System.out.println(String.format("The pirates score is: %d", diceGameManager.getPirateScore()));	}
 }
