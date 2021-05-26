@@ -1,41 +1,48 @@
 package me.charlie.Gui.Popups;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-
-import me.charlie.Gui.Main.StoreOperations.StoreOptionsScreen;
+import java.awt.Font;
 import java.awt.Window.Type;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
+import me.charlie.Gui.Main.StoreOperations.StoreOptionsScreen;
+
+/**
+ * A screen to block the player from the sell window.
+ * 
+ * @author charlie
+ *
+ */
 public class UnableToSellPopup {
 
 	private JFrame frameUnableToSellPopup;
 	private StoreOptionsScreen storeOptionsWindow;
-	
+
 	/**
 	 * Open an UnableToSellPopup from the StoreOptionsScreen.
 	 * 
-	 * @param storeOptionsWindow the StoreOptionsScreen where the popup was opened from.
+	 * @param storeOptionsWindow the StoreOptionsScreen where the popup was opened
+	 *                           from.
 	 */
 	public UnableToSellPopup(StoreOptionsScreen storeOptionsWindow) {
 		this.storeOptionsWindow = storeOptionsWindow;
 		initialize();
 		frameUnableToSellPopup.setVisible(true);
 	}
-	
+
 	/**
 	 * Close the poup window.
 	 */
 	public void closeWindow() {
 		frameUnableToSellPopup.dispose();
 	}
-	
+
 	/**
 	 * Unhides the StoreOptionsScreen and calls to close the window.
 	 */
@@ -77,19 +84,19 @@ public class UnableToSellPopup {
 		frameUnableToSellPopup.setBounds(100, 100, 450, 236);
 		frameUnableToSellPopup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frameUnableToSellPopup.getContentPane().setLayout(null);
-		
+
 		JLabel lblUnableToSell = new JLabel("Unable To Sell.");
 		lblUnableToSell.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblUnableToSell.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUnableToSell.setBounds(10, 11, 430, 69);
 		frameUnableToSellPopup.getContentPane().add(lblUnableToSell);
-		
+
 		JLabel lblReason = new JLabel("No items in cargo.");
 		lblReason.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblReason.setHorizontalAlignment(SwingConstants.CENTER);
 		lblReason.setBounds(10, 91, 430, 55);
 		frameUnableToSellPopup.getContentPane().add(lblReason);
-		
+
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

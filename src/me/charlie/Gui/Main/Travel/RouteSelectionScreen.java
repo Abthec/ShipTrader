@@ -34,6 +34,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
+/**
+ * The screen displayed when the player wants to sail to another Island.
+ * 
+ * @author charlie
+ *
+ */
 public class RouteSelectionScreen {
 
 	private JFrame frameRouteSelectionScreen;

@@ -6,6 +6,12 @@ import me.charlie.Store.StoreType;
 
 import java.util.Random;
 
+/**
+ * Stores information about items.
+ * 
+ * @author charlie.
+ *
+ */
 public class Item {
 
     ItemType itemType;

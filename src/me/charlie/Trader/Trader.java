@@ -2,6 +2,12 @@ package me.charlie.Trader;
 
 import me.charlie.Ship.Ship;
 
+/**
+ * Stores information about the trader.
+ * 
+ * @author charlie
+ *
+ */
 public class Trader {
 
     private String name;

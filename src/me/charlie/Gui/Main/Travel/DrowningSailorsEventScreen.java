@@ -21,6 +21,12 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 
+/**
+ * The screen displayed when the player encounters a DrowningSailorEvent.
+ * 
+ * @author charlie
+ *
+ */
 public class DrowningSailorsEventScreen {
 
 	private JFrame frameDrowningSailorsEventScreen;

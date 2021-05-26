@@ -21,6 +21,12 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * The screen displayed when the player encounters stormy weather while sailing.
+ * 
+ * @author charlie
+ *
+ */
 public class StormyWeatherEventScreen {
 
 	private JFrame frameStormyWeatherEventScreen;

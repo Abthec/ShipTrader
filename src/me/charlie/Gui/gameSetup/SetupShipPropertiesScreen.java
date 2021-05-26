@@ -3,14 +3,10 @@ package me.charlie.Gui.gameSetup;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JSplitPane;
-import me.charlie.Game.Game;
 import me.charlie.Gui.GameManager;
 import me.charlie.Ship.Ship;
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
 import java.awt.GridLayout;
-import java.awt.BorderLayout;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -19,14 +15,19 @@ import java.awt.Window.Type;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-@SuppressWarnings("unused")
+
+/**
+ * A screen which displays the initial characteristics of the ship chosen by the player.
+ * 
+ * @author charlie
+ *
+ */
 public class SetupShipPropertiesScreen {
 
 	private JFrame frameShipProperties;
 	private GameManager gameManager;
 	private ShipSelectionScreen shipSelectionWindow;
 	private Ship ship;
-	private Game game;
 	
 	/**
 	 * Opens a window with the potential properties of the chosen Ship.

@@ -1,5 +1,11 @@
 package me.charlie.Item;
 
+/**
+ * Defines the types of potential ship upgrades and their characteristics.
+ * 
+ * @author charlie
+ *
+ */
 public enum UpgradeType {
     CANNON,
     MAST,

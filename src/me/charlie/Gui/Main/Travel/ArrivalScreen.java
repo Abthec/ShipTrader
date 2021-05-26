@@ -19,6 +19,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * The screen displayed when the player arrives at a new Island.
+ * 
+ * @author charl
+ *
+ */
 public class ArrivalScreen {
 
 	private JFrame frameArrivalScreen;

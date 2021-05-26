@@ -21,6 +21,12 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
+/**
+ * The screen displayed when the player encounters a Pirate event.
+ * 
+ * @author charlie.
+ *
+ */
 public class PiratesEventScreen {
 
 	private JFrame framePirateEventScreen;
