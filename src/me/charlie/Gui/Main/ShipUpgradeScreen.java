@@ -39,6 +39,13 @@ public class ShipUpgradeScreen {
 	private JButton btnConfirm;
 	private String outcome;
 	
+	/**
+	 * Opens a window for the player to apply upgrades to their ship.
+	 * 
+	 * @param gameManager controls the launching and closing of the window.
+	 * @param game the Game data.
+	 * @param outcome the outcome of the previous upgrade.
+	 */
 	public ShipUpgradeScreen(GameManager gameManager, Game game, String outcome) {
 		this.outcome = outcome;
 		this.game = game;
@@ -48,36 +55,67 @@ public class ShipUpgradeScreen {
 		frameShipUpgradeScreen.setVisible(true);
 	}
 	
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frameShipUpgradeScreen.dispose();
 	}
 	
+	/**
+	 * Calls GameManager to close the window.
+	 */
 	public void finishedWindow() {
 		gameManager.closeShipUpgradeScreen(this);
 	}
 	
+	/**
+	 * Sets the outcome of the previous upgrade for the player to see.
+	 */
 	public void setOutcome() {
 		lblOutcome.setText(outcome);
 	}
 	
+	/**
+	 * Disables the confirm button.
+	 */
 	public void disableConfirm() {
 		btnConfirm.setEnabled(false);
 	}
 	
+	/**
+	 * Refreshes the text in the outcome label.
+	 * 
+	 * @param outcomeString the string to be put into the label.
+	 */
 	public void refresh(String outcomeString) {
 		closeWindow();
 		gameManager.launchShipUpgrdeScreen(outcomeString);
 	}
 	
+	/**
+	 * 
+	 * @return the frame of the current window.
+	 */
 	public JFrame getJFrame() {
 		return frameShipUpgradeScreen;
 	}
 	
+	/**
+	 * Blocks the player from upgrading with a popup.
+	 * 
+	 * @param reason the reason the player was unable to upgrade.
+	 */
 	public void launchUnableToUpgradePopup(String reason) {
 		UnableToUpgradePopup unableToUpgradePopup = new UnableToUpgradePopup(this, reason);
 		frameShipUpgradeScreen.setVisible(false);
 	}
 	
+	/**
+	 * Searches through the Ship's current cargo to find the available upgrades. 
+	 * 
+	 * @return all the upgrades currently possed by the player.
+	 */
 	public List<Item> getUpgrades() {
 		List<Item> cargo = game.getShip().getCurrentCargo();
 		for (Item item : cargo) {

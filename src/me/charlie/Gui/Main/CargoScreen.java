@@ -34,6 +34,12 @@ public class CargoScreen {
 	private int currentItemsListIndex = 0;
 	private int soldItemsListIndex = 0;
 	
+	/**
+	 * Opens a window where current and previous cargo can be viewed.
+	 * 
+	 * @param shipPropertiesWindow the window that this window was opened from.
+	 * @param game stores the current Games data.
+	 */ 
 	public CargoScreen(ShipPropertiesScreen shipPropertiesWindow, Game game) {
 		this.game = game;
 		this.ship = game.getShip();
@@ -44,10 +50,16 @@ public class CargoScreen {
 		frameCargoScreen.setVisible(true);
 	}
 
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frameCargoScreen.dispose();
 	}
 	
+	/**
+	 * Calls GameManager to close the window.
+	 */
 	public void finishedWindow() {
 		shipPropertiesWindow.getJFrame().setVisible(true);
 		closeWindow();

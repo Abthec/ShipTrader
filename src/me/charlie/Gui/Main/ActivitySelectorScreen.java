@@ -29,6 +29,12 @@ public class ActivitySelectorScreen {
 	private Game game;
 	private Ship ship;
 	
+	/**
+	 * Creates a window for the player to choose their next activity.
+	 * 
+	 * @param gameManager controls the launching and closing of the window.
+	 * @param game where the current games data is stored.
+	 */
 	public ActivitySelectorScreen(GameManager gameManager, Game game) {
 		this.gameManager = gameManager;
 		this.game = game;
@@ -37,64 +43,109 @@ public class ActivitySelectorScreen {
 		frameActivitySelector.setVisible(true);
 	}
 	
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frameActivitySelector.dispose();
 	}
 	
+	/**
+	 * Calls GameManager to close the window.
+	 */
 	public void finishedWindow() {
 		gameManager.closeActivitySelectorScreen(this);
 	}
 	
+	/**
+	 * Opens a screen for the player to view their ships properties.
+	 */
 	public void launchShipPropertiesScreen() {
 		gameManager.launchShipPropertiesScreen();
 		finishedWindow();
 	}
 	
+	/**
+	 * Opens a window for the player to interact with the store.
+	 */
 	public void launchStoreOptionsScreen() {
 		gameManager.launchStoreOptionsScreen();
 		finishedWindow();
 	}
 	
+	/**
+	 * Opens a window for the player to choose a Route to sail on.
+	 */
 	public void launchRouteSelectionScreen() {
 		gameManager.launchRouteSelectionScreen();
 		finishedWindow();
 	}
 	
+	/**
+	 * Opens a window for the player to hire more crew.
+	 */
 	public void launchCrewHireScreen() {
 		gameManager.launchCrewHireScreen();
 		finishedWindow();
 	}
 	
+	/**
+	 * Opens a window for the player to repair their ship.
+	 */
 	public void launchShipRepairScreen() {
 		gameManager.launchShipRepairScreen();
 		finishedWindow();
 	}
 	
+	/**
+	 * Opens a window for the player to upgrade their ship.
+	 * 
+	 * @param outcome the outcome of the upgrade.
+	 */
 	public void launchShipUpgradeScreen(String outcome) {
 		gameManager.launchShipUpgrdeScreen(outcome);
 		finishedWindow();
 	}
 	
+	/**
+	 * Blocks the player from the repair screen.
+	 * Only occurs if the players ships health is already max.
+	 */
 	public void launchUnableToRepairPopup() {
 		frameActivitySelector.setVisible(false);
 		UnableToRepairPopup unableToRepairPopup = new UnableToRepairPopup(this, "Ship health is full.");
 	}
 	
+	/**
+	 * Blocks the player from the upgrade screen.
+	 * 
+	 * @param reason the reason they were blocked from upgrading.
+	 */
 	public void launchUnableToUpgradePopup(String reason) {
 		frameActivitySelector.setVisible(false);
 		UnableToUpgradePopup unableToUpgradePopup = new UnableToUpgradePopup(this, reason);
 	}
 	
+	/**
+	 * Blocks the player from the RouteSelectionScreen.
+	 */
 	public void launchUnableToSailPopup() {
 		frameActivitySelector.setVisible(false);
 		UnableToSailPopup unableToSailPopup = new UnableToSailPopup(this, gameManager, game, "Repair your ship before setting out.");
 	}
 	
+	/**
+	 * Blocks the player from the crew hire screen.
+	 */
 	public void launchUnableToHireCrewPopup() {
 		frameActivitySelector.setVisible(false);
 		UnableToHireCrewPopup unableToHireCrewPopup = new UnableToHireCrewPopup(this);
 	}
 	
+	/**
+	 * 
+	 * @return the frame of the current window.
+	 */
 	public JFrame getJFrame() {
 		return frameActivitySelector;
 	}

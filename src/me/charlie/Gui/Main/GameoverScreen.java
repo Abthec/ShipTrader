@@ -33,6 +33,14 @@ public class GameoverScreen {
 	private String crewOutcome;
 	private int soldItemsListIndex=0;
 	
+	/**
+	 * Opens a window that indicates the end of the game.
+	 * 
+	 * @param game the Game data.
+	 * @param gameManager controls the launching and closing of the window.
+	 * @param reasonForGameover the reason the game was ended.
+	 * @param lossToPirates if the game ended because of pirates.
+	 */
 	public GameoverScreen(Game game, GameManager gameManager, String reasonForGameover, boolean lossToPirates) {
 		this.lossToPirates = lossToPirates;
 		this.reasonForGameover = reasonForGameover;
@@ -47,10 +55,16 @@ public class GameoverScreen {
 		frameGameoverScreen.setVisible(true);
 	}
 	
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frameGameoverScreen.dispose();
 	}
 	
+	/**
+	 * Calls GameManager to close the window.
+	 */
 	public void finishedWindow() {
 		gameManager.launchStartupScreen();
 		closeWindow();

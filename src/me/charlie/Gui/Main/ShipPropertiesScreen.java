@@ -23,6 +23,12 @@ public class ShipPropertiesScreen {
 	private GameManager gameManager;
 	private Game game;
 	
+	/**
+	 * Opens a window for the player to view their Ship's stats.
+	 * 
+	 * @param gameManager controls the launching and closing of the window.
+	 * @param game the Game data.
+	 */
 	public ShipPropertiesScreen(GameManager gameManager, Game game) {
 		this.game = game;
 		this.gameManager = gameManager;
@@ -30,19 +36,32 @@ public class ShipPropertiesScreen {
 		frameShipPropertiesScreen.setVisible(true);
 	}
 	
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frameShipPropertiesScreen.dispose();
 	}
 	
+	/**
+	 * Calls GameManager to close the window.
+	 */
 	public void finishedWindow() {
 		gameManager.closeShipPropertiesScreen(this);
 	}
 	
+	/**
+	 * Opens a window for the player to view cargo.
+	 */
 	public void launchCargoScreen() {
 		frameShipPropertiesScreen.setVisible(false);
-		CargoScreen cargoWindow = new CargoScreen(this, game);
+		new CargoScreen(this, game);
 	}
 	
+	/**
+	 * 
+	 * @return the frame of the current window.
+	 */
 	public JFrame getJFrame() {
 		return frameShipPropertiesScreen;
 	}

@@ -24,6 +24,12 @@ public class CrewHireScreen {
 	private GameManager gameManager;
 	private Game game;
 	
+	/**
+	 * Opens a window for the player to hire more crew.
+	 * 
+	 * @param gameManager controls the launching and closing of the window.
+	 * @param game stores the current Game data.
+	 */
 	public CrewHireScreen(GameManager gameManager, Game game) {
 		this.gameManager = gameManager;
 		this.game = game;
@@ -31,10 +37,16 @@ public class CrewHireScreen {
 		frameCrewHireScreen.setVisible(true);
 	}
 	
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frameCrewHireScreen.dispose();
 	}
 	
+	/**
+	 * Calls GameManager to close the window.
+	 */
 	public void finishedWindow() {
 		gameManager.closeCrewHireScreen(this);
 	}
