@@ -28,6 +28,13 @@ public class ArrivalScreen {
 	private Island currentIsland;
 	private Store store;
 	
+	/**
+	 * Opens the ArrivalScreen.
+	 * 
+	 * @param gameManager controls the flow of the game.
+	 * @param route the Route the player took to arrive at the current Island.
+	 * @param game the current instance of the Game.
+	 */
 	public ArrivalScreen(GameManager gameManager, Route route, Game game) {
 		this.gameManager = gameManager;
 		this.route = route;
@@ -40,14 +47,24 @@ public class ArrivalScreen {
 		frameArrivalScreen.setVisible(true);
 	}
 	
+	/**
+	 * Closes the current instance of ArrivalScreen.
+	 */
 	public void closeWindow() {
 		frameArrivalScreen.dispose();
 	}
 	
+	/**
+	 * Calls for gameManager to close the ArrivalScreen.
+	 */
 	public void finishedWindow() {
 		gameManager.closeArrivalScreen(this);
 	}
 	
+	/**
+	 * 
+	 * @return the frame of the current window.
+	 */
 	public JFrame getJFrame() {
 		return frameArrivalScreen;
 	}
