@@ -26,6 +26,14 @@ public class UnableToSailPopup {
 	private Game game;
 	private boolean launchedByActivitySelector;
 	
+	/**
+	 * Open an UnableToSailPopup from the ActivitySelectorScreen.
+	 * 
+	 * @param activitySelectorWindow the ActivitySelectorScreen that the popup was opened from.
+	 * @param gameManager where the ActivitySelectorScreen was opened.
+	 * @param game the current instance of the Game.
+	 * @param reason the reaosn the popup was launched.
+	 */
 	public UnableToSailPopup(ActivitySelectorScreen activitySelectorWindow, GameManager gameManager, Game game, String reason) {
 		this.gameManager = gameManager;
 		this.game = game;
@@ -36,6 +44,14 @@ public class UnableToSailPopup {
 		frameUnableToSailPopup.setVisible(true);
 	}
 	
+	/**
+	 * Open an UnableToSailPopup from the RouteSelectionScreen.
+	 * 
+	 * @param routeSelectionWindow the RouteSelectionScreen that the popup was opened from.
+	 * @param gameManager where the RouteSelectionScreen was launched from.
+	 * @param game the current instance of the Game.
+	 * @param reason the reaosn the popup was launched.
+	 */
 	public UnableToSailPopup(RouteSelectionScreen routeSelectionWindow, GameManager gameManager, Game game, String reason) {
 		this.gameManager = gameManager;
 		this.game = game;
@@ -46,20 +62,32 @@ public class UnableToSailPopup {
 		frameUnableToSailPopup.setVisible(true);
 	}
 	
+	/**
+	 * Creates a new instance of ActivitySelectorScreen.
+	 */
 	public void launchActivitySelectorScreen() {
 		ActivitySelectorScreen activitySelectorWindow = new ActivitySelectorScreen(gameManager, game);
 		closeWindow();
 	}
 	
+	/**
+	 * Creates a new instance of RouteSelectionScreen.
+	 */
 	public void launchRouteSelectionWindow() {
 		RouteSelectionScreen routeSelectionWindow = new RouteSelectionScreen(gameManager, game);
 		closeWindow();
 	}
 	
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frameUnableToSailPopup.dispose();
 	}
 
+	/**
+	 * Determines which of the two windows to open either RouteSelectionScreen or ActivitySelectorScreen.
+	 */
 	public void finishedWindow() {
 		if (launchedByActivitySelector) {
 			launchActivitySelectorScreen();

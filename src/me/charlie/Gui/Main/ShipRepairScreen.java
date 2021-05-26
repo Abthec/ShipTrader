@@ -26,6 +26,7 @@ public class ShipRepairScreen {
 	private GameManager gameManager;
 	private Game game;
 	
+	
 	/**
 	 * Constructs an instance of ShipRepairScreen, initializing the GUI component.
 	 * 
@@ -52,6 +53,14 @@ public class ShipRepairScreen {
 	 */
 	public void finishedWindow() {
 		gameManager.closeShipRepairScreen(this);
+	}
+	
+	/**
+	 * 
+	 * @return the frame of the current window.
+	 */
+	public JFrame getJFrame() {
+		return frameShipRepairScreen;
 	}
 	
 	/**

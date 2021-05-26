@@ -17,16 +17,27 @@ public class UnableToHireCrewPopup {
 	private JFrame frameUnableToHireCrewPopup;
 	private ActivitySelectorScreen activitySelectorWindow;
 	
+	/**
+	 * Opens an UnableToHireCrewPopup.
+	 * 
+	 * @param activitySelectorWindow the ActivitySelectorScreen that the popup was launched from.
+	 */
 	public UnableToHireCrewPopup( ActivitySelectorScreen activitySelectorWindow) {
 		this.activitySelectorWindow = activitySelectorWindow;
 		initialize();
 		frameUnableToHireCrewPopup.setVisible(true);
 	}
 	
+	/**
+	 * Closes the popup.
+	 */
 	public void closeWindow() {
 		frameUnableToHireCrewPopup.dispose();
 	}
 	
+	/**
+	 * Calls to close the popup and unhides the ActivitySelectorScreen.
+	 */
 	public void finishedWindow() {
 		activitySelectorWindow.getJFrame().setVisible(true);
 		closeWindow();

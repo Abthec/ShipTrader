@@ -18,6 +18,12 @@ public class UnableToBuyPopup {
 	private StoreBuyScreen storeBuyWindow;
 	private String reason;
 	
+	/**
+	 * Opens an UnableToBuy popup.
+	 * 
+	 * @param storeBuyWindow
+	 * @param reason
+	 */
 	public UnableToBuyPopup(StoreBuyScreen storeBuyWindow, String reason) {
 		this.storeBuyWindow = storeBuyWindow;
 		this.reason = reason;
@@ -25,10 +31,16 @@ public class UnableToBuyPopup {
 		frameUnableToBuyPopup.setVisible(true);
 	}
 	
+	/**
+	 * Closes the popup window.
+	 */
 	public void closeWindow() {
 		frameUnableToBuyPopup.dispose();
 	}
 	
+	/**
+	 * Calls to close the window and unhides the StoreBuyScreen.
+	 */
 	public void finishedWindow() {
 		closeWindow();
 		storeBuyWindow.getJFrame().setVisible(true);

@@ -24,6 +24,12 @@ public class UnableToUpgradePopup {
 	private int returnCode;
 	private String reason;
 	
+	/**
+	 * Opens an UnableToUpgradePopup from the ActivitySelectorScreen.
+	 * 
+	 * @param activitySelectionWindow the ActivitySelectorScreen the popup was opened from.
+	 * @param reason the reason the popup was opened.
+	 */
 	public UnableToUpgradePopup(ActivitySelectorScreen activitySelectionWindow, String reason) {
 		this.returnCode = 0;
 		this.reason = reason;
@@ -31,7 +37,12 @@ public class UnableToUpgradePopup {
 		initialize();
 		frameUnableToUpgradePopup.setVisible(true);
 	}
-	
+	 /**
+	  * Opens an UnableToUpgradePopup from the ShipUpgradeScreen.
+	  * 
+	  * @param shipUpgradeWindow the ShipUpgradeScreen that the popup was opened from.
+	  * @param reason the reason the popup was opened.
+	  */
 	public UnableToUpgradePopup(ShipUpgradeScreen shipUpgradeWindow, String reason) {
 		this.returnCode = 1;
 		this.reason = reason;
@@ -40,23 +51,29 @@ public class UnableToUpgradePopup {
 		frameUnableToUpgradePopup.setVisible(true);
 	}
 	
+	/**
+	 * Unhides the ActivitySelectorScreen and calls to close the window.
+	 */
 	public void launchActivitySelectionWindow() {
 		activitySelectionWindow.getJFrame().setVisible(true);
-		finishedWindow();
+		closeWindow();
 	}
 	
+	/**
+	 * Unides the ShipUpgradeScreen and calls to close the window.
+	 */
 	public void launchShipUpgradeScreen() {
 		shipUpgradeWindow.getJFrame().setVisible(true);
-		finishedWindow();
+		closeWindow();
 	}
 
+	/**
+	 * Closes the popup window.
+	 */
 	public void closeWindow() {
 		frameUnableToUpgradePopup.dispose();
 	}
 	
-	public void finishedWindow() {
-		closeWindow();
-	}
 	/**
 	 * Launch the application.
 	 */

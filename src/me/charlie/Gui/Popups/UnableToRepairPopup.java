@@ -22,27 +22,53 @@ public class UnableToRepairPopup {
 	private ActivitySelectorScreen activitySelectorWindow;
 	private ShipRepairScreen shipRepairWindow;
 	private String reason;
+	private boolean launchedFromActivitySelectorScreen;
 	
+	/**
+	 * Opens an UnableToRepairPopup from the ActivitySelectorScreen.
+	 * 
+	 * @param activitySelectorWindow the ActivitySelectorScreen that the popup was opened from.
+	 * @param reason the reson the popup was opened.
+	 */
 	public UnableToRepairPopup(ActivitySelectorScreen activitySelectorWindow, String reason) {
+		this.launchedFromActivitySelectorScreen = true;
 		this.reason = reason;
 		this.activitySelectorWindow = activitySelectorWindow;
 		initialize();
 		frameUnableToRepair.setVisible(true);
 	}
 	
+	/**
+	 * Opens an UnableToRepairPopup from the ShipRepairScreen.
+	 * 
+	 * @param shipRepairWindow the ShipRepairScreen that the popup was opened from.
+	 * @param reason the reason the popup was opened.
+	 */
 	public UnableToRepairPopup(ShipRepairScreen shipRepairWindow, String reason) {
+		this.launchedFromActivitySelectorScreen = false;
 		this.reason = reason;
 		this.shipRepairWindow = shipRepairWindow;
 		initialize();
 		frameUnableToRepair.setVisible(true);
 	}
 	
+	/**
+	 * Closes the popup window.
+	 */
 	public void closeWindow() {
 		frameUnableToRepair.dispose();
 	}
 	
+	/**
+	 * Calls to close the popup and also unhide the window that the popup was launched from.
+	 */
 	public void finishedWindow() {
-		activitySelectorWindow.getJFrame().setVisible(true);
+		if (launchedFromActivitySelectorScreen) {
+			activitySelectorWindow.getJFrame().setVisible(true);
+		
+		} else {
+			shipRepairWindow.getJFrame().setVisible(true);
+		}
 		closeWindow();
 	}
 

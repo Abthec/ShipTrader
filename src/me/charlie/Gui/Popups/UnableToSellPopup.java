@@ -18,16 +18,27 @@ public class UnableToSellPopup {
 	private JFrame frameUnableToSellPopup;
 	private StoreOptionsScreen storeOptionsWindow;
 	
+	/**
+	 * Open an UnableToSellPopup from the StoreOptionsScreen.
+	 * 
+	 * @param storeOptionsWindow the StoreOptionsScreen where the popup was opened from.
+	 */
 	public UnableToSellPopup(StoreOptionsScreen storeOptionsWindow) {
 		this.storeOptionsWindow = storeOptionsWindow;
 		initialize();
 		frameUnableToSellPopup.setVisible(true);
 	}
 	
+	/**
+	 * Close the poup window.
+	 */
 	public void closeWindow() {
 		frameUnableToSellPopup.dispose();
 	}
 	
+	/**
+	 * Unhides the StoreOptionsScreen and calls to close the window.
+	 */
 	public void finishedWindow() {
 		storeOptionsWindow.getJFrame().setVisible(true);
 		closeWindow();
