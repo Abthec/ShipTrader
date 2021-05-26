@@ -258,14 +258,7 @@ public class GameManager {
 		PiratesEventScreen piratesEventWindow = new PiratesEventScreen(this, game, chosenRoute);
 	}
 	public void launchDiceGame(Route chosenRoute) {
-		List<Item> upgrades = new ArrayList();
-		List<Item> cargo = game.getShip().getCurrentCargo();
-		for (Item item : cargo) {
-			if (item.getItemType().equals(ItemType.UPGRADE)) {
-				upgrades.add(item);
-			}
-		}
-		int handicap = 6*upgrades.size();
+		int handicap = game.getShip().getNumberOfCannons();
 		DiceGame diceGame = new DiceGame(handicap);
 		DiceGameManager diceGameManager = new DiceGameManager(this, game, chosenRoute, handicap, diceGame);
 		this.diceGameManager = diceGameManager;

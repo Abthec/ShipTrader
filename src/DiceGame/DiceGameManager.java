@@ -36,7 +36,6 @@ public class DiceGameManager {
 		this.gameManager = gameManager;
 		this.route = route;
 		this.diceGame = diceGame;
-		
 		this.playerTurnScore = 0;
 		this.playScore = handiCap;
 		this.handicap = handiCap;
