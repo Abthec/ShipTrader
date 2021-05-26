@@ -31,30 +31,42 @@ public class StoreSellScreen {
 	private GameManager gameManager;
 	private Store store;
 	private Game game;
-	private Ship ship;
 	private StoreOptionsScreen storeOptionsWindow;
-	private int listIndex=0;
-	private JButton btnSell;
 	
+	/**
+	 * Opens a window for the player to sell Items.
+	 * 
+	 * @param gameManager controls the launching and closing of the window.
+	 * @param game stores the current Game data.
+	 * @param storeOptionsWindow the window that this window was opened from.
+	 */
 	public StoreSellScreen(GameManager gameManager, Game game, StoreOptionsScreen storeOptionsWindow) {
 		this.gameManager = gameManager;
 		this.game = game;
 		this.store = game.getShip().getCurrentIsland().getStore();
-		this.ship = game.getShip();
 		this.storeOptionsWindow = storeOptionsWindow;
 		initialize();
 		frameStoreSellScreen.setVisible(true);
 	}
 	
+	/**
+	 * Updates the information on the page to be current after an action is performed.
+	 */
 	public void refresh() {
 		closeWindow();
 		storeOptionsWindow.launchStoreSellScreen();
 	}
 	
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frameStoreSellScreen.dispose();
 	}
 	
+	/**
+	 * Calls GameManager to close the window.
+	 */
 	public void finishedWindow() {
 		gameManager.launchStoreOptionsScreen();
 		closeWindow();

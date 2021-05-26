@@ -26,6 +26,12 @@ public class StoreOptionsScreen {
 	private Game game;
 	private Ship ship;
 	
+	/**
+	 * Opens the main Store menu.
+	 * 
+	 * @param gameManager controls the launching and closing of the window.
+	 * @param game where the Game data is stored.
+	 */
 	public StoreOptionsScreen(GameManager gameManager, Game game) {
 		this.gameManager = gameManager;
 		this.game = game;
@@ -35,29 +41,48 @@ public class StoreOptionsScreen {
 		frameStoreOptionsScreen.setVisible(true);
 	}
 	
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frameStoreOptionsScreen.dispose();
 	}
 	
+	/**
+	 * Opens a window for the player to buy Items.
+	 */
 	public void launchStoreBuyScreen() {
 		StoreBuyScreen storeBuyWindow = new StoreBuyScreen(gameManager, game, this);
 		closeWindow();
 	}
 	
+	/**
+	 * Opens a window for the player to sell Items.
+	 */
 	public void launchStoreSellScreen() {
 		StoreSellScreen storeSellWindow = new StoreSellScreen(gameManager, game, this);
 		closeWindow();
 	}
 	
+	/**
+	 * Blocks the player from selling an item.
+	 */
 	public void launchUnableToSellPopup() {
 		frameStoreOptionsScreen.setVisible(false);
 		UnableToSellPopup unableToSellPopup = new UnableToSellPopup(this);
 	}
 
+	/**
+	 * Calls gameManager to close the window.
+	 */
 	public void finishedWindow() {
 		gameManager.closeStoreOptionsScreen(this);
 	}
 	
+	/**
+	 * 
+	 * @return the frame of the current window.
+	 */
 	public JFrame getJFrame() {
 		return frameStoreOptionsScreen;
 	}

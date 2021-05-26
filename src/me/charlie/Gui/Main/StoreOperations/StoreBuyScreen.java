@@ -34,6 +34,13 @@ public class StoreBuyScreen {
 	private StoreOptionsScreen storeOptionsWindow;
 	private int listIndex = 0;
 	
+	/**
+	 * Opens the buy window in the Store.
+	 * 
+	 * @param gameManager controls the launching and closing of the window.
+	 * @param game the current instance of the Game.
+	 * @param storeOptionsWindow the window that this window was opened from.
+	 */
 	public StoreBuyScreen(GameManager gameManager, Game game, StoreOptionsScreen storeOptionsWindow) {
 		this.game = game;
 		this.gameManager = gameManager;
@@ -43,49 +50,43 @@ public class StoreBuyScreen {
 		frameStoreBuyWindow.setVisible(true);
 	}
 	
+	/**
+	 * Refreshes the window to update labels and lists with new information
+	 */
 	public void refresh() {
 		closeWindow();
 		storeOptionsWindow.launchStoreBuyScreen();
 	}
 	
+	/**
+	 * Stops the player from buying an item.
+	 */
 	public void launchUnableToBuyPopup(String reason) {
 		UnableToBuyPopup unableToBuyPopup = new UnableToBuyPopup(this, reason);
 		frameStoreBuyWindow.setVisible(false);
 	}
 	
-	
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frameStoreBuyWindow.dispose();
 	}
 	
+	/**
+	 * Calls gameManager to close the window.
+	 */
 	public void finishedWindow() {
 		gameManager.launchStoreOptionsScreen();
 		closeWindow();
 	}
 	
+	/**
+	 * 
+	 * @return the frame of the current window.
+	 */
 	public JFrame getJFrame() {
 		return frameStoreBuyWindow;
-	}
-
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StoreBuyScreen window = new StoreBuyScreen();
-					window.frameStoreBuyWindow.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-		public StoreBuyScreen() {
-		initialize();
 	}
 	
 	/**
