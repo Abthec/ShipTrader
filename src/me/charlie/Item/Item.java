@@ -17,6 +17,7 @@ public class Item {
     int purchasedPrice;
     int soldPrice;
     boolean usedAsUpgrade;
+    boolean wasStolen;
     Island placeOfPurchase;
     Island placeOfSale;
     String description;
@@ -39,6 +40,13 @@ public class Item {
         } else {
             this.upgradeType = null;
         }
+    }
+    
+    /**
+     * Sets the Item as stolen.
+     */
+    public void setAsStolen() {
+    	this.wasStolen = true;
     }
     
     /**
