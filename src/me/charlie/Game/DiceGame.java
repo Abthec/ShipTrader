@@ -61,13 +61,16 @@ public class DiceGame {
 				return "Good Roll";
 				}
 			}
-	}
+	}/** Pirates rolls the dice, if the roll is good, a random number between 0 and 0.99 is generated.
+	* this is used to randomly decide if the pirates roll again or lock in their score.
+	**/
 	public int PirateTurn(int PirateScore) {
 		int total = PirateScore;
 		int turnValue = 0;
 		boolean F = false;
 		while (F == false) {
 			Roll();
+			System.out.println(String.format("The pirates roll is: %d, %d", dice[0], dice[1] ));
 			int[] Dice = this.dice;
 			if ((Dice[0] ==1) &&(Dice[1] ==1)) {/** Pirate rolled two ones, turn fails total score is reset to zero */
 				 total = 0;
@@ -86,6 +89,7 @@ public class DiceGame {
 				decides randomly to roll again or not */
 					F = true;
 				}
+				System.out.println(String.format("Pirate turn value is : %d", turnValue ));
 			}
 		}
 		return total;

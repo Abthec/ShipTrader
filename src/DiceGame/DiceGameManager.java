@@ -37,7 +37,6 @@ public class DiceGameManager {
 		this.gameManager = gameManager;
 		this.route = route;
 		this.diceGame = diceGame;
-		
 		this.playerTurnScore = 0;
 		this.playScore = handiCap;
 		this.handicap = handiCap;
@@ -91,7 +90,7 @@ public class DiceGameManager {
 	/** calls to the DiceGame.PirateTurn to create a new pirate score based on the one input into the function
 	 * then passes back to the players turn unless the pirate has reached the score threshold 
 	 */
-	private void pirateTurn() {
+	public void pirateTurn() {
 		int pirateTotal = this.pirateScore;
 		int newScore = diceGame.PirateTurn(pirateTotal);
 		this.pirateScore = newScore;
