@@ -15,12 +15,10 @@ public class DiceGameManager {
 	int playerTurnScore;
 	int handicap;
 	int pirateScore;
-	int[] dice;
 	
 	private GameManager gameManager;
 	private Game game;
 	private Route route;
-	private Trader trader;
 	private DiceGame diceGame;
 	
 	private DiceGameRulesWindow diceGamesRulesWindow;
@@ -37,9 +35,9 @@ public class DiceGameManager {
 		this.game = game;
 		this.gameManager = gameManager;
 		this.route = route;
-		this.trader = game.getTrader();
 		this.diceGame = diceGame;
 		
+		this.playerTurnScore = 0;
 		this.playScore = handiCap;
 		this.handicap = handiCap;
 		this.pirateScore = 0;
@@ -58,34 +56,52 @@ public class DiceGameManager {
 	public int getPirateScore(){
 		return pirateScore;
 	}
-	private void playerTurn() {
+	/** Calls to the DiceGame.then alters the players turn and total values based on the string returned.
+	it then calls the next function
+	*/
+	public void playerTurn() {
 		int playerTotal = this.playScore;
 		int handicap = this.handicap;
-		switch (diceGame.PlayerTurn(playerTotal, handicap)) {
+		switch (diceGame.PlayerTurn(playerTotal, handicap, this.playerTurnScore)) {
 			case "Snake Eyes":
+				this.playerTurnScore = 0;
+				this.playScore = this.handicap;
 				launchSnakeEyesWindow();
 				break;
 			case "Rolled One": 
+				this.playerTurnScore = 0;
 				launchRolledOneWindow();
-			case "Vicotry":
-				launchDiceGameVictoryWindow();
+				break;
 			case "Good Roll":
-				int turnScore = this.playerTurnScore;
 				int[] dice = diceGame.getDice();
-				this.playerTurnScore = turnScore + dice[0] +dice[1];
-				this.playScore = playerTotal + dice[0] +dice[1];
+				this.playerTurnScore += dice[0] +dice[1];
+				playerTotal = playerTotal + dice[0] + dice[1];
+				if (playerTotal >= 100) {
+					launchDiceGameVictoryWindow();
+				} else {
 				launchDiceGameRollWindow();
+				}
+				break;
+			case "Victory":
+				launchDiceGameVictoryWindow();
+				break;
 		}
 	}
+	/** calls to the DiceGame.PirateTurn to create a new pirate score based on the one input into the function
+	 * then passes back to the players turn unless the pirate has reached the score threshold 
+	 */
 	private void pirateTurn() {
 		int pirateTotal = this.pirateScore;
 		int newScore = diceGame.PirateTurn(pirateTotal);
 		this.pirateScore = newScore;
-		if (this.pirateScore >= 100) {
+		if (newScore >= 100) {
 			launchDiceGameLossWindow();
 		} else { launchPirateSummaryWindow();
 		}
 	}
+	/** generates a random number between 750 and 250
+	 * this is used as the gold taken if the player loses the dice game
+	 */
 	public void makePenalty() {
 		int penalty = (int)(Math.random()*(500) + 250);
 		this.penalty = penalty;
@@ -109,7 +125,13 @@ public class DiceGameManager {
 		diceGameRollWindow.closeWindow();
 		playerTurn();
 	}
+	/** this is the only time the players total score increases as you must lock in your turn score by ending your turn
+	 * 
+	 */
 	public void passTurn() {
+		int playerTotal = this.playScore;
+		this.playScore = playerTotal + this.playerTurnScore;
+		this.playerTurnScore = 0;
 		diceGameRollWindow.closeWindow();
 		pirateTurn();
 	}
@@ -125,12 +147,14 @@ public class DiceGameManager {
 		DiceGameLossWindow lossWindow = new DiceGameLossWindow(this);
 		this.diceGameLossWindow = lossWindow;
 	}
+	/** applies the penalty, if the penalty is too great, the player loses the game
+	 */
 	public void closeLossWindow(DiceGameLossWindow diceGameLossWindow) {
 		makePenalty();
-		if (game.getTrader().getMoney() < this.penalty) {
-			//Game Over
+		if (game.getTrader().getMoney() < penalty) {
+			gameManager.launchGameoverScreen("You didnt have enough to pay off the pirates!", true);
 		} else {
-			game.getTrader().subtractMoney(this.penalty);
+			game.getTrader().subtractMoney(penalty);
 		}
 		diceGameLossWindow.closeWindow();
 		gameManager.launchArrivalScreen(route);
@@ -142,10 +166,10 @@ public class DiceGameManager {
 	}
 	public void closeSnakeEyesWindow() {
 		snakeEyesWindow.closeWindow();
-		int pirateTotal = this.pirateScore;
-		diceGame.PirateTurn(pirateTotal);
+		pirateTurn();
 	}
 	public void launchRolledOneWindow() {
+		
 		RolledOneWindow rolledOneWindow = new RolledOneWindow(this);
 		this.rolledOneWindow = rolledOneWindow;
 	}

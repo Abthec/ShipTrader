@@ -66,8 +66,8 @@ public class DiceGameRulesWindow {
 		JTextPane Rules = new JTextPane();
 		Rules.setEditable(false);
 		Rules.setText("The game is snake eyes, you roll two dice and the sum is added you your turn score." +
-		" The aim is to reach 100 points total. If you roll a one your turn is over and you get zero for your turn"+
-		" the pirates then have their turn but if you roll two ones, your score is reset back to zero or your handicap and your turn ends");
+		"\nThe aim is to reach 100 points total. If you roll a one your turn is over and you get zero for your turn"+
+		"\nthe pirates then have their turn but if you roll two ones, your score is reset back to zero or your handicap and your turn ends");
 		rulesFrame.getContentPane().add(Rules, "cell 0 0,alignx center,aligny center");
 		rulesFrame.getContentPane().add(readybttn, "cell 0 1,alignx center");
 	}
