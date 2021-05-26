@@ -25,16 +25,27 @@ public class InvalidTraderNamePopup {
 	private JFrame frameInvalidTraderNamePopup;
 	private GameManager gameManager;
 	
+	/**
+	 * Opens an InvalidTraderNamePopup.
+	 * 
+	 * @param gameManager controls the launching and closing of the popup.
+	 */
 	public InvalidTraderNamePopup(GameManager gameManager) {
 		this.gameManager = gameManager;
 		initialize();
 		frameInvalidTraderNamePopup.setVisible(true);
 	}
 	
+	/**
+	 * Closes the popup window.
+	 */
 	public void closeWindow() {
 		frameInvalidTraderNamePopup.dispose();
 	}
 	
+	/**
+	 * Calls gameManager to close the window.
+	 */
 	public void finishedWindow() {
 		gameManager.closeInvalidTraderNamePopup(this);
 	}

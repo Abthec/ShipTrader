@@ -25,6 +25,13 @@ public class PiratesEventScreen {
 	private Route route;
 	private Trader trader;
 	
+	/**
+	 * 
+	 * 
+	 * @param gameManager
+	 * @param game
+	 * @param route
+	 */
 	public PiratesEventScreen(GameManager gameManager, Game game, Route route) {
 		this.game = game;
 		this.gameManager = gameManager;

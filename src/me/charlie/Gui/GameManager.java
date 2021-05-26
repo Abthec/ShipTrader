@@ -241,19 +241,30 @@ public class GameManager {
 	}
 	
 	/**
+	 * Creates an instance of the DrowningSailorsEventScreen
 	 * 
-	 * 
-	 * @param routeChosen
+	 * @param routeChosen the Route on which the event occurs.
 	 */
 	public void launchDrowningSailorsEventScreen(Route routeChosen) {
 		DrowningSailorsEventScreen drowningSailorsEventScreen = new DrowningSailorsEventScreen(this, game, routeChosen);
 	}
 	
+	/**
+	 * Closes the current instance of DrowningSailorsEventScreen.
+	 * 
+	 * @param drowningSailorsEventScreen the current instance of DrowningSailorsEventScreen.
+	 * @param chosenRoute the Route on which the event occurs.
+	 */
 	public void closeDrowningSailorsEventScreen(DrowningSailorsEventScreen drowningSailorsEventScreen, Route chosenRoute) {
 		drowningSailorsEventScreen.closeWindow();
 		launchArrivalScreen(chosenRoute);
 	}
 	
+	/**
+	 * Creates an instance of PiratesEventScreen.
+	 * 
+	 * @param chosenRoute the route on which the event occurs.
+	 */
 	public void launchPiratesEventScreen(Route chosenRoute) {
 		PiratesEventScreen piratesEventWindow = new PiratesEventScreen(this, game, chosenRoute);
 	}
@@ -263,77 +274,155 @@ public class GameManager {
 		DiceGameManager diceGameManager = new DiceGameManager(this, game, chosenRoute, handicap, diceGame);
 		this.diceGameManager = diceGameManager;
 	}
+	
+	/**
+	 * Closes the current instance of PiratesEventScreen.
+	 * 
+	 * @param piratesEventWindow the current instance of PiratesEventScreen.
+	 * @param chosenRoute the route on which the event occurs.
+	 */
 	public void closePiratesEventScreen(PiratesEventScreen piratesEventWindow, Route chosenRoute) {
 		piratesEventWindow.closeWindow();
 		launchDiceGame(chosenRoute);
 	}
 	
+	/**
+	 * Creates an instance of ArrivalScreen.
+	 * 
+	 * @param chosenRoute the Route which the player has just traveled.
+	 */
 	public void launchArrivalScreen(Route chosenRoute) {
 		ArrivalScreen arrivalWindow = new ArrivalScreen(this, chosenRoute, game);
 	}
 	
+	/**
+	 * Closes the current instance of ArrivalScreen.
+	 * 
+	 * @param arrivalWindow the current instance of ArrivalScreen.
+	 */
 	public void closeArrivalScreen(ArrivalScreen arrivalWindow) {
 		arrivalWindow.closeWindow();
 		launchActivitySelectorScreen();
 	}
 	
+	/**
+	 * Creates an instance of StoreOptionsScreen.
+	 */
 	public void launchStoreOptionsScreen() {
 		StoreOptionsScreen storeOptionsWindow = new StoreOptionsScreen(this, game);
 	}
 	
+	/**
+	 * Closes the current instance of StoreOptionsScreen.
+	 * 
+	 * @param storeOptionsWindow the current instance of StoreOptionsScreen.
+	 */
 	public void closeStoreOptionsScreen(StoreOptionsScreen storeOptionsWindow) {
 		storeOptionsWindow.closeWindow();
 		launchActivitySelectorScreen();
 	}
 	
+	/**
+	 * Creates an instance of CrewHireScreen.
+	 */
 	public void launchCrewHireScreen() {
 		CrewHireScreen crewHireWindow = new CrewHireScreen(this, game);
 	}
 	
+	/**
+	 * Closes the current instance of CrewHireScreen.
+	 * 
+	 * @param crewHireWindow the current instance of CrewHireScreen.
+	 */
 	public void closeCrewHireScreen(CrewHireScreen crewHireWindow) {
 		crewHireWindow.closeWindow();
 		launchActivitySelectorScreen();
 	}
 	
+	/**
+	 * Creates an instance of ShipRepairScreen.
+	 */
 	public void launchShipRepairScreen() {
 		ShipRepairScreen shipRepairWindow = new ShipRepairScreen(this, game);
 	}
 	
+	/**
+	 * Closes the current instance of ShipRepairScreen.
+	 * 
+	 * @param shipRepairWindow the current instance of ShipRepairScreen.
+	 */
 	public void closeShipRepairScreen(ShipRepairScreen shipRepairWindow) {
 		shipRepairWindow.closeWindow();
 		launchActivitySelectorScreen();
 	}
 	
+	/**
+	 * Creates an instance of ShipPropertiesScreen.
+	 */
 	public void launchShipPropertiesScreen() {
 		ShipPropertiesScreen shipPropertiesWindow = new ShipPropertiesScreen(this, game);
 	}
 	
+	/**
+	 * Closes the current instance of ShipPropertiesScreen.
+	 * 
+	 * @param shipPropertiesWindow the current instance of ShipPropertiesScreen.
+	 */
 	public void closeShipPropertiesScreen(ShipPropertiesScreen shipPropertiesWindow) {
 		shipPropertiesWindow.closeWindow();
 		launchActivitySelectorScreen();
 	}
 	
+	/**
+	 * Creates an instance of ShipUpgrdeScreen.
+	 * 
+	 * @param outcome the outcome of the upgrade attempt.
+	 */
 	public void launchShipUpgrdeScreen(String outcome) {
 		ShipUpgradeScreen shipUpgradeWindow = new ShipUpgradeScreen(this, game, outcome);
 	}
 	
+	/**
+	 * Closes the current instance of ShipUpgrdeScreen.
+	 * 
+	 * @param shipUpgradeWindow the current instance of ShipUpgrdeScreen.
+	 */
 	public void closeShipUpgradeScreen(ShipUpgradeScreen shipUpgradeWindow) {
 		shipUpgradeWindow.closeWindow();
 		launchActivitySelectorScreen();
 	}
 	
+	/**
+	 * Creates an instance of GameoverScreen.
+	 * 
+	 * @param reason the reason for the Game ending.
+	 * @param lossToPirates true if the Game is ending because of pirates, false otherwise.
+	 */
 	public void launchGameoverScreen(String reason, boolean lossToPirates) {
 		GameoverScreen gameoverWindow = new GameoverScreen(game, this, reason, lossToPirates);
 	}
 	
+	/**
+	 * Checks if the player is able to pay their sailors one days worth of sailing wages.
+	 * 
+	 * @return true if they can pay their crew, false otherwise.
+	 */
 	public boolean canAffordToPayCrewOneDaysWages() {
 		return game.getTrader().getMoney() > game.getShip().getCurrentCrewSize()*10;
 	}
 	
+	/**
+	 * 
+	 * @return true if the player has items in their cargo.
+	 */
 	public boolean hasItemsToSell() {
 		return game.getShip().getCurrentCargo().size() > 0;
 	}
 	
+	/**
+	 * 
+	 * @return true if the player has enough days remaining to sail to another island, false otherwise.
+	 */
 	public boolean canSailSomewhere() {
 		boolean canSail = false;
 		if (game.getDaysRemaining()==0) {

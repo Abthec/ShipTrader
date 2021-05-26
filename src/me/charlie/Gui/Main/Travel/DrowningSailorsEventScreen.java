@@ -36,6 +36,13 @@ public class DrowningSailorsEventScreen {
 	private JButton btnSave;
 	private JButton btnLeave;
 	
+	/**
+	 * Initiates a DrowningSailorsEvent.
+	 * 
+	 * @param gameManager controls the flow of the game.
+	 * @param game the current instance of the Game.
+	 * @param route the Route the event occurred on.
+	 */
 	public DrowningSailorsEventScreen(GameManager gameManager, Game game, Route route) {
 		this.gameManager = gameManager;
 		this.game = game;
@@ -46,14 +53,25 @@ public class DrowningSailorsEventScreen {
 		frameDrowningSailorsEventScreen.setVisible(true);
 	}
 	
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frameDrowningSailorsEventScreen.dispose();
 	}
 	
+	/**
+	 * Calls gameManager to close the window.
+	 */
 	public void finishedWindow() {
 		gameManager.closeDrowningSailorsEventScreen(this, route);
 	}
 	
+	/**
+	 * Adds the saved sailors to the current crew count, while checking not to go over the max crew count.
+	 * 
+	 * @return the number of crew members added.
+	 */
 	public int sailorsJoinCrew() {
 		int crewHired = 0;
 		for (int i=0; i<sailorsSaved; i++) {
@@ -65,25 +83,45 @@ public class DrowningSailorsEventScreen {
 		return crewHired;
 	}
 	
+	/**
+	 * Adds 100 coins to the Traders wallet for every sailor saved.
+	 * 
+	 * @return the amount of money added to the Traders wallet.
+	 */
 	public int giveReward() {
 		trader.addMoney(sailorsSaved*100);
 		return sailorsSaved*100;
 	}
 	
+	/**
+	 * Sets the outcome of the sailor event.
+	 * 
+	 * @param crewAquired the number of sailors added to the Ship's crew.
+	 * @param moneyAquired the amount of coins added to the Trader's wallet.
+	 */
 	public void setOutcomeText(int crewAquired, int moneyAquired) {
 		lblOutcome.setText("The sailors gave you " + moneyAquired 
 				+ " coins as a reward. " + crewAquired + " sailors also joined your crew.");
 	}
 	
+	/**
+	 * Updates the text of the money and crew size label.
+	 */
 	public void setUpdatedStatsText() {
 		lblUpdatedWalletAndCrewStatus.setText("Current wallet is " + trader.getMoney() 
 				+ " coins. " + "Current crew size is " + game.getShip().getCurrentCrewSize() + ".");
 	}
 	
+	/**
+	 * Sets the outcome of the event to say the sailors drowned.
+	 */
 	public void leaveToDrown() {
 		lblOutcome.setText("You left the sailors!");
 	}
 	
+	/**
+	 * Disables the leave and save buttons and enables the continue button.
+	 */
 	public void setContinueBtn() {
 		btnLeave.setEnabled(false);
 		btnSave.setEnabled(false);
@@ -91,6 +129,10 @@ public class DrowningSailorsEventScreen {
 		btnContinue.setVisible(true);
 	}
 	
+	/**
+	 * 
+	 * @return the frame of the current window.
+	 */
 	public JFrame getJFrame() {
 		return frameDrowningSailorsEventScreen;
 	}

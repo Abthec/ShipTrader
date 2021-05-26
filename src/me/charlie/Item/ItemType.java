@@ -7,6 +7,10 @@ public enum ItemType {
     JEWEL,
     ARTIFACT;
 
+	/**
+	 * 
+	 * @return the size of the Item depending on ItemType.
+	 */
     public int getSize() {
         switch (this) {
             case JEWEL:
@@ -22,6 +26,11 @@ public enum ItemType {
         }
     }
 
+    /**
+     * 
+     * @param itemType the ItemType of a given item.
+     * @return the maximum amount of coins an Item of specific ItemType can cost.
+     */
    public int getUpperCostBound(ItemType itemType) {
        switch (itemType) {
            case ARTIFACT:
@@ -37,6 +46,11 @@ public enum ItemType {
        }
    }
 
+   /**
+    * 
+    * @param itemType the ItemType of a given item.
+    * @return the minimum amount of coins an Item of specific ItemType can cost.
+    */
    public int getLowerCostBound(ItemType itemType) {
        switch (itemType) {
            case ARTIFACT:
@@ -52,6 +66,10 @@ public enum ItemType {
        }
    }
 
+   /**
+    * 
+    * @return a description of the item.
+    */
     public String getDescription() {
         switch (this) {
             default:
@@ -59,6 +77,10 @@ public enum ItemType {
         }
     }
 
+    /**
+     * 
+     * @return the ItemType as a formatted String.
+     */
     public String getName() {
         return toString().substring(0, 1).toUpperCase() + toString().substring(1).toLowerCase().replace("_", " ");
     }

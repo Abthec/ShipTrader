@@ -6,6 +6,7 @@ import me.charlie.Game.DiceGame;
 import me.charlie.Game.Game;
 import me.charlie.Gui.GameManager;
 import me.charlie.Island.Route;
+import me.charlie.Item.Item;
 import me.charlie.Trader.Trader;
 
 ;
@@ -102,7 +103,7 @@ public class DiceGameManager {
 	 * this is used as the gold taken if the player loses the dice game
 	 */
 	public void makePenalty() {
-		int penalty = (int)(Math.random()*(500) + 250);
+		int penalty = (int)(Math.random()*(250) + 250);
 		this.penalty = penalty;
 	}
 	public int getPenalty() {
@@ -150,13 +151,22 @@ public class DiceGameManager {
 	 */
 	public void closeLossWindow(DiceGameLossWindow diceGameLossWindow) {
 		makePenalty();
-		if (game.getTrader().getMoney() < penalty) {
-			gameManager.launchGameoverScreen("You didnt have enough to pay off the pirates!", true);
+		int itemWeatlh = 0;
+		
+		for (Item item : game.getShip().getCurrentCargo()) {
+			itemWeatlh += item.getBuyCost();
+			item.setAsStolen();
+			game.getShip().getReceipts().add(item);
+		}
+		
+		if (itemWeatlh < penalty) {
+			gameManager.launchGameoverScreen("Your items didn't satisfy the pirates!", true);
 		} else {
-			game.getTrader().subtractMoney(penalty);
+			game.getShip().getCurrentCargo().clear();
+			gameManager.launchArrivalScreen(route);
 		}
 		diceGameLossWindow.closeWindow();
-		gameManager.launchArrivalScreen(route);
+		
 
 	}
 	public void launchSnakeEyesWindow() {
