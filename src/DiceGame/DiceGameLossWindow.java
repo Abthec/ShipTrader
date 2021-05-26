@@ -13,7 +13,6 @@ public class DiceGameLossWindow {
 
 	private JFrame lossFrame;
 	private DiceGameManager diceGameManager;
-	private int penalty;
 
 	/**
 	 * Launch the application.

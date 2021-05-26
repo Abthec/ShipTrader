@@ -20,8 +20,7 @@ public class DiceGameRollWindow {
 	private JFrame rollFrame;
 	private DiceGameManager diceGameManager;
 	private DiceGame diceGame;
-	private int playerScore;
-	private int playerTurn;
+
 
 	/**
 	 * Launch the application.
