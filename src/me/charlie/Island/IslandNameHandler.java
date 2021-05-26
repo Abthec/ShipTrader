@@ -10,6 +10,9 @@ public class IslandNameHandler {
 
     private List<String> names = new ArrayList<>();
 
+    /**
+     * Creates an instance of IslandNameHandler and adds names to a list.
+     */
     public IslandNameHandler() {
         this.names.add("Turkmenistan");
         this.names.add("Kyrgyzstan");
@@ -21,6 +24,11 @@ public class IslandNameHandler {
         this.names.add("Jerry2 Electric Boogaloo");
     }
 
+    /**
+     * Gets a random name from the list and then removes it from the list.
+     * 
+     * @return a random name from the list.
+     */
     public String getName() {
         String name = this.names.get(this.random.nextInt(this.names.size() - 1));
         this.names.remove(name);

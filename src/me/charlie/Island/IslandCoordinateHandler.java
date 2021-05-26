@@ -21,10 +21,18 @@ public class IslandCoordinateHandler {
         }
     }
 
+    /**
+     * 
+     * @return a List of the Locations of all the Islands.
+     */
     public List<Location> getIslandCoordinates() {
         return islandLocations;
     }
 
+    /**
+     * 
+     * @return the Location of the first Island in the List.
+     */
     public Location getCoordinate() {
         location = this.islandLocations.get(0);
         this.islandLocations.remove(0);
