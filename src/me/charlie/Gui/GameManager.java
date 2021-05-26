@@ -266,7 +266,7 @@ public class GameManager {
 	 * @param chosenRoute the route on which the event occurs.
 	 */
 	public void launchPiratesEventScreen(Route chosenRoute) {
-		PiratesEventScreen piratesEventWindow = new PiratesEventScreen(this, game, chosenRoute);
+		PiratesEventScreen piratesEventWindow = new PiratesEventScreen(this, chosenRoute);
 	}
 	public void launchDiceGame(Route chosenRoute) {
 		List<Item> upgrades = new ArrayList();

@@ -16,39 +16,48 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextPane;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class PiratesEventScreen {
 
 	private JFrame framePirateEventScreen;
 	private GameManager gameManager;
-	private Game game;
 	private Route route;
-	private Trader trader;
 	
 	/**
+	 * Creates a PirateEventScreen.
 	 * 
-	 * 
-	 * @param gameManager
-	 * @param game
-	 * @param route
+	 * @param gameManager controls the PirateEvent
+	 * @param route the Route on which the event occurred.
 	 */
-	public PiratesEventScreen(GameManager gameManager, Game game, Route route) {
-		this.game = game;
+	public PiratesEventScreen(GameManager gameManager, Route route) {
 		this.gameManager = gameManager;
 		this.route = route;
-		this.trader = game.getTrader();
 		initialize();
 		framePirateEventScreen.setVisible(true);
 	}
 	
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		framePirateEventScreen.dispose();
 	}
 	
+	/**
+	 * Calls gameManager to close the window.
+	 */
 	public void finishedWindow() {
 		gameManager.closePiratesEventScreen(this, route);
 	}
 	
+	/**
+	 * 
+	 * @return the frame of the current window.
+	 */
 	public JFrame getJFrame() {
 		return framePirateEventScreen;
 	}
@@ -81,10 +90,11 @@ public class PiratesEventScreen {
 	 */
 	private void initialize() {
 		framePirateEventScreen = new JFrame();
-		framePirateEventScreen.setBounds(100, 100, 560, 450);
+		framePirateEventScreen.setBounds(100, 100, 630, 241);
 		framePirateEventScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btnContinue = new JButton("CONTINUE");
+		btnContinue.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnContinue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				finishedWindow();
@@ -92,11 +102,11 @@ public class PiratesEventScreen {
 		});
 		framePirateEventScreen.getContentPane().setLayout(new MigLayout("", "[85px,grow]", "[grow][23px]"));
 		
-		JTextPane introduction = new JTextPane();
-		framePirateEventScreen.getContentPane().add(introduction, "cell 0 0,alignx center,aligny center");
+		JLabel lblNewLabel = new JLabel("You have been boarded by pirates! You will have to beat them in a game to deter them.");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		framePirateEventScreen.getContentPane().add(lblNewLabel, "cell 0 0");
 		framePirateEventScreen.getContentPane().add(btnContinue, "cell 0 1,alignx center,aligny center");
-		introduction.setEditable(false);
-		introduction.setText("Youve been boarded by pirates, youll have to beat them in a dice game to protect your inventory!");
 	}
 
 }

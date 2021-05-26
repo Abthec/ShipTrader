@@ -31,6 +31,13 @@ public class StormyWeatherEventScreen {
 	private Game game;
 	private Ship ship;
 	
+	/**
+	 * Creates a StormyWeatherEventScreen.
+	 * 
+	 * @param gameManager controls the launching and closing of the event.
+	 * @param route the Route on which the event occurred.
+	 * @param game the current instance of the Game.
+	 */
 	public StormyWeatherEventScreen(GameManager gameManager, Route route, Game game) {
 		this.gameManager = gameManager;
 		this.route = route;
@@ -41,14 +48,24 @@ public class StormyWeatherEventScreen {
 		frameStormyWeatherEventScreen.setVisible(true);
 	}
 	
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frameStormyWeatherEventScreen.dispose();
 	}
 	
+	/**
+	 * Calls GameManager to close the window and launch the next window.
+	 */
 	public void finishedWindow() {
 		gameManager.closeStormyWeatherEventScreen(this, route);
 	}
 	
+	/**
+	 * 
+	 * @return the frame of the current window.
+	 */
 	public JFrame getJFrame() {
 		return frameStormyWeatherEventScreen;
 	}

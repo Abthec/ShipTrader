@@ -44,6 +44,12 @@ public class RouteSelectionScreen {
 	private Route chosenRoute;
 	private int listIndex=0;
 	
+	/**
+	 * Creates a RouteSelectionScreen.
+	 * 
+	 * @param gameManager controls the launching and closing of the window.
+	 * @param game the current instance of the Game.
+	 */
 	public RouteSelectionScreen(GameManager gameManager, Game game) {
 		this.game = game;
 		this.gameManager = gameManager;
@@ -52,6 +58,9 @@ public class RouteSelectionScreen {
 		frameRouteSelectionScreen.setVisible(true);
 	}
 	
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frameRouteSelectionScreen.dispose();
 	}
@@ -76,15 +85,27 @@ public class RouteSelectionScreen {
 		}
 	}
 	
+	/**
+	 * Stops the player from sailing with a popup.
+	 * 
+	 * @param reason the reason the player cannot sail.
+	 */
 	public void launchUnableToSailPopup(String reason) {
 		UnableToSailPopup unableToSailPopup = new UnableToSailPopup(this, gameManager, game, reason);
 	}
 	
+	/**
+	 * Takes the player back to the ActivitySelectorScreen.
+	 */
 	public void goBack() {
 		gameManager.launchActivitySelectorScreen();
 		closeWindow();
 	}
 
+	/**
+	 * 
+	 * @return the frame of the current window.
+	 */
 	public JFrame getJFrame() {
 		return frameRouteSelectionScreen;
 	}
