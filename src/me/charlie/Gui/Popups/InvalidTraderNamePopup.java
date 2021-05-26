@@ -1,6 +1,5 @@
 package me.charlie.Gui.Popups;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Window.Type;
 import java.awt.event.ActionEvent;
@@ -46,29 +45,6 @@ public class InvalidTraderNamePopup {
 	 */
 	public void finishedWindow() {
 		gameManager.closeInvalidTraderNamePopup(this);
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InvalidTraderNamePopup window = new InvalidTraderNamePopup();
-					window.frameInvalidTraderNamePopup.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public InvalidTraderNamePopup() {
-		initialize();
 	}
 
 	/**

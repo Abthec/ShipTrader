@@ -64,6 +64,8 @@ public class StoreBuyScreen {
 
 	/**
 	 * Stops the player from buying an item.
+	 * 
+	 * @param reason the reason the popup is being launched.
 	 */
 	public void launchUnableToBuyPopup(String reason) {
 		UnableToBuyPopup unableToBuyPopup = new UnableToBuyPopup(this, reason);

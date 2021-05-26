@@ -1,7 +1,6 @@
 package me.charlie.Gui.gameSetup;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -96,29 +95,6 @@ public class ShipSelectionScreen {
 	 */
 	public JFrame getJFrame() {
 		return frameShipSelectoionScreen;
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ShipSelectionScreen window = new ShipSelectionScreen();
-					window.frameShipSelectoionScreen.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public ShipSelectionScreen() {
-		initialize();
 	}
 
 	/**

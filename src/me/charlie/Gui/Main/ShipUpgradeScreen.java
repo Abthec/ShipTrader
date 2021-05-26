@@ -1,6 +1,5 @@
 package me.charlie.Gui.Main;
 
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -127,29 +126,6 @@ public class ShipUpgradeScreen {
 			}
 		}
 		return upgrades;
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ShipUpgradeScreen window = new ShipUpgradeScreen();
-					window.frameShipUpgradeScreen.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public ShipUpgradeScreen() {
-		initialize();
 	}
 
 	/**

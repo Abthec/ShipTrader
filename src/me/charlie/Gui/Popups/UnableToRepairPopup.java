@@ -1,6 +1,5 @@
 package me.charlie.Gui.Popups;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Window.Type;
 import java.awt.event.ActionEvent;
@@ -77,29 +76,6 @@ public class UnableToRepairPopup {
 			shipRepairWindow.getJFrame().setVisible(true);
 		}
 		closeWindow();
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UnableToRepairPopup window = new UnableToRepairPopup();
-					window.frameUnableToRepair.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public UnableToRepairPopup() {
-		initialize();
 	}
 
 	/**

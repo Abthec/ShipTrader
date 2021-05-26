@@ -1,6 +1,5 @@
 package me.charlie.Gui.Main.StoreOperations;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -91,29 +90,6 @@ public class StoreOptionsScreen {
 	 */
 	public JFrame getJFrame() {
 		return frameStoreOptionsScreen;
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StoreOptionsScreen window = new StoreOptionsScreen();
-					window.frameStoreOptionsScreen.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public StoreOptionsScreen() {
-		initialize();
 	}
 
 	/**

@@ -161,8 +161,8 @@ public class GameManager {
 	 * Takes the player back to the ShipSelectionScreen without terminating the
 	 * current instance of ShipPropertiesScreen.
 	 * 
-	 * @param shipPropertiesWindow   the instance of ShipPropertiesScreen.
-	 * @param shipSelectionWindowthe instance of ShipSelectionScreen.
+	 * @param shipPropertiesWindow the instance of ShipPropertiesScreen.
+	 * @param shipSelectionWindow  the instance of ShipSelectionScreen.
 	 */
 	public void shipPropertiesGoBack(SetupShipPropertiesScreen shipPropertiesWindow,
 			ShipSelectionScreen shipSelectionWindow) {
@@ -173,7 +173,7 @@ public class GameManager {
 	/**
 	 * Terminates the current instance of ShipPropertiesScreen.
 	 * 
-	 * @param shipPropertiesWindow
+	 * @param shipPropertiesWindow the window that is being closed.
 	 */
 	public void closeShipPropertiesScreen(SetupShipPropertiesScreen shipPropertiesWindow) {
 		this.chosenShip = shipPropertiesWindow.getShip();
@@ -275,6 +275,11 @@ public class GameManager {
 		PiratesEventScreen piratesEventWindow = new PiratesEventScreen(this, chosenRoute);
 	}
 
+	/**
+	 * Launches the dice game to fight the pirates
+	 * 
+	 * @param chosenRoute the route on which the pirates attacked.
+	 */
 	public void launchDiceGame(Route chosenRoute) {
 		int handicap = game.getShip().getNumberOfCannons();
 		DiceGame diceGame = new DiceGame(handicap);
@@ -455,6 +460,11 @@ public class GameManager {
 		return canSail;
 	}
 
+	/**
+	 * Begins the game loop
+	 * 
+	 * @param args args
+	 */
 	public static void main(String[] args) {
 		GameManager gameManager = new GameManager();
 		gameManager.launchStartupScreen();

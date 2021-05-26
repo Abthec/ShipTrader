@@ -17,6 +17,13 @@ public class IslandCoordinateHandler {
 	private Random random = new Random();
 	int islandTotal;
 
+	/**
+	 * Creates an IslandCoordinateHandler object which creates a list of coordinates
+	 * for the islands.
+	 * 
+	 * @param islandTotal the total number of islands coordinates need to be
+	 *                    generated for.
+	 */
 	public IslandCoordinateHandler(int islandTotal) {
 		this.islandTotal = islandTotal;
 		while (islandLocations.size() <= islandTotal - 1) {

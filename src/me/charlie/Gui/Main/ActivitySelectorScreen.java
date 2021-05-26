@@ -1,6 +1,5 @@
 package me.charlie.Gui.Main;
 
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Window.Type;
@@ -154,29 +153,6 @@ public class ActivitySelectorScreen {
 	 */
 	public JFrame getJFrame() {
 		return frameActivitySelector;
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ActivitySelectorScreen window = new ActivitySelectorScreen();
-					window.frameActivitySelector.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public ActivitySelectorScreen() {
-		initialize();
 	}
 
 	/**

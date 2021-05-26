@@ -1,6 +1,5 @@
 package me.charlie.Gui.Popups;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,29 +48,6 @@ public class UnableToHireCrewPopup {
 	public void finishedWindow() {
 		activitySelectorWindow.getJFrame().setVisible(true);
 		closeWindow();
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UnableToHireCrewPopup window = new UnableToHireCrewPopup();
-					window.frameUnableToHireCrewPopup.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public UnableToHireCrewPopup() {
-		initialize();
 	}
 
 	/**

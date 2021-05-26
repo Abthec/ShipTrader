@@ -1,6 +1,5 @@
 package me.charlie.Gui.Main;
 
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -77,6 +76,11 @@ public class ShipRepairScreen {
 		UnableToRepairPopup unableToRepairPopup = new UnableToRepairPopup(this, reason);
 	}
 
+	/**
+	 * Calculates the cost to fully repair the ship.
+	 * 
+	 * @return the cost to fully repair the ship.
+	 */
 	public int getFullRepairCost() {
 		Ship ship = game.getShip();
 		double eachRepair = ship.getShipEndurance() / 10;
@@ -84,29 +88,6 @@ public class ShipRepairScreen {
 		int numberOfRepairs = (int) Math.ceil(healthMissing / eachRepair);
 		int fullRepairCost = numberOfRepairs * 100;
 		return fullRepairCost;
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ShipRepairScreen window = new ShipRepairScreen();
-					window.frameShipRepairScreen.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public ShipRepairScreen() {
-		initialize();
 	}
 
 	/**

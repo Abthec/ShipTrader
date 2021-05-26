@@ -1,6 +1,5 @@
 package me.charlie.Gui.Popups;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,8 +27,8 @@ public class UnableToBuyPopup {
 	/**
 	 * Opens an UnableToBuy popup.
 	 * 
-	 * @param storeBuyWindow
-	 * @param reason
+	 * @param storeBuyWindow the window the popup was opened from.
+	 * @param reason         the reason the popup was opened.
 	 */
 	public UnableToBuyPopup(StoreBuyScreen storeBuyWindow, String reason) {
 		this.storeBuyWindow = storeBuyWindow;
@@ -51,29 +50,6 @@ public class UnableToBuyPopup {
 	public void finishedWindow() {
 		closeWindow();
 		storeBuyWindow.getJFrame().setVisible(true);
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UnableToBuyPopup window = new UnableToBuyPopup();
-					window.frameUnableToBuyPopup.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public UnableToBuyPopup() {
-		initialize();
 	}
 
 	/**

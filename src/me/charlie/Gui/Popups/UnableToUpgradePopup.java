@@ -1,6 +1,5 @@
 package me.charlie.Gui.Popups;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -79,29 +78,6 @@ public class UnableToUpgradePopup {
 	 */
 	public void closeWindow() {
 		frameUnableToUpgradePopup.dispose();
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UnableToUpgradePopup window = new UnableToUpgradePopup();
-					window.frameUnableToUpgradePopup.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public UnableToUpgradePopup() {
-		initialize();
 	}
 
 	/**

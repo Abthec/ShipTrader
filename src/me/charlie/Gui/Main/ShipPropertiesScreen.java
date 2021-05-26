@@ -1,6 +1,5 @@
 package me.charlie.Gui.Main;
 
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -71,29 +70,6 @@ public class ShipPropertiesScreen {
 	 */
 	public JFrame getJFrame() {
 		return frameShipPropertiesScreen;
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ShipPropertiesScreen window = new ShipPropertiesScreen();
-					window.frameShipPropertiesScreen.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public ShipPropertiesScreen() {
-		initialize();
 	}
 
 	/**

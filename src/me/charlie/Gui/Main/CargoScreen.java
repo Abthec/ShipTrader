@@ -1,6 +1,5 @@
 package me.charlie.Gui.Main;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -67,29 +66,6 @@ public class CargoScreen {
 	public void finishedWindow() {
 		shipPropertiesWindow.getJFrame().setVisible(true);
 		closeWindow();
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CargoScreen window = new CargoScreen();
-					window.frameCargoScreen.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public CargoScreen() {
-		initialize();
 	}
 
 	/**

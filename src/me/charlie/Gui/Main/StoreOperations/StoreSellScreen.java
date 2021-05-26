@@ -1,6 +1,5 @@
 package me.charlie.Gui.Main.StoreOperations;
 
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -75,29 +74,6 @@ public class StoreSellScreen {
 	public void finishedWindow() {
 		gameManager.launchStoreOptionsScreen();
 		closeWindow();
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StoreSellScreen window = new StoreSellScreen();
-					window.frameStoreSellScreen.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public StoreSellScreen() {
-		initialize();
 	}
 
 	/**

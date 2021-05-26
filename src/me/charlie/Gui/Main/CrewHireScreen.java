@@ -1,6 +1,5 @@
 package me.charlie.Gui.Main;
 
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -54,29 +53,6 @@ public class CrewHireScreen {
 	 */
 	public void finishedWindow() {
 		gameManager.closeCrewHireScreen(this);
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CrewHireScreen window = new CrewHireScreen();
-					window.frameCrewHireScreen.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public CrewHireScreen() {
-		initialize();
 	}
 
 	/**
