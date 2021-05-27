@@ -9,7 +9,11 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/** tells the player how many points the pirates have after they've made their turn.
+ * button starts the players next turn and rolls the dice
+ * @author Josef
+ *
+ */
 public class PirateSummaryWindow {
 
 	private JFrame summaryFrame;

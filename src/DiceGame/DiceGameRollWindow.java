@@ -15,6 +15,11 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.awt.event.ActionEvent;
 
+/** Creates a summary of the players last roll, current turn value, current total score and pirates current total score
+ * Provides options to the player to lock in their current turn score or roll again
+ * @author Josef
+ *
+ */
 public class DiceGameRollWindow {
 
 	private JFrame rollFrame;

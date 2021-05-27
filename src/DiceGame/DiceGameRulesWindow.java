@@ -8,7 +8,10 @@ import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/** when the dice game launches this window opens to explain the rules and flow of the game
+ * @author Josef
+ *
+ */
 public class DiceGameRulesWindow {
 
 	private JFrame rulesFrame;

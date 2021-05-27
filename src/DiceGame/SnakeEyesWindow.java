@@ -8,7 +8,10 @@ import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/** lets the player know they rolled snake eyes, their score has been reset and the turn will pass to the pirates
+ * @author Josef
+ *
+ */
 public class SnakeEyesWindow {
 
 	private JFrame snakeEyesFrame;
@@ -45,7 +48,7 @@ public class SnakeEyesWindow {
 	 }
 	 private String getSummary() {
 		int score =  diceGameManager.getPirateScore();
-		String summary = String.format("You rolled snake eyes so your turn is over and your score has been reset. Your current score is %o"+
+		String summary = String.format("You rolled snake eyes so your turn is over and your score has been reset. Your current score is %d"+
 		" The pirates will now make their turn" ,score);
 		return summary;
 	 }

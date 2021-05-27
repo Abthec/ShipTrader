@@ -8,7 +8,10 @@ import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/** lets the player know that they rolled a one, they got zero points for their turn and its now the pirates turn
+ * @author Josef
+ *
+ */
 public class RolledOneWindow {
 
 	private JFrame rolledOneFrame;

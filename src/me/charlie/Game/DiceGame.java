@@ -1,5 +1,10 @@
 package me.charlie.Game;
-
+/** The DiceGame class uses the players/pirates current score and players turn score
+ * The player simply does one roll before asking the player if they would like to roll again
+ * the pirate turn will keep rolling the dice untill it decides to stop or gets a failed roll
+ * @author Josef
+ *
+ */
 public class DiceGame {
 	
 	int playerScore;

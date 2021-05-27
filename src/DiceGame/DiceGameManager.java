@@ -9,8 +9,13 @@ import me.charlie.Island.Route;
 import me.charlie.Item.Item;
 import me.charlie.Trader.Trader;
 
-;
-
+/**DiceGameManager controls and stores the variables required to play the dice game
+ * It launches each of the corresponding windows in accordance to what is required
+ * when the game is over it will carry on the game if the player wins or enact the penalty if they lose
+ * if they can't afford the penalty it will launch the gameOver screen.
+ * @author Josef
+ *
+ */
 public class DiceGameManager {
 	int playScore;
 	int playerTurnScore;
@@ -31,7 +36,13 @@ public class DiceGameManager {
 	private PirateSummaryWindow pirateSummaryWindow;
 	private int penalty
 	;
-	
+	/** creates an instance of DiceGameManger
+	 * @param gameManager the gameManager this belongs to
+	 * @param game the game this belongs to
+	 * @param route the route the player was on when they were attacked
+	 * @param handiCap sets the floor of the player score
+	 * @param diceGame the dice game instance that belongs to this one
+	 */
 	public DiceGameManager(GameManager gameManager, Game game, Route route,int handiCap, DiceGame diceGame) {
 		this.game = game;
 		this.gameManager = gameManager;
@@ -43,16 +54,27 @@ public class DiceGameManager {
 		this.pirateScore = 0;
 		launchDiceGameRulesWindow();
 	} 
+	/** returns the handicap
+	 * @return int, handicap
+	 */
 	public int getHandicap() {
 		return handicap;
 	 }
-	
+	/**returns the players current total score
+	 * @return int players total score
+	 */
 	public int getPlayerScore() {
 		return playScore;
 	}
+	/** returns the players current turn score
+	 * @return int, turn score
+	 */
 	public int getPlayerTurnScore() {
 		return playerTurnScore;
 	}
+	/** returns the pirates current total score
+	 * @return int, pirates  score
+	 */
 	public int getPirateScore(){
 		return pirateScore;
 	}
@@ -106,27 +128,39 @@ public class DiceGameManager {
 		int penalty = (int)(Math.random()*(250) + 250);
 		this.penalty = penalty;
 	}
+	/** returns the penalty that is enacted if the player loses
+	 * @return int, value of goods stolen if the player loses
+	 */
 	public int getPenalty() {
 		return penalty;
 	}
+	/** launches the rules window
+	 */
 	public void launchDiceGameRulesWindow() {
 		DiceGameRulesWindow rulesWindow = new DiceGameRulesWindow(this);
 		this.diceGamesRulesWindow = rulesWindow;
 	}	
+	/**closes the rules window then starts the playerTurn function
+	 * @param diceGameRulesWindow instance of the rulesWindow it is starting
+	 */
 	public void closeRulesWindow(DiceGameRulesWindow diceGameRulesWindow) {
 		diceGamesRulesWindow.closeWindow();
 		playerTurn();
 	}
+	/** launches the RollWindow
+	 */
 	public void launchDiceGameRollWindow() {
 		DiceGameRollWindow rollWindow = new DiceGameRollWindow(this, diceGame);
 		this.diceGameRollWindow = rollWindow;
 	}
+	/** closes the roll window and starts the playerTurn function again
+	 */
 	public void reRoll() {
 		diceGameRollWindow.closeWindow();
 		playerTurn();
 	}
 	/** this is the only time the players total score increases as you must lock in your turn score by ending your turn
-	 * 
+	 * closes the rollWindow then starts the pirates turn
 	 */
 	public void passTurn() {
 		int playerTotal = this.playScore;
@@ -135,19 +169,28 @@ public class DiceGameManager {
 		diceGameRollWindow.closeWindow();
 		pirateTurn();
 	}
+	/** launches the pirate summary window
+	 */
 	public void launchPirateSummaryWindow() {
 		PirateSummaryWindow pirateSummaryWindow = new PirateSummaryWindow(this);
 		this.pirateSummaryWindow = pirateSummaryWindow;
 	}
+	/** closes the pirate summary window then starts playerTurn()
+	 */
 	public void closePirateSummaryWindow() {
 		pirateSummaryWindow.closeWindow();
 		playerTurn();
 	}
+	/** launches the lossWindow
+	 */
 	public void launchDiceGameLossWindow() {
 		DiceGameLossWindow lossWindow = new DiceGameLossWindow(this);
 		this.diceGameLossWindow = lossWindow;
 	}
 	/** applies the penalty, if the penalty is too great, the player loses the game
+	 * closes the loss window
+	 * if the player loses the game the gameover screen is launched
+	 * if the can afford the penalty they lose their items and arrive at the destination 
 	 */
 	public void closeLossWindow(DiceGameLossWindow diceGameLossWindow) {
 		makePenalty();
@@ -166,31 +209,43 @@ public class DiceGameManager {
 			gameManager.launchArrivalScreen(route);
 		}
 		diceGameLossWindow.closeWindow();
-		
-
 	}
+	/** launches the snake eyes Window
+	 */
 	public void launchSnakeEyesWindow() {
 		SnakeEyesWindow snakeEyesWindow = new SnakeEyesWindow(this);
 		this.snakeEyesWindow = snakeEyesWindow;
 	}
+	/** closes the snake eyes window
+	 * starts the pirates turn
+	 */
 	public void closeSnakeEyesWindow() {
 		snakeEyesWindow.closeWindow();
 		pirateTurn();
 	}
+	/** launches the rolled one window
+	 */
 	public void launchRolledOneWindow() {
-		
 		RolledOneWindow rolledOneWindow = new RolledOneWindow(this);
 		this.rolledOneWindow = rolledOneWindow;
 	}
+	/** closes the rolled one window
+	 * starts the pirates turn
+	 */
 	public void closeRolledOneWindow() {
 		rolledOneWindow.closeWindow();
 		pirateTurn();
 	}
+	/** launches the victory window
+	 */
 	private void launchDiceGameVictoryWindow() {
 		penalty = 0;
 		DiceGameVictoryWindow victoryWindow = new DiceGameVictoryWindow(this, diceGame);
 		this.diceGameVictoryWindow = victoryWindow;
 	}
+	/** closes the victory window
+	 * arrives the player at their location
+	 */
 	public void closeVictoryWindow() {
 		diceGameVictoryWindow.closeWindow();
 		gameManager.launchArrivalScreen(route);

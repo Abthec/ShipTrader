@@ -11,7 +11,11 @@ import me.charlie.Game.DiceGame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/** displays a window showing the players last roll and their total score when they win the game
+ * when the button is clicked the game carries on and they arrive at their destination
+ * @author Josef
+ *
+ */
 public class DiceGameVictoryWindow {
 
 	private JFrame victoryFrame;

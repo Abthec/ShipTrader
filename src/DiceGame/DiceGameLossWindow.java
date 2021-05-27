@@ -8,7 +8,10 @@ import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/** The loss window is activated when the pirates win the dice game, it is called from diceGameManager
+ * @author Josef
+ *
+ */
 public class DiceGameLossWindow {
 
 	private JFrame lossFrame;
@@ -16,6 +19,7 @@ public class DiceGameLossWindow {
 
 	/**
 	 * Launch the application.
+	 * 
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -36,17 +40,28 @@ public class DiceGameLossWindow {
 	public DiceGameLossWindow() {
 		initialize();
 	}
+	/**
+	 * Create the application.
+	 * @param diceGameManager instance that this window belongs to
+	 */
 	public DiceGameLossWindow(DiceGameManager diceGameManager) {
 		this.diceGameManager = diceGameManager;
 		initialize();
 		lossFrame.setVisible(true);
 	}
+	/** closes the window
+	 */
 	public void closeWindow() {
 		lossFrame.dispose();
 	}
+	/**calls back to the manager to close the window
+	 */
 	public void finishedWindow() {
 		diceGameManager.closeLossWindow(this);
 	}
+	/** generates a string which is a summary of the what happened and the penalty
+	 * @return summary, the string to be displayed in the window
+	 */
 	private String makeSummary() {
 		diceGameManager.makePenalty();
 		String summary = String.format("You lost the pirates are taking your items, if they aren't satisfied they'll make you walk the plank!", diceGameManager.getPenalty());
