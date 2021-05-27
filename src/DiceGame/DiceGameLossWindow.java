@@ -21,7 +21,7 @@ public class DiceGameLossWindow {
 
 	/**
 	 * Launches the application
-	 * @param args
+	 * @param args args
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

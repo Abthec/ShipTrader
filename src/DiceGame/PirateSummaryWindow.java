@@ -23,6 +23,8 @@ public class PirateSummaryWindow {
 
 	/**
 	 * Launch the application.
+	 * 
+	 * @param args args
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -39,6 +41,8 @@ public class PirateSummaryWindow {
 
 	/**
 	 * Create the application.
+	 * 
+	 * @param diceGameManager controls launching and closing of the window.
 	 */
 	public PirateSummaryWindow(DiceGameManager diceGameManager) {
 		this.diceGameManager = diceGameManager;
@@ -46,14 +50,24 @@ public class PirateSummaryWindow {
 		summaryFrame.setVisible(true);
 	}
 
+	/**
+	 * Creates an instance of PirateSummaryWindow.
+	 */
 	public PirateSummaryWindow() {
 		initialize();
 	}
 
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		summaryFrame.dispose();
 	}
 
+	/**
+	 * 
+	 * @return a summary of the pirates turn
+	 */
 	private String makeSummary() {
 		String result = String.format("The pirates have had their turn and now have %d points",
 				diceGameManager.getPirateScore());

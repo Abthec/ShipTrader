@@ -37,6 +37,8 @@ public class RolledOneWindow {
 
 	/**
 	 * Create the application.
+	 * 
+	 * @param diceGameManager controls launching and closing of the dice game.
 	 */
 	public RolledOneWindow(DiceGameManager diceGameManager) {
 		this.diceGameManager = diceGameManager;
@@ -44,14 +46,24 @@ public class RolledOneWindow {
 		rolledOneFrame.setVisible(true);
 	}
 
+	/**
+	 * Initializes the frame.
+	 */
 	public RolledOneWindow() {
 		initialize();
 	}
 
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		rolledOneFrame.dispose();
 	}
 
+	/**
+	 * 
+	 * @return a summary of the what happened on the turn.
+	 */
 	private String makeSummary() {
 		int score = diceGameManager.getPlayerScore();
 		String summary = String.format("You rolled a one, your last turn doesnt count and your turn is over."

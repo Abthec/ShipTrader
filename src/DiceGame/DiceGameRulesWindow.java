@@ -22,6 +22,8 @@ public class DiceGameRulesWindow {
 
 	/**
 	 * Launch the application.
+	 * 
+	 * @param args args
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -50,10 +52,16 @@ public class DiceGameRulesWindow {
 		rulesFrame.setVisible(true);
 	}
 
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		rulesFrame.dispose();
 	}
 
+	/**
+	 * Calls diceGameManager to close the window
+	 */
 	public void finishedWindow() {
 		diceGameManager.closeRulesWindow(this);
 	}

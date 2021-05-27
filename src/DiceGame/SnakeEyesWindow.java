@@ -21,6 +21,8 @@ public class SnakeEyesWindow {
 
 	/**
 	 * Launch the application.
+	 * 
+	 * @param args args
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -38,7 +40,7 @@ public class SnakeEyesWindow {
 	/**
 	 * Create the application.
 	 * 
-	 * @param diceGameManager2
+	 * @param diceGameManager controls launching and closing of the dice game.
 	 */
 	public SnakeEyesWindow(DiceGameManager diceGameManager) {
 		this.diceGameManager = diceGameManager;
@@ -83,6 +85,9 @@ public class SnakeEyesWindow {
 		snakeEyesFrame.getContentPane().add(btnNewButton, "cell 0 1,alignx center");
 	}
 
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		snakeEyesFrame.dispose();
 	}

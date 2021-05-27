@@ -11,12 +11,20 @@ public class DiceGame {
 	int handicap;
 	int[] dice;
 
+	/**
+	 * Creates an instance of the dice game
+	 * 
+	 * @param Handicap the players starting handicap, this is based on how many cannons they have.
+	 */
 	public DiceGame(int Handicap) {
 		playerScore = Handicap;
 		pirateScore = 0;
 		handicap = Handicap;
 	}
 
+	/**
+	 * Calculates the total from rolling two dice
+	 */
 	public void Roll() {
 		int[] Dice = new int[2];
 		Dice[0] = (int) (Math.random() * 6 + 1);
@@ -24,12 +32,20 @@ public class DiceGame {
 		this.dice = Dice;
 	}
 
+	/**
+	 * 
+	 * @return the two dice.
+	 */
 	public int[] getDice() {
 		return dice;
 	}
 
 	/**
 	 * rolls the dice and returns a string based on the outcome
+	 * 
+	 * @param PlayerScore that players total score.
+	 * @param turnScore the players current turn score.
+	 * @return the result of the role.
 	 */
 	public String PlayerTurn(int PlayerScore, int HC, int turnScore) {
 		int TurnValue = turnScore;
@@ -78,6 +94,9 @@ public class DiceGame {
 	 * Pirates rolls the dice, if the roll is good, a random number between 0 and
 	 * 0.99 is generated. this is used to randomly decide if the pirates roll again
 	 * or lock in their score.
+	 * 
+	 * @param PirateScore the pirates score before their turn starts.
+	 * @return the pirates total game score.
 	 **/
 	public int PirateTurn(int PirateScore) {
 		int total = PirateScore;
