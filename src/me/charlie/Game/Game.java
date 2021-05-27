@@ -48,7 +48,6 @@ public class Game {
 		this.islands = createIslands(islandTotal);
 		this.routes = createRoutes(islands);
 		this.trader = new Trader(traderName, startingCash, ship);
-		this.ship = ship;
 		this.daysRemaining = gameDuration;
 
 		ship.setCurrentIsland(islands.get(0));
@@ -102,7 +101,7 @@ public class Game {
 	 * @return the Ship object.
 	 */
 	public Ship getShip() {
-		return ship;
+		return trader.getShip();
 	}
 
 	/**
