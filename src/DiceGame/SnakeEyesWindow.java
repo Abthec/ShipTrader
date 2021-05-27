@@ -2,10 +2,7 @@ package DiceGame;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
-<<<<<<< HEAD
-/** lets the player know they rolled snake eyes, their score has been reset and the turn will pass to the pirates
- * @author Josef
-=======
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -14,12 +11,8 @@ import javax.swing.JTextPane;
 
 import net.miginfocom.swing.MigLayout;
 
-/**
- * The main window for the dice game against the pirates.
- * 
- * @author josef
->>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
- *
+/** lets the player know they rolled snake eyes, their score has been reset and the turn will pass to the pirates
+ * @author Josef
  */
 public class SnakeEyesWindow {
 
@@ -47,31 +40,23 @@ public class SnakeEyesWindow {
 	 * 
 	 * @param diceGameManager2
 	 */
-
 	public SnakeEyesWindow(DiceGameManager diceGameManager) {
 		this.diceGameManager = diceGameManager;
 		initialize();
 		snakeEyesFrame.setVisible(true);
 	}
-
+	/** create the application
+	 */
 	public SnakeEyesWindow() {
 		initialize();
-<<<<<<< HEAD
 	 }
+	/** creates the summary that is displayed to the user
+	 * @return String, string that is displayed to the user
+	 */
 	 private String getSummary() {
-		int score =  diceGameManager.getPirateScore();
+		int score =  diceGameManager.getPlayerScore();
 		String summary = String.format("You rolled snake eyes so your turn is over and your score has been reset. Your current score is %d"+
-		" The pirates will now make their turn" ,score);
-=======
-	}
-
-	private String getSummary() {
-		int score = diceGameManager.getPirateScore();
-		String summary = String.format(
-				"You rolled snake eyes so your turn is over and your score has been reset. Your current score is %o"
-						+ " The pirates will now make their turn",
-				score);
->>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
+		"/nThe pirates will now make their turn" ,score);
 		return summary;
 	}
 

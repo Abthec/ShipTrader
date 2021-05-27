@@ -10,21 +10,13 @@ import javax.swing.JTextPane;
 
 import me.charlie.Game.DiceGame;
 import net.miginfocom.swing.MigLayout;
-
-<<<<<<< HEAD
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 /** displays a window showing the players last roll and their total score when they win the game
  * when the button is clicked the game carries on and they arrive at their destination
  * @author Josef
-=======
-/**
- * Informs the player of their victory in the dice game against the pirates.
- * 
- * @author josef
->>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
- *
  */
 public class DiceGameVictoryWindow {
 

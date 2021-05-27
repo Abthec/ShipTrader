@@ -1,17 +1,8 @@
 package me.charlie.Game;
-<<<<<<< HEAD
 /** The DiceGame class uses the players/pirates current score and players turn score
  * The player simply does one roll before asking the player if they would like to roll again
  * the pirate turn will keep rolling the dice untill it decides to stop or gets a failed roll
  * @author Josef
-=======
-
-/**
- * The game the player must play during a pirate encounter.
- * 
- * @author josef.
->>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
- *
  */
 public class DiceGame {
 

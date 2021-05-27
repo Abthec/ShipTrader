@@ -2,10 +2,7 @@ package DiceGame;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
-<<<<<<< HEAD
-/** lets the player know that they rolled a one, they got zero points for their turn and its now the pirates turn
- * @author Josef
-=======
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -14,13 +11,8 @@ import javax.swing.JTextPane;
 
 import net.miginfocom.swing.MigLayout;
 
-/**
- * A window telling the player that they rolled a one and that their turn is
- * over.
- * 
- * @author josef
->>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
- *
+/** lets the player know that they rolled a one, they got zero points for their turn and its now the pirates turn
+ * @author Josef
  */
 public class RolledOneWindow {
 

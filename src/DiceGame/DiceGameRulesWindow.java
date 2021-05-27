@@ -2,10 +2,7 @@ package DiceGame;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
-<<<<<<< HEAD
-/** when the dice game launches this window opens to explain the rules and flow of the game
- * @author Josef
-=======
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -15,11 +12,8 @@ import javax.swing.JTextPane;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Informs the player about the rules of the dice game.
- * 
+ * Informs the player about the rules of the dice game and how it works
  * @author josef
->>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
- *
  */
 public class DiceGameRulesWindow {
 
@@ -48,8 +42,7 @@ public class DiceGameRulesWindow {
 
 	/**
 	 * Create the application.
-	 * 
-	 * @param diceGameManager
+	 * @param diceGameManager, instance of diceManager this window belongs to
 	 */
 	public DiceGameRulesWindow(DiceGameManager diceGameManager) {
 		this.diceGameManager = diceGameManager;

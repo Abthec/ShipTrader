@@ -12,7 +12,6 @@ import javax.swing.JTextPane;
 import me.charlie.Game.DiceGame;
 import net.miginfocom.swing.MigLayout;
 
-<<<<<<< HEAD
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -23,14 +22,7 @@ import java.awt.event.ActionEvent;
 /** Creates a summary of the players last roll, current turn value, current total score and pirates current total score
  * Provides options to the player to lock in their current turn score or roll again
  * @author Josef
-=======
-/**
- * Displayed during the players turn and informs them of their rolls.
- * 
- * @author josef
->>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
- *
- */
+*/
 public class DiceGameRollWindow {
 
 	private JFrame rollFrame;
@@ -66,33 +58,20 @@ public class DiceGameRollWindow {
 		initialize();
 		rollFrame.setVisible(true);
 	}
-<<<<<<< HEAD
 	/** create the application
 	 */
-	DiceGameRollWindow(){
-=======
-
 	DiceGameRollWindow() {
->>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
 		initialize();
 	}
-<<<<<<< HEAD
 	/**close the window
 	 */
-=======
-
->>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
 	public void closeWindow() {
 		rollFrame.dispose();
 	}
-<<<<<<< HEAD
 	/** creates and returns a string to be displayed to the player
 	 * the string 
 	 * @return summary, the string to be displayed
 	 */
-=======
-
->>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
 	private String makeSummary() {
 		int[] dice = diceGame.getDice();
 		int pirateScore = diceGameManager.getPirateScore();
@@ -103,21 +82,13 @@ public class DiceGameRollWindow {
 				dice[0], dice[1], playerScore, turnScore, pirateScore);
 		return summary;
 	}
-<<<<<<< HEAD
 	/** calls to the reRoll function in diceGameManager
 	*/
-=======
-
->>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
 	public void reRoll() {
 		diceGameManager.reRoll();
 	}
-<<<<<<< HEAD
 	/** calls to the passTurn in diceGameManager
 	 */
-=======
-
->>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
 	public void passTurn() {
 		diceGameManager.passTurn();
 	}

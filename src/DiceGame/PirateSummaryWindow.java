@@ -2,11 +2,7 @@ package DiceGame;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
-<<<<<<< HEAD
-/** tells the player how many points the pirates have after they've made their turn.
- * button starts the players next turn and rolls the dice
- * @author Josef
-=======
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -16,12 +12,9 @@ import javax.swing.JTextPane;
 
 import net.miginfocom.swing.MigLayout;
 
-/**
- * A summary of the pirates turn in the dice game.
- * 
- * @author josef
->>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
- *
+/** tells the player how many points the pirates have after they've made their turn.
+ * button starts the players next turn and rolls the dice
+ * @author Josef
  */
 public class PirateSummaryWindow {
 
