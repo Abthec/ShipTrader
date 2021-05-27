@@ -1,86 +1,83 @@
 package me.charlie.Gui.gameSetup;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import java.awt.GridBagLayout;
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import me.charlie.Game.Game;
-import me.charlie.Gui.GameManager;
-import javax.swing.JPanel;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import javax.swing.BoxLayout;
-import net.miginfocom.swing.MigLayout;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JSlider;
-import java.awt.Component;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.JButton;
-import java.awt.Window.Type;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-@SuppressWarnings("unused")
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JSlider;
+import javax.swing.JTextField;
+
+import me.charlie.Gui.GameManager;
+
+/**
+ * Opens when game starts. A screen to get the players name and desired game
+ * duration.
+ * 
+ * @author charlie
+ *
+ */
 public class StartupScreen {
 
 	private JFrame frmIslandTraderSetup;
 	private JTextField textFieldTraderName;
 	private GameManager gameManager;
+	private String traderName;
+	private int gameDuration;
 
-	String traderName;
-	int gameDuration;
-
+	/**
+	 * Creates the first screen for the Game, to get a trader name and game
+	 * duration.
+	 * 
+	 * @param gameManager controls the launching and closing of the window.
+	 */
 	public StartupScreen(GameManager gameManager) {
 		this.gameManager = gameManager;
 		initialize();
 		frmIslandTraderSetup.setVisible(true);
 	}
-	
+
+	/**
+	 * Closes the window.
+	 */
 	public void closeWindow() {
 		frmIslandTraderSetup.dispose();
 	}
-	
+
+	/**
+	 * Calls gameManager to close the window.
+	 */
 	public void finishedWindow() {
 		gameManager.closeStartupScreen(this);
 	}
-	
+
+	/**
+	 * 
+	 * @return the frame of the current window.
+	 */
 	public JFrame getSetupJFrame() {
 		return frmIslandTraderSetup;
 	}
-	
+
+	/**
+	 * 
+	 * @return the name entered by the player.
+	 */
 	public String getTraderName() {
 		return traderName;
 	}
-	
-	public int getGameDuration() {
-		return gameDuration;
-	}
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StartupScreen window = new StartupScreen();
-					window.frmIslandTraderSetup.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
-	 * Create the application.
+	 * 
+	 * @return the duration selected by the player.
 	 */
-	public StartupScreen() {
-		initialize();
+	public int getGameDuration() {
+		return gameDuration;
 	}
 
 	/**
@@ -92,12 +89,13 @@ public class StartupScreen {
 		frmIslandTraderSetup.setBounds(100, 100, 580, 361);
 		frmIslandTraderSetup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
 		frmIslandTraderSetup.getContentPane().setLayout(gridBagLayout);
-		
+
 		JLabel lblWelcomeMessage = new JLabel("Welcome to Island Trader!");
 		lblWelcomeMessage.setFont(new Font("Tahoma", Font.BOLD, 20));
 		GridBagConstraints gbc_lblWelcomeMessage = new GridBagConstraints();
@@ -105,14 +103,14 @@ public class StartupScreen {
 		gbc_lblWelcomeMessage.gridx = 2;
 		gbc_lblWelcomeMessage.gridy = 1;
 		frmIslandTraderSetup.getContentPane().add(lblWelcomeMessage, gbc_lblWelcomeMessage);
-		
+
 		JLabel spacer1 = new JLabel(" ");
 		GridBagConstraints gbc_spacer1 = new GridBagConstraints();
 		gbc_spacer1.insets = new Insets(0, 0, 5, 5);
 		gbc_spacer1.gridx = 3;
 		gbc_spacer1.gridy = 2;
 		frmIslandTraderSetup.getContentPane().add(spacer1, gbc_spacer1);
-		
+
 		JLabel lblEnterTraderName = new JLabel("Enter Trader Name:");
 		lblEnterTraderName.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblEnterTraderName = new GridBagConstraints();
@@ -120,7 +118,7 @@ public class StartupScreen {
 		gbc_lblEnterTraderName.gridx = 2;
 		gbc_lblEnterTraderName.gridy = 3;
 		frmIslandTraderSetup.getContentPane().add(lblEnterTraderName, gbc_lblEnterTraderName);
-		
+
 		textFieldTraderName = new JTextField();
 		GridBagConstraints gbc_textFieldTraderName = new GridBagConstraints();
 		gbc_textFieldTraderName.insets = new Insets(0, 0, 5, 5);
@@ -129,21 +127,21 @@ public class StartupScreen {
 		gbc_textFieldTraderName.gridy = 4;
 		frmIslandTraderSetup.getContentPane().add(textFieldTraderName, gbc_textFieldTraderName);
 		textFieldTraderName.setColumns(10);
-		
+
 		JLabel lblTraderNameConstraints = new JLabel("(3-15 Alphabetic Characters)");
 		GridBagConstraints gbc_lblTraderNameConstraints = new GridBagConstraints();
 		gbc_lblTraderNameConstraints.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTraderNameConstraints.gridx = 2;
 		gbc_lblTraderNameConstraints.gridy = 5;
 		frmIslandTraderSetup.getContentPane().add(lblTraderNameConstraints, gbc_lblTraderNameConstraints);
-		
+
 		JLabel spacer2 = new JLabel(" ");
 		GridBagConstraints gbc_spacer2 = new GridBagConstraints();
 		gbc_spacer2.insets = new Insets(0, 0, 5, 5);
 		gbc_spacer2.gridx = 3;
 		gbc_spacer2.gridy = 6;
 		frmIslandTraderSetup.getContentPane().add(spacer2, gbc_spacer2);
-		
+
 		JLabel lblSelectGameDuration = new JLabel("Select Game Duration:");
 		lblSelectGameDuration.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblSelectGameDuration = new GridBagConstraints();
@@ -151,7 +149,7 @@ public class StartupScreen {
 		gbc_lblSelectGameDuration.gridx = 2;
 		gbc_lblSelectGameDuration.gridy = 7;
 		frmIslandTraderSetup.getContentPane().add(lblSelectGameDuration, gbc_lblSelectGameDuration);
-		
+
 		JSlider sliderGameDuration = new JSlider();
 		sliderGameDuration.setSnapToTicks(true);
 		sliderGameDuration.setPaintTicks(true);
@@ -166,28 +164,28 @@ public class StartupScreen {
 		gbc_sliderGameDuration.gridx = 3;
 		gbc_sliderGameDuration.gridy = 8;
 		frmIslandTraderSetup.getContentPane().add(sliderGameDuration, gbc_sliderGameDuration);
-		
+
 		JLabel lblNewLabel_3 = new JLabel("");
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_3.gridx = 0;
 		gbc_lblNewLabel_3.gridy = 9;
 		frmIslandTraderSetup.getContentPane().add(lblNewLabel_3, gbc_lblNewLabel_3);
-		
+
 		JLabel lblGameDurationConstraints = new JLabel("(20-50 Days)");
 		GridBagConstraints gbc_lblGameDurationConstraints = new GridBagConstraints();
 		gbc_lblGameDurationConstraints.insets = new Insets(0, 0, 5, 5);
 		gbc_lblGameDurationConstraints.gridx = 2;
 		gbc_lblGameDurationConstraints.gridy = 10;
 		frmIslandTraderSetup.getContentPane().add(lblGameDurationConstraints, gbc_lblGameDurationConstraints);
-		
+
 		JLabel spacer3 = new JLabel(" ");
 		GridBagConstraints gbc_spacer3 = new GridBagConstraints();
 		gbc_spacer3.insets = new Insets(0, 0, 5, 5);
 		gbc_spacer3.gridx = 3;
 		gbc_spacer3.gridy = 11;
 		frmIslandTraderSetup.getContentPane().add(spacer3, gbc_spacer3);
-		
+
 		JButton btnReady = new JButton("READY");
 		btnReady.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -195,9 +193,9 @@ public class StartupScreen {
 				gameDuration = sliderGameDuration.getValue();
 				if ((traderName.length() < 3 || traderName.length() > 15) || (!traderName.matches("^[a-zA-Z]*$"))) {
 					gameManager.launchInvalidTraderNamePopup();
-	            } else {
-	            	finishedWindow();
-	            }
+				} else {
+					finishedWindow();
+				}
 			}
 		});
 		btnReady.setFont(new Font("Tahoma", Font.BOLD, 16));

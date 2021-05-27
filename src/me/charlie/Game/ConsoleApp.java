@@ -17,18 +17,33 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Runs a command line application to play the game.
+ * 
+ * @author charlie
+ *
+ */
 public class ConsoleApp {
 
     private Scanner scanner;
-    Route chosenRoute;
-    String traderName;
-    Ship selectedShip;
-    int gameDuration;
+    private Route chosenRoute;
+    private String traderName;
+    private Ship selectedShip;
+    private int gameDuration;
 
+    /**
+     * Creates an instance of ConsoleApp
+     * Creates an instance of Scanner.
+     */
     public ConsoleApp() {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Creates an instance of the Game class.
+     * 
+     * @return an instance of the Game class.
+     */
     public Game Start() {
 
         String traderName = chooseTraderName();
@@ -40,6 +55,12 @@ public class ConsoleApp {
         return game;
     }
 
+    /**
+     * Takes a maximum number and gets a numerical input from the player.
+     * 
+     * @param maxNumberCode the maximum accepted number.
+     * @return a numerical value corresponding to some ID system.
+     */
     public int getNumberCode(int maxNumberCode) {
         while (true) {
             try {
@@ -55,11 +76,20 @@ public class ConsoleApp {
         }
     }
 
+    /**
+     * Acts as a pause point so the flow of the game can be controlled by the player.
+     */
     public void pressAnyKeyToContinue() {
         System.out.println("Press any key to continue.");
         scanner.nextLine();
     }
 
+    /**
+     * Asks the player what activity they would like to carry out.
+     * Executes the chosen activity.
+     * 
+     * @param game the current instance of the game.
+     */
     public void chooseActivity(Game game) {
         Trader trader = game.getTrader();
         Ship ship = trader.getShip();
@@ -106,6 +136,13 @@ public class ConsoleApp {
         }
     }
 
+    /**
+     * The menu dialogue for ship repairing.
+     * Displays costs to repair.
+     * Displays the properties of a repair.
+     * 
+     * @param trader the instance of the players character the Trader.
+     */
     public void repairShip(Trader trader) {
         Ship ship = trader.getShip();
         System.out.println("Current ship health is: " + ship.getShipHealth() + "/" + ship.getShipEndurance() +
@@ -125,6 +162,12 @@ public class ConsoleApp {
         }
     }
 
+    /**
+     * Calculates the cost to fully repair the players ship.
+     * 
+     * @param ship the current instance of the Ship class for the given game.
+     * @return the cost to fully repair the ship as an int.
+     */
     public int getFullRepairCost(Ship ship) {
         double eachRepair = ship.getShipEndurance() / 10;
         double healthMissing = ship.getShipEndurance() - ship.getShipHealth();
@@ -133,6 +176,11 @@ public class ConsoleApp {
         return fullRepairCost;
     }
 
+    /**
+     * Provides information about hiring crew members.
+     * 
+     * @param ship the current instance of the Ship class for the given game.
+     */
     public void hireCrew(Ship ship) {
         System.out.println("Hiring a crew member will add 10 coins extra wages per day sailed." +
                 "\nCurrent crew wages are " + ship.getCurrentCrewSize() * 10 + "." +
@@ -143,6 +191,11 @@ public class ConsoleApp {
         }
     }
 
+    /**
+     * Displays the ships properties.
+     * 
+     * @param ship the current instance of the Ship class for the given game.
+     */
     public void viewShipProperties(Ship ship) {
 
         System.out.println("Ship name: " + ship.getName());
@@ -161,6 +214,12 @@ public class ConsoleApp {
         pressAnyKeyToContinue();
     }
 
+    /**
+     * Prints a list of the upgrades possessed by the player.
+     * Asks the player which upgrade they would like to apply.
+     * 
+     * @param ship the current instance of the Ship class for the given game.
+     */
     public void upgradeShip(Ship ship) {
         List<Item> upgrades = new ArrayList<>();
 
@@ -195,6 +254,12 @@ public class ConsoleApp {
         }
     }
 
+    /**
+     * Applies a chosen upgrade to the ship.
+     * 
+     * @param upgrade the upgrade the player has purchased and chosen to apply.
+     * @param ship he current instance of the Ship class for the given game.
+     */
     public void applyUpgrade(UpgradeType upgrade, Ship ship) {
         switch (upgrade) {
             case MAST:
@@ -213,6 +278,11 @@ public class ConsoleApp {
         }
     }
 
+    /**
+     * Prints the options for the store interface.
+     * 
+     * @param trader the current isntance of the Trader class for the given Game.
+     */
     public void visitStore(Trader trader) {
 
         Scanner scanner = new Scanner(System.in);
@@ -239,6 +309,11 @@ public class ConsoleApp {
         }
     }
 
+    /**
+     * Asks the player which item they would like to purchase.
+     * 
+     * @param trader the current instance of the Trader class for the Given game.
+     */
     public void purchaseItems(Trader trader) {
         Ship ship = trader.getShip();
         Store store = ship.getCurrentIsland().getStore();
@@ -308,6 +383,11 @@ public class ConsoleApp {
         }
     }
 
+    /**
+     * Prints a list of all the items possessed by the player and asks if/what they would like to sell.
+     * 
+     * @param trader the current given of the Trader class for the current game.
+     */
     public void sellItems(Trader trader) {
         Ship ship = trader.getShip();
         Store store = ship.getCurrentIsland().getStore();
@@ -354,6 +434,11 @@ public class ConsoleApp {
         }
     }
 
+    /**
+     * Prints a list of all the available Item's for the current Island's Store.
+     * 
+     * @param ship the given instance of Ship for the current game.
+     */
     public void viewStock(Ship ship) {
 
         Store store = ship.getCurrentIsland().getStore();
@@ -368,6 +453,11 @@ public class ConsoleApp {
         }
     }
 
+    /**
+     * Relocates the Ship and Trader to a new Island based on a chosen route.
+     * 
+     * @param game the current instance of the Game.
+     */
     public void sail(Game game) {
         chooseRoute(game);
         if (chosenRoute == null) {
@@ -385,6 +475,12 @@ public class ConsoleApp {
         pressAnyKeyToContinue();
     }
 
+    /**
+     * Applies a RandomEvent that occurs on a given Route.
+     * 
+     * @param randomEventType the RandomEvent's RandomEventType which determines what consequences there are.
+     * @param ship the current instance of the Ship given the current Game.
+     */
     public void applyRandomEvent(RandomEventType randomEventType, Ship ship) {
         Random random = new Random();
 
@@ -433,6 +529,11 @@ public class ConsoleApp {
         }
     }
 
+    /**
+     * Asks a player to choose a Route to sail on to get to another Island.
+     * 
+     * @param game the current instance of the Game.
+     */
     public void chooseRoute(Game game) {
         Ship ship = game.getShip();
         Island currentIsland = ship.getCurrentIsland();
@@ -469,6 +570,11 @@ public class ConsoleApp {
         }
     }
 
+    /**
+     * Asks the player what they would like their Trader to be called.
+     * 
+     * @return the name as a String, selected by the player.
+     */
     public String chooseTraderName() {
         while (true) {
             System.out.println("Enter Trader Name");
@@ -485,6 +591,11 @@ public class ConsoleApp {
         return traderName;
     }
 
+    /**
+     * Asks the player how long they would like the game to last.
+     * 
+     * @return the gameDuration as an int that the player chose.
+     */
     public int chooseGameDuration() {
         while (true) {
             System.out.println("Enter desired amount of days");
@@ -499,6 +610,12 @@ public class ConsoleApp {
         return gameDuration;
     }
 
+    /**
+     * Presents the player with four options for ships.
+     * Asks the player what Ship they would like to use in the Game.
+     * 
+     * @return the Ship chosen by the player.
+     */
     public Ship chooseShip() {
 
         List<Ship> ships = new ArrayList<Ship>();
@@ -529,11 +646,21 @@ public class ConsoleApp {
         return selectedShip;
     }
 
+    /**
+     * Ends the game and tells the player how much money they ended with.
+     * 
+     * @param trader the instance of Trader for the current Game.
+     */
     public void gameover(Trader trader) {
         System.out.println("Gameover!");
         System.out.println("You finished with " + trader.getMoney());
     }
 
+    /**
+     * Where the Game is executed.
+     * 
+     * @param args.
+     */
     public static void main(String[] args) {
 
         ConsoleApp consoleApp = new ConsoleApp();
