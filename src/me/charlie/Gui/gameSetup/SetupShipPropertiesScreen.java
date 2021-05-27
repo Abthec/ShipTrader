@@ -1,37 +1,38 @@
 package me.charlie.Gui.gameSetup;
 
-import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Window.Type;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JSplitPane;
-import me.charlie.Game.Game;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import me.charlie.Gui.GameManager;
 import me.charlie.Ship.Ship;
-import javax.swing.JPanel;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
-import java.awt.BorderLayout;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.Font;
-import java.awt.Window.Type;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-@SuppressWarnings("unused")
+/**
+ * A screen which displays the initial characteristics of the ship chosen by the
+ * player.
+ * 
+ * @author charlie
+ *
+ */
 public class SetupShipPropertiesScreen {
 
 	private JFrame frameShipProperties;
 	private GameManager gameManager;
 	private ShipSelectionScreen shipSelectionWindow;
 	private Ship ship;
-	private Game game;
-	
+
 	/**
 	 * Opens a window with the potential properties of the chosen Ship.
 	 * 
-	 * @param gameManager controls the launching and closing of the window.
+	 * @param gameManager         controls the launching and closing of the window.
 	 * @param shipSelectionWindow the window that this window was launched from.
 	 */
 	public SetupShipPropertiesScreen(GameManager gameManager, ShipSelectionScreen shipSelectionWindow) {
@@ -41,57 +42,34 @@ public class SetupShipPropertiesScreen {
 		initialize();
 		frameShipProperties.setVisible(true);
 	}
-	
+
 	/**
 	 * Closes the window.
 	 */
 	public void closeWindow() {
 		frameShipProperties.dispose();
 	}
-	
+
 	/**
 	 * Calls GameManager to close the window.
 	 */
 	public void finishedWindow() {
 		gameManager.closeShipPropertiesScreen(this);
 	}
-	
+
 	/**
 	 * Takes the player back to the ShipSelectionScreen.
 	 */
 	public void goBack() {
 		gameManager.shipPropertiesGoBack(this, shipSelectionWindow);
 	}
-	
+
 	/**
 	 * 
 	 * @return the chosen Ship.
 	 */
 	public Ship getShip() {
 		return ship;
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SetupShipPropertiesScreen window = new SetupShipPropertiesScreen();
-					window.frameShipProperties.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public SetupShipPropertiesScreen() {
-		initialize();
 	}
 
 	/**
@@ -103,50 +81,50 @@ public class SetupShipPropertiesScreen {
 		frameShipProperties.setBounds(100, 100, 749, 252);
 		frameShipProperties.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frameShipProperties.getContentPane().setLayout(new GridLayout(0, 2, 0, 0));
-		
+
 		JPanel panel = new JPanel();
 		frameShipProperties.getContentPane().add(panel);
 		panel.setLayout(new MigLayout("", "[][][]", "[][][][][][][][][][]"));
-		
+
 		JLabel lblShipTypeIdentifier = new JLabel("Ship Type:");
 		lblShipTypeIdentifier.setFont(new Font("Tahoma", Font.BOLD, 16));
 		panel.add(lblShipTypeIdentifier, "cell 0 0");
-		
+
 		JLabel lblShipType = new JLabel("New label");
 		lblShipType.setText(ship.getShipType().getName());
 		lblShipType.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(lblShipType, "cell 2 0");
-		
+
 		JLabel spacer_1_1 = new JLabel(" \r\n");
 		panel.add(spacer_1_1, "cell 0 1");
-		
+
 		JLabel lblMaxCargoCapacityIdentifier = new JLabel("Max Cargo Capacity:");
 		lblMaxCargoCapacityIdentifier.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel.add(lblMaxCargoCapacityIdentifier, "cell 0 2");
-		
+
 		JLabel lblMaxCargoCapacity = new JLabel("New label");
 		lblMaxCargoCapacity.setText(String.valueOf(ship.getMaxCargoCapacity()));
 		lblMaxCargoCapacity.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(lblMaxCargoCapacity, "cell 2 2");
-		
+
 		JLabel spacer_1_2 = new JLabel(" \r\n");
 		panel.add(spacer_1_2, "cell 0 3");
-		
+
 		JLabel lblMaxCrewSizeIdentifier = new JLabel("Max Crew Size:");
 		lblMaxCrewSizeIdentifier.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel.add(lblMaxCrewSizeIdentifier, "cell 0 4");
-		
+
 		JLabel lblMaxCrewSize = new JLabel("New label");
 		lblMaxCrewSize.setText(String.valueOf(ship.getMaxCrewSize()));
 		lblMaxCrewSize.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(lblMaxCrewSize, "cell 2 4");
-		
+
 		JLabel spacer_1_3 = new JLabel(" \r\n");
 		panel.add(spacer_1_3, "cell 0 5");
-		
+
 		JLabel spacer_1_4 = new JLabel(" \r\n");
 		panel.add(spacer_1_4, "cell 0 7");
-		
+
 		JButton btnConfirm = new JButton("CONFIRM");
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -155,50 +133,50 @@ public class SetupShipPropertiesScreen {
 		});
 		btnConfirm.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel.add(btnConfirm, "cell 0 8");
-		
+
 		JPanel panel_1 = new JPanel();
 		frameShipProperties.getContentPane().add(panel_1);
 		panel_1.setLayout(new MigLayout("", "[][][]", "[][][][][][][][][]"));
-		
+
 		JLabel lblShipNameIdentifier = new JLabel("Ship Name:");
 		lblShipNameIdentifier.setFont(new Font("Tahoma", Font.BOLD, 16));
 		panel_1.add(lblShipNameIdentifier, "cell 0 0");
-		
+
 		JLabel lblShipName = new JLabel("New label");
 		lblShipName.setText(ship.getName());
 		lblShipName.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_1.add(lblShipName, "cell 2 0");
-		
+
 		JLabel spacer_1_5 = new JLabel(" \r\n");
 		panel_1.add(spacer_1_5, "cell 0 1");
-		
+
 		JLabel lblSailSpeedIdentifier = new JLabel("Sail Speed:");
 		lblSailSpeedIdentifier.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel_1.add(lblSailSpeedIdentifier, "cell 0 2");
-		
+
 		JLabel lblSailSpeed = new JLabel("New label");
 		lblSailSpeed.setText(ship.getSailSpeed() + "km/day");
 		lblSailSpeed.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_1.add(lblSailSpeed, "cell 2 2");
-		
+
 		JLabel spacer_1_6 = new JLabel(" \r\n");
 		panel_1.add(spacer_1_6, "cell 0 3");
-		
+
 		JLabel lblShipEnduranceIdentifier = new JLabel("Ship Endurance:");
 		lblShipEnduranceIdentifier.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel_1.add(lblShipEnduranceIdentifier, "cell 0 4");
-		
+
 		JLabel lblShipEndurance = new JLabel("New label");
 		lblShipEndurance.setText(String.valueOf(ship.getShipEndurance()));
 		lblShipEndurance.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_1.add(lblShipEndurance, "cell 2 4");
-		
+
 		JLabel spacer_1_7 = new JLabel(" \r\n");
 		panel_1.add(spacer_1_7, "cell 0 5");
-		
+
 		JLabel spacer_1 = new JLabel(" \r\n");
 		panel_1.add(spacer_1, "cell 0 6");
-		
+
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

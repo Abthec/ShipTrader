@@ -17,6 +17,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Runs a command line application to play the game.
+ * 
+ * @author charlie
+ *
+ */
 public class ConsoleApp {
 
     private Scanner scanner;

@@ -1,5 +1,11 @@
 package me.charlie.Item;
 
+/**
+ * Defines the potential types of different items and their characteristics
+ * 
+ * @author charlie
+ *
+ */
 public enum ItemType {
 
     UPGRADE,

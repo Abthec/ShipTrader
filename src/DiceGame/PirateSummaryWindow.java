@@ -1,17 +1,26 @@
 package DiceGame;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JTextPane;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+<<<<<<< HEAD
 /** tells the player how many points the pirates have after they've made their turn.
  * button starts the players next turn and rolls the dice
  * @author Josef
+=======
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextPane;
+
+import net.miginfocom.swing.MigLayout;
+
+/**
+ * A summary of the pirates turn in the dice game.
+ * 
+ * @author josef
+>>>>>>> branch 'master' of https://github.com/Abthec/ShipTrader.git
  *
  */
 public class PirateSummaryWindow {
@@ -43,16 +52,21 @@ public class PirateSummaryWindow {
 		initialize();
 		summaryFrame.setVisible(true);
 	}
+
 	public PirateSummaryWindow() {
 		initialize();
 	}
+
 	public void closeWindow() {
 		summaryFrame.dispose();
 	}
+
 	private String makeSummary() {
-		String result = String.format("The pirates have had their turn and now have %d points" , diceGameManager.getPirateScore());
+		String result = String.format("The pirates have had their turn and now have %d points",
+				diceGameManager.getPirateScore());
 		return result;
 	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -61,15 +75,15 @@ public class PirateSummaryWindow {
 		summaryFrame.setBounds(100, 100, 450, 300);
 		summaryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		summaryFrame.getContentPane().setLayout(new MigLayout("", "[grow]", "[grow][][]"));
-		
+
 		JTextPane summaryText = new JTextPane();
 		summaryFrame.getContentPane().add(summaryText, "cell 0 0,grow");
 		summaryText.setEditable(false);
 		summaryText.setText(makeSummary());
-		
+
 		JLabel lblNewLabel = new JLabel("Ready to take your turn?");
 		summaryFrame.getContentPane().add(lblNewLabel, "cell 0 1,alignx center,aligny center");
-		
+
 		JButton btnNewButton = new JButton("Roll");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

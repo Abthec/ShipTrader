@@ -1,28 +1,34 @@
 package me.charlie.Gui.Popups;
 
-import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
-
-import me.charlie.Gui.Main.StoreOperations.StoreBuyScreen;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
+import me.charlie.Gui.Main.StoreOperations.StoreBuyScreen;
+
+/**
+ * A screen to block the player from buying an item and let them know why they
+ * are being blocked.
+ * 
+ * @author charlie
+ *
+ */
 public class UnableToBuyPopup {
 
 	private JFrame frameUnableToBuyPopup;
 	private StoreBuyScreen storeBuyWindow;
 	private String reason;
-	
+
 	/**
 	 * Opens an UnableToBuy popup.
 	 * 
-	 * @param storeBuyWindow
-	 * @param reason
+	 * @param storeBuyWindow the window the popup was opened from.
+	 * @param reason         the reason the popup was opened.
 	 */
 	public UnableToBuyPopup(StoreBuyScreen storeBuyWindow, String reason) {
 		this.storeBuyWindow = storeBuyWindow;
@@ -30,43 +36,20 @@ public class UnableToBuyPopup {
 		initialize();
 		frameUnableToBuyPopup.setVisible(true);
 	}
-	
+
 	/**
 	 * Closes the popup window.
 	 */
 	public void closeWindow() {
 		frameUnableToBuyPopup.dispose();
 	}
-	
+
 	/**
 	 * Calls to close the window and unhides the StoreBuyScreen.
 	 */
 	public void finishedWindow() {
 		closeWindow();
 		storeBuyWindow.getJFrame().setVisible(true);
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UnableToBuyPopup window = new UnableToBuyPopup();
-					window.frameUnableToBuyPopup.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public UnableToBuyPopup() {
-		initialize();
 	}
 
 	/**
@@ -78,22 +61,22 @@ public class UnableToBuyPopup {
 		frameUnableToBuyPopup.setBounds(100, 100, 450, 211);
 		frameUnableToBuyPopup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frameUnableToBuyPopup.getContentPane().setLayout(null);
-		
+
 		JLabel lblHeading = new JLabel("Unable To Purchase Item");
 		lblHeading.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblHeading.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHeading.setBounds(10, 11, 430, 60);
 		frameUnableToBuyPopup.getContentPane().add(lblHeading);
-		
+
 		JLabel lblReason = new JLabel("Reason");
-		
+
 		lblReason.setText(reason);
-		
+
 		lblReason.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblReason.setHorizontalAlignment(SwingConstants.CENTER);
 		lblReason.setBounds(10, 68, 430, 60);
 		frameUnableToBuyPopup.getContentPane().add(lblReason);
-		
+
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
