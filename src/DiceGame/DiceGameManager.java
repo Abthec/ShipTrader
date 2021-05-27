@@ -189,7 +189,7 @@ public class DiceGameManager {
 	}
 	/** applies the penalty, if the penalty is too great, the player loses the game
 	 * closes the loss window
-	 * if the player loses the game the gameover screen is launched
+	 * if the player loses the game the game over screen is launched
 	 * if the can afford the penalty they lose their items and arrive at the destination
 	 * @param diceGameLossWindow, the window that belongs to this instance of diceGameManage 
 	 */

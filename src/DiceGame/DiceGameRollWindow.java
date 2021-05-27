@@ -29,6 +29,7 @@ public class DiceGameRollWindow {
 
 	/**
 	 * Launch the application.
+	 * @param args
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -53,12 +54,20 @@ public class DiceGameRollWindow {
 		initialize();
 		rollFrame.setVisible(true);
 	}
+	/** create the application
+	 */
 	DiceGameRollWindow(){
 		initialize();
 	}
+	/**close the window
+	 */
 	public void closeWindow() {
 		rollFrame.dispose();
 	}
+	/** creates and returns a string to be displayed to the player
+	 * the string 
+	 * @return summary, the string to be displayed
+	 */
 	private String makeSummary() {
 		int[] dice = diceGame.getDice();
 		int pirateScore = diceGameManager.getPirateScore();
@@ -69,9 +78,13 @@ public class DiceGameRollWindow {
 		"\nThe pirates have a score of %d" ,dice[0], dice[1], playerScore, turnScore, pirateScore );
 		return summary;
 	}
+	/** calls to the reRoll function in diceGameManager
+	*/
 	public void reRoll() {
 		diceGameManager.reRoll();
 	}
+	/** calls to the passTurn in diceGameManager
+	 */
 	public void passTurn() {
 		diceGameManager.passTurn();
 	}

@@ -18,8 +18,8 @@ public class DiceGameLossWindow {
 	private DiceGameManager diceGameManager;
 
 	/**
-	 * Launch the application.
-	 * 
+	 * Launches the application
+	 * @param args
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
