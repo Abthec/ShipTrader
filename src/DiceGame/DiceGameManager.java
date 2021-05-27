@@ -30,8 +30,7 @@ public class DiceGameManager {
 	private SnakeEyesWindow snakeEyesWindow;
 	private RolledOneWindow rolledOneWindow;
 	private PirateSummaryWindow pirateSummaryWindow;
-	private int penalty
-	;
+	private int penalty;
 	
 	public DiceGameManager(GameManager gameManager, Game game, Route route,int handiCap, DiceGame diceGame) {
 		this.game = game;
