@@ -200,13 +200,16 @@ public class GameoverScreen {
 				String itemString = item.getItemType().getName() + " | " + item.getPlaceOfPurchase() + " | "
 						+ item.getPurchasedPrice() + " | " + "Applied to ship as upgrade";
 				soldItemsModel.add(soldItemsListIndex, itemString);
+			} else if (item.wasStolen()) {
+				String itemString = item.getItemType().getName() + " | " + item.getPlaceOfPurchase().getName() + " | "
+						+ item.getPurchasedPrice() + " | " + "Was stolen by pirates.";
 			} else {
 				String itemString = item.getItemType().getName() + " | " + item.getPlaceOfPurchase().getName() + " | "
 						+ item.getPlaceOfSale().getName() + " | " + item.getPurchasedPrice() + " | "
 						+ item.getSoldPrice();
 				soldItemsModel.add(soldItemsListIndex, itemString);
 			}
-			soldItemsListIndex++;
+
 		}
 
 		JList listItemsSold = new JList();

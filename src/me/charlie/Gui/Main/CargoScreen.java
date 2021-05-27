@@ -167,6 +167,9 @@ public class CargoScreen {
 				String itemString = item.getItemType().getName() + " | " + item.getPlaceOfPurchase() + " | "
 						+ item.getPurchasedPrice() + " | " + "Applied to ship as upgrade";
 				soldItemsModel.add(soldItemsListIndex, itemString);
+			} else if (item.wasStolen()) {
+				String itemString = item.getItemType().getName() + " | " + item.getPlaceOfPurchase().getName() + " | "
+						+ item.getPurchasedPrice() + " | " + "Was stolen by pirates.";
 			} else {
 				String itemString = item.getItemType().getName() + " | " + item.getPlaceOfPurchase().getName() + " | "
 						+ item.getPlaceOfSale().getName() + " | " + item.getPurchasedPrice() + " | "

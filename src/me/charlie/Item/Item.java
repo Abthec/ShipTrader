@@ -54,6 +54,10 @@ public class Item {
 		}
 	}
 
+	public boolean wasStolen() {
+		return wasStolen;
+	}
+
 	/**
 	 * Sets the Item as stolen.
 	 */
