@@ -1,0 +1,15 @@
+DiceGame
+me.charlie.Exceptions
+me.charlie.Game
+me.charlie.Gui
+me.charlie.Gui.gameSetup
+me.charlie.Gui.Main
+me.charlie.Gui.Main.StoreOperations
+me.charlie.Gui.Main.Travel
+me.charlie.Gui.Popups
+me.charlie.Island
+me.charlie.Item
+me.charlie.RandomEvents
+me.charlie.Ship
+me.charlie.Store
+me.charlie.Trader
