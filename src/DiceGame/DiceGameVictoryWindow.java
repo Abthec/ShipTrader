@@ -24,8 +24,8 @@ public class DiceGameVictoryWindow {
 	private DiceGameManager diceGameManager;
 	private DiceGame diceGame;
 
-	/**
-	 * Launch the application.
+	/** launch the application
+	 * @param args used to create the window
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -39,9 +39,10 @@ public class DiceGameVictoryWindow {
 			}
 		});
 	}
-
 	/**
-	 * Create the application.
+	 * Launch the application
+	 * @param diceGameManager, instance of diceGameManager this window belongs to
+	 * @param diceGame, instance of diceGame this window uses
 	 */
 	public DiceGameVictoryWindow(DiceGameManager diceGameManager, DiceGame diceGame) {
 		this.diceGameManager = diceGameManager;
@@ -49,15 +50,19 @@ public class DiceGameVictoryWindow {
 		initialize();
 		victoryFrame.setVisible(true);
 	}
-
+	/** launch the application
+	 */
 	public DiceGameVictoryWindow() {
 		initialize();
 	}
-
+	/** close the window
+	 */
 	public void closeWindow() {
 		victoryFrame.dispose();
 	}
-
+	/** create a summary string that is displayed to the player
+	 * @return String, the string the is shown to the player
+	 */
 	private String makeSummary() {
 		int[] dice = diceGame.getDice();
 		int score = diceGameManager.getPlayerScore();
